@@ -20,11 +20,21 @@ content.rooms.atrium = content.rooms.invent({
 
     if (content.instruments.hasUnscanned()) {
       attributes.push({
-        label: 'Unappraised instruments',
+        label: 'New instruments',
         modifiers: ['undiscovered'],
       })
     }
 
     return attributes
+  },
+  // Movement
+  moveDown: function () {
+    const unscanned = content.instruments.getFirstUnscannedName()
+
+    if (unscanned) {
+      content.rooms.gallery.setInstrumentByName(unscanned)
+    }
+
+    this.move('down')
   },
 })

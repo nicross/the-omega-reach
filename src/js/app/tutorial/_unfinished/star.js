@@ -15,8 +15,17 @@ app.tutorial.star = app.tutorial.invent({
 
     [
       {
+        title: `It's a star!`,
+        description: ``,
+        actions: [
+          {
+            label: 'Reach deeper',
+          }
+        ],
+      },
+      {
         title: `[Tutorial] Stars:`,
-        description: `Interact to reveal more information.`,
+        description: ``,
         actions: [
           {
             label: 'Regain control',

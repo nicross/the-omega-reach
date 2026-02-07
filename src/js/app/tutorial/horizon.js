@@ -21,7 +21,7 @@ app.tutorial.horizon = app.tutorial.invent({
       },
       {
         title: `[Tutorial] The horizon:`,
-        description: `Interact to zoom in to a new galaxy. The galaxies you find from here will be remembered for later.`,
+        description: `Interact to find a new galaxy. The reach will zoom in automatically.`,
         actions: [
           {
             label: 'Regain control',

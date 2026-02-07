@@ -22,14 +22,15 @@ app.tutorial.reachOnline = app.tutorial.invent({
       {
         title: `[Tutorial] The reach:`,
         description: () => ({
-          gamepad: `Press <kbd>D-Pad Up</kbd> to extend it to the next zoom level. You may power it off and on while not in-use.`,
-          keyboard: `Press the <kbd>Up Arrow</kbd> to extend it to the next zoom level. You may power it off and on while not in-use.`,
-          mouse: `Click the <kbd>Up Button</kbd> to extend it to the next zoom level. You may power it off and on while not in-use.`,
+          gamepad: `Press <kbd>D-Pad Up</kbd> to extend <strong>the reach</strong> to its next zoom level.`,
+          keyboard: `Press the <kbd>Up Arrow</kbd> to extend <strong>the reach</strong> to its next zoom level.`,
+          mouse: `Click the <kbd>Up Button</kbd> to extend <strong>the reach</strong> to its next zoom level.`,
         }[app.settings.computed.inputPreference]),
         actions: [
           {
             label: 'Regain control',
             before: () => this.markComplete(),
+            after: () => app.screen.game.interact.update(),
           }
         ],
       },

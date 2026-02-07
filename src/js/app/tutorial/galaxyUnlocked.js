@@ -1,22 +1,18 @@
-app.tutorial.galaxy = app.tutorial.invent({
-  id: 'galaxy',
+app.tutorial.galaxyUnlocked = app.tutorial.invent({
+  id: 'galaxyUnlocked',
   // State
   state: {},
   // Lifecycle
-  shouldActivate: () => content.location.is('galaxy'),
+  shouldActivate: () => content.location.is('galaxy') && app.tutorial.firstInstrument.complete,
   onUpdate: function () {
     if (!content.location.is('galaxy')) {
-      return
-    }
-
-    if (this.preventDouble()) {
       return
     }
 
     [
       {
         title: `[Tutorial] Galaxies:`,
-        description: `Interact to zoom in to a new star. The stars you find from here will be remembered for later.`,
+        description: 'You may now interact with galaxies at any time to reach new stars.',
         actions: [
           {
             label: 'Regain control',

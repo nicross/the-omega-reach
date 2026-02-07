@@ -38,7 +38,7 @@
     width: fit-content;
   }
     .a-game--description-undiscovered {
-      color: #888888;
+      color: #AAAAAA;
     }
     .a-game--description-uncommon {
       color: #55AAFF;
@@ -293,6 +293,6 @@
     opacity: 1;
   }
   100% {
-    opacity: 0.333;
+    opacity: 0.5;
   }
 }

@@ -37,7 +37,7 @@ content.instruments = (() => {
       rare: [...rareQuirks],
     }
 
-    if (isTutorial || type.commonQuirks.length && srand('quirk', 'common1', 'roll') < rarity) {
+    if (isTutorial || quirks.common.length && srand('quirk', 'common1', 'roll') < rarity) {
       instrument.quirks.push({
         name: engine.fn.chooseSplice(
           quirks.common,
@@ -46,7 +46,7 @@ content.instruments = (() => {
       })
     }
 
-    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < rarity/2) {
+    if (!isTutorial && quirks.common.length && srand('quirk', 'common2', 'roll') < rarity/2) {
       instrument.quirks.push({
         name: engine.fn.chooseSplice(
           quirks.common,
@@ -55,7 +55,7 @@ content.instruments = (() => {
       })
     }
 
-    if (!isTutorial && type.rareQuirks.length && srand('quirk', 'rare', 'roll') < rarity/3) {
+    if (!isTutorial && quirks.rare.length && srand('quirk', 'rare', 'roll') < rarity/3) {
       instrument.quirks.push({
         isRare: true,
         name: engine.fn.chooseSplice(
@@ -65,7 +65,7 @@ content.instruments = (() => {
       })
     }
 
-    if (!isTutorial && type.rareQuirks.length && srand('quirk', 'rare', 'roll') < rarity/4) {
+    if (!isTutorial && quirks.rare.length && srand('quirk', 'rare', 'roll') < rarity/4) {
       instrument.quirks.push({
         isRare: true,
         name: engine.fn.chooseSplice(
@@ -108,15 +108,16 @@ content.instruments = (() => {
 
       return instrument
     },
-    has: (name) => states.has(name),
-    hasUnscanned: () => {
+    getFirstUnscannedName: function () {
       for (const [name, state] of states.entries()) {
         if ((state.scans || 0) <= 0) {
-          return true
+          return name
         }
       }
-
-      return false
+    },
+    has: (name) => states.has(name),
+    hasUnscanned: function () {
+      return Boolean(this.getFirstUnscannedName())
     },
     import: function (data = {}) {
       for (const [name, state] of Object.entries(data)) {

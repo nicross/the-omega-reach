@@ -11,7 +11,7 @@ content.rooms.horizon = content.rooms.invent({
     down: 'reach',
   },
   // Interaction
-  canInteract: () => true,
+  canInteract: () => Boolean(!app.tutorial.galaxy.complete || app.tutorial.horizonUnlocked.complete),
   onInteract: function () {
     const galaxy = content.galaxies.new()
 
@@ -24,6 +24,10 @@ content.rooms.horizon = content.rooms.invent({
   },
   // Attributes
   getAttributeLabels: function () {
+    if (!this.canInteract()) {
+      return []
+    }
+
     return [
       {
         label: 'Unexamined galaxies',
@@ -33,4 +37,12 @@ content.rooms.horizon = content.rooms.invent({
   },
   // Movement
   canEnter: () => Boolean(content.rooms.reach.state.online),
+  moveUp: function () {
+    if (!content.rooms.galaxy.getGalaxy()) {
+      const names = content.galaxies.names()
+      content.rooms.galaxy.setGalaxyByName(names[0])
+    }
+
+    return this.move('up')
+  },
 })

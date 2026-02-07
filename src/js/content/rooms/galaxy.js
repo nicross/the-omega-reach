@@ -32,7 +32,7 @@ content.rooms.galaxy = content.rooms.invent({
     return this
   },
   // Interaction
-  canInteract: () => true,
+  canInteract: () => Boolean(!app.tutorial.star.complete || app.tutorial.galaxyUnlocked.complete),
   onInteract: function () {
     const star = content.stars.new(this.getGalaxy().name)
     content.rooms.star.setStarByName(star.name)
@@ -40,6 +40,10 @@ content.rooms.galaxy = content.rooms.invent({
   },
   // Attributes
   getAttributeLabels: function () {
+    if (!this.canInteract()) {
+      return []
+    }
+
     return [
       {
         label: 'Unexamined stars',
@@ -49,7 +53,6 @@ content.rooms.galaxy = content.rooms.invent({
   },
   // Movement
   canEnter: () => content.galaxies.count() > 0,
-  canMoveDown: () => Boolean(app.tutorial.moonInstrument.complete),
   canMoveLeft: () => content.galaxies.count() > 1,
   canMoveRight: () => content.galaxies.count() > 1,
   moveLeft: function () {

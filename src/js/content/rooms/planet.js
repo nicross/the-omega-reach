@@ -134,7 +134,6 @@ content.rooms.planet = content.rooms.invent({
   },
   // Movement
   canEnter: () => content.planets.namesForStar(content.rooms.star.getStar()?.name).length > 0,
-  canMoveDown: () => Boolean(app.tutorial.moonInstrument.complete),
   canMoveLeft: () => content.planets.namesForStar(content.rooms.star.getStar()?.name).length > 1,
   canMoveRight: () => content.planets.namesForStar(content.rooms.star.getStar()?.name).length > 1,
   canMoveUp: function () {

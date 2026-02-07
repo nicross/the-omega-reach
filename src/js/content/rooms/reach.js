@@ -15,7 +15,7 @@ content.rooms.reach = content.rooms.invent({
     online: false,
   },
   // Interaction
-  canInteract: () => true,
+  canInteract: () => Boolean(!app.tutorial.reachOnline.complete || app.tutorial.reachUnlocked.complete),
   onInteract: function () {
     this.state.online = !this.state.online
 
@@ -25,13 +25,6 @@ content.rooms.reach = content.rooms.invent({
       content.rooms.planet.reset()
       content.rooms.moon.reset()
     }
-
-    // Prevent live region interrupting dialog open
-    /*
-    if (!app.tutorial.reachOnline.complete) {
-      return
-    }
-    */
 
     return this.getAttributeLabels()[0]?.label
   },

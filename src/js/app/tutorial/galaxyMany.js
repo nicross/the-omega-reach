@@ -17,9 +17,9 @@ app.tutorial.galaxyMany = app.tutorial.invent({
       {
         title: `[Tutorial] Galaxies:`,
         description: () => ({
-          gamepad: `Press <kbd>D-Pad Right</kbd> and <kbd>D-Pad Left</kbd> to navigate between the galaxies you've reached.`,
-          keyboard: `Press <kbd>Right Arrow</kbd> and <kbd>Left Arrow</kbd> to navigate between the galaxies you've reached.`,
-          mouse: `Click the <kbd>Arrow Buttons</kbd> to navigate between the galaxies you've reached.`,
+          gamepad: `You can revisit any galaxy at any time. Press <kbd>D-Pad Right</kbd> and <kbd>D-Pad Left</kbd> to navigate between the galaxies you've reached.`,
+          keyboard: `You can revisit any galaxy at any time. Press <kbd>Right Arrow</kbd> and <kbd>Left Arrow</kbd> to navigate between the galaxies you've reached.`,
+          mouse: `You can revisit any galaxy at any time. Click the <kbd>Arrow Buttons</kbd> to navigate between the galaxies you've reached.`,
         }[app.settings.computed.inputPreference]),
         actions: [
           {

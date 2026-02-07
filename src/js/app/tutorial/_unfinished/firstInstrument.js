@@ -1,5 +1,5 @@
-app.tutorial.moonInstrument = app.tutorial.invent({
-  id: 'instrumentGet',
+app.tutorial.firstInstrument = app.tutorial.invent({
+  id: 'firstInstrument',
   // State
   state: {},
   // Lifecycle
@@ -11,13 +11,12 @@ app.tutorial.moonInstrument = app.tutorial.invent({
 
     [
       {
-        title: `Shiny thing!`,
+        title: `What's that?`,
         description: ``,
         actions: [
           {
             label: 'To the gallery',
             before: () => this.markComplete(),
-            after: () => app.screen.game.movement.update(),
           }
         ],
       },

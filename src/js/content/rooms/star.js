@@ -117,7 +117,6 @@ content.rooms.star = content.rooms.invent({
   },
   // Movement
   canEnter: () => content.stars.namesForGalaxy(content.rooms.galaxy.getGalaxy()?.name).length > 0,
-  canMoveDown: () => Boolean(app.tutorial.moonInstrument.complete),
   canMoveLeft: () => content.stars.namesForGalaxy(content.rooms.galaxy.getGalaxy()?.name).length > 1,
   canMoveRight: () => content.stars.namesForGalaxy(content.rooms.galaxy.getGalaxy()?.name).length > 1,
   canMoveUp: function () {
