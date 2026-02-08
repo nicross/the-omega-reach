@@ -20,6 +20,7 @@ app.tutorial.star = app.tutorial.invent({
         actions: [
           {
             label: 'Regain control',
+            before: () => this.markComplete(),
           }
         ],
       },

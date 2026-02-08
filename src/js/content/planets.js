@@ -26,8 +26,10 @@ content.planets = (() => {
   function generate(name) {
     const isTutorial = name.includes(content.const.tutorialName)
 
+    const srand = (...seed) => engine.fn.srand('planet', name, 'attribute', ...seed)()
+
     const starName = extractStarName(name)
-    const star = content.galaxies.get(starName)
+    const star = content.stars.get(starName)
 
     const index = extractIndex(name)
     const habitability = star.habitability * (
@@ -38,8 +40,6 @@ content.planets = (() => {
     const heat = star.children == 1
       ? srand('heat')
       : 1 - (index / star.children)
-
-    const srand = (...seed) => engine.fn.srand('planet', name, 'attribute', ...seed)()
 
     const type = engine.fn.chooseWeighted(generateTypes({
       habitability,
@@ -53,7 +53,7 @@ content.planets = (() => {
 
     const planet = {
       age: srand('age') * star.age,
-      children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 6, srand('children') * type.moons, 1.5)),
+      children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 6, srand('children') * type.moons, 2)),
       habitability, // Pass raw habitability to children, not type habitability
       heat,
       index,
