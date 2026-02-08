@@ -22,6 +22,8 @@ content.instruments = (() => {
     }
 
     const quirks = generateQuirks(srand)
+    quirks.common = engine.fn.shuffle(quirks.common, engine.fn.srand(srand('sort','common')))
+    quirks.rare = engine.fn.shuffle(quirks.rare, engine.fn.srand(srand('sort','rare')))
 
     if (quirks.common.length && (isTutorial || srand('quirk', 'common1', 'roll') < rarity)) {
       instrument.quirks.push({
@@ -66,15 +68,44 @@ content.instruments = (() => {
 
   function generateQuirks(srand) {
     const common = [
-      'Popular',
+      'Branded',
       'Replica',
     ]
 
     const rare = [
       'Autographed',
       'Forbidden',
+      'Renown owner',
       'Obscure',
     ]
+
+    // Type
+    if (srand('type','rarity') < 1/2) {
+      rare.push('Electronic')
+    } else {
+      common.push('Acoustic')
+    }
+
+    // Size
+    common.push(
+      engine.fn.choose(['Handheld','Upright','Free standing'], srand('size','roll'))
+    )
+
+    // Handedness
+    if (srand('handedness','rarity') < 1/2) {
+      rare.push('Left handed')
+    } else {
+      common.push('Right handed')
+    }
+
+    // Edibility
+    if (srand('edibility','rarity') < 2/3) {
+      rare.push(
+        engine.fn.choose(['Edible','Edible once'], srand('edibility','roll'))
+      )
+    } else {
+      common.push('Inedible')
+    }
 
     // Cost
     if (srand('cost','rarity') < 1/2) {

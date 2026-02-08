@@ -26,10 +26,12 @@ content.stars = (() => {
     const srand = (...seed) => engine.fn.srand('star', name, 'attribute', ...seed)()
 
     const type = engine.fn.chooseWeighted(generateTypes(galaxy, srand), srand('type'))
+    type.commonQuirks = engine.fn.shuffle(type.commonQuirks, engine.fn.srand(srand('sort','common')))
+    type.rareQuirks = engine.fn.shuffle(type.rareQuirks, engine.fn.srand(srand('sort','rare')))
 
     const star = {
       age: srand('age') * galaxy.age,
-      children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 12, srand('children') * type.planets, 2)),
+      children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 12, srand('children') * type.planets, 1.5)),
       habitability: srand('habitability') * galaxy.habitability * type.habitability,
       galaxy,
       mass: srand('mass') * galaxy.mass,

@@ -48,10 +48,15 @@ content.planets = (() => {
       star,
     }), srand('type'))
 
+    type.commonQuirks = engine.fn.shuffle(type.commonQuirks, engine.fn.srand(srand('sort','common')))
+    type.rareQuirks = engine.fn.shuffle(type.rareQuirks, engine.fn.srand(srand('sort','rare')))
+
     const planet = {
       age: srand('age') * star.age,
-      children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 6, srand('children') * type.moons, 2)),
-      habitability: habitability * type.habitability,
+      children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 6, srand('children') * type.moons, 1.5)),
+      habitability, // Pass raw habitability to children, not type habitability
+      heat,
+      index,
       mass: srand('mass') * star.mass,
       name,
       quirks: [],
@@ -70,7 +75,7 @@ content.planets = (() => {
       })
     }
 
-    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < planet.wildcard) {
+    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < planet.wildcard/1.5) {
       planet.quirks.push({
         name: engine.fn.chooseSplice(
           type.commonQuirks,
@@ -79,7 +84,7 @@ content.planets = (() => {
       })
     }
 
-    if (isTutorial || type.rareQuirks.length && srand('quirk', 'rare', 'roll') < planet.wildcard/1.5) {
+    if (isTutorial || type.rareQuirks.length && srand('quirk', 'rare', 'roll') < planet.wildcard/2) {
       planet.quirks.push({
         isRare: true,
         name: engine.fn.chooseSplice(
@@ -123,15 +128,15 @@ content.planets = (() => {
     const rareQuirks = [
       'Extreme tilt',
       'Organic compounds',
+      'Recent impact',
       'Retrograde orbit',
       'Retrograde spin',
+      'Spaceship graveyard',
     ]
     const rareGiantQuirks = [
       'Decommissioned probes',
       'Internal heating',
       'Magnetic storms',
-      'Recent impact',
-      'Spaceship graveyard',
     ]
     const rareTerrestrialQuirks = [
       'Distress beacon',
@@ -152,7 +157,6 @@ content.planets = (() => {
     return [
       {
         label: 'Gas giant',
-        habitability: 0,
         instrument: 0,
         moons: 1,
         weight: 1,
@@ -172,10 +176,9 @@ content.planets = (() => {
       },
       {
         label: 'Ice giant',
-        habitability: 0,
         instrument: 0,
         moons: 1,
-        weight: (1 - heat) ** 2,
+        weight: 1 - heat,
         commonQuirks: [
           ...commonQuirks,
           ...commonGiantQuirks,
@@ -193,10 +196,9 @@ content.planets = (() => {
       },
       {
         label: 'Rocky planet',
-        habitability: 1/6,
         instrument: 1,
         moons: 1/3,
-        weight: 1/2,
+        weight: 1 * 0.5,
         commonQuirks: [
           ...commonQuirks,
           ...commonTerrestrialQuirks,
@@ -218,10 +220,9 @@ content.planets = (() => {
       },
       {
         label: 'Acid planet',
-        habitability: 0,
         instrument: 1,
         moons: 1/3,
-        weight: 1/2,
+        weight: habitability * 0.5,
         commonQuirks: [
           ...commonQuirks,
           ...commonTerrestrialQuirks,
@@ -242,10 +243,9 @@ content.planets = (() => {
       },
       {
         label: 'Terran planet',
-        habitability: 1,
         instrument: 1,
         moons: 1/2,
-        weight: habitability ** 2,
+        weight: habitability,
         commonQuirks: [
           ...commonQuirks,
           ...commonTerrestrialQuirks,
@@ -264,6 +264,7 @@ content.planets = (() => {
           ...rareTerrestrialQuirks,
           lifeQuirks[4],
           lifeQuirks[5],
+          'Abandoned cities',
           'Captured asteroid',
           'Heavy water',
           'Magnetic storms',
@@ -272,10 +273,9 @@ content.planets = (() => {
       },
       {
         label: 'Desert planet',
-        habitability: 2/3,
         instrument: 1,
         moons: 1/3,
-        weight: 1/2,
+        weight: (1 - habitability) * 0.5,
         commonQuirks: [
           ...commonQuirks,
           ...commonTerrestrialQuirks,
@@ -305,7 +305,7 @@ content.planets = (() => {
         habitability: 1/3,
         instrument: 1,
         moons: 1/3,
-        weight: (1 - heat) ** 2,
+        weight: (1 - heat) * 0.5,
         commonQuirks: [
           ...commonQuirks,
           ...commonTerrestrialQuirks,

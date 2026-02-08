@@ -14,18 +14,25 @@ content.moons = (() => {
 
     const srand = (...seed) => engine.fn.srand('moon', name, 'attribute', ...seed)()
 
-    const type = engine.fn.chooseWeighted(generateTypes(planet), srand('type'))
+    const type = engine.fn.chooseWeighted(generateTypes({
+      planet,
+      srand,
+    }), srand('type'))
+
+    type.commonQuirks = engine.fn.shuffle(type.commonQuirks, engine.fn.srand(srand('sort','common')))
+    type.rareQuirks = engine.fn.shuffle(type.rareQuirks, engine.fn.srand(srand('sort','rare')))
 
     const moon = {
       age: srand('age') * planet.age,
-      habitability: srand('habitability') * planet.habitability * type.habitability,
+      habitability: planet.habitability, // Inherit from planet
+      heat: planet.habitability, // Inherit from planet
       mass: srand('mass') * planet.mass,
       name,
       planet,
       quirks: [],
-      radius: srand('radius'),
+      radius: srand('radius') * planet.radius,
       type: type.label,
-      wildcard: (srand('wildcard') + planet.wildcard) * 0.5,
+      wildcard: (srand('wildcard') + planet.wildcard) * 0.5, // Inherit from star
     }
 
     if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common1', 'roll') < moon.wildcard) {
@@ -37,7 +44,7 @@ content.moons = (() => {
       })
     }
 
-    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < moon.wildcard/2) {
+    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < moon.wildcard/1.5) {
       moon.quirks.push({
         name: engine.fn.chooseSplice(
           type.commonQuirks,
@@ -46,7 +53,7 @@ content.moons = (() => {
       })
     }
 
-    if (!isTutorial && type.rareQuirks.length && srand('quirk', 'rare', 'roll') < moon.wildcard/3) {
+    if (!isTutorial && type.rareQuirks.length && srand('quirk', 'rare', 'roll') < moon.wildcard/2) {
       moon.quirks.push({
         isRare: true,
         name: engine.fn.chooseSplice(
@@ -58,25 +65,160 @@ content.moons = (() => {
 
     moon.instrument = isTutorial
       ? true
-      : srand('instrument', 'roll') < type.instrument * moon.wildcard/4
+      : srand('instrument', 'roll') < type.instrument * moon.wildcard/2
 
     return moon
   }
 
-  function generateTypes(planet) {
+  function generateTypes({
+    planet,
+    srand,
+  } = {}) {
+    const commonQuirks = [
+      engine.fn.choose(['High','Low'], srand('density')) + ' density',
+      engine.fn.choose(['High','Low'], srand('gravity')) + ' gravity',
+      'Geological activity',
+      engine.fn.choose(['Strong','Weak'], srand('magnetism')) + ' magnetic field',
+    ]
+
+    const rareQuirks = [
+      'Distress beacon',
+      'Extreme tilt',
+      'Organic compounds',
+      'Precious metals',
+      'Precious minerals',
+      'Recent impact',
+      'Retrograde orbit',
+      'Retrograde spin',
+      'Spaceship graveyard',
+      'Tidally locked',
+    ]
+
+    const lifeQuirks = [
+      'Primordial life',
+      'Microbial life',
+      'Fungal life',
+      'Floral life',
+      'Animal life',
+      'Intelligent life',
+    ]
+
     return [
       {
-        label: 'Generic moon',
-        habitability: 1,
+        label: 'Rocky moon',
         instrument: 1,
-        moons: 1,
         weight: 1,
         commonQuirks: [
-          'Common quirk',
-          'Common quirk',
+          ...commonQuirks,
+          'Cratered',
+          'Fine regolith',
+          'High albedo',
+          'Highly metallic',
         ],
         rareQuirks: [
-          'Rare quirk',
+          ...rareQuirks,
+          lifeQuirks[0],
+          'Captured asteroid',
+          'Mining sites',
+          'Polar ice',
+          'Research stations',
+          'Tenuous atmosphere',
+        ],
+      },
+      {
+        label: 'Acid moon',
+        instrument: 1,
+        weight: planet.habitability,
+        commonQuirks: [
+          ...commonQuirks,
+          'Acid ocean',
+          'Acid rain',
+          'Cyclonic storms',
+          'Greenhouse gases',
+          'Thick atmosphere',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          lifeQuirks[0],
+          'Ancient ruins',
+          'Captured asteroid',
+          'Tectonic plates',
+        ],
+      },
+      {
+        label: 'Terran moon',
+        instrument: 1,
+        weight: planet.habitability,
+        commonQuirks: [
+          ...commonQuirks,
+          lifeQuirks[1],
+          lifeQuirks[2],
+          lifeQuirks[3],
+          'Ancient ruins',
+          'Breathable atmosphere',
+          'Cyclonic storms',
+          'Polar ice',
+          'Tectonic plates',
+          'Water ocean',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          lifeQuirks[4],
+          lifeQuirks[5],
+          'Abandoned cities',
+          'Captured asteroid',
+          'Heavy water',
+          'Magnetic storms',
+          'Terraformed',
+        ],
+      },
+      {
+        label: 'Desert moon',
+        instrument: 1,
+        weight: 1 - planet.habitability,
+        commonQuirks: [
+          ...commonQuirks,
+          lifeQuirks[0],
+          lifeQuirks[1],
+          'Dried riverbeds',
+          'Dust storms',
+          'Fine regolith',
+          'Polar ice',
+          'Thin atmosphere',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          lifeQuirks[2],
+          lifeQuirks[3],
+          'Ancient ruins',
+          'Captured asteroid',
+          'Breathable atmosphere',
+          'Mining sites',
+          'Research stations',
+          'Tectonic plates',
+        ],
+      },
+      {
+        label: 'Arctic moon',
+        instrument: 1,
+        weight: 1 - planet.heat,
+        commonQuirks: [
+          ...commonQuirks,
+          lifeQuirks[0],
+          lifeQuirks[1],
+          'Extreme cold',
+          'High albedo',
+          'Subsurface ocean',
+          'Thin atmosphere',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          lifeQuirks[2],
+          lifeQuirks[3],
+          'Breathable atmosphere',
+          'Captured comet',
+          'Heavy water',
+          'Research stations',
         ],
       },
     ]
