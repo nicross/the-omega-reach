@@ -169,6 +169,7 @@ app.controls.mappings = {
         'Delete',
         'Escape',
         'NumpadDecimal',
+        'Pause',
       ],
       mouseAxis: [],
       mouseButton: [
@@ -183,11 +184,8 @@ app.controls.mappings = {
         9,
       ],
       keyboard: [
-        'Backspace',
-        'Delete',
         'Escape',
         'Pause',
-        'NumpadDecimal',
       ],
       mouseAxis: [],
       mouseButton: [

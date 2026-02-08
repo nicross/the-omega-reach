@@ -1,6 +1,6 @@
-document.querySelectorAll('.c-menuButton, .a-game').forEach((element) => {
+document.querySelectorAll('button, [role="button"]').forEach((element) => {
   element.addEventListener('keydown', (e) => {
-    if (['Enter','NumpadEnter','Space'].includes(e.key)) {
+    if (['Enter','NumpadEnter','Space'].includes(e.code)) {
       e.preventDefault()
     }
   })

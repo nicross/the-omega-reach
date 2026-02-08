@@ -13,7 +13,7 @@ app.screen.game.movement = (() => {
   return pubsub.decorate({
     down: function () {
       const e = {
-        direction: 'left',
+        direction: 'down',
         isOut: ['horizon','galaxy','star','planet','moon'].includes(content.location.id()),
       }
 

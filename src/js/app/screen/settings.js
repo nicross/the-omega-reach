@@ -76,12 +76,18 @@ app.screen.settings = app.screenManager.invent({
         } else if (ui.down) {
           return app.utility.focus.setNextFocusable(this.rootElement, (element) => !app.utility.dom.contains(select.rootElement, element))
         } else if (ui.right) {
-          select.nextElement.focus()
-          select.next()
+          if (app.utility.focus.is(select.nextElement)) {
+            select.nextElement.click()
+          } else {
+            select.nextElement.focus()
+          }
           return
         } else if (ui.left) {
-          select.previousElement.focus()
-          select.previous()
+          if (app.utility.focus.is(select.previousElement)) {
+            select.previousElement.click()
+          } else {
+            select.previousElement.focus()
+          }
           return
         }
       }

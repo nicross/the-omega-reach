@@ -3,6 +3,12 @@ content.audio = (() => {
     mainInput = context.createGain(),
     mainOutput = engine.mixer.createBus()
 
+  const reverb = engine.mixer.reverb.send.create({
+    gainModel: engine.mixer.reverb.gainModel.normalize.instantiate({
+      gain: engine.fn.fromDb(-6),
+    }),
+  })
+
   mainInput.connect(mainOutput)
 
   function createBus() {
@@ -38,10 +44,19 @@ content.audio = (() => {
       default: createChannel(),
     },
     main: () => mainOutput,
+    reverb: () => reverb,
     // Namespaces
     buffer: {},
   }
 })()
 
-engine.loop.on('resume', () => engine.loop.once('frame', () => engine.fn.rampLinear(content.audio.main().gain, 1, 0.25)))
-engine.loop.on('pause', () => engine.loop.once('frame', () => engine.fn.rampLinear(content.audio.main().gain, 0, 0.25)))
+// Basic mixer
+engine.loop.on('resume', () => {
+  engine.fn.rampLinear(content.audio.main().gain, 1, 0.25)
+  engine.fn.rampLinear(engine.mixer.reverb.param.gain, 1, 0.25)
+})
+
+engine.loop.on('pause', () => {
+  engine.fn.rampLinear(content.audio.main().gain, 0, 0.25)
+  engine.fn.rampLinear(engine.mixer.reverb.param.gain, 0, 0.25)
+})
