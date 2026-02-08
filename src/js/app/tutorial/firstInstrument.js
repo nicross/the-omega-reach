@@ -12,7 +12,7 @@ app.tutorial.firstInstrument = app.tutorial.invent({
     [
       {
         title: `What's that?`,
-        description: ``,
+        description: `You've reached what you're looking for.`,
         actions: [
           {
             label: 'To the gallery',

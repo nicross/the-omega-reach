@@ -15,17 +15,8 @@ app.tutorial.planet = app.tutorial.invent({
 
     [
       {
-        title: `It's a planet!`,
-        description: ``,
-        actions: [
-          {
-            label: 'Reach deeper',
-          }
-        ],
-      },
-      {
         title: `[Tutorial] Planets:`,
-        description: ``,
+        description: `Interact to reveal more about a planet.`,
         actions: [
           {
             label: 'Regain control',

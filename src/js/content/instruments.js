@@ -70,13 +70,16 @@ content.instruments = (() => {
     const common = [
       'Branded',
       'Replica',
+      'Smuggled',
+      'Stolen',
     ]
 
     const rare = [
       'Autographed',
       'Forbidden',
-      'Renown owner',
       'Obscure',
+      'Priceless',
+      'Renown owner',
     ]
 
     // Type
@@ -105,17 +108,6 @@ content.instruments = (() => {
       )
     } else {
       common.push('Inedible')
-    }
-
-    // Cost
-    if (srand('cost','rarity') < 1/2) {
-      rare.push(
-        engine.fn.choose(['Premium','Priceless'], srand('cost','roll'))
-      )
-    } else {
-      common.push(
-        engine.fn.choose(['Discounted','Inexpensive'], srand('cost','roll'))
-      )
     }
 
     // Design

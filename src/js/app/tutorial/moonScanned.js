@@ -1,9 +1,9 @@
-app.tutorial.moon = app.tutorial.invent({
-  id: 'moon',
+app.tutorial.moonScanned = app.tutorial.invent({
+  id: 'moonScanned',
   // State
   state: {},
   // Lifecycle
-  shouldActivate: () => content.location.is('moon'),
+  shouldActivate: () => content.location.is('moon') && content.scans.is(content.rooms.moon.getMoon().name),
   onUpdate: function () {
     if (!content.location.is('moon')) {
       return
@@ -15,17 +15,8 @@ app.tutorial.moon = app.tutorial.invent({
 
     [
       {
-        title: `It's a moon!`,
-        description: ``,
-        actions: [
-          {
-            label: 'Reach deeper',
-          }
-        ],
-      },
-      {
-        title: `[Tutorial] Moons:`,
-        description: ``,
+        title: `[Tutorial] Instruments:`,
+        description: `Some objects have instruments on them. Interact to recover an instrument for your collection.`,
         actions: [
           {
             label: 'Regain control',

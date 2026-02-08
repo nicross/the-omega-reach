@@ -12,7 +12,7 @@ app.tutorial.shopClosed = app.tutorial.invent({
     [
       {
         title: `Be back in five.`,
-        description: `You scan <strong>the shop</strong> for its persnickety keeper. It's unclear where they might find a proper meal this late, but their determination is commendable. Honestly, you'd rather grab an <em>earthen burger</em> with the reach.`,
+        description: `You scan <strong>the shop</strong> for its persnickety keeper. It's unclear where they might find a proper meal this late, but their determination has that reputation. Honestly, you'd rather grab an <em>earthen burger</em> with <strong>the reach</strong>.`,
         actions: [
           {
             label: 'Come back later',

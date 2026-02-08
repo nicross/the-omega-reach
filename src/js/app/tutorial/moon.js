@@ -1,18 +1,22 @@
-app.tutorial.galleryInstrument = app.tutorial.invent({
-  id: 'galleryInstrument',
+app.tutorial.moon = app.tutorial.invent({
+  id: 'moon',
   // State
   state: {},
   // Lifecycle
-  shouldActivate: () => content.location.is('gallery') && content.instruments.count() > 0,
+  shouldActivate: () => content.location.is('moon'),
   onUpdate: function () {
-    if (!content.location.is('gallery')) {
+    if (!content.location.is('moon')) {
+      return
+    }
+
+    if (this.preventDouble()) {
       return
     }
 
     [
       {
-        title: `[Tutorial] Instruments:`,
-        description: ``,
+        title: `[Tutorial] Moons:`,
+        description: `Interact to reveal more about a moon.`,
         actions: [
           {
             label: 'Regain control',
