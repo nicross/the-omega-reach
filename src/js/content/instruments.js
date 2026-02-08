@@ -4,40 +4,26 @@ content.instruments = (() => {
 
   const defaultState = {}
 
-  const commonQuirks = [
-    'Common quirk',
-    'Common quirk',
-  ]
-
-  const rareQuirks = [
-    'Rare quirk',
-    'Rare quirk',
-  ]
-
   function generate(name) {
     const isTutorial = name.includes(content.const.tutorialName)
 
-    const srand = (seed) => engine.fn.srand('instrument', name, 'attribute', seed)()
-
+    const srand = (...seed) => engine.fn.srand('instrument', name, 'attribute', ...seed)()
     const rarity = isTutorial ? 0 : srand('rarity')
 
     const instrument = {
       name,
       quirks: [],
-      rarity: engine.fn.chooseWeighted([
-        {label: 'Common', weight: 1},
-        {label: 'Uncommon', weight: 0.5},
-        {label: 'Rare', weight: 0.25},
-        {label: 'Legendary', weight: 0.125},
-      ], rarity).label,
+      rarity: engine.fn.choose([
+        'Common',
+        'Uncommon',
+        'Rare',
+        'Legendary',
+      ], rarity),
     }
 
-    const quirks = {
-      common: [...commonQuirks],
-      rare: [...rareQuirks],
-    }
+    const quirks = generateQuirks(srand)
 
-    if (isTutorial || quirks.common.length && srand('quirk', 'common1', 'roll') < rarity) {
+    if (quirks.common.length && (isTutorial || srand('quirk', 'common1', 'roll') < rarity)) {
       instrument.quirks.push({
         name: engine.fn.chooseSplice(
           quirks.common,
@@ -46,7 +32,7 @@ content.instruments = (() => {
       })
     }
 
-    if (!isTutorial && quirks.common.length && srand('quirk', 'common2', 'roll') < rarity/2) {
+    if (!isTutorial && quirks.common.length && srand('quirk', 'common2', 'roll') < rarity) {
       instrument.quirks.push({
         name: engine.fn.chooseSplice(
           quirks.common,
@@ -55,27 +41,111 @@ content.instruments = (() => {
       })
     }
 
-    if (!isTutorial && quirks.rare.length && srand('quirk', 'rare', 'roll') < rarity/3) {
+    if (!isTutorial && quirks.rare.length && srand('quirk', 'rare1', 'roll') < rarity) {
       instrument.quirks.push({
         isRare: true,
         name: engine.fn.chooseSplice(
           quirks.rare,
-          srand('quirk', 'rare', 'type')
+          srand('quirk', 'rare1', 'type')
         ),
       })
     }
 
-    if (!isTutorial && quirks.rare.length && srand('quirk', 'rare', 'roll') < rarity/4) {
+    if (!isTutorial && quirks.rare.length && srand('quirk', 'rare2', 'roll') < rarity) {
       instrument.quirks.push({
         isRare: true,
         name: engine.fn.chooseSplice(
           quirks.rare,
-          srand('quirk', 'rare', 'type')
+          srand('quirk', 'rare2', 'type')
         ),
       })
     }
 
     return instrument
+  }
+
+  function generateQuirks(srand) {
+    const common = [
+      'Popular',
+      'Replica',
+    ]
+
+    const rare = [
+      'Autographed',
+      'Forbidden',
+      'Obscure',
+    ]
+
+    // Cost
+    if (srand('cost','rarity') < 1/2) {
+      rare.push(
+        engine.fn.choose(['Premium','Priceless'], srand('cost','roll'))
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Discounted','Inexpensive'], srand('cost','roll'))
+      )
+    }
+
+    // Design
+    if (srand('design','rarity') < 2/7) {
+      rare.push(
+        engine.fn.choose(['Commemorative','Ornate'], srand('design','roll')) + ' design'
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Complex','Compact','Ergonomic','Functional'], srand('design','roll')) + ' design'
+      )
+    }
+
+    // Lore
+    if (srand('lore','rarity') < 3/9) {
+      rare.push(
+        engine.fn.choose(['Epic','Legendary','Mythical'], srand('lore','roll')) + ' lore'
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Cultural','Fictional','Political','Scientific','Religious','Wartime'], srand('lore','roll')) + ' lore'
+      )
+    }
+
+    // Material
+    if (srand('material','rarity') < 4/7) {
+      rare.push(
+        engine.fn.choose(['Exotic','Living','Radioactive','Synthetic'], srand('material','roll')) + ' matter'
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Metallic','Organic','Silicate'], srand('material','roll')) + ' matter'
+      )
+    }
+
+    // Period
+    if (srand('period','rarity') < 2/6) {
+      rare.push(
+        engine.fn.choose(['Ancient','Extinction'], srand('period','roll')) + ' period'
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Classical','Modern','Retro','Futuristic'], srand('period','roll')) + ' period'
+      )
+    }
+
+    // Quality
+    if (srand('quality','rarity') < 1/2) {
+      rare.push(
+        engine.fn.choose(['Fine','Very fine','Near mint','Mint'], srand('quality','roll')) + ' condition'
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Poor','Fair','Good','Very good'], srand('quality','roll')) + ' condition'
+      )
+    }
+
+    return {
+      common,
+      rare,
+    }
   }
 
   return {

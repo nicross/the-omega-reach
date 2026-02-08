@@ -25,7 +25,7 @@ content.stars = (() => {
 
     const srand = (...seed) => engine.fn.srand('star', name, 'attribute', ...seed)()
 
-    const type = engine.fn.chooseWeighted(generateTypes(galaxy), srand('type'))
+    const type = engine.fn.chooseWeighted(generateTypes(galaxy, srand), srand('type'))
 
     const star = {
       age: srand('age') * galaxy.age,
@@ -100,7 +100,7 @@ content.stars = (() => {
         planets: 1/4,
         weight: engine.fn.lerp(0, 1/2, galaxy.age),
         commonQuirks: [
-          engine.fn.choose(['Carbon core', 'Neon core', 'Helium core'], Math.random()),
+          engine.fn.choose(['Carbon core', 'Neon core', 'Helium core'], srand('dwarf','core')),
           'High density',
           'Highly magnetic',
           'Highly metallic',

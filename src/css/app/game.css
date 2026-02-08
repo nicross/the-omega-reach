@@ -43,6 +43,9 @@
     .a-game--description-uncommon {
       color: #55AAFF;
     }
+    .a-game--description-rare {
+      color: #FFAA55;
+    }
     .a-game--description-legendary {
       color: #FF55AA;
     }
@@ -81,7 +84,7 @@
       margin-right: 0.5em;
     }
     .a-game--attribute-rare {
-      color: #FF6900;
+      color: #FFAA55;
       font-family: FiraCodeMedium, monospace;
       font-weight: 500;
     }
@@ -89,7 +92,7 @@
       animation: a-game--attribute-undiscovered 1s ease 0s infinite alternate both;
     }
     .a-game--attribute-instrument {
-      background-color: #FF6900;
+      background-color: #FFAA55;
       color: #000000;
       font-family: FiraCodeMedium, monospace;
       font-weight: 500;
