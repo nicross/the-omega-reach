@@ -11,6 +11,12 @@ content.planets = (() => {
     'z',
   ]
 
+  function extractIndex(name) {
+    return latinLetters.indexOf(
+      name.split(' ').pop()
+    ) - 1
+  }
+
   function extractStarName(name) {
     const parts = name.split(' ')
     parts.pop()
@@ -23,14 +29,29 @@ content.planets = (() => {
     const starName = extractStarName(name)
     const star = content.galaxies.get(starName)
 
+    const index = extractIndex(name)
+    const habitability = star.habitability * (
+      star.children <= 2
+        ? srand('habitability')
+        : Math.sin(Math.PI * index / star.children)
+    )
+    const heat = star.children == 1
+      ? srand('heat')
+      : 1 - (index / star.children)
+
     const srand = (...seed) => engine.fn.srand('planet', name, 'attribute', ...seed)()
 
-    const type = engine.fn.chooseWeighted(generateTypes(star), srand('type'))
+    const type = engine.fn.chooseWeighted(generateTypes({
+      habitability,
+      heat,
+      srand,
+      star,
+    }), srand('type'))
 
     const planet = {
       age: srand('age') * star.age,
       children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 6, srand('children') * type.moons, 2)),
-      habitability: srand('habitability') * star.habitability * type.habitability,
+      habitability: habitability * type.habitability,
       mass: srand('mass') * star.mass,
       name,
       quirks: [],
@@ -49,7 +70,7 @@ content.planets = (() => {
       })
     }
 
-    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < planet.wildcard/2) {
+    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < planet.wildcard) {
       planet.quirks.push({
         name: engine.fn.chooseSplice(
           type.commonQuirks,
@@ -58,7 +79,7 @@ content.planets = (() => {
       })
     }
 
-    if (isTutorial || type.rareQuirks.length && srand('quirk', 'rare', 'roll') < planet.wildcard/3) {
+    if (isTutorial || type.rareQuirks.length && srand('quirk', 'rare', 'roll') < planet.wildcard/1.5) {
       planet.quirks.push({
         isRare: true,
         name: engine.fn.chooseSplice(
@@ -70,25 +91,240 @@ content.planets = (() => {
 
     planet.instrument = isTutorial
       ? false
-      : srand('instrument', 'roll') < type.instrument * planet.wildcard/4
+      : srand('instrument', 'roll') < type.instrument * planet.wildcard/2
 
     return planet
   }
 
-  function generateTypes(star) {
+  function generateTypes({
+    habitability,
+    heat,
+    srand,
+    star,
+  } = {}) {
+    const commonQuirks = [
+      engine.fn.choose(['High','Low'], srand('density')) + ' density',
+      engine.fn.choose(['High','Low'], srand('gravity')) + ' gravity',
+    ]
+    const commonGiantQuirks = [
+      'Anticyclonic storms',
+      'Banded clouds',
+      'Extreme winds',
+      'Gravity well',
+      'Ring system',
+      'Rocky core',
+      'Strong magnetic field',
+    ]
+    const commonTerrestrialQuirks = [
+      'Geological activity',
+      engine.fn.choose(['Strong','Weak'], srand('magnetism')) + ' magnetic field',
+    ]
+
+    const rareQuirks = [
+      'Extreme tilt',
+      'Organic compounds',
+      'Retrograde orbit',
+      'Retrograde spin',
+    ]
+    const rareGiantQuirks = [
+      'Decommissioned probes',
+      'Internal heating',
+      'Magnetic storms',
+      'Recent impact',
+      'Spaceship graveyard',
+    ]
+    const rareTerrestrialQuirks = [
+      'Distress beacon',
+      'Precious metals',
+      'Precious minerals',
+      'Ring system',
+    ]
+
+    const lifeQuirks = [
+      'Primordial life',
+      'Microbial life',
+      'Fungal life',
+      'Floral life',
+      'Animal life',
+      'Intelligent life',
+    ]
+
     return [
       {
-        label: 'Generic planet',
-        habitability: 1,
-        instrument: 1,
+        label: 'Gas giant',
+        habitability: 0,
+        instrument: 0,
         moons: 1,
         weight: 1,
         commonQuirks: [
-          'Common quirk',
-          'Common quirk',
+          ...commonQuirks,
+          ...commonGiantQuirks,
+          'Highly metallic',
         ],
         rareQuirks: [
-          'Rare quirk',
+          ...rareQuirks,
+          ...rareGiantQuirks,
+          lifeQuirks[0],
+          'Captured asteroid',
+          'Contracting interior',
+          'Failed star',
+        ],
+      },
+      {
+        label: 'Ice giant',
+        habitability: 0,
+        instrument: 0,
+        moons: 1,
+        weight: (1 - heat) ** 2,
+        commonQuirks: [
+          ...commonQuirks,
+          ...commonGiantQuirks,
+          'Icy mantle',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          ...rareGiantQuirks,
+          lifeQuirks[0],
+          'Captured comet',
+          'Diamond rain',
+          'Extreme cold',
+          'Heavy water',
+        ],
+      },
+      {
+        label: 'Rocky planet',
+        habitability: 1/6,
+        instrument: 1,
+        moons: 1/3,
+        weight: 1/2,
+        commonQuirks: [
+          ...commonQuirks,
+          ...commonTerrestrialQuirks,
+          'Cratered',
+          'Fine regolith',
+          'High albedo',
+          'Highly metallic',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          ...rareTerrestrialQuirks,
+          lifeQuirks[0],
+          'Captured asteroid',
+          'Mining sites',
+          'Polar ice',
+          'Research stations',
+          'Tenuous atmosphere',
+        ],
+      },
+      {
+        label: 'Acid planet',
+        habitability: 0,
+        instrument: 1,
+        moons: 1/3,
+        weight: 1/2,
+        commonQuirks: [
+          ...commonQuirks,
+          ...commonTerrestrialQuirks,
+          'Acid ocean',
+          'Acid rain',
+          'Cyclonic storms',
+          'Greenhouse gases',
+          'Thick atmosphere',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          ...rareTerrestrialQuirks,
+          lifeQuirks[0],
+          'Ancient ruins',
+          'Captured asteroid',
+          'Tectonic plates',
+        ],
+      },
+      {
+        label: 'Terran planet',
+        habitability: 1,
+        instrument: 1,
+        moons: 1/2,
+        weight: habitability ** 2,
+        commonQuirks: [
+          ...commonQuirks,
+          ...commonTerrestrialQuirks,
+          lifeQuirks[1],
+          lifeQuirks[2],
+          lifeQuirks[3],
+          'Ancient ruins',
+          'Breathable atmosphere',
+          'Cyclonic storms',
+          'Polar ice',
+          'Tectonic plates',
+          'Water ocean',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          ...rareTerrestrialQuirks,
+          lifeQuirks[4],
+          lifeQuirks[5],
+          'Captured asteroid',
+          'Heavy water',
+          'Magnetic storms',
+          'Terraformed',
+        ],
+      },
+      {
+        label: 'Desert planet',
+        habitability: 2/3,
+        instrument: 1,
+        moons: 1/3,
+        weight: 1/2,
+        commonQuirks: [
+          ...commonQuirks,
+          ...commonTerrestrialQuirks,
+          lifeQuirks[0],
+          lifeQuirks[1],
+          'Dried riverbeds',
+          'Dust storms',
+          'Fine regolith',
+          'Polar ice',
+          'Thin atmosphere',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          ...rareTerrestrialQuirks,
+          lifeQuirks[2],
+          lifeQuirks[3],
+          'Ancient ruins',
+          'Captured asteroid',
+          'Breathable atmosphere',
+          'Mining sites',
+          'Research stations',
+          'Tectonic plates',
+        ],
+      },
+      {
+        label: 'Arctic planet',
+        habitability: 1/3,
+        instrument: 1,
+        moons: 1/3,
+        weight: (1 - heat) ** 2,
+        commonQuirks: [
+          ...commonQuirks,
+          ...commonTerrestrialQuirks,
+          lifeQuirks[0],
+          lifeQuirks[1],
+          'Extreme cold',
+          'High albedo',
+          'Subsurface ocean',
+          'Thin atmosphere',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          ...rareTerrestrialQuirks,
+          lifeQuirks[2],
+          lifeQuirks[3],
+          'Breathable atmosphere',
+          'Captured comet',
+          'Heavy water',
+          'Research stations',
         ],
       },
     ]

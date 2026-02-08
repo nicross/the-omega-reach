@@ -71,7 +71,7 @@ content.stars = (() => {
     return star
   }
 
-  function generateTypes(galaxy) {
+  function generateTypes(galaxy, srand) {
     return [
       {
         label: 'Main sequence star',
