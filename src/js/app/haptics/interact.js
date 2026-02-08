@@ -3,7 +3,10 @@ engine.loop.on('frame', ({paused}) => {
     return
   }
 
-  const value = app.screen.game.interact.value()
+  const value = engine.fn.clamp(
+      app.screen.game.interact.value()
+    + ((app.screen.game.interact.proximity() ** 2) * 0.75)
+  )
 
   if (!value) {
     return
@@ -11,23 +14,23 @@ engine.loop.on('frame', ({paused}) => {
 
   app.haptics.enqueue({
     duration: engine.loop.delta() * 1000,
-    strongMagnitude: Math.random() * value,
-    weakMagnitude: Math.random() * value,
+    strongMagnitude: value,
+    weakMagnitude: value,
   })
 })
 
 engine.ready(() => {
   app.screen.game.interact.on('trigger', () => {
     app.haptics.enqueue({
-      duration: 100,
-      startDelay: 200,
+      duration: 125,
+      startDelay: 125,
       strongMagnitude: 1,
       weakMagnitude: 1,
     })
 
     app.haptics.enqueue({
-      duration: 100,
-      startDelay: 400,
+      duration: 125,
+      startDelay: 375,
       strongMagnitude: 1,
       weakMagnitude: 1,
     })

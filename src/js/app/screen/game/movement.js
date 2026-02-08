@@ -1,6 +1,7 @@
 app.screen.game.movement = (() => {
   const downElement = document.querySelector('.a-game--down'),
     leftElement = document.querySelector('.a-game--left'),
+    pubsub = engine.tool.pubsub.create(),
     rightElement = document.querySelector('.a-game--right'),
     upElement = document.querySelector('.a-game--up')
 
@@ -9,44 +10,72 @@ app.screen.game.movement = (() => {
     canRight = false,
     canUp = false
 
-  return {
+  return pubsub.decorate({
     down: function () {
+      const e = {
+        direction: 'left',
+        isOut: ['horizon','galaxy','star','planet','moon'].includes(content.location.id()),
+      }
+
       if (!canDown) {
+        pubsub.emit('disallowed', e)
         return this
       }
 
       content.location.get().moveDown()
       app.screen.game.update()
+      pubsub.emit('move', e)
 
       return this
     },
     left: function () {
+      const e = {
+        direction: 'left',
+        isPrevious: ['gallery','galaxy','star','planet','moon'].includes(content.location.id()),
+      }
+
       if (!canLeft) {
+        pubsub.emit('disallowed', e)
         return this
       }
 
       content.location.get().moveLeft()
       app.screen.game.update()
+      pubsub.emit('move', e)
 
       return this
     },
     right: function () {
+      const e = {
+        direction: 'right',
+        isNext: ['gallery','galaxy','star','planet','moon'].includes(content.location.id()),
+      }
+
       if (!canRight) {
+        pubsub.emit('disallowed', e)
         return this
       }
 
       content.location.get().moveRight()
       app.screen.game.update()
+      pubsub.emit('move', e)
 
       return this
     },
     up: function () {
+      const e = {
+        direction: 'up',
+        isIn: ['reach','horizon','galaxy','star','planet','moon'].includes(content.location.id()),
+      }
+
       if (!canUp) {
+        pubsub.emit('disallowed', e)
         return this
       }
 
       content.location.get().moveUp()
       app.screen.game.update()
+      pubsub.emit('move', e)
 
       return this
     },
@@ -111,5 +140,5 @@ app.screen.game.movement = (() => {
 
       return this
     },
-  }
+  })
 })()

@@ -6,6 +6,7 @@ app.screen.game.interact = (() => {
 
   let canInteract,
     isCooldown = false,
+    proximity = 0,
     value = 0
 
   rootElement.addEventListener('click', () => {
@@ -67,8 +68,14 @@ app.screen.game.interact = (() => {
 
       return this
     },
+    proximity: () => proximity,
     setCooldown: function (nextValue) {
       isCooldown = Boolean(nextValue)
+
+      return this
+    },
+    setProximity: function (nextValue) {
+      proximity = nextValue
 
       return this
     },

@@ -36,6 +36,7 @@ content.location = (() => {
       }
     },
     get: () => room,
+    id: () => room?.id,
     import: function ({id} = {}, states = {}) {
       load(id, states[id])
 

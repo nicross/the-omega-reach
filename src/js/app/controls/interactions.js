@@ -127,7 +127,7 @@ app.controls.interactions = (() => {
 
     point.x = 1 - magnitude
 
-    return point.rotateQuaternion(mappings.rotation)
+    return point.rotateQuaternion(mappings.rotation).normalize()
   }
 
   function updateGamepad() {
@@ -157,7 +157,7 @@ app.controls.interactions = (() => {
           x: 1 - mouseMemory.distance(),
           y: -mouseMemory.x,
           z: mouseMemory.y,
-        })
+        }).normalize()
       )
     }
   }

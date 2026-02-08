@@ -12,7 +12,8 @@
 */
 
 app.screen.game.dialog = (() => {
-  const queue = []
+  const pubsub = engine.tool.pubsub.create(),
+    queue = []
 
   const rootElement = document.querySelector('.a-game--dialog')
 
@@ -39,9 +40,13 @@ app.screen.game.dialog = (() => {
       } else {
         app.utility.focus.setWithin(rootElement)
       }
+
+      pubsub.emit('advance')
     } else if (isOpen) {
       close()
       current = undefined
+
+      pubsub.emit('close')
     }
   }
 
@@ -109,7 +114,7 @@ app.screen.game.dialog = (() => {
     isOpen = true
   }
 
-  return {
+  return pubsub.decorate({
     checkAdvance: function () {
       if (!isOpen) {
         advance()
@@ -155,5 +160,5 @@ app.screen.game.dialog = (() => {
 
       return this
     },
-  }
+  })
 })()

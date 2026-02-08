@@ -50,7 +50,7 @@ content.rooms.star = content.rooms.invent({
   canInteract: function () {
     const star = this.getStar()
 
-    return content.scans.get(star.name) < star.quirks.length + 1
+    return content.scans.get(star.name) < 1 + star.quirks.length
   },
   canInteractFreely: function () {
     return !this.solution

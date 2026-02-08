@@ -56,11 +56,18 @@ app.screen.game = app.screenManager.invent({
     const interactions = app.controls.interactions.points(),
       solution = content.location.get().solution
 
-    let interacted = false
+    let closest = Infinity,
+      interacted = false
 
-    if (solution) {
+    if (solution && content.location.get().canInteract()) {
       for (const interaction of interactions) {
-        if (engine.fn.distance(interaction, solution) < 1/3) {
+        const distance = engine.fn.distance(interaction, solution)
+
+        if (distance < closest) {
+          closest = distance
+        }
+
+        if (distance < 1/2) {
           interacted = true
 
           if (app.settings.computed.inputHold) {
@@ -71,6 +78,10 @@ app.screen.game = app.screenManager.invent({
         }
       }
     }
+
+    this.interact.setProximity(
+      isFinite(closest) ? engine.fn.clamp(engine.fn.scale(closest, 1/2, 1, 1, 0), 0, 1) : 0
+    )
 
     // Handle UI controls
     const focus = app.utility.focus.get(),
