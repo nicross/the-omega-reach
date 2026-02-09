@@ -16,9 +16,9 @@
     engine.buffer.impulse({
       buffer: engine.buffer.whiteNoise({
         channels: 2,
-        duration: 4,
+        duration: 5,
       }),
-      power: 2,
+      power: 1,
     })
   )
 
@@ -30,6 +30,7 @@
   engine.mixer.param.limiter.release.value = 0.125
   engine.mixer.param.limiter.threshold.value = -24
   engine.mixer.param.preGain.value = 1.5
+  engine.mixer.reverb.param.delay.value = 1/8
 
   // Prevent the Doppler effect
   engine.const.speedOfSound = engine.const.maxSafeFloat
