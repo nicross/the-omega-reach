@@ -58,18 +58,23 @@ content.audio.ui.focus = function ({
 
   const synth = engine.synth.pwm({
     detune: engine.fn.randomFloat(-10, 10),
-    frequency: frequency,
+    frequency,
     type: enabled ? 'sine' : 'sawtooth',
     width: engine.fn.randomFloat(0.25, 0.75),
   }).filtered({
     frequency: frequency * (enabled ? 0.5 : 1),
-  }).chainAssign(
-    'panner', engine.context().createStereoPanner()
-  ).connect(bus)
+  }).connect(bus)
 
-  synth.panner.pan.value = pan
+  if (pan) {
+    synth.chainAssign(
+      'panner', engine.context().createStereoPanner()
+    )
+
+    synth.panner.pan.value = pan
+  }
 
   synth.param.detune.linearRampToValueAtTime(engine.fn.lerp(-1200, 1200, strength), now + duration/2)
+
   synth.param.gain.linearRampToValueAtTime(1, now + duration/2)
   synth.param.gain.linearRampToValueAtTime(engine.const.zero, now + duration)
 

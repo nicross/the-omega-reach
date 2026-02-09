@@ -70,26 +70,26 @@ app.screen.game.dialog = (() => {
 
     actionsElement.innerHTML = '';
 
-    for (const {
-      label,
-      before,
-      after,
-    } of actions) {
+    for (const action of actions) {
       const container = app.utility.dom.toElement(
-        `<li><button class="c-menuButton" type="button">${label}</button></li>`
+        `<li><button class="c-menuButton" type="button">${action.label}</button></li>`
       )
 
+      const button = container.querySelector('button')
+
       const clickHandler = () => {
-        if (before) {
-          before()
+        if (action.before) {
+          action.before()
         }
 
         advance()
 
-        if (after) {
-          after()
+        if (action.after) {
+          action.after()
         }
       }
+
+      action.button = button
 
       container.querySelector('button').addEventListener('click', clickHandler)
       actionsElement.appendChild(container)
@@ -128,17 +128,7 @@ app.screen.game.dialog = (() => {
 
       if (ui.confirm) {
         if (current.actions.length == 1) {
-          const action = current.actions[0]
-
-          if (action.before) {
-            action.before()
-          }
-
-          advance()
-
-          if (action.after) {
-            action.after()
-          }
+          current.actions[0].button.click()
         } else if (focus) {
           focus.click()
         }
