@@ -20,7 +20,7 @@ content.audio.calibration = (() => {
       modFrequency,
     }).filtered({
       detune: engine.fn.randomFloat(-10, 10),
-      frequency: engine.const.minFrequency,
+      frequency: frequency / 10,
     }).chainAssign(
       'panner', engine.context().createStereoPanner()
     ).connect(bus)

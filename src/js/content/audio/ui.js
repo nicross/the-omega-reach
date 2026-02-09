@@ -70,7 +70,7 @@ content.audio.ui.focus = function ({
   synth.panner.pan.value = pan
 
   synth.param.detune.linearRampToValueAtTime(engine.fn.lerp(-1200, 1200, strength), now + duration/2)
-  synth.param.gain.linearRampToValueAtTime(1, now + 1/48)
+  synth.param.gain.linearRampToValueAtTime(1, now + duration/2)
   synth.param.gain.linearRampToValueAtTime(engine.const.zero, now + duration)
 
   synth.stop(now + duration)
