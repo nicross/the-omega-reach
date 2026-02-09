@@ -1,22 +1,22 @@
 engine.ready(() => {
   app.screen.game.dialog.on('advance', () => {
     app.haptics.enqueue({
-      duration: 125,
-      strongMagnitude: 1,
-      weakMagnitude: 1,
+      duration: 75,
+      strongMagnitude: 1 * 0.75,
+      weakMagnitude: 1 * 0.75,
     })
 
     app.haptics.enqueue({
-      duration: 125,
-      startDelay: 250,
-      strongMagnitude: 1,
-      weakMagnitude: 1,
+      duration: 75,
+      startDelay: 150,
+      strongMagnitude: 1 * 0.75,
+      weakMagnitude: 1 * 0.75,
     })
   })
 
   app.screen.game.dialog.on('close', () => {
     app.haptics.enqueue({
-      duration: 125,
+      duration: 75,
       strongMagnitude: 1,
       weakMagnitude: 1,
     })

@@ -58,17 +58,15 @@ document.addEventListener('mouseover', (e) => {
     return
   }
 
+  app.audio.ui.hoverMemory = target
+
   if (target.matches('.a-app--screen') || target.closest('.a-app--splash') || target.matches('[tabindex="0"]')) {
-    app.audio.ui.hoverMemory = target
     return
   }
 
   if (!app.utility.focus.isFocusable(target)) {
-    app.audio.ui.hoverMemory = target
     return
   }
-
-  app.audio.ui.hoverMemory = target
 
   // XXX: Copied via focusing
   content.audio.ui.focus({

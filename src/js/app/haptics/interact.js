@@ -22,17 +22,17 @@ engine.loop.on('frame', ({paused}) => {
 engine.ready(() => {
   app.screen.game.interact.on('trigger', () => {
     app.haptics.enqueue({
-      duration: 125,
+      duration: 75,
       startDelay: 125,
       strongMagnitude: 1,
       weakMagnitude: 1,
     })
 
     app.haptics.enqueue({
-      duration: 125,
-      startDelay: 375,
-      strongMagnitude: 1,
-      weakMagnitude: 1,
+      duration: 75,
+      startDelay: 125 + 150,
+      strongMagnitude: 0.75,
+      weakMagnitude: 0.75,
     })
   })
 })
