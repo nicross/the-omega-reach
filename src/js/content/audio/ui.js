@@ -7,11 +7,11 @@ content.audio.ui = (() => {
   }
 })()
 
-content.audio.ui.click = ({
+content.audio.ui.click = function ({
   enabled = 0,
   pan = 0,
   strength = 0,
-}) => {
+}) {
   const bus = content.audio.ui.bus(),
     duration = 1/8,
     frequency = engine.fn.fromMidi(enabled ? 48 : 42),
@@ -41,15 +41,16 @@ content.audio.ui.click = ({
 
   synth.param.gain.linearRampToValueAtTime(engine.const.zero, now + duration)
 
-
   synth.stop(now + duration)
+
+  return this
 }
 
-content.audio.ui.focus = ({
+content.audio.ui.focus = function ({
   enabled = 0,
   pan = 0,
   strength = 0,
-}) => {
+}) {
   const bus = content.audio.ui.bus(),
     duration = engine.fn.randomFloat(1/24, 1/16),
     frequency = engine.fn.fromMidi(enabled ? 48 : 42),
@@ -73,12 +74,14 @@ content.audio.ui.focus = ({
   synth.param.gain.linearRampToValueAtTime(engine.const.zero, now + duration)
 
   synth.stop(now + duration)
+
+  return this
 }
 
-content.audio.ui.value = ({
+content.audio.ui.value = function ({
   enabled = 0,
   strength = 0,
-}) => {
+}) {
   const bus = content.audio.ui.bus(),
     duration = engine.fn.randomFloat(1/16, 1/12),
     frequency = engine.fn.fromMidi(enabled ? 48 : 42),
@@ -98,4 +101,6 @@ content.audio.ui.value = ({
   synth.param.gain.linearRampToValueAtTime(engine.const.zero, now + duration)
 
   synth.stop(now + duration)
+
+  return this
 }

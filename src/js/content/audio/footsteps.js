@@ -59,6 +59,8 @@ content.audio.footsteps = (() => {
           when: when + (i * (delay + engine.fn.randomFloat(-1/48, 1/48))),
         })
       }
+
+      return this
     },
   }
 })()
