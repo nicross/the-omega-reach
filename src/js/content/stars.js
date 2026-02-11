@@ -17,8 +17,14 @@ content.stars = (() => {
     return parts.join(' ')
   }
 
+  function firstName() {
+    for (const stars of namesByGalaxy.entries()) {
+      return [...stars][0]
+    }
+  }
+
   function generate(name) {
-    const isTutorial = name.includes(content.const.tutorialName)
+    const isTutorial = [undefined, name].includes(firstName())
 
     const galaxyName = extractGalaxyName(name)
     const galaxy = content.galaxies.get(galaxyName)
@@ -221,16 +227,6 @@ content.stars = (() => {
     return namesByGalaxy.get(galaxyName)
   }
 
-  function isEmpty() {
-    for (const starNames of namesByGalaxy.values()) {
-      if (starNames.size > 0) {
-        return false
-      }
-    }
-
-    return true
-  }
-
   function randomInteger(max) {
     return engine.fn.randomInt(1, max)
   }
@@ -304,7 +300,7 @@ content.stars = (() => {
     namesForGalaxy: (galaxyName) => [...getNamesForGalaxy(galaxyName)],
     namesForStar: (starName) => [...getNamesForGalaxy(extractGalaxyName(starName))],
     new: function (galaxyName) {
-      const name = isEmpty() ? `${galaxyName} ${content.const.tutorialName}` : uniqueName(galaxyName)
+      const name = uniqueName(galaxyName)
       getNamesForGalaxy(galaxyName).add(name)
       return this.get(name)
     },

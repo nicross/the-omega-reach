@@ -1,5 +1,3 @@
 const content = {
-  const: {
-    tutorialName: 'Dawn',
-  },
+  const: {},
 }

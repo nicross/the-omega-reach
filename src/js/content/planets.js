@@ -23,8 +23,14 @@ content.planets = (() => {
     return parts.join(' ')
   }
 
+  function firstName() {
+    for (const planets of namesByStar.entries()) {
+      return [...planets][0]
+    }
+  }
+
   function generate(name) {
-    const isTutorial = name.includes(content.const.tutorialName)
+    const isTutorial = [undefined, name].includes(firstName())
 
     const srand = (...seed) => engine.fn.srand('planet', name, 'attribute', ...seed)()
 

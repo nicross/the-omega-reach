@@ -6,8 +6,14 @@ content.moons = (() => {
     return /(.+\D)\d+/.exec(name)[1]
   }
 
+  function firstName() {
+    for (const moons of namesByPlanet.entries()) {
+      return [...moons][0]
+    }
+  }
+
   function generate(name) {
-    const isTutorial = name.includes(content.const.tutorialName)
+    const isTutorial = [undefined, name].includes(firstName())
 
     const planetName = extractPlanetName(name)
     const planet = content.planets.get(planetName)

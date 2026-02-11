@@ -4,8 +4,14 @@ content.instruments = (() => {
 
   const defaultState = {}
 
+  function firstName() {
+    for (const name of states.keys()) {
+      return name
+    }
+  }
+
   function generate(name) {
-    const isTutorial = name.includes(content.const.tutorialName)
+    const isTutorial = [undefined, name].includes(firstName())
 
     const srand = (...seed) => engine.fn.srand('instrument', name, 'attribute', ...seed)()
     const rarity = isTutorial ? 0 : srand('rarity')
@@ -194,7 +200,7 @@ content.instruments = (() => {
 
       do {
         const prefix = engine.fn.choose([
-          'Anthem',
+          'Air',
           'Call',
           'Drone',
           'Echo',
@@ -202,11 +208,10 @@ content.instruments = (() => {
           'Lyric',
           'Melody',
           'Note',
-          'Ode',
           'Psalm',
           'Rhyme',
           'Sound',
-          'Tune',
+          'Tone',
           'Vibe',
         ], Math.random())
 
