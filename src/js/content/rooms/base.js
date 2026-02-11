@@ -90,23 +90,29 @@ content.rooms.base = {
       return
     }
 
-    if (preference == 'keyboard') {
-      this.solution = engine.fn.choose([...Object.values(
-        app.controls.interactions.keyboardMappings()
-      )], Math.random())
-    } else if (preference == 'mouse') {
-      this.solution = engine.tool.vector3d.create({
-        x: engine.fn.randomFloat(0, 1),
-        y: engine.fn.randomFloat(-1, 1),
-        z: engine.fn.randomFloat(-1, 1),
-      }).normalize()
-    } else {
-      this.solution = engine.tool.vector3d.create({
-        x: engine.fn.randomFloat(-1, 1),
-        y: engine.fn.randomFloat(-1, 1),
-        z: engine.fn.randomFloat(-1, 1),
-      }).normalize()
-    }
+    let solution
+
+    do {
+      if (preference == 'keyboard') {
+        solution = engine.fn.choose([...Object.values(
+          app.controls.interactions.keyboardMappings()
+        )], Math.random())
+      } else if (preference == 'mouse') {
+        solution = engine.tool.vector3d.create({
+          x: engine.fn.randomFloat(0, 1),
+          y: engine.fn.randomFloat(-1, 1),
+          z: engine.fn.randomFloat(-1, 1),
+        }).normalize()
+      } else {
+        solution = engine.tool.vector3d.create({
+          x: engine.fn.randomFloat(-1, 1),
+          y: engine.fn.randomFloat(-1, 1),
+          z: engine.fn.randomFloat(-1, 1),
+        }).normalize()
+      }
+    } while (this.solution && this.solution.distance(solution) < 1/2)
+
+    this.solution = solution
 
     return this.solution
   },
