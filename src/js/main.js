@@ -35,6 +35,10 @@
   // Prevent the Doppler effect
   engine.const.speedOfSound = engine.const.maxSafeFloat
 
+  // Use C4=256Hz
+  engine.const.midiReferenceFrequency = 256
+  engine.const.midiReferenceNote = 60
+
   // Start the loop
   engine.loop.start().pause()
 
