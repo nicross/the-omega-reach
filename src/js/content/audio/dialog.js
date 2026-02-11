@@ -10,6 +10,8 @@ content.audio.dialog = (() => {
     when,
     width,
   } = {}) {
+    const tail = 1/2
+
     // Synthesis
     const synth = engine.synth.pwm({
       detune: engine.fn.randomFloat(-10, 10),
@@ -28,8 +30,10 @@ content.audio.dialog = (() => {
     synth.param.gain.linearRampToValueAtTime(baseGain, when + 1/64)
     synth.param.gain.setValueAtTime(baseGain, when + duration - 1/64)
     synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration)
+    synth.param.gain.exponentialRampToValueAtTime(baseGain/8, when + duration + tail - 1/32)
+    synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration + tail)
 
-    synth.stop(when + duration)
+    synth.stop(when + duration + tail)
   }
 
   return {
