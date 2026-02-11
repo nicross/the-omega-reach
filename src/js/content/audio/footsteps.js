@@ -29,11 +29,11 @@ content.audio.footsteps = (() => {
 
     synth.panner.pan.value = pan
 
-    synth.filter.frequency.linearRampToValueAtTime(frequency/2, when + duration/2)
+    synth.filter.frequency.linearRampToValueAtTime(frequency/2, when + duration/4)
     synth.filter.frequency.exponentialRampToValueAtTime(frequency, when + duration)
 
     synth.param.gain.exponentialRampToValueAtTime(baseGain, when + 1/32)
-    synth.param.gain.linearRampToValueAtTime(baseGain/8, when + duration/4)
+    synth.param.gain.linearRampToValueAtTime(baseGain/4, when + duration/4)
     synth.param.gain.exponentialRampToValueAtTime(engine.const.zeroGain, when + duration)
 
     synth.param.carrierGain.linearRampToValueAtTime(1 - modDepth, when + duration)
@@ -44,9 +44,9 @@ content.audio.footsteps = (() => {
 
   return {
     trigger: function ({
-      count = 3,
+      count = 5,
       delay = 1/8,
-      duration = 1/12,
+      duration = 1/16,
       pan = 0,
       velocity = 1,
       when = engine.time(),

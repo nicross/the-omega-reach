@@ -1,5 +1,5 @@
 content.audio.calibration = (() => {
-  const baseGain = engine.fn.fromDb(-6),
+  const baseGain = engine.fn.fromDb(-4.5),
     bus = content.audio.channel.default.createBus()
 
   function trigger({

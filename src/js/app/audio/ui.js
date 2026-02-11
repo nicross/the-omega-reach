@@ -4,7 +4,7 @@ app.audio.ui = {
 
 // Clicking
 document.addEventListener('click', (e) => {
-  if (!e.target.matches('.c-menuButton, .c-menuButton *, .c-select *, .c-toggle, .c-toggle *, .a-game--menu, .a-game--interact[aria-disabled="true"]')) {
+  if (!e.target.matches('.c-menuButton, .c-menuButton *, .c-select *, .c-toggle, .c-toggle *, .a-game--menu, .a-game--interact[aria-disabled="true"], .a-game--interact[aria-disabled="true"] *')) {
     return
   }
 
@@ -17,7 +17,7 @@ document.addEventListener('click', (e) => {
     })
   }
 
-  const button = e.target.closest('.c-menuButton') || e.target
+  const button = e.target.closest('.c-menuButton, .a-game--interact') || e.target
 
   content.audio.ui.click({
     enabled: button.getAttribute('aria-disabled') != 'true',

@@ -77,6 +77,10 @@ content.rooms.star = content.rooms.invent({
       message.push('Star complete')
     }
 
+    if (scans == 1 + star.quirks.length) {
+      content.location.emit('interact-complete', {room: this})
+    }
+
     return message.join(', ')
   },
   // Attributes

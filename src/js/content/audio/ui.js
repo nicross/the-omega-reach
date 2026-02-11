@@ -31,7 +31,7 @@ content.audio.ui.click = function ({
   synth.panner.pan.value = pan
 
   synth.param.detune.linearRampToValueAtTime(engine.fn.lerp(-1200, 1200, strength), now + duration/4)
-  synth.param.gain.linearRampToValueAtTime(1, now + 1/48)
+  synth.param.gain.linearRampToValueAtTime(enabled ? 1 : 2, now + 1/48)
 
   if (enabled) {
     synth.param.gain.linearRampToValueAtTime(1/2, now + duration/2)

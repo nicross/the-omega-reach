@@ -1,4 +1,4 @@
-content.audio.dialog = (() => {
+content.audio.interactSuccess = (() => {
   const baseGain = engine.fn.fromDb(-6),
     bus = content.audio.channel.default.createBus()
 
@@ -15,21 +15,24 @@ content.audio.dialog = (() => {
     const synth = engine.synth.pwm({
       detune: engine.fn.randomFloat(-10, 10),
       frequency,
-      type: 'triangle',
+      type: 'sawtooth',
       when,
       width,
     }).filtered({
-      frequency: frequency * color,
+      frequency: frequency * color * 2,
     }).chainAssign(
       'panner', engine.context().createStereoPanner()
     ).connect(bus)
 
     synth.panner.pan.value = pan
 
+    synth.filter.frequency.linearRampToValueAtTime(frequency, when + duration)
+    synth.filter.frequency.linearRampToValueAtTime(frequency * color, when + duration + tail)
+
     synth.param.gain.linearRampToValueAtTime(baseGain, when + 1/64)
     synth.param.gain.setValueAtTime(baseGain, when + duration - 1/64)
     synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration)
-    synth.param.gain.exponentialRampToValueAtTime(baseGain/8, when + duration + tail - 1/32)
+    synth.param.gain.linearRampToValueAtTime(baseGain/8, when + duration + tail - 1/32)
     synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration + tail)
 
     synth.panner.pan.setValueAtTime(pan, when + duration)
@@ -42,18 +45,18 @@ content.audio.dialog = (() => {
     trigger: function ({
       duration = 1/24,
       delay = 1/24,
-      tail = 0,
-      when = engine.time() + 1/8,
+      tail = 1/2,
+      when = engine.time(),
     } = {}) {
-      const notes = engine.fn.shuffle([
-        60,63,65,67,70,72,
-      ]).slice(0, 5).map(engine.fn.fromMidi)
+      const notes = [
+        60,62,63,67,72,70
+      ].map(engine.fn.fromMidi)
 
       for (const i in notes) {
         trigger({
-          color: engine.fn.scale(i, 0, 4, 0.5, engine.fn.randomFloat(0.5, 1.5)),
+          color: 4,
           duration,
-          frequency: notes[i],
+          frequency: notes[i] * 2,
           pan: engine.fn.randomFloat(-0.25, 0.25),
           tail,
           when: when + (i * delay),

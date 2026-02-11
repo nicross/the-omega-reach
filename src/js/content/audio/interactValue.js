@@ -1,5 +1,5 @@
 content.audio.interactValue = (() => {
-  const baseGain = engine.fn.fromDb(-12),
+  const baseGain = engine.fn.fromDb(-6),
     bus = content.audio.channel.default.createBus(),
     rootFrequency = engine.fn.fromMidi(48)
 

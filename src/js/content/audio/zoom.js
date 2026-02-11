@@ -1,5 +1,5 @@
 content.audio.zoom = (() => {
-  const baseGain = engine.fn.fromDb(-12),
+  const baseGain = engine.fn.fromDb(-9),
     bus = content.audio.channel.default.createBus(),
     rootFrequency = engine.fn.fromMidi(72)
 

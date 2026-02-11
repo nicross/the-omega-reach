@@ -80,6 +80,10 @@ content.rooms.planet = content.rooms.invent({
       message.push('Planet complete')
     }
 
+    if (scans == 1 + planet.quirks.length + (planet.instrument ? 1 : 0)) {
+      content.location.emit('interact-complete', {room: this})
+    }
+
     return message.join(', ')
   },
   // Attributes

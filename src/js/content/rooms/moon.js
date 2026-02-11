@@ -67,12 +67,20 @@ content.rooms.moon = content.rooms.invent({
     } else if (scans <= 1 + moon.quirks.length) {
       message.push(`${moon.quirks[scans - 2].name} found`)
     } else if (moon.instrument) {
+      content.location.emit('interact-instrument', {
+        room: this,
+      })
+
       content.instruments.add(moon.name)
       message.push(`Instrument recovered`)
     }
 
     if (content.moons.isComplete(moon.name)) {
       message.push('Moon complete')
+    }
+
+    if (scans == 1 + moon.quirks.length + (moon.instrument ? 1 : 0)) {
+      content.location.emit('interact-complete', {room: this})
     }
 
     return message.join(', ')
