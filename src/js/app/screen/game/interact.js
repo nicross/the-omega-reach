@@ -6,6 +6,7 @@ app.screen.game.interact = (() => {
 
   let canInteract,
     isCooldown = false,
+    lastFrame = 0,
     proximity = 0,
     value = 0
 
@@ -51,9 +52,13 @@ app.screen.game.interact = (() => {
       return this
     },
     increment: function () {
-      if (isCooldown || !canInteract) {
+      const frame = engine.loop.frame()
+
+      if (isCooldown || !canInteract || frame == lastFrame) {
         return this
       }
+
+      lastFrame = frame
 
       value = app.settings.computed.inputHold
         ? engine.fn.accelerateValue(value, 1, 1)

@@ -67,14 +67,14 @@ app.screen.game = app.screenManager.invent({
           closest = distance
         }
 
-        if (distance < 1/2) {
-          interacted = true
-
+        if (distance < 1/2 && !interacted) {
           if (app.settings.computed.inputHold) {
             this.interact.increment()
           } else {
             this.interact.click()
           }
+
+          interacted = true
         }
       }
     }

@@ -72,7 +72,7 @@ app.controls.interactions = (() => {
 
   let mouseAllowed = false
 
-  document.addEventListener('mousedown', (e) => mouseAllowed = !e.target.matches('button'))
+  document.addEventListener('mousedown', (e) => mouseAllowed = !e.target.matches('button, button *'))
   document.addEventListener('mouseup', (e) => mouseAllowed = true)
 
   document.addEventListener('mousemove', (e) => {
