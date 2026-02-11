@@ -72,7 +72,10 @@ content.rooms.planet = content.rooms.invent({
     } else if (scans <= 1 + planet.quirks.length) {
       message.push(`${planet.quirks[scans - 2].name} found`)
     } else if (planet.instrument) {
-      content.instruments.add(planet.name)
+      content.instruments.add(
+        content.instruments.generateNameForBody(planet.name)
+      )
+
       message.push(`Instrument recovered`)
     }
 

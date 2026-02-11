@@ -187,6 +187,34 @@ content.instruments = (() => {
 
       return data
     },
+    generateNameForBody: function (bodyName) {
+      const shortName = bodyName.split(' ').slice(-2).join(' ')
+
+      let name
+
+      do {
+        const prefix = engine.fn.choose([
+          'Anthem',
+          'Call',
+          'Drone',
+          'Echo',
+          'Hymn',
+          'Lyric',
+          'Melody',
+          'Note',
+          'Ode',
+          'Psalm',
+          'Rhyme',
+          'Sound',
+          'Tune',
+          'Vibe',
+        ], Math.random())
+
+        name = `${prefix} of ${shortName}`
+      } while (states.has(name))
+
+      return name
+    },
     get: function (name) {
       if (!generated.has(name)) {
         generated.set(name, generate(name))

@@ -67,11 +67,10 @@ content.rooms.moon = content.rooms.invent({
     } else if (scans <= 1 + moon.quirks.length) {
       message.push(`${moon.quirks[scans - 2].name} found`)
     } else if (moon.instrument) {
-      content.location.emit('interact-instrument', {
-        room: this,
-      })
+      content.instruments.add(
+        content.instruments.generateNameForBody(moon.name)
+      )
 
-      content.instruments.add(moon.name)
       message.push(`Instrument recovered`)
     }
 
