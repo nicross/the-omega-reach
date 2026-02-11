@@ -36,7 +36,7 @@ content.audio.ui.click = function ({
   if (enabled) {
     synth.param.gain.linearRampToValueAtTime(1/2, now + duration/2)
   } else {
-    synth.param.gain.linearRampToValueAtTime(1/16, now + duration/4)
+    synth.param.gain.linearRampToValueAtTime(1/4, now + duration/4)
   }
 
   synth.param.gain.linearRampToValueAtTime(engine.const.zero, now + duration)
