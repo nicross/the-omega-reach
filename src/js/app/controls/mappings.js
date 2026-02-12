@@ -13,6 +13,7 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [],
     },
   },
   ui: {
@@ -33,6 +34,7 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [],
     },
     down: {
       gamepadAnalog: [],
@@ -50,6 +52,7 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [],
     },
     left: {
       gamepadAnalog: [],
@@ -69,6 +72,7 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [],
     },
     right: {
       gamepadAnalog: [],
@@ -88,6 +92,7 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [],
     },
     // Movement
     moveUp: {
@@ -102,6 +107,9 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [
+        ['getWheelY', -1],
+      ],
     },
     moveDown: {
       gamepadAnalog: [],
@@ -115,6 +123,9 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [
+        ['getWheelY', 1],
+      ],
     },
     moveLeft: {
       gamepadAnalog: [],
@@ -128,6 +139,9 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [
+        ['getWheelX', -1],
+      ],
     },
     moveRight: {
       gamepadAnalog: [],
@@ -141,6 +155,9 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [
+        ['getWheelX', 1],
+      ],
     },
     // Actions
     confirm: {
@@ -157,6 +174,7 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [],
     },
     back: {
       gamepadAnalog: [],
@@ -175,6 +193,7 @@ app.controls.mappings = {
       mouseButton: [
         3,
       ],
+      mouseWheel: [],
     },
     pause: {
       gamepadAnalog: [],
@@ -191,6 +210,7 @@ app.controls.mappings = {
       mouseButton: [
         3,
       ],
+      mouseWheel: [],
     },
     interact: {
       gamepadAnalog: [],
@@ -204,7 +224,10 @@ app.controls.mappings = {
         'Space',
       ],
       mouseAxis: [],
-      mouseButton: [],
+      mouseButton: [
+        // Handled by interactions
+      ],
+      mouseWheel: [],
     },
     // Individual special buttons
     enter: {
@@ -217,6 +240,7 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [],
     },
     select: {
       gamepadAnalog: [],
@@ -227,6 +251,7 @@ app.controls.mappings = {
       keyboard: [],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [],
     },
     space: {
       gamepadAnalog: [],
@@ -237,6 +262,7 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [],
     },
     start: {
       gamepadAnalog: [],
@@ -247,6 +273,7 @@ app.controls.mappings = {
       keyboard: [],
       mouseAxis: [],
       mouseButton: [],
+      mouseWheel: [],
     },
   },
 }

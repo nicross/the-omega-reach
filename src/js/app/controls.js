@@ -43,6 +43,14 @@ app.controls = (() => {
           reading > 0 ? reading : 0,
         )
       }, 0),
+      mappings.mouseWheel.reduce((value, mapping) => {
+        const reading = mapping[1] * engine.input.mouse[mapping[0]]()
+
+        return Math.max(
+          value,
+          reading > 0 ? reading : 0,
+        )
+      }, 0),
       // Mouse buttons
       mappings.mouseButton.reduce((value, key) => value || engine.input.mouse.isButton(key) ? 1 : 0, 0),
     )
