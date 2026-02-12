@@ -40,6 +40,7 @@ content.stars = (() => {
       children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 12, srand('children') * type.planets, 2)),
       habitability: srand('habitability') * galaxy.habitability * type.habitability,
       galaxy,
+      isTutorial,
       mass: srand('mass') * galaxy.mass,
       name,
       quirks: [],
@@ -253,6 +254,7 @@ content.stars = (() => {
   }
 
   return {
+    firstName,
     countForGalaxy: (galaxyName) => getNamesForGalaxy(galaxyName).size,
     countForStar: (starName) => getNamesForGalaxy(extractGalaxyName(starName)).size,
     export: () => {

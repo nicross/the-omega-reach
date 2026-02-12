@@ -55,6 +55,20 @@ content.rooms.planet = content.rooms.invent({
   canInteractFreely: function () {
     return !this.solution
   },
+  getInteractJingle: function () {
+    const planet = this.getPlanet()
+    const scans = content.scans.get(planet.name)
+
+    if (scans == 1) {
+      return planet.quirks.length || planet.instrument ? 0 : 2
+    }
+
+    if (scans < 1 + planet.quirks.length + (planet.instrument ? 1 : 0)) {
+      return 1
+    }
+
+    return 2
+  },
   onInteract: function () {
     const planet = this.getPlanet()
     const scans = content.scans.increment(planet.name)

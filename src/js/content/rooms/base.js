@@ -66,19 +66,19 @@ content.rooms.base = {
   // Interaction
   canInteract: () => false,
   canInteractFreely: () => false,
+  getInteractJingle: () => 2,
   interact: function () {
     if (!this.canInteract()) {
       return this
     }
 
     const result = this.onInteract()
+    this.generateSolution()
 
     content.location.emit('interact', {
       result,
       room: this,
     })
-
-    this.generateSolution()
 
     return result
   },

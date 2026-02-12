@@ -7,8 +7,6 @@ content.audio.interactComplete = (() => {
     duration,
     when,
   } = {}) {
-    const tail = 1/2
-
     // Synthesis
     const synth = engine.synth.pwm({
       detune: engine.fn.randomFloat(-10, 10),
@@ -27,12 +25,12 @@ content.audio.interactComplete = (() => {
     synth.param.gain.linearRampToValueAtTime(baseGain/16, when + duration/4)
     synth.param.gain.linearRampToValueAtTime(0, when + duration)
 
-    synth.stop(when + duration + tail)
+    synth.stop(when + duration)
   }
 
   return {
     trigger: function ({
-      duration = 2,
+      duration = 1.5,
       when = engine.time(),
     } = {}) {
       trigger({

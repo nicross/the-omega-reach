@@ -1,5 +1,8 @@
 engine.ready(() => {
-  app.screen.game.interact.on('trigger', () => content.audio.interactSuccess.trigger())
+  app.screen.game.interact.on('trigger', ({room}) => content.audio.interactSuccess.trigger({
+    index: room.getInteractJingle(),
+  }))
+
   content.location.on('interact-complete', () => content.audio.interactComplete.trigger())
 })
 

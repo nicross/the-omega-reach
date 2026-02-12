@@ -66,6 +66,19 @@ content.rooms.gallery = content.rooms.invent({
   canInteractFreely: function () {
     return this.getInstrument() && !this.solution
   },
+  getInteractJingle: function () {
+    const instrument = this.getInstrument()
+
+    if (instrument.state.scans == 1) {
+      return 0
+    }
+
+    if (instrument.state.scans < 1 + instrument.quirks.length) {
+      return 1
+    }
+
+    return 2
+  },
   onInteract: function () {
     const instrument = this.getInstrument()
     instrument.state.scans = (instrument.state.scans || 0) + 1
@@ -81,6 +94,7 @@ content.rooms.gallery = content.rooms.invent({
     }
 
     if (this.isComplete()) {
+      content.location.emit('interact-complete', {room: this})
       message.push(`Instrument complete`)
     }
 

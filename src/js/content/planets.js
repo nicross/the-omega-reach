@@ -1,6 +1,5 @@
 content.planets = (() => {
-  const generated = new Map(),
-    namesByStar = new Map()
+  const generated = new Map()
 
   const latinLetters = [
     'a', 'b', 'c', 'd', 'e',
@@ -23,19 +22,13 @@ content.planets = (() => {
     return parts.join(' ')
   }
 
-  function firstName() {
-    for (const planets of namesByStar.entries()) {
-      return [...planets][0]
-    }
-  }
-
   function generate(name) {
-    const isTutorial = [undefined, name].includes(firstName())
-
     const srand = (...seed) => engine.fn.srand('planet', name, 'attribute', ...seed)()
 
     const starName = extractStarName(name)
     const star = content.stars.get(starName)
+
+    const isTutorial = star.isTutorial
 
     const index = extractIndex(name)
     const habitability = star.habitability * (
@@ -373,7 +366,6 @@ content.planets = (() => {
     },
     reset: function () {
       generated.clear()
-      namesByStar.clear()
 
       return this
     },

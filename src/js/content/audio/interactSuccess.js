@@ -45,12 +45,15 @@ content.audio.interactSuccess = (() => {
     trigger: function ({
       duration = 1/24,
       delay = 1/24,
+      index = 2,
       tail = 1/2,
       when = engine.time(),
     } = {}) {
       const notes = [
-        60,62,63,67,72,70
-      ].map(engine.fn.fromMidi)
+        [56,58,60,63,72,70],
+        [58,60,62,65,72,70],
+        [60,62,63,67,72,70],
+      ][index].map(engine.fn.fromMidi)
 
       for (const i in notes) {
         trigger({

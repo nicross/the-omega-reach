@@ -1,22 +1,15 @@
 content.moons = (() => {
-  const generated = new Map(),
-    namesByPlanet = new Map()
+  const generated = new Map()
 
   function extractPlanetName(name) {
     return /(.+\D)\d+/.exec(name)[1]
   }
 
-  function firstName() {
-    for (const moons of namesByPlanet.entries()) {
-      return [...moons][0]
-    }
-  }
-
   function generate(name) {
-    const isTutorial = [undefined, name].includes(firstName())
-
     const planetName = extractPlanetName(name)
     const planet = content.planets.get(planetName)
+
+    const isTutorial = planet.star.isTutorial
 
     const srand = (...seed) => engine.fn.srand('moon', name, 'attribute', ...seed)()
 
@@ -262,7 +255,6 @@ content.moons = (() => {
     },
     reset: function () {
       generated.clear()
-      namesByPlanet.clear()
 
       return this
     },

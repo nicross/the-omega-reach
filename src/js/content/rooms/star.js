@@ -55,6 +55,20 @@ content.rooms.star = content.rooms.invent({
   canInteractFreely: function () {
     return !this.solution
   },
+  getInteractJingle: function () {
+    const star = this.getStar()
+    const scans = content.scans.get(star.name)
+
+    if (scans == 1) {
+      return star.quirks.length ? 0 : 2
+    }
+
+    if (scans < 1 + star.quirks.length) {
+      return 1
+    }
+
+    return 2
+  },
   onInteract: function () {
     const star = this.getStar()
     const scans = content.scans.increment(star.name)

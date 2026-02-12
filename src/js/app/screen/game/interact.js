@@ -20,9 +20,10 @@ app.screen.game.interact = (() => {
     isCooldown = true
     rootElement.classList.remove('a-game--interact-active')
 
-    pubsub.emit('trigger')
+    const room = content.location.get()
+    const result = room.interact()
 
-    const result = content.location.get().interact()
+    pubsub.emit('trigger', {room})
 
     if (result) {
       app.screen.game.live.set(result)

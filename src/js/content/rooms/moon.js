@@ -53,6 +53,20 @@ content.rooms.moon = content.rooms.invent({
   canInteractFreely: function () {
     return !this.solution
   },
+  getInteractJingle: function () {
+    const moon = this.getMoon()
+    const scans = content.scans.get(moon.name)
+
+    if (scans == 1) {
+      return moon.quirks.length || moon.instrument ? 0 : 2
+    }
+
+    if (scans < 1 + moon.quirks.length + (moon.instrument ? 1 : 0)) {
+      return 1
+    }
+
+    return 2
+  },
   onInteract: function () {
     const moon = this.getMoon()
     const scans = content.scans.increment(moon.name)
