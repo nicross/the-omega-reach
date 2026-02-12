@@ -1,4 +1,6 @@
 content.solution = (() => {
+  const minSequentialDistance = 3/4
+
   let previous,
     solution
 
@@ -32,7 +34,7 @@ content.solution = (() => {
             z: engine.fn.randomFloat(-1, 1),
           }).normalize()
         }
-      } while (previous && previous.distance(solution) < 1/2)
+      } while (previous && previous.distance(solution) < minSequentialDistance)
 
       return this
     },

@@ -20,7 +20,7 @@ content.audio.interactProximity = (() => {
       fmDepth: engine.fn.lerpExp(0.25, 0.5, value, 2) * rootFrequency,
       fmFrequency: engine.fn.lerpExp(4, 1, value, 2) * rootFrequency,
       gain: engine.fn.lerp(1, 1/4, value) * (value ** 0.5) * baseGain,
-      pan: 0.5 * -vector.y,
+      pan: engine.fn.lerpExp(2/3 * -vector.y, 0, value, 3),
     }
   }
 
