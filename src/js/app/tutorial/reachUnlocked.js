@@ -18,7 +18,7 @@ app.tutorial.reachUnlocked = app.tutorial.invent({
             label: 'Regain control',
             before: () => this.markComplete(),
             after: () => {
-              content.rooms.reach.generateSolution()
+              content.solution.generate()
               app.screen.game.interact.update()
             },
           }

@@ -54,7 +54,7 @@ app.screen.game = app.screenManager.invent({
 
     // Handle interactions
     const interactions = app.controls.interactions.points(),
-      solution = content.location.get().solution
+      solution = content.solution.get()
 
     let closest = Infinity,
       interacted = false

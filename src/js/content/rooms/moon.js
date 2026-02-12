@@ -51,7 +51,7 @@ content.rooms.moon = content.rooms.invent({
     return content.scans.get(moon.name) < 1 + moon.quirks.length + (moon.instrument ? 1 : 0)
   },
   canInteractFreely: function () {
-    return !this.solution
+    return !content.solution.has()
   },
   getInteractJingle: function () {
     const moon = this.getMoon()
@@ -157,7 +157,7 @@ content.rooms.moon = content.rooms.invent({
       ]
     )
 
-    this.generateSolution()
+    content.solution.generate()
 
     return this.move('left')
   },
@@ -170,7 +170,7 @@ content.rooms.moon = content.rooms.invent({
       ]
     )
 
-    this.generateSolution()
+    content.solution.generate()
 
     return this.move('right')
   },

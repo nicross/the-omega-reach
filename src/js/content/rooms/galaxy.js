@@ -64,7 +64,7 @@ content.rooms.galaxy = content.rooms.invent({
       ]
     )
 
-    this.generateSolution()
+    content.solution.generate()
     content.rooms.star.reset()
     content.rooms.planet.reset()
     content.rooms.moon.reset()
@@ -80,7 +80,7 @@ content.rooms.galaxy = content.rooms.invent({
       ]
     )
 
-    this.generateSolution()
+    content.solution.generate()
     content.rooms.star.reset()
     content.rooms.planet.reset()
     content.rooms.moon.reset()

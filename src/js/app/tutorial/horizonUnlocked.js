@@ -18,7 +18,7 @@ app.tutorial.horizonUnlocked = app.tutorial.invent({
             label: 'Regain control',
             before: () => this.markComplete(),
             after: () => {
-              content.rooms.horizon.generateSolution()
+              content.solution.generate()
               app.screen.game.interact.update()
             },
           }

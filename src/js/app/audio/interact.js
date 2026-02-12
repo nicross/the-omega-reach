@@ -22,7 +22,7 @@ engine.loop.on('frame', ({paused}) => {
     return
   }
 
-  const solution = content.location.get().solution
+  const solution = content.solution.get()
 
   content.audio.interactProximity.update({
     value: solution ? app.screen.game.interact.proximity() : 0,

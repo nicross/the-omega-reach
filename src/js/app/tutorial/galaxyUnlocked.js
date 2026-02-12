@@ -18,7 +18,7 @@ app.tutorial.galaxyUnlocked = app.tutorial.invent({
             label: 'Regain control',
             before: () => this.markComplete(),
             after: () => {
-              content.rooms.galaxy.generateSolution()
+              content.solution.generate()
               app.screen.game.interact.update()
             },
           }

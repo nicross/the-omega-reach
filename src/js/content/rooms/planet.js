@@ -53,7 +53,7 @@ content.rooms.planet = content.rooms.invent({
     return content.scans.get(planet.name) < 1 + planet.quirks.length + (planet.instrument ? 1 : 0)
   },
   canInteractFreely: function () {
-    return !this.solution
+    return !content.solution.has()
   },
   getInteractJingle: function () {
     const planet = this.getPlanet()
@@ -175,7 +175,7 @@ content.rooms.planet = content.rooms.invent({
       ]
     )
 
-    this.generateSolution()
+    content.solution.generate()
     content.rooms.moon.reset()
 
     return this.move('left')
@@ -189,7 +189,7 @@ content.rooms.planet = content.rooms.invent({
       ]
     )
 
-    this.generateSolution()
+    content.solution.generate()
     content.rooms.moon.reset()
 
     return this.move('right')

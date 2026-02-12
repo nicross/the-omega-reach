@@ -4,8 +4,6 @@ content.location = (() => {
   let room
 
   function load(id, state) {
-    const previousSolution = room?.solution
-
     room = content.rooms.get(id)
 
     if (!room) {
@@ -15,11 +13,6 @@ content.location = (() => {
     // Import state to prevent errors when first loading the room
     if (state) {
       room.import(state)
-    }
-
-    // Carry over previous solution from last room to prevent them from being nearby
-    if (room.canInteract()) {
-      room.solution = previousSolution
     }
 
     room.enter()

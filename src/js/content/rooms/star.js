@@ -53,7 +53,7 @@ content.rooms.star = content.rooms.invent({
     return content.scans.get(star.name) < 1 + star.quirks.length
   },
   canInteractFreely: function () {
-    return !this.solution
+    return !content.solution.has()
   },
   getInteractJingle: function () {
     const star = this.getStar()
@@ -155,7 +155,7 @@ content.rooms.star = content.rooms.invent({
       ]
     )
 
-    this.generateSolution()
+    content.solution.generate()
     content.rooms.planet.reset()
     content.rooms.moon.reset()
 
@@ -170,7 +170,7 @@ content.rooms.star = content.rooms.invent({
       ]
     )
 
-    this.generateSolution()
+    content.solution.generate()
     content.rooms.planet.reset()
     content.rooms.moon.reset()
 

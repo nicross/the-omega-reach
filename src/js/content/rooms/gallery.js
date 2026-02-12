@@ -64,7 +64,7 @@ content.rooms.gallery = content.rooms.invent({
     return Boolean(this.getInstrument())
   },
   canInteractFreely: function () {
-    return this.getInstrument() && !this.solution
+    return this.getInstrument() && !content.solution.has()
   },
   getInteractJingle: function () {
     const instrument = this.getInstrument()
@@ -140,6 +140,8 @@ content.rooms.gallery = content.rooms.invent({
       ]
     )
 
+    content.solution.generate()
+
     return this.move('left')
   },
   moveRight: function () {
@@ -150,6 +152,8 @@ content.rooms.gallery = content.rooms.invent({
         engine.fn.wrap(names.indexOf(this.state.name) + 1, 0, names.length)
       ]
     )
+
+    content.solution.generate()
 
     return this.move('right')
   },
