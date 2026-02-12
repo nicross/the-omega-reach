@@ -16,7 +16,7 @@ app.tutorial.moon = app.tutorial.invent({
     [
       {
         title: `[Tutorial] Moons:`,
-        description: `Interact to reveal more about a moon.`,
+        description: `Moons live at the unfortunate edge of your reach. Interact to reveal more details about a moon.`,
         actions: [
           {
             label: 'Regain control',

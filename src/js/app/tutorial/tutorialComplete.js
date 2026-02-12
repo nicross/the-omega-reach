@@ -13,10 +13,10 @@ app.tutorial.tutorialComplete = app.tutorial.invent({
     [
       {
         title: `This is the life!`,
-        description: `You've recalled everything you need to be successful.`,
+        description: `You've recalled everything that you need to be successful this cycle. Reach for the stars, gather their instruments, and curate the best collection in the universe!`,
         actions: [
           {
-            label: 'Grow your collection',
+            label: 'End tutorial',
             before: () => this.markComplete(),
           }
         ],

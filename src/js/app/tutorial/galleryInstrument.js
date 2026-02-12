@@ -11,8 +11,8 @@ app.tutorial.galleryInstrument = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] Appraisal:`,
-        description: `Interact to reveal more about an instrument.`,
+        title: `[Tutorial] Instruments:`,
+        description: `They're your <em>earthen bread and butter</em>—or what keeps the conservatory's lights on. Interact to reveal more details about an instrument.`,
         actions: [
           {
             label: 'Regain control',

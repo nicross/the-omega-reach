@@ -11,11 +11,11 @@ app.tutorial.firstInstrument = app.tutorial.invent({
 
     [
       {
-        title: `What's that?`,
-        description: `You've reached what you're looking for.`,
+        title: `It sings:`,
+        description: `<q>You've finally reached the treasure you seek!</q> Its fanfare recedes into the telescopic esophagus for its analysis by your hand. By zooming out to <strong>the gallery</strong>, you might feel its truths that you could never reach.`,
         actions: [
           {
-            label: 'To the gallery',
+            label: 'Get zooming',
             before: () => this.markComplete(),
           }
         ],

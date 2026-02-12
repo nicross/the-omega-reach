@@ -15,8 +15,17 @@ app.tutorial.galaxy = app.tutorial.invent({
 
     [
       {
+        title: `Just keep zooming.`,
+        description: `You repeat this mantra like that <q>fish</q> from the <em>earthen picture</em>. Though not as aloof, this confluence of zooms might consume you as profusely.`,
+        actions: [
+          {
+            label: 'Reach deeper',
+          }
+        ],
+      },
+      {
         title: `[Tutorial] Galaxies:`,
-        description: `Interact to find a new star. The reach will zoom in automatically.`,
+        description: `Galaxies are hosts to countless stars. Interact to reach toward a random star within them. You will zoom in automagically to any new stars that you reach.`,
         actions: [
           {
             label: 'Regain control',

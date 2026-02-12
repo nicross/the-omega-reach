@@ -12,7 +12,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
     [
       {
         title: `It's the Omega Reach.`,
-        description: `It's capable of feats only a telescope dreams, and fabled for its breakings of fourth ceilings. You enter the enclosure for what can only be described as a retractable hand—one that has started—and ended—intergalactic wars.`,
+        description: `It's capable of feats only a telescope dreams—and fabled for its breakings of fourth ceilings. You enter the enclosure for what can only be described as a retractable hand—one that has started—and ended—intergalactic wars.`,
         actions: [
           {
             label: 'Approach the device',
@@ -42,7 +42,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
       },
       {
         title: `Yet, it's offline.`,
-        description: `You recall there being a specific sequence to make it stir. It's somewhere in that waking memory of yours.`,
+        description: `You recall there being a specific sequence to make it stir. It's somewhere in that waking memory of yours. You reach toward the console, and…`,
         actions: [
           {
             label: 'Try something',

@@ -34,8 +34,6 @@ content.solution = (() => {
         }
       } while (previous && previous.distance(solution) < 1/2)
 
-      console.log('generated')
-
       return this
     },
     get: () => solution,

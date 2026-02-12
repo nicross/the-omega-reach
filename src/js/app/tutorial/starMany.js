@@ -17,9 +17,9 @@ app.tutorial.starMany = app.tutorial.invent({
       {
         title: `[Tutorial] Stars:`,
         description: () => ({
-          gamepad: `You can revisit any star at any time. Press <kbd>D-Pad Right</kbd> and <kbd>D-Pad Left</kbd> to navigate between the stars you've reached in this galaxy.`,
-          keyboard: `You can revisit any star at any time. Press <kbd>Right Arrow</kbd> and <kbd>Left Arrow</kbd> to navigate between the stars you've reached in this galaxy.`,
-          mouse: `You can revisit any star at any time. Click the <kbd>Arrow Buttons</kbd> to navigate between the stars you've reached in this galaxy.`,
+          gamepad: `You can revisit any star at any time. Press <kbd>D-Pad Right</kbd> and <kbd>D-Pad Left</kbd> to navigate between the stars you've reached within this galaxy.`,
+          keyboard: `You can revisit any star at any time. Press <kbd>Right Arrow</kbd> and <kbd>Left Arrow</kbd> to navigate between the stars you've reached within this galaxy.`,
+          mouse: `You can revisit any star at any time. Click the <kbd>Arrow Buttons</kbd> to navigate between the stars you've reached within this galaxy.`,
         }[app.settings.computed.inputPreference]),
         actions: [
           {

@@ -11,8 +11,8 @@ app.tutorial.galleryScanned = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] Instruments:`,
-        description: `Appraising instruments and revealing all of their quirks increases their sale value.`,
+        title: `[Tutorial] Free play:`,
+        description: `Some instruments have quirks as well! They can be freely played once fully appraised.`,
         actions: [
           {
             label: 'Regain control',

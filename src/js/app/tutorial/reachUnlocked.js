@@ -12,7 +12,7 @@ app.tutorial.reachUnlocked = app.tutorial.invent({
     [
       {
         title: `[Tutorial] The reach:`,
-        description: 'You may now interact with <strong>the reach</strong> at any time to power it off and on.',
+        description: `You may now interact with <strong>the reach</strong> at any time to power it off and on. There is no reason to do so, but I'll allow it.`,
         actions: [
           {
             label: 'Regain control',

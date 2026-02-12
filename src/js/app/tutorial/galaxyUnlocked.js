@@ -12,7 +12,7 @@ app.tutorial.galaxyUnlocked = app.tutorial.invent({
     [
       {
         title: `[Tutorial] Galaxies:`,
-        description: 'You may now interact with galaxies at any time to reach new stars.',
+        description: 'You may now interact with galaxies at any time to reach new stars within them.',
         actions: [
           {
             label: 'Regain control',
