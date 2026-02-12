@@ -11,5 +11,10 @@ engine.loop.on('frame', ({paused}) => {
     return
   }
 
+  content.audio.interactProximity.update({
+    value: app.screen.game.interact.proximity(),
+    vector: content.location.get().solution,
+  })
+
   content.audio.interactValue.update(app.screen.game.interact.value())
 })

@@ -157,6 +157,8 @@ content.rooms.moon = content.rooms.invent({
       ]
     )
 
+    this.generateSolution()
+
     return this.move('left')
   },
   moveRight: function () {
@@ -167,6 +169,8 @@ content.rooms.moon = content.rooms.invent({
         engine.fn.wrap(names.indexOf(this.state.name) + 1, 0, names.length)
       ]
     )
+
+    this.generateSolution()
 
     return this.move('right')
   },

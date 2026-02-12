@@ -64,6 +64,7 @@ content.rooms.galaxy = content.rooms.invent({
       ]
     )
 
+    this.generateSolution()
     content.rooms.star.reset()
     content.rooms.planet.reset()
     content.rooms.moon.reset()
@@ -79,6 +80,7 @@ content.rooms.galaxy = content.rooms.invent({
       ]
     )
 
+    this.generateSolution()
     content.rooms.star.reset()
     content.rooms.planet.reset()
     content.rooms.moon.reset()
@@ -86,7 +88,7 @@ content.rooms.galaxy = content.rooms.invent({
     return this.move('right')
   },
   moveUp: function () {
-    if (!content.rooms.star.getStar()) {
+    if (content.rooms.star.getStar()?.galaxy !== this.getGalaxy()) {
       const names = content.stars.namesForGalaxy(this.getGalaxy().name)
       content.rooms.star.setStarByName(names[0])
     }

@@ -155,6 +155,7 @@ content.rooms.star = content.rooms.invent({
       ]
     )
 
+    this.generateSolution()
     content.rooms.planet.reset()
     content.rooms.moon.reset()
 
@@ -169,13 +170,14 @@ content.rooms.star = content.rooms.invent({
       ]
     )
 
+    this.generateSolution()
     content.rooms.planet.reset()
     content.rooms.moon.reset()
 
     return this.move('right')
   },
   moveUp: function () {
-    if (!content.rooms.planet.getPlanet()) {
+    if (content.rooms.planet.getPlanet()?.star !== this.getStar()) {
       const names = content.planets.namesForStar(this.getStar().name)
       content.rooms.planet.setPlanetByName(names[0])
     }

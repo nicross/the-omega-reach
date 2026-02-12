@@ -1,26 +1,30 @@
-content.audio.interactValue = (() => {
+content.audio.interactProximity = (() => {
   const baseGain = engine.fn.fromDb(-6),
     bus = content.audio.channel.default.createBus(),
-    rootFrequency = engine.fn.fromMidi(48)
+    rootFrequency = engine.fn.fromMidi(72)
 
   let synth
 
-  function calculateParameters(value) {
-    const amDepth = engine.fn.fromDb(engine.fn.lerp(-12, -3, value))
+  function calculateParameters({
+    value,
+    vector,
+  } = {}) {
+    const amDepth = engine.fn.fromDb(engine.fn.lerp(-4.5, -3, value))
 
     return {
       amDepth,
-      amFrequency: rootFrequency / 4,
+      amFrequency: engine.fn.lerpExp(2, 12, value, 2),
       carrierGain: 1 - amDepth,
-      color: engine.fn.lerp(0.5, 4, value),
+      color: engine.fn.lerp(4, 1, value) * engine.fn.scale(vector.x, -1, 1, 0.5, 1),
       detune: engine.fn.lerp(-2400, 0, value),
-      fmDepth: engine.fn.lerp(0, 1/12/1.5, value) * rootFrequency,
-      fmFrequency: engine.fn.lerp(2, 12, value),
-      gain: engine.fn.lerp(1/8, 1, value) * baseGain,
+      fmDepth: engine.fn.lerpExp(0.25, 0.5, value, 2) * rootFrequency,
+      fmFrequency: engine.fn.lerpExp(4, 1, value, 2) * rootFrequency,
+      gain: engine.fn.lerp(1, 1/4, value) * (value ** 0.5) * baseGain,
+      pan: 0.5 * -vector.y,
     }
   }
 
-  function createSynth(value) {
+  function createSynth(...args) {
     const {
       amDepth,
       amFrequency,
@@ -30,20 +34,25 @@ content.audio.interactValue = (() => {
       fmDepth,
       fmFrequency,
       gain,
-    } = calculateParameters(value)
+      pan,
+    } = calculateParameters(...args)
 
     synth = engine.synth.mod({
-      amType: 'square',
       carrierDetune: detune,
       carrierFrequency: rootFrequency,
-      carrierType: 'square',
+      carrierType: 'triangle',
       fmDepth,
       fmFrequency,
+      fmType: 'square',
       gain,
-    }).filtered({
+    }).chainAssign(
+      'panner', engine.context().createStereoPanner()
+    ).filtered({
       detune,
       frequency: rootFrequency * color,
     }).connect(bus)
+
+    synth.panner.pan.value = pan
   }
 
   function destroySynth() {
@@ -56,7 +65,7 @@ content.audio.interactValue = (() => {
     synth = undefined
   }
 
-  function updateSynth(value) {
+  function updateSynth(...args) {
     const {
       amDepth,
       amFrequency,
@@ -66,10 +75,12 @@ content.audio.interactValue = (() => {
       fmDepth,
       fmFrequency,
       gain,
-    } = calculateParameters(value)
+      pan,
+    } = calculateParameters(...args)
 
     engine.fn.setParam(synth.filter.detune, detune)
     engine.fn.setParam(synth.filter.frequency, rootFrequency * color)
+    engine.fn.setParam(synth.panner.pan, pan)
     engine.fn.setParam(synth.param.amod.depth, amDepth)
     engine.fn.setParam(synth.param.amod.frequency, amFrequency)
     engine.fn.setParam(synth.param.carrierGain, carrierGain)
@@ -87,12 +98,15 @@ content.audio.interactValue = (() => {
 
       return this
     },
-    update: function (value) {
+    update: function ({
+      value,
+      vector,
+    } = {}) {
       if (value) {
         if (synth) {
-          updateSynth(value)
+          updateSynth({value, vector})
         } else {
-          createSynth(value)
+          createSynth({value, vector})
         }
       } else if (synth) {
         destroySynth()
