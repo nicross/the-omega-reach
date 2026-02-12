@@ -52,7 +52,7 @@ content.planets = (() => {
 
     const planet = {
       age: srand('age') * star.age,
-      children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 6, srand('children') * type.moons, 2)),
+      children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 6, srand('children'), type.moons)),
       habitability, // Pass raw habitability to children, not type habitability
       heat,
       index,
@@ -196,7 +196,7 @@ content.planets = (() => {
       {
         label: 'Rocky planet',
         instrument: 1,
-        moons: 1/3,
+        moons: 3,
         weight: 1 * 0.5,
         commonQuirks: [
           ...commonQuirks,
@@ -220,7 +220,7 @@ content.planets = (() => {
       {
         label: 'Acid planet',
         instrument: 1,
-        moons: 1/3,
+        moons: 3,
         weight: habitability * 0.5,
         commonQuirks: [
           ...commonQuirks,
@@ -243,7 +243,7 @@ content.planets = (() => {
       {
         label: 'Terran planet',
         instrument: 1,
-        moons: 1/2,
+        moons: 2,
         weight: habitability,
         commonQuirks: [
           ...commonQuirks,
@@ -273,7 +273,7 @@ content.planets = (() => {
       {
         label: 'Desert planet',
         instrument: 1,
-        moons: 1/3,
+        moons: 3,
         weight: (1 - habitability) * 0.5,
         commonQuirks: [
           ...commonQuirks,
@@ -303,7 +303,7 @@ content.planets = (() => {
         label: 'Arctic planet',
         habitability: 1/3,
         instrument: 1,
-        moons: 1/3,
+        moons: 3,
         weight: (1 - heat) * 0.5,
         commonQuirks: [
           ...commonQuirks,

@@ -66,6 +66,9 @@ content.location = (() => {
   })
 })()
 
-engine.state.on('import', ({location, rooms}) => content.location.import(location, rooms))
-engine.state.on('export', (data) => data.location = content.location.export())
-engine.state.on('reset', () => content.location.reset())
+// XXX: Load location after all other modules
+engine.ready(() => {
+  engine.state.on('import', ({location, rooms}) => content.location.import(location, rooms))
+  engine.state.on('export', (data) => data.location = content.location.export())
+  engine.state.on('reset', () => content.location.reset())
+})

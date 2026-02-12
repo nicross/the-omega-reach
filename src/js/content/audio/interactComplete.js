@@ -22,7 +22,7 @@ content.audio.interactComplete = (() => {
     synth.param.detune.linearRampToValueAtTime(-2400, when + duration/4)
 
     synth.param.gain.linearRampToValueAtTime(baseGain, when + 1/64)
-    synth.param.gain.linearRampToValueAtTime(baseGain/16, when + duration/4)
+    synth.param.gain.linearRampToValueAtTime(baseGain/8, when + duration/4)
     synth.param.gain.linearRampToValueAtTime(0, when + duration)
 
     synth.stop(when + duration)
@@ -30,7 +30,7 @@ content.audio.interactComplete = (() => {
 
   return {
     trigger: function ({
-      duration = 1.5,
+      duration = 1,
       when = engine.time(),
     } = {}) {
       trigger({

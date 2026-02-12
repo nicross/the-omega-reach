@@ -18,8 +18,8 @@ content.stars = (() => {
   }
 
   function firstName() {
-    for (const stars of namesByGalaxy.entries()) {
-      return [...stars][0]
+    for (const [galaxyName, starNames] of namesByGalaxy.entries()) {
+      return [...starNames][0]
     }
   }
 
@@ -37,7 +37,7 @@ content.stars = (() => {
 
     const star = {
       age: srand('age') * galaxy.age,
-      children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 12, srand('children') * type.planets, 2)),
+      children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 12, srand('children'), type.planets)),
       habitability: srand('habitability') * galaxy.habitability * type.habitability,
       galaxy,
       isTutorial,
@@ -106,7 +106,7 @@ content.stars = (() => {
       {
         label: 'White dwarf',
         habitability: 1/2,
-        planets: 1/4,
+        planets: 2,
         weight: engine.fn.lerp(0, 1/2, galaxy.age),
         commonQuirks: [
           engine.fn.choose(['Carbon core', 'Neon core', 'Helium core'], srand('dwarf','core')),
@@ -127,7 +127,7 @@ content.stars = (() => {
       {
         label: 'Black hole',
         habitability: 1/8,
-        planets: 1/4,
+        planets: 3,
         weight: engine.fn.lerp(0, 1/6/2, galaxy.age),
         commonQuirks: [
           'Dilated time',
@@ -149,7 +149,7 @@ content.stars = (() => {
       {
         label: 'Neutron star',
         habitability: 1/8,
-        planets: 1/4,
+        planets: 3,
         weight: engine.fn.lerp(0, 1/6/2, galaxy.age),
         commonQuirks: [
           'Dilated time',
@@ -171,8 +171,8 @@ content.stars = (() => {
       },
       {
         label: 'Red supergiant',
-        habitability: 1/4,
-        planets: 1,
+        habitability: 1/2,
+        planets: 2,
         weight: engine.fn.lerp(1/3/2, 1/6/2, galaxy.age),
         commonQuirks: [
           'Asteroid belt',
@@ -195,8 +195,8 @@ content.stars = (() => {
       },
       {
         label: 'Blue hypergiant',
-        habitability: 1/4,
-        planets: 1,
+        habitability: 1/2,
+        planets: 2,
         weight: engine.fn.lerp(1/3/2, 1/6/2, galaxy.age),
         commonQuirks: [
           'Asteroid belt',
