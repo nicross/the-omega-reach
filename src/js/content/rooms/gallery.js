@@ -140,6 +140,13 @@ content.rooms.gallery = content.rooms.invent({
       ]
     )
 
+    const instrument = this.getInstrument()
+
+    content.programs.load('instrument', {
+      instrument,
+      seed: instrument.name,
+    })
+
     content.solution.generate()
 
     return this.move('left')
@@ -153,6 +160,13 @@ content.rooms.gallery = content.rooms.invent({
       ]
     )
 
+    const instrument = this.getInstrument()
+
+    content.programs.load('instrument', {
+      instrument,
+      seed: instrument.name,
+    })
+
     content.solution.generate()
 
     return this.move('right')
@@ -163,5 +177,17 @@ content.rooms.gallery = content.rooms.invent({
         content.instruments.names()[0]
       )
     }
+
+    const instrument = this.getInstrument()
+
+    content.programs.load('instrument', {
+      instrument,
+      seed: instrument.name,
+    })
+  },
+  onExit: function () {
+    content.programs.unload()
+
+    return this
   },
 })

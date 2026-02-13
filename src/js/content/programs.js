@@ -23,7 +23,7 @@ content.programs = (() => {
 
       return this
     },
-    unload: function () {
+    unload: function (destroyOptions = {}) {
       if (loaded) {
         loaded.destroy(destroyOptions)
       }

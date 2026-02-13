@@ -2,6 +2,7 @@ content.programs.base = {
   // Attributes
   id: undefined,
   channel: 'default',
+  hasReverb: false,
   hasSynths: false,
   fieldDefinitions: {
     // Hash of names to objects for engine.fn.createNoise()
@@ -36,6 +37,10 @@ content.programs.base = {
     this.destination = content.audio.channel[this.channel].createBus()
     this.options = {...options}
     this.synths = new Map()
+
+    if (this.hasReverb) {
+      content.audio.reverb().from(this.destination)
+    }
 
     this.loadFields()
     this.loadProperties()
@@ -97,7 +102,7 @@ content.programs.base = {
   },
   unloadSynths: function () {
     for (const synth of this.synths.values()) {
-      synth.off()
+      synth.stop()
     }
 
     this.synths.clear()
@@ -112,8 +117,6 @@ content.programs.base = {
   updateSynths: function ({
     points = [],
   } = {}) {
-    console.log(points)
-
     if (!this.hasSynths) {
       return this
     }
