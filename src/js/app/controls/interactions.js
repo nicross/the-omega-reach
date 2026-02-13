@@ -1,6 +1,6 @@
 app.controls.interactions = (() => {
   const mouseMemory = engine.tool.vector2d.create(),
-    points = []
+    pointLimit = 8
 
   const gamepadMappings = {
     left: {
@@ -70,6 +70,12 @@ app.controls.interactions = (() => {
     Slash: engine.tool.vector3d.create({...engine.tool.vector2d.unitX().rotate(engine.const.tau * (0.5 + -(9/10))), z: -0.666}).normalize(),
   }
 
+  let gamepadLeftPoint,
+    gamepadRightPoint,
+    keyboardPoints,
+    mousePoint,
+    points = []
+
   let mouseAllowed = false
 
   document.addEventListener('mousedown', (e) => mouseAllowed = !e.target.matches('button, button *'))
@@ -131,34 +137,47 @@ app.controls.interactions = (() => {
   }
 
   function updateGamepad() {
-    for (const [key, mappings] of Object.entries(gamepadMappings)) {
-      const point = getGamepadSide(mappings)
+    const left = getGamepadSide(gamepadMappings.left)
 
-      if (point) {
-        points.push(point)
-      }
+    if (left) {
+      gamepadLeftPoint = gamepadLeftPoint || {}
+      gamepadLeftPoint.x = left.x
+      gamepadLeftPoint.y = left.y
+      gamepadLeftPoint.z = left.z
+    } else {
+      gamepadLeftPoint = undefined
+    }
+
+    const right = getGamepadSide(gamepadMappings.right)
+
+    if (right) {
+      gamepadRightPoint = gamepadRightPoint || {}
+      gamepadRightPoint.x = right.x
+      gamepadRightPoint.y = right.y
+      gamepadRightPoint.z = right.z
+    } else {
+      gamepadRightPoint = undefined
     }
   }
 
   function updateKeyboard() {
+    keyboardPoints = []
+
     for (const [key, vector] of Object.entries(keyboardMappings)) {
       if (engine.input.keyboard.is(key)) {
-        points.push(
-          vector.clone()
-        )
+        keyboardPoints.push(vector)
       }
     }
   }
 
   function updateMouse() {
     if (mouseAllowed && engine.input.mouse.isButton(0))  {
-      points.push(
-        engine.tool.vector3d.create({
-          x: 1 - mouseMemory.distance(),
-          y: -mouseMemory.x,
-          z: mouseMemory.y,
-        }).normalize()
-      )
+      mousePoint = mousePoint || {}
+      mousePoint.x = 1 - mouseMemory.distance()
+      mousePoint.y = -mouseMemory.x
+      mousePoint.z = mouseMemory.y
+    } else {
+      mousePoint = undefined
     }
   }
 
@@ -177,6 +196,19 @@ app.controls.interactions = (() => {
         updateGamepad()
         updateKeyboard()
         updateMouse()
+
+        points.push(
+          mousePoint,
+          gamepadLeftPoint,
+          gamepadRightPoint,
+          ...keyboardPoints,
+        )
+
+        points = points.filter((x) => x)
+
+        if (points.length > pointLimit) {
+          points = points.slice(points.length - pointLimit - 1, points.length)
+        }
       }
 
       return this

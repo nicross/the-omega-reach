@@ -130,6 +130,11 @@ app.screen.game = app.screenManager.invent({
     if (!interacted) {
       this.interact.decrement().setCooldown(false)
     }
+
+    // Programs
+    content.programs.get()?.update({
+      points: interactions,
+    })
   },
   // Methods
   getFocusWithinTarget: function () {
