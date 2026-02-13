@@ -54,9 +54,16 @@ content.programs.base = {
 
     for (const [name, definition] of Object.entries(this.fieldDefinitions)) {
       this.fields[name] = engine.fn.createNoise({
+        octaves: 1,
+        type: 'simplex3d',
         ...definition,
-        seed: [this.id, this.options.seed, ...definition.seed],
+        seed: [this.id, this.options.seed, name],
       })
+
+      this.fields[name].valueAt = function (point, scale) {
+        scale *= engine.tool.simplex3d.prototype.skewFactor
+        return this.value(point.x * scale, point.y * scale, point.z * scale)
+      }
 
       engine.ephemera.add(this.fields[name])
     }
@@ -67,9 +74,7 @@ content.programs.base = {
     this.properties = {}
 
     for (const [name, generator] of Object.entries(this.propertyDefinitions)) {
-      this.properties[name] = generator.call(this, {
-        srand: engine.fn.srand(this.id, this.options.seed, name),
-      })
+      this.properties[name] = generator.call(this, engine.fn.srand(this.id, this.options.seed, name))
     }
 
     return this
@@ -147,14 +152,17 @@ content.programs.base = {
   // Synthesis - override createSynth as needed
   createSynth: function ({point, wrapper}) {},
   createSynthWrapper: function (point) {
-    const attack = 1/16,
-      baseGain = engine.fn.fromDb(-6)/8,
+    const _this = this
+
+    const attack = 1/32,
+      baseGain = engine.fn.fromDb(-4.5),
       context = engine.context(),
-      release = 1/16
+      release = 1/32
 
     const wrapper = {
       filter: context.createBiquadFilter(),
       input: context.createGain(),
+      output: context.createGain(),
       maxColor: 8,
       minColor: 0.5,
       rootFrequency: 440,
@@ -162,7 +170,7 @@ content.programs.base = {
       onUpdate: () => {},
       onStop: () => {},
       stop: async function () {
-        engine.fn.rampLinear(this.input.gain, 0, release)
+        engine.fn.rampLinear(this.output.gain, 0, release)
         await engine.fn.promise(release * 1000)
 
         this.onStop()
@@ -174,9 +182,10 @@ content.programs.base = {
         return this
       },
       update: function (point) {
-        this.onUpdate()
+        this.onUpdate(point)
 
         engine.fn.setParam(wrapper.filter.frequency, wrapper.rootFrequency * engine.fn.scale(point.x, -1, 1, wrapper.minColor, wrapper.maxColor))
+        engine.fn.setParam(wrapper.input.gain, baseGain/_this.synths.size)
         engine.fn.setParam(wrapper.panner.pan, -point.y)
 
         return this
@@ -185,13 +194,15 @@ content.programs.base = {
 
     wrapper.input.connect(wrapper.panner)
     wrapper.panner.connect(wrapper.filter)
-    wrapper.filter.connect(this.destination)
+    wrapper.filter.connect(wrapper.output)
+    wrapper.output.connect(this.destination)
 
     wrapper.filter.frequency.value = wrapper.rootFrequency * engine.fn.scale(point.x, -1, 1, wrapper.minColor, wrapper.maxColor)
+    wrapper.input.gain.value = 0
     wrapper.panner.pan.value = -point.y
 
-    wrapper.input.gain.value = 0
-    engine.fn.rampLinear(wrapper.input.gain, baseGain, attack)
+    wrapper.output.gain.value = 0
+    engine.fn.rampLinear(wrapper.output.gain, baseGain, attack)
 
     return wrapper
   },

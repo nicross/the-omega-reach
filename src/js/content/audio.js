@@ -5,7 +5,7 @@ content.audio = (() => {
 
   const reverb = engine.mixer.reverb.send.create({
     gainModel: engine.mixer.reverb.gainModel.normalize.instantiate({
-      gain: engine.fn.fromDb(-4.5),
+      gain: engine.fn.fromDb(-6),
     }),
   })
 

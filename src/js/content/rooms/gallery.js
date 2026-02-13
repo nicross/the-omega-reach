@@ -21,7 +21,7 @@ content.rooms.gallery = content.rooms.invent({
 
     if (instrument) {
       return instrument.state.scans > 0
-        ? `${instrument.rarity} instrument`
+        ? `${instrument.rarityLabel} instrument`
         : 'Unappraised'
     }
 
@@ -31,7 +31,7 @@ content.rooms.gallery = content.rooms.invent({
     const instrument = this.getInstrument()
 
     return instrument && instrument.state.scans > 0
-      ? instrument.rarity.toLowerCase()
+      ? instrument.rarityLabel.toLowerCase()
       : ''
   },
   getName: function () {

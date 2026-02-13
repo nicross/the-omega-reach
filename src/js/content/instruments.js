@@ -14,17 +14,18 @@ content.instruments = (() => {
     const isTutorial = [undefined, name].includes(firstName())
 
     const srand = (...seed) => engine.fn.srand('instrument', name, 'attribute', ...seed)()
-    const rarity = isTutorial ? 0 : srand('rarity')
+    const rarity = srand('rarity') * (isTutorial ? 1/8 : 1)
 
     const instrument = {
       name,
       quirks: [],
-      rarity: engine.fn.choose([
+      rarityLabel: engine.fn.choose([
         'Common',
         'Uncommon',
         'Rare',
         'Legendary',
       ], rarity),
+      rarity,
     }
 
     const quirks = generateQuirks(srand)
