@@ -189,7 +189,7 @@ content.programs.base = {
 
         engine.fn.setParam(wrapper.filter.frequency, wrapper.rootFrequency * engine.fn.scale(point.x * depth, -1 * depth, 1, wrapper.minColor, wrapper.maxColor))
         engine.fn.setParam(wrapper.input.gain, baseGain/_this.synths.size)
-        engine.fn.setParam(wrapper.panner.pan, -point.y)
+        engine.fn.setParam(wrapper.panner.pan, point.y)
 
         return this
       }
@@ -202,7 +202,7 @@ content.programs.base = {
 
     wrapper.filter.frequency.value = wrapper.rootFrequency * engine.fn.scale(point.x * depth, -1 * depth, 1, wrapper.minColor, wrapper.maxColor)
     wrapper.input.gain.value = 0
-    wrapper.panner.pan.value = -point.y
+    wrapper.panner.pan.value = point.y
 
     wrapper.output.gain.value = 0
     engine.fn.rampLinear(wrapper.output.gain, baseGain, attack)
