@@ -157,6 +157,7 @@ content.programs.base = {
     const attack = 1/32,
       baseGain = engine.fn.fromDb(-4.5),
       context = engine.context(),
+      depth = point.depth || 1,
       release = 1/32
 
     const wrapper = {
@@ -182,9 +183,11 @@ content.programs.base = {
         return this
       },
       update: function (point) {
+        const depth = point.depth || 1
+
         this.onUpdate(point)
 
-        engine.fn.setParam(wrapper.filter.frequency, wrapper.rootFrequency * engine.fn.scale(point.x, -1, 1, wrapper.minColor, wrapper.maxColor))
+        engine.fn.setParam(wrapper.filter.frequency, wrapper.rootFrequency * engine.fn.scale(point.x * depth, -1 * depth, 1, wrapper.minColor, wrapper.maxColor))
         engine.fn.setParam(wrapper.input.gain, baseGain/_this.synths.size)
         engine.fn.setParam(wrapper.panner.pan, -point.y)
 
@@ -197,7 +200,7 @@ content.programs.base = {
     wrapper.filter.connect(wrapper.output)
     wrapper.output.connect(this.destination)
 
-    wrapper.filter.frequency.value = wrapper.rootFrequency * engine.fn.scale(point.x, -1, 1, wrapper.minColor, wrapper.maxColor)
+    wrapper.filter.frequency.value = wrapper.rootFrequency * engine.fn.scale(point.x * depth, -1 * depth, 1, wrapper.minColor, wrapper.maxColor)
     wrapper.input.gain.value = 0
     wrapper.panner.pan.value = -point.y
 

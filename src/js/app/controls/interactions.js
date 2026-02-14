@@ -133,7 +133,13 @@ app.controls.interactions = (() => {
 
     point.x = 1 - magnitude
 
-    return point.rotateQuaternion(mappings.rotation).normalize()
+    const rotated = point.rotateQuaternion(mappings.rotation).normalize()
+
+    rotated.depth = mappings.analog.reduce((value, button) => {
+      return Math.max(value, engine.input.gamepad.getAnalog(button))
+    }, 0) || 1
+
+    return rotated
   }
 
   function updateGamepad() {
@@ -144,6 +150,7 @@ app.controls.interactions = (() => {
       gamepadLeftPoint.x = left.x
       gamepadLeftPoint.y = left.y
       gamepadLeftPoint.z = left.z
+      gamepadLeftPoint.depth = left.depth
     } else {
       gamepadLeftPoint = undefined
     }
@@ -155,6 +162,7 @@ app.controls.interactions = (() => {
       gamepadRightPoint.x = right.x
       gamepadRightPoint.y = right.y
       gamepadRightPoint.z = right.z
+      gamepadRightPoint.depth = right.depth
     } else {
       gamepadRightPoint = undefined
     }
