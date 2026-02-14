@@ -198,10 +198,10 @@ app.controls.interactions = (() => {
         updateMouse()
 
         points.push(
+          ...keyboardPoints, // If more than limit, prefer most recent keys and other inputs
           mousePoint,
           gamepadLeftPoint,
           gamepadRightPoint,
-          ...keyboardPoints,
         )
 
         points = points.filter((x) => x)

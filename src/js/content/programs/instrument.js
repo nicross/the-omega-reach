@@ -5,6 +5,8 @@ content.programs.instrument = content.programs.invent({
   fieldDefinitions: {
     amDepth: {},
     amFrequency: {},
+    cmDepth: {},
+    cmFrequency: {},
     color: {},
     detune: {},
     dmDepth: {},
@@ -21,49 +23,60 @@ content.programs.instrument = content.programs.invent({
     amType: (srand) => engine.fn.choose(['sine','triangle'], srand()),
     amDepthCenter: (srand) => srand(),
     amDepthRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
-    amDepthScale: function (srand) {return srand() * this.options.instrument.rarity},
+    amDepthScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     amFrequencyCenter: (srand) => srand(),
     amFrequencyRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
-    amFrequencyScale: function (srand) {return srand() * this.options.instrument.rarity},
+    amFrequencyScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
+    cmType: (srand) => engine.fn.choose(['sine','sine','triangle','triangle','square','sawtooth'], srand()),
+    cmDepthCenter: (srand) => srand(),
+    cmDepthRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
+    cmDepthScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
+    cmFrequencyCenter: (srand) => srand(),
+    cmFrequencyRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
+    cmFrequencyScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     carrierType: (srand) => engine.fn.choose(['sine','triangle','square','sawtooth'], srand()),
-    colorCenter: (srand) => srand(),
-    colorRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
-    colorScale: function (srand) {return srand() * this.options.instrument.rarity},
+    colorCenter: function (srand) {return engine.fn.lerp(srand(), 0.5, this.options.instrument.rarity)},
+    colorRange: function (srand) {return engine.fn.lerp(srand(), 1, this.options.instrument.rarity) * 0.5},
+    colorScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     detuneRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
-    detuneScale: function (srand) {return srand() * this.options.instrument.rarity},
+    detuneScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
+    dmType: (srand) => engine.fn.choose(['sine','sine','triangle','triangle','square','sawtooth'], srand()),
     dmDepthCenter: (srand) => srand(),
     dmDepthRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
-    dmDepthScale: function (srand) {return srand() * this.options.instrument.rarity},
+    dmDepthScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     dmFrequencyCenter: (srand) => srand(),
     dmFrequencyRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
-    dmFrequencyScale: function (srand) {return srand() * this.options.instrument.rarity},
+    dmFrequencyScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     frequencyCenter: (srand) => srand(),
-    frequencyRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
-    frequencyScale: function (srand) {return srand() * this.options.instrument.rarity},
+    frequencyRange: function (srand) {return engine.fn.lerp(srand(), 1, this.options.instrument.rarity) * 0.5},
+    frequencyScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     fmType: (srand) => engine.fn.choose(['sine','triangle','square','sawtooth'], srand()),
     fmDepthCenter: (srand) => srand(),
     fmDepthRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
-    fmDepthScale: function (srand) {return srand() * this.options.instrument.rarity},
+    fmDepthScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     fmDetuneRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
-    fmDetuneScale: function (srand) {return srand() * this.options.instrument.rarity},
+    fmDetuneScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     fmFrequencyCenter: (srand) => srand(),
     fmFrequencyRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
-    fmFrequencyScale: function (srand) {return srand() * this.options.instrument.rarity},
+    fmFrequencyScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     scale: (srand) => srand(),
     widthCenter: (srand) => srand(),
     widthRange: function (srand) {return srand() * this.options.instrument.rarity * 0.25},
-    widthScale: function (srand) {return srand() * this.options.instrument.rarity},
+    widthScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
+    wmType: (srand) => engine.fn.choose(['sine','sine','triangle','triangle','square','sawtooth'], srand()),
     wmDepthCenter: (srand) => srand(),
     wmDepthRange: function (srand) {return srand() * this.options.instrument.rarity * 0.25},
-    wmDepthScale: function (srand) {return srand() * this.options.instrument.rarity},
+    wmDepthScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     wmFrequencyCenter: (srand) => srand(),
     wmFrequencyRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
-    wmFrequencyScale: function (srand) {return srand() * this.options.instrument.rarity},
+    wmFrequencyScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
   },
   createSynth: function ({point, wrapper}) {
     const {
       amDepth,
       amFrequency,
+      cmDepth,
+      cmFrequency,
       color,
       detune,
       dmDepth,
@@ -94,6 +107,12 @@ content.programs.instrument = content.programs.invent({
       type: this.properties.amType,
     }))
 
+    synth.assign('cm', engine.synth.lfo({
+      depth: cmDepth,
+      frequency: cmFrequency,
+      type: this.properties.cmType,
+    }))
+
     synth.assign('dm', engine.synth.lfo({
       depth: dmDepth,
       frequency: dmFrequency,
@@ -116,6 +135,9 @@ content.programs.instrument = content.programs.invent({
     synth.am.connect(synth.param.gain)
     synth.chainStop(synth.am)
 
+    synth.cm.connect(wrapper.filter.detune)
+    synth.chainStop(synth.cm)
+
     synth.dm.connect(synth.param.detune)
     synth.dm.connect(synth.fm.param.detune)
     synth.chainStop(synth.dm)
@@ -132,6 +154,8 @@ content.programs.instrument = content.programs.invent({
       const {
         amDepth,
         amFrequency,
+        cmDepth,
+        cmFrequency,
         color,
         detune,
         dmDepth,
@@ -150,6 +174,8 @@ content.programs.instrument = content.programs.invent({
 
       engine.fn.setParam(synth.param.am.depth, amDepth)
       engine.fn.setParam(synth.param.am.frequency, amFrequency)
+      engine.fn.setParam(synth.param.cm.depth, cmDepth)
+      engine.fn.setParam(synth.param.cm.frequency, cmFrequency)
       engine.fn.setParam(synth.param.detune, detune)
       engine.fn.setParam(synth.param.dm.depth, dmDepth)
       engine.fn.setParam(synth.param.dm.frequency, dmFrequency)
@@ -181,8 +207,8 @@ content.programs.instrument = content.programs.invent({
     ]
 
     const value = engine.fn.lerp(
-      this.properties.frequencyCenter - this.properties.frequencyRange,
-      this.properties.frequencyCenter + this.properties.frequencyRange,
+      engine.fn.clamp(this.properties.frequencyCenter - this.properties.frequencyRange),
+      engine.fn.clamp(this.properties.frequencyCenter + this.properties.frequencyRange),
       this.fields.frequency.valueAt(point, engine.fn.lerp(1, 2, this.properties.frequencyScale))
     )
 
@@ -203,6 +229,12 @@ content.programs.instrument = content.programs.invent({
       amFrequency: engine.fn.lerpExp(1/8, 8, engine.fn.clamp(
         engine.fn.lerp(this.properties.amFrequencyCenter - this.properties.amFrequencyRange, this.properties.amFrequencyCenter + this.properties.amFrequencyRange, this.fields.amFrequency.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.amFrequencyScale))),
       ), 4),
+      cmDepth: engine.fn.lerp(0, 2400, engine.fn.clamp(
+        engine.fn.lerp(this.properties.cmDepthCenter - this.properties.cmDepthRange, this.properties.cmDepthCenter + this.properties.cmDepthRange, this.fields.cmDepth.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.cmDepthScale))),
+      )),
+      cmFrequency: engine.fn.lerpExp(1/8, 8, engine.fn.clamp(
+        engine.fn.lerp(this.properties.cmFrequencyCenter - this.properties.cmFrequencyRange, this.properties.cmFrequencyCenter + this.properties.cmFrequencyRange, this.fields.cmFrequency.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.cmFrequencyScale))),
+      ), 4),
       color: engine.fn.lerp(1, 8, engine.fn.clamp(
         engine.fn.lerp(this.properties.colorCenter - this.properties.colorRange, this.properties.colorCenter + this.properties.colorRange, this.fields.color.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.colorScale))),
       )),
@@ -211,7 +243,7 @@ content.programs.instrument = content.programs.invent({
         50 * this.properties.detuneRange,
         this.fields.detune.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.detuneScale)),
       ),
-      dmDepth: engine.fn.lerp(-50, 50, engine.fn.clamp(
+      dmDepth: engine.fn.lerp(0, 50, engine.fn.clamp(
         engine.fn.lerp(this.properties.dmDepthCenter - this.properties.dmDepthRange, this.properties.dmDepthCenter + this.properties.dmDepthRange, this.fields.dmDepth.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.dmDepthScale))),
       )),
       dmFrequency: engine.fn.lerpExp(1/8, 8, engine.fn.clamp(
