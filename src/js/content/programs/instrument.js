@@ -100,8 +100,8 @@ content.programs.instrument = content.programs.invent({
     particleValueScale: function (srand) {return engine.fn.lerp(1, 4, (srand() * 0.5) + (this.options.instrument.rarity * 0.5))},
     particleValueMax: function () {return engine.fn.clamp(this.properties.particleValueCenter + this.properties.particleValueRange)},
     particleValueMin: function () {return engine.fn.clamp(this.properties.particleValueCenter - this.properties.particleValueRange)},
-    rotation: (srand) => engine.tool.quaternion.fromEuler({pitch: srand(-Math.PI, Math.PI), roll: srand(-Math.PI, Math.PI), yaw: srand(-Math.PI, Math.PI)}).normalize(),
-    rotationVelocity: (srand) => engine.tool.quaternion.fromEuler({pitch: srand(-Math.PI, Math.PI), roll: srand(-Math.PI, Math.PI), yaw: srand(-Math.PI, Math.PI)}).normalize(),
+    rotation: () => engine.tool.quaternion.fromEuler({pitch: engine.fn.randomFloat(-Math.PI, Math.PI), roll: engine.fn.randomFloat(-Math.PI, Math.PI), yaw: engine.fn.randomFloat(-Math.PI, Math.PI)}).normalize(),
+    rotationVelocity: () => engine.tool.quaternion.fromEuler({pitch: engine.fn.randomFloat(-Math.PI, Math.PI), roll: engine.fn.randomFloat(-Math.PI, Math.PI), yaw: engine.fn.randomFloat(-Math.PI, Math.PI)}).normalize(),
   },
   createSynth: function ({point, wrapper}) {
     const {

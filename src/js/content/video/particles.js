@@ -75,9 +75,9 @@ void main(void) {
         current.h = engine.fn.accelerateValue(current.h, target.h, 4)
         current.s = engine.fn.accelerateValue(current.s, target.s, 4)
         current.v = engine.fn.accelerateValue(current.v, target.v, 4)
-        current.x = engine.fn.accelerateValue(current.x, target.x, 8 * Math.max(1, Math.abs(target.x - current.x)))
-        current.y = engine.fn.accelerateValue(current.y, target.y, 8 * Math.max(1, Math.abs(target.y - current.y)))
-        current.z = engine.fn.accelerateValue(current.z, target.z, 8 * Math.max(1, Math.abs(target.z - current.z)))
+        current.x = engine.fn.accelerateValue(current.x, target.x, 6 * Math.max(1, Math.abs(target.x - current.x)))
+        current.y = engine.fn.accelerateValue(current.y, target.y, 6 * Math.max(1, Math.abs(target.y - current.y)))
+        current.z = engine.fn.accelerateValue(current.z, target.z, 6 * Math.max(1, Math.abs(target.z - current.z)))
 
         colors.push(
           current.h,
