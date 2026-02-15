@@ -5,7 +5,7 @@ content.programs.baseGalaxy = content.programs.invent({
   },
   propertyDefinitions: {
     // Particles
-    galaxyRadius: function () {return engine.fn.lerp(2, 4, this.options.galaxy.mass)},
+    galaxyRadius: function () {return engine.fn.lerp(3, 6, this.options.galaxy.mass)},
     irregularRadiusScale: (srand) => srand(0.5, 2.5),
     rotation: (srand) => engine.tool.quaternion.fromEuler({
       pitch: srand(-Math.PI, Math.PI) * 0.25,
@@ -32,7 +32,7 @@ content.programs.baseGalaxy = content.programs.invent({
       zScale = this.properties.zScale
 
     const radius = this.options.galaxy.type == 'Irregular' || this.options.galaxy.type == 'Peculiar'
-      ? engine.fn.lerp(this.properties.galaxyRadius * 0.5, this.properties.galaxyRadius * 1, this.fields.irregularRadius.valueAt(particle.spheres[index], this.properties.irregularRadiusScale))
+      ? engine.fn.lerp(this.properties.galaxyRadius * 0.5, this.properties.galaxyRadius * 1.5, this.fields.irregularRadius.valueAt(particle.spheres[index], this.properties.irregularRadiusScale))
       : this.properties.galaxyRadius
 
     const distance = engine.fn.distance({

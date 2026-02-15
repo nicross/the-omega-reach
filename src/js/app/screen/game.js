@@ -49,6 +49,7 @@ app.screen.game = app.screenManager.invent({
     this.dialog.checkAdvance()
 
     if (this.dialog.isOpen()) {
+      content.programs.get()?.update()
       return this.dialog.handleInput()
     }
 

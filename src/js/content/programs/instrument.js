@@ -293,10 +293,10 @@ content.programs.instrument = content.programs.invent({
       fmFrequency: engine.fn.lerp(1/4, 4, engine.fn.clamp(
         engine.fn.lerp(this.properties.fmFrequencyCenter - this.properties.fmFrequencyRange, this.properties.fmFrequencyCenter + this.properties.fmFrequencyRange, this.fields.fmFrequency.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.fmFrequencyScale))),
       )) * frequency,
-      width: engine.fn.lerp(0.25, 0.75, engine.fn.clamp(
+      width: engine.fn.lerp(0.375, 0.625, engine.fn.clamp(
         engine.fn.lerp(this.properties.widthCenter - this.properties.widthRange, this.properties.widthCenter + this.properties.widthRange, this.fields.color.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.widthScale))),
       )),
-      wmDepth: engine.fn.lerp(0, 0.5, engine.fn.clamp(
+      wmDepth: engine.fn.lerp(0, 0.25, engine.fn.clamp(
         engine.fn.lerp(this.properties.wmDepthCenter - this.properties.wmDepthRange, this.properties.wmDepthCenter + this.properties.wmDepthRange, this.fields.wmDepth.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.wmDepthScale))),
       )),
       wmFrequency: engine.fn.lerpExp(1/8, 8, engine.fn.clamp(
