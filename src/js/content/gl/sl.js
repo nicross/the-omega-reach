@@ -49,7 +49,7 @@ content.gl.sl.bindUniforms = (gl, program) => {
   gl.uniformMatrix4fv(program.uniforms.u_projection, false, content.camera.projectionMatrix().elements)
 
   // Bind u_proximity
-  gl.uniform1f(program.uniforms.u_proximity, app.screen.game.interact.proximity())
+  gl.uniform1f(program.uniforms.u_proximity, Math.max(app.screen.game.interact.proximity(), app.screen.game.interact.value()))
 
   // Bind u_resolution
   gl.uniform2fv(program.uniforms.u_resolution, [gl.canvas.width, gl.canvas.height])

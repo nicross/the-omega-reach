@@ -204,7 +204,7 @@ app.controls.interactions = (() => {
     update: function () {
       points.length = 0
 
-      if (app.screenManager.is('game') && (content.location.get()?.canInteract() || content.location.get()?.canInteractFreely())) {
+      if (app.screenManager.is('game') && !app.screen.game.dialog.isOpen() && (content.location.get()?.canInteract() || content.location.get()?.canInteractFreely())) {
         updateGamepad()
         updateKeyboard()
         updateMouse()

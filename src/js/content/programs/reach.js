@@ -1,5 +1,8 @@
 content.programs.reach = content.programs.invent({
   id: 'reach',
+  propertyDefinitions: {
+    rotation: () => engine.tool.quaternion.identity(),
+  },
   onLoad: function () {
     content.sphereIndex.randomize()
     return this
@@ -18,13 +21,36 @@ content.programs.reach = content.programs.invent({
     const distanceFactor = engine.fn.clamp(
       engine.fn.scale(distance, 0, 4, 2, 0),
       0, 1
-    ) * 1.5
+    )
 
     particle.target.h = (0 + (Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]) * 25)) / 360
     particle.target.s = isOnline ? 0.875 + (Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1]) * 0.125) : 0
-    particle.target.v = isOnline ? engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]), -1, 1, 0, 1) : 1
-    particle.target.x = isOnline ? particle.spheres[index].x : Math.max(particle.floor.x, -10)
-    particle.target.y = isOnline ? particle.spheres[index].y : particle.floor.y
-    particle.target.z = isOnline ? particle.spheres[index].z : (particle.floor.z + Math.max(0, -particle.floor.x - 10) + distanceFactor)
+    particle.target.v = isOnline ? engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]), -1, 1, 0, 1) : engine.fn.lerp(1, 0.125, distanceFactor)
+    particle.target.x = isOnline ? engine.fn.clamp(particle.spheres[index].x, -0.5, 0.5) * 2 : Math.max(particle.floor.x, -10)
+    particle.target.y = isOnline ? engine.fn.clamp(particle.spheres[index].y, -0.5, 0.5) * 2 : particle.floor.y
+    particle.target.z = isOnline ? engine.fn.clamp(particle.spheres[index].z, -0.5, 0.5) * 2 : (particle.floor.z + Math.max(0, -particle.floor.x - 10) + (distanceFactor * 2))
+  },
+  getRotation: function () {
+    const isOnline = content.rooms.reach.state.online
+
+    if (!isOnline) {
+      this.properties.rotation = engine.tool.quaternion.identity()
+      this.properties.rotationVelocity = undefined
+    } else {
+      if (!this.properties.rotationVelocity) {
+        const primes = [2,3,5,7]
+        this.properties.rotationVelocity = engine.tool.quaternion.fromEuler({
+          pitch: engine.fn.randomSign() * engine.fn.chooseSplice(primes, Math.random()),
+          roll: engine.fn.randomSign() * engine.fn.chooseSplice(primes, Math.random()),
+          yaw: engine.fn.randomSign() * engine.fn.chooseSplice(primes, Math.random()),
+        }).normalize()
+      }
+
+      this.properties.rotation = this.properties.rotation.multiply(
+        this.properties.rotationVelocity.lerpFrom({}, engine.loop.delta() / 5)
+      ).normalize()
+    }
+
+    return this.properties.rotation
   },
 })

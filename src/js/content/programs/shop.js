@@ -7,7 +7,7 @@ content.programs.shop = content.programs.invent({
     if (particle.floor.x < -10) {
       countertop = Math.max(0, -particle.floor.x - 15)
     } else if (particle.floor.x < -5) {
-      countertop = 1.5
+      countertop = 1
     }
 
     particle.target.h = 0

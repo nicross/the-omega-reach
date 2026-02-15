@@ -11,7 +11,11 @@ in vec3 color_out;
 out vec4 color;
 
 void main() {
-  color = vec4(color_out, alpha);
+  color = vec4(mix(
+    color_out,
+    vec3(1.0),
+    pow(proximity, 3.0)
+  ), alpha);
 }
 `
 
@@ -23,6 +27,7 @@ ${content.gl.sl.defineOuts()}
 ${content.gl.sl.defineUniforms()}
 ${content.gl.sl.commonVertex()}
 
+uniform vec3 u_pointers[8];
 uniform mat4 u_rotation;
 
 in vec3 color_in;
@@ -32,8 +37,30 @@ in vec3 vertex;
 out float alpha;
 out vec3 color_out;
 
+float calculatePointerProximity(vec3 rotated) {
+  float distance = 999.0;
+
+  for (int i = 0; i < 8; i += 1) {
+    if (length(u_pointers[i]) > 0.0) {
+      distance = min(distance, length(u_pointers[i] - (length(rotated) < 6.0 ? normalize(rotated) : rotated)));
+    }
+  }
+
+  return clamp(scale(distance, 0.0, 2.0, 1.0, 0.0), 0.0, 1.0);
+}
+
 void main(void) {
-  gl_Position = vec4(vertex, 0.0) + (u_rotation * vec4(offset + u_camera, 1.0)) - vec4(u_camera, 0.0);
+  vec4 rotated = (u_rotation * vec4(offset + u_camera, 1.0));
+  float proximityRatio = calculatePointerProximity(rotated.xyz);
+
+  rotated = mix(rotated, normalize(rotated) * 5.0, pow(proximityRatio, 8.0));
+
+  gl_Position = vec4(vertex, 0.0) + rotated - vec4(u_camera, 0.0);
+
+  gl_Position.x += (perlin4d(vec4(normalize(rotated.xyz), u_time * 8.0), 0.0) * pow(u_proximity, 3.0) - 0.5) * 0.25;
+  gl_Position.y += (perlin4d(vec4(normalize(rotated.xyz), u_time * 8.0), 1.0) * pow(u_proximity, 3.0) - 0.5) * 0.25;
+  gl_Position.z += (perlin4d(vec4(normalize(rotated.xyz), u_time * 8.0), 2.0) * pow(u_proximity, 3.0) - 0.5) * 0.25;
+
   gl_Position = u_projection * gl_Position;
 
   ${content.gl.sl.passUniforms()}
@@ -106,6 +133,19 @@ void main(void) {
       gl.vertexAttribPointer(program.attributes.offset, 3, gl.FLOAT, false, 0, 0)
       gl.vertexAttribDivisor(program.attributes.offset, 1)
 
+      // Bind pointers
+      const points = []
+
+      for (const point of app.controls.interactions.points()) {
+        points.push(point.x, point.y, point.z)
+      }
+
+      while (points.length < 8*3) {
+        points.push(0)
+      }
+
+      gl.uniform3fv(program.uniforms['u_pointers[0]'], points)
+
       // Bind u_rotation
       const rotation = engine.tool.matrix4d.fromQuaternion(
         activeProgram?.getRotation() || engine.tool.quaternion.identity()
@@ -157,6 +197,7 @@ void main(void) {
         ],
         uniforms: [
           ...content.gl.sl.uniformNames(),
+          'u_pointers[0]',
           'u_rotation',
         ],
       })
