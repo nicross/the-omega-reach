@@ -172,6 +172,7 @@ function getContentJs() {
     'src/js/content/*.js',
     'src/js/content/gl/sl.js',
     'src/js/content/programs/base.js',
+    'src/js/content/programs/baseGalaxy.js',
     'src/js/content/rooms/base.js',
     'src/js/content/**/*.js',
   ]

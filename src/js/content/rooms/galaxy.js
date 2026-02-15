@@ -69,6 +69,8 @@ content.rooms.galaxy = content.rooms.invent({
     content.rooms.planet.reset()
     content.rooms.moon.reset()
 
+    this.updateProgram()
+
     return this.move('left')
   },
   moveRight: function () {
@@ -85,6 +87,8 @@ content.rooms.galaxy = content.rooms.invent({
     content.rooms.planet.reset()
     content.rooms.moon.reset()
 
+    this.updateProgram()
+
     return this.move('right')
   },
   moveUp: function () {
@@ -94,5 +98,16 @@ content.rooms.galaxy = content.rooms.invent({
     }
 
     return this.move('up')
+  },
+  onEnter: function () {
+    this.updateProgram()
+  },
+  updateProgram: function () {
+    const galaxy = this.getGalaxy()
+
+    content.programs.load('baseGalaxy', {
+      galaxy,
+      seed: galaxy.name,
+    })
   },
 })

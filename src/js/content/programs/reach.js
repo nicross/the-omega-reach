@@ -7,6 +7,9 @@ content.programs.reach = content.programs.invent({
     content.sphereIndex.randomize()
     return this
   },
+  onExit: function () {
+    this.properties.rotationVelocity = undefined
+  },
   // Particles
   alterParticle: function (particle) {
     const index = content.sphereIndex.get(),
@@ -25,7 +28,7 @@ content.programs.reach = content.programs.invent({
 
     particle.target.h = (0 + (Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]) * 25)) / 360
     particle.target.s = isOnline ? 0.875 + (Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1]) * 0.125) : 0
-    particle.target.v = isOnline ? engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]), -1, 1, 0, 1) : engine.fn.lerp(1, 0.125, distanceFactor)
+    particle.target.v = isOnline ? engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]), -1, 1, 0, 1) : engine.fn.lerpExp(1, 0.25, distanceFactor, 0.05)
     particle.target.x = isOnline ? engine.fn.clamp(particle.spheres[index].x, -0.5, 0.5) * 2 : Math.max(particle.floor.x, -10)
     particle.target.y = isOnline ? engine.fn.clamp(particle.spheres[index].y, -0.5, 0.5) * 2 : particle.floor.y
     particle.target.z = isOnline ? engine.fn.clamp(particle.spheres[index].z, -0.5, 0.5) * 2 : (particle.floor.z + Math.max(0, -particle.floor.x - 10) + (distanceFactor * 2))

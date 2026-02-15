@@ -140,14 +140,8 @@ content.rooms.gallery = content.rooms.invent({
       ]
     )
 
-    const instrument = this.getInstrument()
-
-    content.programs.load('instrument', {
-      instrument,
-      seed: instrument.name,
-    })
-
     content.solution.generate()
+    this.updateProgram()
 
     return this.move('left')
   },
@@ -160,14 +154,8 @@ content.rooms.gallery = content.rooms.invent({
       ]
     )
 
-    const instrument = this.getInstrument()
-
-    content.programs.load('instrument', {
-      instrument,
-      seed: instrument.name,
-    })
-
     content.solution.generate()
+    this.updateProgram()
 
     return this.move('right')
   },
@@ -178,6 +166,9 @@ content.rooms.gallery = content.rooms.invent({
       )
     }
 
+    this.updateProgram()
+  },
+  updateProgram: function () {
     const instrument = this.getInstrument()
 
     if (instrument) {

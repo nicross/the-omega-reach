@@ -57,9 +57,9 @@ void main(void) {
 
   gl_Position = vec4(vertex, 0.0) + rotated - vec4(u_camera, 0.0);
 
-  gl_Position.x += (perlin4d(vec4(normalize(rotated.xyz), u_time * 8.0), 0.0) * pow(u_proximity, 3.0) - 0.5) * 0.25;
-  gl_Position.y += (perlin4d(vec4(normalize(rotated.xyz), u_time * 8.0), 1.0) * pow(u_proximity, 3.0) - 0.5) * 0.25;
-  gl_Position.z += (perlin4d(vec4(normalize(rotated.xyz), u_time * 8.0), 2.0) * pow(u_proximity, 3.0) - 0.5) * 0.25;
+  gl_Position.x += (perlin4d(vec4(normalize(rotated.xyz), u_time * 4.0), 0.0) * pow(u_proximity, 3.0) - 0.5) * 0.25;
+  gl_Position.y += (perlin4d(vec4(normalize(rotated.xyz), u_time * 4.0), 1.0) * pow(u_proximity, 3.0) - 0.5) * 0.25;
+  gl_Position.z += (perlin4d(vec4(normalize(rotated.xyz), u_time * 4.0), 2.0) * pow(u_proximity, 3.0) - 0.5) * 0.25;
 
   gl_Position = u_projection * gl_Position;
 

@@ -18,6 +18,8 @@ content.programs.base = {
   properties: {
     // Hash of generated values for this instance
   },
+  defaultState: {},
+  state: {},
   // Methods
   create: function (...args) {
     const instance = Object.create(this)
@@ -36,6 +38,7 @@ content.programs.base = {
   load: function (options = {}) {
     this.destination = content.audio.channel[this.channel].createBus()
     this.options = {...options}
+    this.state = {...this.defaultState}
     this.synths = new Map()
 
     if (this.hasReverb) {
