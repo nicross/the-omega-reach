@@ -11,7 +11,7 @@ content.programs.base = {
     // Hash of named fields for this instance
   },
   options: {},
-  propertyGenerators: {
+  propertyDefinitions: {
     // Hash of names to function (srand) {}
     // These are values that only need to be generated once
   },
@@ -209,5 +209,6 @@ content.programs.base = {
 
     return wrapper
   },
-  // TODO: Particles
+  // Particles
+  alterParticle: function (particle) {},
 }

@@ -3,6 +3,7 @@ content.rooms.lobby = content.rooms.invent({
   id: 'lobby',
   name: 'The lobby',
   description: 'Closed for the cycle',
+  defaultProgram: 'lobby',
   moveRightLabel: 'To the atrium',
   // Transitions
   transitions: {

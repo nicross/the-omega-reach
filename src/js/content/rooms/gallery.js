@@ -180,14 +180,13 @@ content.rooms.gallery = content.rooms.invent({
 
     const instrument = this.getInstrument()
 
-    content.programs.load('instrument', {
-      instrument,
-      seed: instrument.name,
-    })
-  },
-  onExit: function () {
-    content.programs.unload()
-
-    return this
+    if (instrument) {
+      content.programs.load('instrument', {
+        instrument,
+        seed: instrument.name,
+      })
+    } else {
+      content.programs.load('galleryEmpty')
+    }
   },
 })

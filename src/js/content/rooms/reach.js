@@ -3,6 +3,7 @@ content.rooms.reach = content.rooms.invent({
   id: 'reach',
   name: 'The reach',
   description: 'Beyond the end of time',
+  defaultProgram: 'reach',
   moveDownLabel: 'To the atrium',
   moveUpLabel: 'Zoom in',
   // Transitions
@@ -22,7 +23,9 @@ content.rooms.reach = content.rooms.invent({
   onInteract: function () {
     this.state.online = !this.state.online
 
-    if (!this.state.online) {
+    if (this.state.online) {
+      content.sphereIndex.randomize()
+    } else {
       content.rooms.galaxy.reset()
       content.rooms.star.reset()
       content.rooms.planet.reset()

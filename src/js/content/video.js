@@ -9,6 +9,7 @@ content.video = (() => {
 
       content.gl.clear()
 
+      this.particles.draw()
       this.interactions.draw()
       this.grain.draw()
 
@@ -21,6 +22,7 @@ content.video = (() => {
 
       this.grain.load()
       this.interactions.load()
+      this.particles.load()
 
       isLoaded = true
 
@@ -33,6 +35,7 @@ content.video = (() => {
 
       this.grain.unload()
       this.interactions.unload()
+      this.particles.unload()
 
       isLoaded = false
 

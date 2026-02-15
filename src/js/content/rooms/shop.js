@@ -3,6 +3,7 @@ content.rooms.shop = content.rooms.invent({
   id: 'shop',
   name: 'The shop',
   description: 'Out for lunch',
+  defaultProgram: 'shop',
   moveLeftLabel: 'To the atrium',
   // Transitions
   transitions: {

@@ -3,6 +3,7 @@ content.rooms.base = {
   id: undefined,
   name: undefined,
   description: undefined,
+  defaultProgram: undefined,
   interactLabel: 'Examine',
   moveDownLabel: 'No south',
   moveLeftLabel: 'No west',
@@ -104,12 +105,18 @@ content.rooms.base = {
     return this.canMove('up')
   },
   enter: function () {
+    if (this.defaultProgram) {
+      content.programs.load(this.defaultProgram)
+    }
+
     content.solution.generate()
     this.onEnter()
 
     return this
   },
   exit: function () {
+    content.programs.unload()
+
     this.onExit()
 
     return this

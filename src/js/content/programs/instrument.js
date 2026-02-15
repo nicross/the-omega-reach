@@ -2,7 +2,12 @@ content.programs.instrument = content.programs.invent({
   id: 'instrument',
   hasReverb: true,
   hasSynths: true,
+  onLoad: function () {
+    content.sphereIndex.randomize()
+    return this
+  },
   fieldDefinitions: {
+    // Synthesis
     amDepth: {},
     amFrequency: {},
     cmDepth: {},
@@ -18,8 +23,15 @@ content.programs.instrument = content.programs.invent({
     width: {},
     wmDepth: {},
     wmFrequency: {},
+    // TODO: haptics
+    // Particles
+    particleHue: {},
+    particleSaturation: {},
+    particleValue: {},
+    particleRadius: {},
   },
   propertyDefinitions: {
+    // Synthesis
     amType: (srand) => engine.fn.choose(['sine','triangle'], srand()),
     amDepthCenter: (srand) => srand(),
     amDepthRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
@@ -70,6 +82,24 @@ content.programs.instrument = content.programs.invent({
     wmFrequencyCenter: (srand) => srand(),
     wmFrequencyRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
     wmFrequencyScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
+    // TODO: Haptics
+    // Particles
+    particleRadiusScale: function (srand) {return engine.fn.lerp(1, 4, (srand() * 0.5) + (this.options.instrument.rarity * 0.5))},
+    particleHueCenter: (srand) => srand(),
+    particleHueRange: function (srand) {return (srand() * 0.5) + (this.options.instrument.rarity * 0.5)},
+    particleHueScale: function (srand) {return engine.fn.lerp(1, 4, (srand() * 0.5) + (this.options.instrument.rarity * 0.5))},
+    particleHueMax: function () {return this.properties.particleHueCenter + this.properties.particleHueRange},
+    particleHueMin: function () {return this.properties.particleHueCenter - this.properties.particleHueRange},
+    particleSaturationCenter: (srand) => engine.fn.lerp(0, 1, srand()),
+    particleSaturationRange: function (srand) {return ((srand() * 0.5) + (this.options.instrument.rarity * 0.5))},
+    particleSaturationScale: function (srand) {return engine.fn.lerp(1, 4, (srand() * 0.5) + (this.options.instrument.rarity * 0.5))},
+    particleSaturationMax: function () {return engine.fn.clamp(this.properties.particleSaturationCenter + this.properties.particleSaturationRange)},
+    particleSaturationMin: function () {return engine.fn.clamp(this.properties.particleSaturationCenter - this.properties.particleSaturationRange)},
+    particleValueCenter: (srand) => engine.fn.lerp(0.75, 1, srand()),
+    particleValueRange: function (srand) {return ((srand() * 0.5) + (this.options.instrument.rarity * 0.5)) * 0.25},
+    particleValueScale: function (srand) {return engine.fn.lerp(1, 4, (srand() * 0.5) + (this.options.instrument.rarity * 0.5))},
+    particleValueMax: function () {return engine.fn.clamp(this.properties.particleValueCenter + this.properties.particleValueRange)},
+    particleValueMin: function () {return engine.fn.clamp(this.properties.particleValueCenter - this.properties.particleValueRange)},
   },
   createSynth: function ({point, wrapper}) {
     const {
@@ -271,5 +301,18 @@ content.programs.instrument = content.programs.invent({
         engine.fn.lerp(this.properties.wmFrequencyCenter - this.properties.wmFrequencyRange, this.properties.wmFrequencyCenter + this.properties.wmFrequencyRange, this.fields.wmDepth.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.wmFrequencyScale))),
       ), 4),
     }
+  },
+  // Particles
+  alterParticle: function (particle) {
+    const index = content.sphereIndex.get()
+
+    const radius = engine.fn.lerp(0.5, 2.5, this.fields.particleRadius.valueAt(particle.spheres[index], this.properties.particleRadiusScale))
+
+    particle.target.h = engine.fn.lerp(this.properties.particleHueMin, this.properties.particleHueMax, this.fields.particleHue.valueAt(particle.spheres[index], this.properties.particleHueScale))
+    particle.target.s = engine.fn.lerp(this.properties.particleSaturationMin, this.properties.particleSaturationMax, this.fields.particleSaturation.valueAt(particle.spheres[index], this.properties.particleSaturationScale))
+    particle.target.v = engine.fn.lerp(this.properties.particleValueMin, this.properties.particleValueMax, this.fields.particleValue.valueAt(particle.spheres[index], this.properties.particleValueScale))
+    particle.target.x = particle.spheres[index].x * radius
+    particle.target.y = particle.spheres[index].y * radius
+    particle.target.z = particle.spheres[index].z * radius
   },
 })
