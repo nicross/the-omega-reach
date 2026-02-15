@@ -48,8 +48,15 @@ content.gl.sl.bindUniforms = (gl, program) => {
   // Bind u_projection
   gl.uniformMatrix4fv(program.uniforms.u_projection, false, content.camera.projectionMatrix().elements)
 
+  // Bind u_proximity
+  gl.uniform1f(program.uniforms.u_proximity, app.screen.game.interact.proximity())
+
   // Bind u_resolution
   gl.uniform2fv(program.uniforms.u_resolution, [gl.canvas.width, gl.canvas.height])
+
+  // Bind u_solution
+  const solution = content.solution.get()
+  gl.uniform3fv(program.uniforms.u_solution, [solution?.x || 0, solution?.y || 0, solution?.z || 0])
 
   // Bind u_time
   gl.uniform1f(program.uniforms.u_time, content.time.value())
@@ -60,8 +67,10 @@ in vec3 camera;
 in float drawDistance;
 in mat4 projection;
 in mat4 projection_inverse;
+in highp float proximity;
 in vec2 quadCoordinates;
 in vec2 resolution;
+in vec3 solution;
 in highp float time;
 `
 
@@ -71,7 +80,9 @@ out float drawDistance;
 out mat4 projection;
 out mat4 projection_inverse;
 out vec2 quadCoordinates;
+out float proximity;
 out vec2 resolution;
+out vec3 solution;
 out float time;
 `
 
@@ -79,8 +90,10 @@ content.gl.sl.defineUniforms = () => `
 in vec2 quadCoordinates_in;
 uniform vec3 u_camera;
 uniform float u_drawDistance;
+uniform highp float u_proximity;
 uniform mat4 u_projection;
 uniform vec2 u_resolution;
+uniform vec3 u_solution;
 uniform highp float u_time;
 `
 
@@ -89,8 +102,10 @@ camera = u_camera;
 drawDistance = u_drawDistance;
 projection = u_projection;
 projection_inverse = inverse(u_projection);
+proximity = u_proximity;
 quadCoordinates = quadCoordinates_in;
 resolution = u_resolution;
+solution = u_solution;
 time = u_time;
 `
 
@@ -98,7 +113,9 @@ content.gl.sl.uniformNames = () => [
   'u_camera',
   'u_planet',
   'u_projection',
+  'u_proximity',
   'u_resolution',
+  'u_solution',
   'u_time',
 ]
 

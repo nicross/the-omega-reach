@@ -9,6 +9,7 @@ content.video = (() => {
 
       content.gl.clear()
 
+      this.interactions.draw()
       this.grain.draw()
 
       return this
@@ -19,6 +20,7 @@ content.video = (() => {
       }
 
       this.grain.load()
+      this.interactions.load()
 
       isLoaded = true
 
@@ -30,6 +32,7 @@ content.video = (() => {
       }
 
       this.grain.unload()
+      this.interactions.unload()
 
       isLoaded = false
 

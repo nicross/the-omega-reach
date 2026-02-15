@@ -174,6 +174,9 @@ app.controls.interactions = (() => {
     for (const [key, vector] of Object.entries(keyboardMappings)) {
       if (engine.input.keyboard.is(key)) {
         keyboardPoints.push(vector)
+        vector.depth = engine.fn.accelerateValue(vector.depth || 0, 1, 24)
+      } else {
+        vector.depth = 0
       }
     }
   }
@@ -184,6 +187,7 @@ app.controls.interactions = (() => {
       mousePoint.x = 1 - mouseMemory.distance()
       mousePoint.y = mouseMemory.x
       mousePoint.z = mouseMemory.y
+      mousePoint.depth = engine.fn.accelerateValue(mousePoint.depth || 0, 1, 24)
     } else {
       mousePoint = undefined
     }

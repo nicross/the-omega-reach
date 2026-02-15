@@ -63,8 +63,11 @@ content.camera = (() => {
       return this
     },
     update: function () {
-      vector = engine.position.getVector()
-      quaternion = engine.position.getQuaternion()
+      // Looking at origin in -x direction
+      // Listener position is at origin facing same direction
+      vector = engine.tool.vector3d.unitX().scale(10)
+      quaternion = engine.tool.vector3d.unitX().inverse().quaternion()
+      engine.position.setQuaternion(quaternion)
 
       updateProjectionMatrix()
 
