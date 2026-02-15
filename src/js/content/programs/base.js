@@ -211,4 +211,7 @@ content.programs.base = {
   },
   // Particles
   alterParticle: function (particle) {},
+  getRotation: function () {
+    return engine.tool.quaternion.identity()
+  },
 }

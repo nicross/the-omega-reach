@@ -23,6 +23,8 @@ ${content.gl.sl.defineOuts()}
 ${content.gl.sl.defineUniforms()}
 ${content.gl.sl.commonVertex()}
 
+uniform mat4 u_rotation;
+
 in vec3 color_in;
 in vec3 offset;
 in vec3 vertex;
@@ -31,7 +33,8 @@ out float alpha;
 out vec3 color_out;
 
 void main(void) {
-  gl_Position = u_projection * vec4(vertex + offset, 1.0);
+  gl_Position = vec4(vertex, 0.0) + (u_rotation * vec4(offset + u_camera, 1.0)) - vec4(u_camera, 0.0);
+  gl_Position = u_projection * gl_Position;
 
   ${content.gl.sl.passUniforms()}
   alpha = 1.0;
@@ -103,6 +106,13 @@ void main(void) {
       gl.vertexAttribPointer(program.attributes.offset, 3, gl.FLOAT, false, 0, 0)
       gl.vertexAttribDivisor(program.attributes.offset, 1)
 
+      // Bind u_rotation
+      const rotation = engine.tool.matrix4d.fromQuaternion(
+        activeProgram?.getRotation() || engine.tool.quaternion.identity()
+      ).transpose()
+
+      gl.uniformMatrix4fv(program.uniforms.u_rotation, false, rotation.elements)
+
       // Bind mesh
       const mesh = content.gl.createQuad({
         height: 1/64,
@@ -147,6 +157,7 @@ void main(void) {
         ],
         uniforms: [
           ...content.gl.sl.uniformNames(),
+          'u_rotation',
         ],
       })
 

@@ -157,12 +157,6 @@
     font-weight: 300;
     height: unset !important;
     margin-top: 2rem !important;
-    opacity: 0.5;
-  }
-  .a-game--menu:active,
-  .a-game--menu:focus,
-  .a-game--menu:hover {
-    opacity: 1;
   }
 
   .a-game--interact {
@@ -170,19 +164,12 @@
     font-family: FiraCodeRegular, monospace;
     height: unset !important;
     margin-bottom: 2rem !important;
-    opacity: 0.5;
     overflow: hidden;
     position: relative;
     padding-bottom: 0.25em !important;
   }
     .a-game--interact-instant {
       padding-bottom: 0 !important;
-    }
-    .a-game--interact-active,
-    .a-game--interact:active,
-    .a-game--interact:focus,
-    .a-game--interact:hover {
-      opacity: 1;
     }
   .a-game--interactProgress {
     background-color: #FFFFFF;
