@@ -85,6 +85,7 @@ content.stars = (() => {
     return [
       {
         label: 'Main sequence star',
+        program: 'mainSequence',
         habitability: 1,
         planets: 1,
         weight: engine.fn.lerp(1/2, 0, galaxy.age),
@@ -128,6 +129,7 @@ content.stars = (() => {
       },
       {
         label: 'Black hole',
+        program: 'blackHole',
         habitability: 1/8,
         planets: 3,
         weight: engine.fn.lerp(0, 1/6/2, galaxy.age),
@@ -150,6 +152,7 @@ content.stars = (() => {
       },
       {
         label: 'Neutron star',
+        program: 'neutronStar',
         habitability: 1/8,
         planets: 3,
         weight: engine.fn.lerp(0, 1/6/2, galaxy.age),
@@ -173,6 +176,7 @@ content.stars = (() => {
       },
       {
         label: 'Red supergiant',
+        program: 'redSupergiant',
         habitability: 1/2,
         planets: 2,
         weight: engine.fn.lerp(1/3/2, 1/6/2, galaxy.age),
@@ -197,6 +201,7 @@ content.stars = (() => {
       },
       {
         label: 'Blue hypergiant',
+        program: 'blueHypergiant',
         habitability: 1/2,
         planets: 2,
         weight: engine.fn.lerp(1/3/2, 1/6/2, galaxy.age),

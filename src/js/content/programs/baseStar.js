@@ -3,7 +3,15 @@ content.programs.baseStar = content.programs.invent({
   fieldDefinitions: {
     radius4d: {type: 'simplex4d'},
   },
-  propertyDefinitions: {},
+  propertyDefinitions: {
+    rotation: (srand) => engine.tool.quaternion.fromEuler({
+      pitch: srand(-Math.PI, Math.PI) * 0.25,
+      roll: srand(-Math.PI, Math.PI) * 0.25,
+      yaw: srand(-Math.PI, Math.PI) * 0.25
+    }).normalize(),
+    rotationRate: (srand) => srand(),
+    rotationVelocity: (srand) => engine.tool.quaternion.fromEuler({pitch: srand(-Math.PI, Math.PI), roll: srand(-Math.PI, Math.PI), yaw: srand(-Math.PI, Math.PI)}).normalize(),
+  },
   onLoad: function () {
     content.sphereIndex.randomize()
     return this
@@ -48,6 +56,11 @@ content.programs.baseStar = content.programs.invent({
       return engine.tool.quaternion.identity()
     }
 
-    return engine.tool.quaternion.identity()
+    this.properties.rotation = this.properties.rotation.multiply(
+      this.properties.rotationVelocity.lerpFrom({}, engine.loop.delta() * this.getRotationRate())
+    ).normalize()
+
+    return this.properties.rotation
   },
+  getRotationRate: function () {return 0.025 * this.properties.rotationRate},
 })

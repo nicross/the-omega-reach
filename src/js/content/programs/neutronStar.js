@@ -1,16 +1,18 @@
-content.programs.whiteDwarf = content.programs.invent({
-  id: 'whiteDwarf',
+content.programs.neutronStar = content.programs.invent({
+  id: 'neutronStar',
   fieldDefinitions: {
     ...content.programs.baseStar.fieldDefinitions,
   },
   propertyDefinitions: {
     ...content.programs.baseStar.propertyDefinitions,
-    activity: (srand) => srand(),
+    radius4dLength: (srand) => srand(0.5, 1.5),
+    radius4dScale: (srand) => srand(3, 6),
+    radius4dTimeScale: (srand) => srand(0.25, 0.75),
   },
   alterParticleColor: function (particle, point) {
     const time = content.time.value()
 
-    particle.target.h = (engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]), -1, 1, 235, 335) / 360) - 1
+    particle.target.h = engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]), -1, 1, -180, 180) / 360
     particle.target.s = engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1]), -1, 1, 0, 0.333)
     particle.target.v = engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]), -1, 1, 0, 1)
 
@@ -19,12 +21,12 @@ content.programs.whiteDwarf = content.programs.invent({
   alterParticleVertex: function (particle, point) {
     const time = content.time.value()
 
-    const radius = engine.fn.lerp(0.25, 0.75, this.options.star.radius) + engine.fn.lerp(0, 0.125, this.fields.radius4d.valueAt({
+    const radius = engine.fn.lerp(0.125, 0.25, this.options.star.radius) + engine.fn.lerpExp(0, this.properties.radius4dLength, this.fields.radius4d.valueAt({
       time,
       x: point.x,
       y: point.y,
       z: point.z,
-    }, 2, engine.fn.lerp(0.125, 0.5, this.properties.activity)))
+    }, this.properties.radius4dScale, this.properties.radius4dTimeScale), 4)
 
     particle.target.x = point.x * radius
     particle.target.y = point.y * radius
@@ -32,4 +34,5 @@ content.programs.whiteDwarf = content.programs.invent({
 
     return true
   },
+  getRotationRate: function () {return engine.fn.lerp(0.25, 1, this.properties.rotationRate)},
 }, content.programs.baseStar)

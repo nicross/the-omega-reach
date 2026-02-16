@@ -78,6 +78,12 @@ content.rooms.moon = content.rooms.invent({
       if (moon.quirks.length) {
         message.push(`${moon.quirks.length} quirk${moon.quirks.length == 1 ? '' : 's'} detected`)
       }
+
+      if (moon.instrument) {
+        message.push(`Instrument detected`)
+      }
+
+      content.sphereIndex.randomize()
     } else if (scans <= 1 + moon.quirks.length) {
       message.push(`${moon.quirks[scans - 2].name} found`)
     } else if (moon.instrument) {

@@ -83,6 +83,12 @@ content.rooms.planet = content.rooms.invent({
       if (planet.quirks.length) {
         message.push(`${planet.quirks.length} quirk${planet.quirks.length == 1 ? '' : 's'} detected`)
       }
+
+      if (planet.instrument) {
+        message.push(`Instrument detected`)
+      }
+
+      content.sphereIndex.randomize()
     } else if (scans <= 1 + planet.quirks.length) {
       message.push(`${planet.quirks[scans - 2].name} found`)
     } else if (planet.instrument) {

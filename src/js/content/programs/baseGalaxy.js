@@ -14,9 +14,9 @@ content.programs.baseGalaxy = content.programs.invent({
     }).normalize(),
     zScale: function (srand) {return {
       Elliptical: () => srand(3/4, 1),
-      Irregular: () => srand(7/12, 5/6),
+      Irregular: () => srand(9/16, 13/16),
       Lenticular: () => srand(1/4, 3/4),
-      Peculiar: () => srand(1/6, 5/12),
+      Peculiar: () => srand(3/16, 7/16),
       Spiral: () => srand(1/32, 1/8),
     }[this.options.galaxy.type]()},
   },
