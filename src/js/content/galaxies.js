@@ -27,6 +27,7 @@ content.galaxies = (() => {
       habitability: srand('habitability'),
       mass: srand('mass'),
       name,
+      program: 'baseGalaxy',
       type: engine.fn.chooseWeighted([
         {label: 'Elliptical', weight: 1/3},
         {label: 'Lenticular', weight: 1/3/3},

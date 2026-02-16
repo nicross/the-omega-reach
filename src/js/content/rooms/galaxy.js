@@ -105,7 +105,7 @@ content.rooms.galaxy = content.rooms.invent({
   updateProgram: function () {
     const galaxy = this.getGalaxy()
 
-    content.programs.load('baseGalaxy', {
+    content.programs.load(galaxy.program, {
       galaxy,
       seed: galaxy.name,
     })

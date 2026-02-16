@@ -159,6 +159,8 @@ content.rooms.star = content.rooms.invent({
     content.rooms.planet.reset()
     content.rooms.moon.reset()
 
+    this.updateProgram()
+
     return this.move('left')
   },
   moveRight: function () {
@@ -174,6 +176,8 @@ content.rooms.star = content.rooms.invent({
     content.rooms.planet.reset()
     content.rooms.moon.reset()
 
+    this.updateProgram()
+
     return this.move('right')
   },
   moveUp: function () {
@@ -183,5 +187,16 @@ content.rooms.star = content.rooms.invent({
     }
 
     return this.move('up')
+  },
+  onEnter: function () {
+    this.updateProgram()
+  },
+  updateProgram: function () {
+    const star = this.getStar()
+
+    content.programs.load(star.program, {
+      star,
+      seed: star.name,
+    })
   },
 })

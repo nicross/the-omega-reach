@@ -26,7 +26,7 @@ content.programs.reach = content.programs.invent({
       0, 1
     )
 
-    particle.target.h = (0 + (Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]) * 25)) / 360
+    particle.target.h = engine.fn.lerpExp(-25, 25, engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]), -1, 1, 0, 1), 4) / 360
     particle.target.s = isOnline ? 0.875 + (Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1]) * 0.125) : 0
     particle.target.v = isOnline ? engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]), -1, 1, 0, 1) : engine.fn.lerpExp(1, 0.25, distanceFactor, 0.05)
     particle.target.x = isOnline ? engine.fn.clamp(particle.spheres[index].x, -0.5, 0.5) * 2 : Math.max(particle.floor.x, -10)

@@ -44,6 +44,7 @@ content.stars = (() => {
       mass: srand('mass') * galaxy.mass,
       name,
       quirks: [],
+      program: type.program || 'baseStar',
       radius: srand('radius'),
       type: type.label,
       wildcard: (srand('wildcard') + galaxy.wildcard) * 0.5,
@@ -105,6 +106,7 @@ content.stars = (() => {
       },
       {
         label: 'White dwarf',
+        program: 'whiteDwarf',
         habitability: 1/2,
         planets: 2,
         weight: engine.fn.lerp(0, 1/2, galaxy.age),

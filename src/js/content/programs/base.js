@@ -63,9 +63,9 @@ content.programs.base = {
         seed: [this.id, this.options.seed, name],
       })
 
-      this.fields[name].valueAt = function (point, scale) {
+      this.fields[name].valueAt = function (point, scale, timeScale) {
         scale *= engine.tool.simplex3d.prototype.skewFactor
-        return this.value(point.x * scale, point.y * scale, point.z * scale)
+        return this.value(point.x * scale, point.y * scale, point.z * scale, point.time * timeScale)
       }
 
       engine.ephemera.add(this.fields[name])
@@ -214,6 +214,16 @@ content.programs.base = {
   },
   // Particles
   alterParticle: function (particle) {},
+  alterParticleUnscanned: function (particle) {
+    const index = content.sphereIndex.get()
+
+    particle.target.h = 0
+    particle.target.s = 0
+    particle.target.v = 0.25
+    particle.target.x = particle.spheres[index].x
+    particle.target.y = particle.spheres[index].y
+    particle.target.z = particle.spheres[index].z
+  },
   getRotation: function () {
     return engine.tool.quaternion.identity()
   },

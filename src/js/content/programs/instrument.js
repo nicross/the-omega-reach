@@ -309,20 +309,27 @@ content.programs.instrument = content.programs.invent({
     const index = content.sphereIndex.get(),
       isScanned = this.options.instrument.state.scans > 0
 
+    particle.target.h = engine.fn.lerp(this.properties.particleHueMin, this.properties.particleHueMax, this.fields.particleHue.valueAt(particle.spheres[index], this.properties.particleHueScale))
+
+    if (!isScanned) {
+      return this.alterParticleUnscanned(particle)
+    }
+
     const radius = engine.fn.lerp(0.5, 2.5, this.fields.particleRadius.valueAt(particle.spheres[index], this.properties.particleRadiusScale))
 
-    particle.target.h = engine.fn.lerp(this.properties.particleHueMin, this.properties.particleHueMax, this.fields.particleHue.valueAt(particle.spheres[index], this.properties.particleHueScale))
-    particle.target.s = isScanned
-      ? engine.fn.lerp(this.properties.particleSaturationMin, this.properties.particleSaturationMax, this.fields.particleSaturation.valueAt(particle.spheres[index], this.properties.particleSaturationScale))
-      : 0
-    particle.target.v = isScanned
-      ? engine.fn.lerp(this.properties.particleValueMin, this.properties.particleValueMax, this.fields.particleValue.valueAt(particle.spheres[index], this.properties.particleValueScale))
-      : 0.25
-    particle.target.x = particle.spheres[index].x * (isScanned ? radius : 1)
-    particle.target.y = particle.spheres[index].y * (isScanned ? radius : 1)
-    particle.target.z = particle.spheres[index].z * (isScanned ? radius : 1)
+    particle.target.s = engine.fn.lerp(this.properties.particleSaturationMin, this.properties.particleSaturationMax, this.fields.particleSaturation.valueAt(particle.spheres[index], this.properties.particleSaturationScale))
+    particle.target.v = engine.fn.lerp(this.properties.particleValueMin, this.properties.particleValueMax, this.fields.particleValue.valueAt(particle.spheres[index], this.properties.particleValueScale))
+    particle.target.x = particle.spheres[index].x * radius
+    particle.target.y = particle.spheres[index].y * radius
+    particle.target.z = particle.spheres[index].z * radius
   },
   getRotation: function () {
+    const isScanned = this.options.instrument.state.scans > 0
+
+    if (!isScanned) {
+      return engine.tool.quaternion.identity()
+    }
+
     this.properties.rotation = this.properties.rotation.multiply(
       this.properties.rotationVelocity.lerpFrom({}, engine.loop.delta() / 30)
     ).normalize()
