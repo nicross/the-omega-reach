@@ -11,6 +11,9 @@ app.storage.game = {
       },
       seed: app.fn.generateSeed(),
       tutorial: {},
+      wallet: {
+        amount: 50,
+      },
     }
   },
   load: function () {

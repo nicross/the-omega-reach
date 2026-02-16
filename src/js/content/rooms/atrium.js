@@ -26,6 +26,13 @@ content.rooms.atrium = content.rooms.invent({
       })
     }
 
+    if (content.donations.has()) {
+      attributes.push({
+        label: 'New donations',
+        modifiers: ['undiscovered'],
+      })
+    }
+
     return attributes
   },
   // Movement
