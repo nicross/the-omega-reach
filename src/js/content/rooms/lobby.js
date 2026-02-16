@@ -2,7 +2,7 @@ content.rooms.lobby = content.rooms.invent({
   // Attributes
   id: 'lobby',
   name: 'The lobby',
-  description: 'Closed for the cycle',
+  description: 'Closed to visitors',
   defaultProgram: 'lobby',
   moveRightLabel: 'To the atrium',
   // Transitions
@@ -13,11 +13,11 @@ content.rooms.lobby = content.rooms.invent({
   getDescription: function () {
     return this.isOpen()
       ? 'Open to visitors'
-      : 'Closed for the cycle'
+      : 'Closed to visitors'
   },
   isDiscovered: function () {
     return this.isOpen()
   },
-  isOpen: () => false,
+  isOpen: () => content.instruments.count() > 0,
   // ...
 })

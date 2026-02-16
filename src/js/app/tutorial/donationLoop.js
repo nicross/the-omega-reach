@@ -3,7 +3,7 @@ app.tutorial.donationLoop = app.tutorial.invent({
   // State
   state: {},
   // Lifecycle
-  shouldActivate: () => app.tutorial.firstInstrument.complete,
+  shouldActivate: () => content.donations.has(),
   onUpdate: function () {
     if (!(content.location.is('lobby') && content.donations.has())) {
       return
@@ -11,11 +11,20 @@ app.tutorial.donationLoop = app.tutorial.invent({
 
     if (!this.state.tutorial) {
       app.screen.game.dialog.push({
+        title: `Perfect timing!`,
+        description: `It appears you missed some visitors while you were busy with <strong>the reach</strong>. Beyond the usual indicators—like dust on the doormat or missing pens—when left, their generous donations are the most enticing!`,
+        actions: [
+          {
+            label: 'Collect earnings',
+          }
+        ],
+      })
+      app.screen.game.dialog.push({
         title: `[Tutorial] The lobby`,
         description: `Donations will accumulate in <strong>the lobby</strong> as you explore the universe. Return here to collect them often.`,
         actions: [
           {
-            label: 'Collect them',
+            label: 'Regain control',
             before: () => this.state.tutorial = true,
           }
         ],
@@ -24,7 +33,7 @@ app.tutorial.donationLoop = app.tutorial.invent({
 
     app.screen.game.dialog.push({
       title: `Credits received!`,
-      description: `You collect <strong>${app.utility.format.currency(content.donations.amount())}</strong> from the donation box in the lobby.`,
+      description: `You collect <strong>${app.utility.format.currency(content.donations.amount())}</strong> in donations from <strong>the lobby</strong>.`,
       actions: [
         {
           label: 'Cheers!',
