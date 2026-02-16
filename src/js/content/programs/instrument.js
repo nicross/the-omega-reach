@@ -39,7 +39,7 @@ content.programs.instrument = content.programs.invent({
     amFrequencyCenter: (srand) => srand(),
     amFrequencyRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
     amFrequencyScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
-    cmType: (srand) => engine.fn.choose(['sine','sine','triangle','triangle','square','sawtooth'], srand()),
+    cmType: (srand) => engine.fn.choose(['sine','triangle','sawtooth'], srand()),
     cmDepthCenter: (srand) => srand(),
     cmDepthRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
     cmDepthScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
@@ -52,7 +52,7 @@ content.programs.instrument = content.programs.invent({
     colorScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     detuneRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
     detuneScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
-    dmType: (srand) => engine.fn.choose(['sine','sine','triangle','triangle','square','sawtooth'], srand()),
+    dmType: (srand) => engine.fn.choose(['sine','triangle','sawtooth'], srand()),
     dmDepthCenter: (srand) => srand(),
     dmDepthRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
     dmDepthScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
@@ -75,7 +75,7 @@ content.programs.instrument = content.programs.invent({
     widthCenter: (srand) => srand(),
     widthRange: function (srand) {return srand() * this.options.instrument.rarity * 0.25},
     widthScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
-    wmType: (srand) => engine.fn.choose(['sine','sine','triangle','triangle','square','sawtooth'], srand()),
+    wmType: (srand) => engine.fn.choose(['sine','triangle','sawtooth'], srand()),
     wmDepthCenter: (srand) => srand(),
     wmDepthRange: function (srand) {return srand() * this.options.instrument.rarity * 0.25},
     wmDepthScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
@@ -225,9 +225,21 @@ content.programs.instrument = content.programs.invent({
     let scale = engine.fn.choose([
       [0,1,2,3,4,5,6,7,8,9,10,11],
       [0,2,3,5,7,8,10],
-      [0,2,3,6,7,8,11],
       [0,3,5,7,10],
       [0,2,3,7,8],
+      [0,2,3,6,7,8,11],
+      // repeat
+      [0,1,2,3,4,5,6,7,8,9,10,11],
+      [0,2,3,5,7,8,10],
+      [0,3,5,7,10],
+      [0,2,3,7,8],
+      [0,2,3,6,7,8,11],
+      // repeat
+      [0,1,2,3,4,5,6,7,8,9,10,11],
+      [0,2,3,5,7,8,10],
+      [0,3,5,7,10],
+      [0,2,3,7,8],
+      [0,2,3,6,7,8,11],
     ], this.properties.scale)
 
     scale = [

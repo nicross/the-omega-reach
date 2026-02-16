@@ -135,9 +135,11 @@ app.controls.interactions = (() => {
 
     const rotated = point.rotateQuaternion(mappings.rotation).normalize()
 
-    rotated.depth = mappings.analog.reduce((value, button) => {
+    rotated.depth = mappings.digital.reduce((value, button) => {
+      return Math.max(value, engine.input.gamepad.isDigital(button) ? 1 : 0)
+    }, 0) || mappings.analog.reduce((value, button) => {
       return Math.max(value, engine.input.gamepad.getAnalog(button))
-    }, 0) || 1
+    }, 0)
 
     return rotated
   }

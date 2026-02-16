@@ -9,7 +9,7 @@
   app.screenManager.ready()
 
   // Set gamepad deadzone
-  engine.input.gamepad.setDeadzone(0.125)
+  engine.input.gamepad.setDeadzone(0.1)
 
   // Initialize mix
   engine.mixer.reverb.setImpulse(

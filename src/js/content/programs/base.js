@@ -191,7 +191,7 @@ content.programs.base = {
         this.onUpdate(point)
 
         engine.fn.setParam(wrapper.filter.frequency, wrapper.rootFrequency * engine.fn.scale(point.x * depth, -1 * depth, 1, wrapper.minColor, wrapper.maxColor))
-        engine.fn.setParam(wrapper.input.gain, baseGain/_this.synths.size)
+        engine.fn.setParam(wrapper.input.gain, baseGain/_this.synths.size*depth)
         engine.fn.setParam(wrapper.panner.pan, point.y)
 
         return this
