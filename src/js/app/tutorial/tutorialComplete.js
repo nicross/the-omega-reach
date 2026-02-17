@@ -13,7 +13,7 @@ app.tutorial.tutorialComplete = app.tutorial.invent({
     [
       {
         title: `This is the life!`,
-        description: `You've recalled everything that you need to be successful this cycle. Reach for the stars, gather their instruments, and curate the best collection in the universe!`,
+        description: `You've recalled all of the basics for you to be successful this cycle. You may recall more later, but until then? Reach for the stars, gather their instruments, and curate the best collection in the universe!`,
         actions: [
           {
             label: 'End tutorial',

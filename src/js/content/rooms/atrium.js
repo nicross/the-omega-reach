@@ -23,6 +23,7 @@ content.rooms.atrium = content.rooms.invent({
       attributes.push({
         label: 'New instruments',
         modifiers: ['undiscovered'],
+        chimeNote: 63,
       })
     }
 
@@ -30,8 +31,11 @@ content.rooms.atrium = content.rooms.invent({
       attributes.push({
         label: 'New donations',
         modifiers: ['undiscovered'],
+        chimeNote: 67,
       })
     }
+
+    // TODO: New wares
 
     return attributes
   },
@@ -44,5 +48,18 @@ content.rooms.atrium = content.rooms.invent({
     }
 
     this.move('down')
+  },
+  onEnter: function () {
+    const chimeNotes = this.getAttributeLabels()
+      .map((x) => x.chimeNote)
+      .filter((x) => x)
+
+    if (chimeNotes.length) {
+      chimeNotes.push(75)
+
+      content.audio.atriumChime.trigger({
+        notes: chimeNotes.map(engine.fn.fromMidi),
+      })
+    }
   },
 })
