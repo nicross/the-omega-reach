@@ -52,3 +52,7 @@ app.autosave = (() => {
     },
   }
 })()
+
+engine.ready(() => {
+  content.location.on('interact-complete', () => app.autosave.trigger())
+})
