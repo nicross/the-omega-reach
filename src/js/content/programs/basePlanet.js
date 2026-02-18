@@ -8,7 +8,7 @@ content.programs.basePlanet = content.programs.invent({
       x: srand(0, 1),
       y: srand(-1, 1),
       z: srand(-1, 1),
-    }),
+    }).normalize(),
     rotation: (srand) => engine.tool.quaternion.fromEuler({
       pitch: srand(-Math.PI, Math.PI),
       roll: srand(-Math.PI, Math.PI),

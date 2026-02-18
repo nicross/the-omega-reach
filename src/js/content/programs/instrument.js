@@ -335,7 +335,7 @@ content.programs.instrument = content.programs.invent({
     particle.target.y = particle.spheres[index].y * radius
     particle.target.z = particle.spheres[index].z * radius
   },
-  getLightSource: () => engine.tool.euler.create({}).forward(),
+  getLightSource: () => engine.tool.euler.create().forward(),
   getRotation: function () {
     const isScanned = this.options.instrument.state.scans > 0
 

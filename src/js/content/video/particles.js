@@ -68,7 +68,7 @@ void main(void) {
   vec3 hsv = vec3(color_in);
 
   if (length(u_lightSource) > 0.0) {
-    float d = dot(rotated.xyz, u_lightSource);
+    float d = dot(normalize(rotated.xyz), u_lightSource);
 
     if (d < 0.0) {
       hsv.y *= mix(0.5, 1.0, pow(1.0 + d, 4.0));
