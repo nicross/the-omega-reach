@@ -2,13 +2,58 @@ content.programs.gasGiant = content.programs.invent({
   id: 'gasGiant',
   fieldDefinitions: {
     ...content.programs.basePlanet.fieldDefinitions,
+    color: {},
+    saturation: {},
+    value: {},
   },
   propertyDefinitions: {
     ...content.programs.basePlanet.propertyDefinitions,
+    color1: (srand) => srand(-1/4, 1/4),
+    color2: function (srand) {return this.properties.color1 + engine.fn.choose([
+      () => 0.5 + srand(-5/360, 5/360),
+      () => 1/3 + srand(-10/360, 10/360),
+      () => 0 + srand(0/360, 45/360),
+    ], srand())()},
+    colorBands: (srand) => srand(6, 18),
+    colorTimeScale: (srand) => srand(1/60, 1/15),
+    saturationBands: (srand) => srand(6, 18),
+    saturationCenter: (srand) => srand(0, 1),
+    saturationRange: (srand) => srand(0, 1),
+    saturationTimeScale: (srand) => srand(1/60, 1/15),
+    valueBands: (srand) => srand(12, 24),
+    valueCenter: (srand) => srand(7/8, 1),
+    valueRange: (srand) => srand(0, 1/16),
+    valueTimeScale: (srand) => srand(1/60, 1/15),
     zFactor: function () {return engine.fn.lerp(1, 0.875, this.options.body.mass)},
   },
   alterParticleColor: function (particle, point) {
-    //return true
+    const time = content.time.value()
+
+    particle.target.h = engine.fn.lerp(this.properties.color1, this.properties.color2, content.fn.gain(
+      this.fields.color.valueAt({
+        x: 0,
+        y: point.y * this.properties.colorBands,
+        z: time * this.properties.colorTimeScale,
+      }, 1), 8
+    ))
+
+    particle.target.s = engine.fn.clamp(engine.fn.lerp(this.properties.saturationCenter - this.properties.saturationRange, this.properties.saturationCenter + this.properties.saturationRange,
+      this.fields.saturation.valueAt({
+        x: 0,
+        y: point.y * this.properties.saturationBands,
+        z: time * this.properties.saturationTimeScale,
+      }, 1)
+    ))
+
+    particle.target.v = engine.fn.clamp(engine.fn.lerp(this.properties.valueCenter - this.properties.valueRange, this.properties.valueCenter + this.properties.valueRange,
+      this.fields.value.valueAt({
+        x: 0,
+        y: point.y * this.properties.valueBands,
+        z: time * this.properties.valueTimeScale,
+      }, 1)
+    ))
+
+    return true
   },
   alterParticleVertex: function (particle, point) {
     const radius = engine.fn.lerp(2, 3, this.options.body.radius)
