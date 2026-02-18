@@ -71,7 +71,7 @@ void main(void) {
     float d = dot(normalize(rotated.xyz), u_lightSource);
 
     if (d < 0.0) {
-      hsv.y *= mix(0.125, 1.0, pow(1.0 + d, 8.0));
+      hsv.y *= mix(0.125, 1.0, pow(1.0 + d, 2.0));
       hsv.z *= mix(0.0625, 1.0, pow(1.0 + d, 8.0));
     }
   }

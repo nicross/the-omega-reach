@@ -95,13 +95,7 @@ app.screen.game.dialog = (() => {
       actionsElement.appendChild(container)
     }
 
-    if (actions.length == 1) {
-      textElement.ariaDescription = actions[0].label
-      textElement.role = 'button'
-    } else {
-      textElement.ariaDescription = `${actions.length} actions`
-      textElement.removeAttribute('role')
-    }
+    textElement.ariaDescription = `${actions.length} action${actions.length == 1 ? '' : 's'}`
   }
 
   function open() {
@@ -126,12 +120,8 @@ app.screen.game.dialog = (() => {
       const focus = app.utility.focus.get(),
         ui = app.controls.ui()
 
-      if (ui.confirm) {
-        if (current.actions.length == 1) {
-          current.actions[0].button.click()
-        } else if (focus) {
-          focus.click()
-        }
+      if (ui.confirm && focus) {
+        focus.click()
       }
 
       if (ui.up || ui.left) {

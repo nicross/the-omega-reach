@@ -12,7 +12,7 @@ app.tutorial.reachOnline = app.tutorial.invent({
     [
       {
         title: `It's online!`,
-        description: `The device thrums back to life, returning virogously to its preferred state! And lo, its console glows with the promise of your recurring fate.`,
+        description: `The device thrums back to life, returning vigorously to its preferred state! And lo, its console glows with the promise of your recurring fate.`,
         actions: [
           {
             label: 'Use the device',

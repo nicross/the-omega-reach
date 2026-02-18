@@ -45,6 +45,8 @@ app.screen.game = app.screenManager.invent({
     engine.loop.pause()
   },
   onFrame: function () {
+    this.interact.accelerate()
+
     // Handle input when dialog is open
     this.dialog.checkAdvance()
 
@@ -82,7 +84,7 @@ app.screen.game = app.screenManager.invent({
 
     this.interact.setProximity(
       isFinite(closest) ? engine.fn.clamp(engine.fn.scale(closest, 1/2, 2, 1, 0), 0, 1) : 0
-    ).accelerate()
+    )
 
     // Handle UI controls
     const focus = app.utility.focus.get(),
