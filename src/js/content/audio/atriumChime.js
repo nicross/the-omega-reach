@@ -42,7 +42,7 @@ content.audio.atriumChime = (() => {
           color,
           duration,
           frequency: notes[i],
-          when: when + (i * delay),
+          when: when + delay + (i * delay),
           width: 0.5 + (engine.fn.randomSign() * engine.fn.randomFloat(0.125, 0.25)),
         })
       }

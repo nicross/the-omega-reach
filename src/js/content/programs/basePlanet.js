@@ -1,7 +1,7 @@
-content.programs.baseStar = content.programs.invent({
-  id: 'baseStar',
+content.programs.basePlanet = content.programs.invent({
+  id: 'basePlanet',
   fieldDefinitions: {
-    radius4d: {type: 'simplex4d'},
+    radius: {},
   },
   propertyDefinitions: {
     rotation: (srand) => engine.tool.quaternion.fromEuler({
@@ -19,7 +19,7 @@ content.programs.baseStar = content.programs.invent({
   // Particles
   alterParticle: function (particle) {
     const index = content.sphereIndex.get(),
-      isScanned = content.scans.is(this.options.star.name),
+      isScanned = content.scans.is(this.options.body.name),
       time = content.time.value()
 
     if (!isScanned) {
@@ -27,14 +27,8 @@ content.programs.baseStar = content.programs.invent({
     }
 
     if (!this.alterParticleVertex(particle, particle.spheres[index])) {
-      const radius = engine.fn.lerp(2, 4, this.options.star.radius)
-        + (0.5 * this.fields.radius4d.valueAt({
-            time,
-            x: particle.spheres[index].x,
-            y: particle.spheres[index].y,
-            z: particle.spheres[index].z,
-          }, 2, 0.0125)
-        )
+      const radius = engine.fn.lerp(0.5, 1.5, this.options.body.radius)
+        + (0.5 * this.fields.radius.valueAt(particle.spheres[index], 2))
 
       particle.target.x = particle.spheres[index].x * radius
       particle.target.y = particle.spheres[index].y * radius
@@ -42,15 +36,15 @@ content.programs.baseStar = content.programs.invent({
     }
 
     if (!this.alterParticleColor(particle, particle.spheres[index])) {
-      particle.target.h = 0
-      particle.target.s = 0
-      particle.target.v = engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]), -1, 1, 0, 1)
+      particle.target.h = 335/360
+      particle.target.s = particle.target.x > 0 ? 1 : 0.5
+      particle.target.v = particle.target.x > 0 ? 1 : 0.25
     }
   },
   alterParticleColor: function (particle, point) {},
   alterParticleVertex: function (particle, point) {},
   getRotation: function () {
-    const isScanned = content.scans.is(this.options.star.name)
+    const isScanned = content.scans.is(this.options.body.name)
 
     if (!isScanned) {
       return engine.tool.quaternion.identity()

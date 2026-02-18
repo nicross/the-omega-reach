@@ -35,7 +35,7 @@ content.rooms.atrium = content.rooms.invent({
       })
     }
 
-    // TODO: New wares
+    // TODO: New wares, chimeNote: 70
 
     return attributes
   },

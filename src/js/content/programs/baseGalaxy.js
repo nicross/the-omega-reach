@@ -8,9 +8,9 @@ content.programs.baseGalaxy = content.programs.invent({
     galaxyRadius: function () {return engine.fn.lerp(3, 6, this.options.galaxy.mass)},
     irregularRadiusScale: (srand) => srand(0.5, 2.5),
     rotation: (srand) => engine.tool.quaternion.fromEuler({
-      pitch: srand(-Math.PI, Math.PI) * 0.25,
-      roll: srand(-Math.PI, Math.PI) * 0.25,
-      yaw: srand(-Math.PI, Math.PI) * 0.25
+      pitch: srand(-Math.PI, Math.PI),
+      roll: srand(-Math.PI, Math.PI),
+      yaw: srand(-Math.PI, Math.PI),
     }).normalize(),
     zScale: function (srand) {return {
       Elliptical: () => srand(3/4, 1),

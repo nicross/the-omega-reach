@@ -58,6 +58,7 @@ content.planets = (() => {
       index,
       mass: srand('mass') * star.mass,
       name,
+      program: type.program || 'basePlanet',
       quirks: [],
       radius: srand('radius'),
       star,

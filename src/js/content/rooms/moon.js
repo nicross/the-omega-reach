@@ -164,6 +164,7 @@ content.rooms.moon = content.rooms.invent({
     )
 
     content.solution.generate()
+    this.updateProgram()
 
     return this.move('left')
   },
@@ -177,7 +178,18 @@ content.rooms.moon = content.rooms.invent({
     )
 
     content.solution.generate()
+    this.updateProgram()
 
     return this.move('right')
+  },onEnter: function () {
+    this.updateProgram()
+  },
+  updateProgram: function () {
+    const moon = this.getMoon()
+
+    content.programs.load(moon.program, {
+      body: moon,
+      seed: moon.name,
+    })
   },
 })

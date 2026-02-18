@@ -28,6 +28,7 @@ content.moons = (() => {
       mass: srand('mass') * planet.mass,
       name,
       planet,
+      program: type.program || 'baseMoon',
       quirks: [],
       radius: srand('radius') * planet.radius,
       type: type.label,

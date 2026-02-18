@@ -83,7 +83,7 @@ content.rooms.star = content.rooms.invent({
       if (star.quirks.length) {
         message.push(`${star.quirks.length} quirk${star.quirks.length == 1 ? '' : 's'} detected`)
       }
-      
+
       content.sphereIndex.randomize()
     } else {
       message.push(`${star.quirks[scans - 2].name} found`)

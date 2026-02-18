@@ -184,6 +184,8 @@ content.rooms.planet = content.rooms.invent({
     content.solution.generate()
     content.rooms.moon.reset()
 
+    this.updateProgram()
+
     return this.move('left')
   },
   moveRight: function () {
@@ -198,6 +200,8 @@ content.rooms.planet = content.rooms.invent({
     content.solution.generate()
     content.rooms.moon.reset()
 
+    this.updateProgram()
+
     return this.move('right')
   },
   moveUp: function () {
@@ -207,5 +211,16 @@ content.rooms.planet = content.rooms.invent({
     }
 
     return this.move('up')
+  },
+  onEnter: function () {
+    this.updateProgram()
+  },
+  updateProgram: function () {
+    const planet = this.getPlanet()
+
+    content.programs.load(planet.program, {
+      body: planet,
+      seed: planet.name,
+    })
   },
 })
