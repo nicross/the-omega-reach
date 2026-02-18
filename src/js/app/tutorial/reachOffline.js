@@ -20,7 +20,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
         ],
       },
       {
-        title: `[Select input preference]`,
+        title: `[Select input device]`,
         description: `You sit at the device. Upon its inert console rests…`,
         actions: [
           {
@@ -36,6 +36,22 @@ app.tutorial.reachOffline = app.tutorial.invent({
           {
             label: 'an array of keys',
             before: () => app.settings.setInputPreference('keyboard'),
+            after: () => app.settings.save(),
+          },
+        ],
+      },
+      {
+        title: `[Select input preference]`,
+        description: `To confirm your choices at the console, you…`,
+        actions: [
+          {
+            label: 'hold for a moment',
+            before: () => app.settings.setInputHold(true),
+            after: () => app.settings.save(),
+          },
+          {
+            label: 'let go immediately',
+            before: () => app.settings.setInputHold(false),
             after: () => app.settings.save(),
           },
         ],
