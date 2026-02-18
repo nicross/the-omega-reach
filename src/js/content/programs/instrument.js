@@ -224,22 +224,28 @@ content.programs.instrument = content.programs.invent({
   calculateFrequency: function (point) {
     let scale = engine.fn.choose([
       [0,1,2,3,4,5,6,7,8,9,10,11],
-      [0,2,3,5,7,8,10],
+      [0,12,17,24,28,31],
       [0,3,5,7,10],
+      [0,2,3,5,7,8,10],
       [0,2,3,7,8],
       [0,2,3,6,7,8,11],
+      [0,2,4,6,8,10],
       // repeat
       [0,1,2,3,4,5,6,7,8,9,10,11],
-      [0,2,3,5,7,8,10],
+      [0,12,17,24,28,31],
       [0,3,5,7,10],
+      [0,2,3,5,7,8,10],
       [0,2,3,7,8],
       [0,2,3,6,7,8,11],
+      [0,2,4,6,8,10],
       // repeat
       [0,1,2,3,4,5,6,7,8,9,10,11],
-      [0,2,3,5,7,8,10],
+      [0,12,17,24,28,31],
       [0,3,5,7,10],
+      [0,2,3,5,7,8,10],
       [0,2,3,7,8],
       [0,2,3,6,7,8,11],
+      [0,2,4,6,8,10],
     ], this.properties.scale)
 
     scale = [
@@ -248,7 +254,9 @@ content.programs.instrument = content.programs.invent({
       ...scale.map((x) => x + 0),
       ...scale.map((x) => x + 12),
       ...scale.map((x) => x + 24),
-    ]
+    ].sort((a, b) => a - b)
+
+    scale = [...new Set(scale)]
 
     const value = engine.fn.lerp(
       engine.fn.clamp(this.properties.frequencyCenter - this.properties.frequencyRange),
