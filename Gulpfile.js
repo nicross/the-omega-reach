@@ -175,6 +175,12 @@ function getContentJs() {
     'src/js/content/programs/baseGalaxy.js',
     'src/js/content/programs/baseStar.js',
     'src/js/content/programs/basePlanet.js',
+    // XXX: Moons extend planets
+    'src/js/content/programs/acidPlanet.js',
+    'src/js/content/programs/arcticPlanet.js',
+    'src/js/content/programs/desertPlanet.js',
+    'src/js/content/programs/rockyPlanet.js',
+    'src/js/content/programs/terranPlanet.js',
     'src/js/content/programs/baseMoon.js',
     'src/js/content/rooms/base.js',
     'src/js/content/**/*.js',

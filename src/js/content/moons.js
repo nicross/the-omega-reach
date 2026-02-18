@@ -106,6 +106,7 @@ content.moons = (() => {
     return [
       {
         label: 'Rocky moon',
+        program: 'rockyMoon',
         instrument: 1,
         weight: 1,
         commonQuirks: [
@@ -127,6 +128,7 @@ content.moons = (() => {
       },
       {
         label: 'Acid moon',
+        program: 'acidMoon',
         instrument: 1,
         weight: planet.habitability,
         commonQuirks: [
@@ -147,6 +149,7 @@ content.moons = (() => {
       },
       {
         label: 'Terran moon',
+        program: 'terranMoon',
         instrument: 1,
         weight: planet.habitability,
         commonQuirks: [
@@ -174,6 +177,7 @@ content.moons = (() => {
       },
       {
         label: 'Desert moon',
+        program: 'desertMoon',
         instrument: 1,
         weight: 1 - planet.habitability,
         commonQuirks: [
@@ -200,6 +204,7 @@ content.moons = (() => {
       },
       {
         label: 'Arctic moon',
+        program: 'arcticMoon',
         instrument: 1,
         weight: 1 - planet.heat,
         commonQuirks: [

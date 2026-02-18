@@ -1,5 +1,6 @@
 content.programs.basePlanet = content.programs.invent({
   id: 'basePlanet',
+  bumpiness: 1,
   fieldDefinitions: {
     radius: {},
   },
@@ -9,6 +10,8 @@ content.programs.basePlanet = content.programs.invent({
       y: srand(-1, 1),
       z: srand(-1, 1),
     }).normalize(),
+    radiusPower: (srand) => srand(1, 2),
+    radiusScale: (srand) => srand(1, 4),
     rotation: (srand) => engine.tool.quaternion.fromEuler({
       pitch: srand(-Math.PI, Math.PI),
       roll: srand(-Math.PI, Math.PI),
@@ -32,8 +35,8 @@ content.programs.basePlanet = content.programs.invent({
     }
 
     if (!this.alterParticleVertex(particle, particle.spheres[index])) {
-      const radius = engine.fn.lerp(0.5, 1.5, this.options.body.radius)
-        + (0.5 * this.fields.radius.valueAt(particle.spheres[index], 2))
+      const radius = engine.fn.lerp(1, 2, this.options.body.radius)
+        + (0.25 * this.bumpiness * (this.fields.radius.valueAt(particle.spheres[index], this.properties.radiusScale) ** this.properties.radiusPower))
 
       particle.target.x = particle.spheres[index].x * radius
       particle.target.y = particle.spheres[index].y * radius
@@ -41,7 +44,7 @@ content.programs.basePlanet = content.programs.invent({
     }
 
     if (!this.alterParticleColor(particle, particle.spheres[index])) {
-      particle.target.h = 335/360
+      particle.target.h = -25/360
       particle.target.s = 1
       particle.target.v = 1
     }
@@ -64,5 +67,5 @@ content.programs.basePlanet = content.programs.invent({
 
     return this.properties.rotation
   },
-  getRotationRate: function () {return 0.025 * this.properties.rotationRate},
+  getRotationRate: function () {return 0.05 * this.properties.rotationRate},
 })

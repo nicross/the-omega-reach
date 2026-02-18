@@ -5,7 +5,6 @@ content.programs.blackHole = content.programs.invent({
   },
   propertyDefinitions: {
     ...content.programs.baseStar.propertyDefinitions,
-    radius: (srand) => srand(0, 0.5),
   },
   alterParticleColor: function (particle, point) {
     const time = content.time.value()

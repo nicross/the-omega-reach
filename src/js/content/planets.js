@@ -157,6 +157,7 @@ content.planets = (() => {
     return [
       {
         label: 'Gas giant',
+        program: 'gasGiant',
         instrument: 0,
         moons: 1,
         weight: 1,
@@ -176,6 +177,7 @@ content.planets = (() => {
       },
       {
         label: 'Ice giant',
+        program: 'iceGiant',
         instrument: 0,
         moons: 1,
         weight: 1 - heat,
@@ -196,6 +198,7 @@ content.planets = (() => {
       },
       {
         label: 'Rocky planet',
+        program: 'rockyPlanet',
         instrument: 1,
         moons: 3,
         weight: 1 * 0.5,
@@ -220,6 +223,7 @@ content.planets = (() => {
       },
       {
         label: 'Acid planet',
+        program: 'acidPlanet',
         instrument: 1,
         moons: 3,
         weight: habitability * 0.5,
@@ -243,6 +247,7 @@ content.planets = (() => {
       },
       {
         label: 'Terran planet',
+        program: 'terranPlanet',
         instrument: 1,
         moons: 2,
         weight: habitability,
@@ -273,6 +278,7 @@ content.planets = (() => {
       },
       {
         label: 'Desert planet',
+        program: 'desertPlanet',
         instrument: 1,
         moons: 3,
         weight: (1 - habitability) * 0.5,
@@ -302,6 +308,7 @@ content.planets = (() => {
       },
       {
         label: 'Arctic planet',
+        program: 'arcticPlanet',
         habitability: 1/3,
         instrument: 1,
         moons: 3,

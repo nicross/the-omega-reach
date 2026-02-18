@@ -39,7 +39,7 @@ content.audio.atriumChime = (() => {
     } = {}) {
       for (const i in notes) {
         trigger({
-          color,
+          color: i == notes.length - 1 ? 1 : color,
           duration,
           frequency: notes[i],
           when: when + delay + (i * delay),

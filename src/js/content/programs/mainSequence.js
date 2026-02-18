@@ -5,7 +5,10 @@ content.programs.mainSequence = content.programs.invent({
   },
   propertyDefinitions: {
     ...content.programs.baseStar.propertyDefinitions,
-    radius: (srand) => srand(0, 0.5),
+    radius4dAmplitude: (srand) => srand(0.5, 1),
+    radius4dPower: (srand) => srand(1, 3),
+    radius4dScale: (srand) => srand(3, 6),
+    radius4dTimeScale: (srand) => engine.fn.lerp(1/60, 1/15, srand()),
   },
   alterParticleColor: function (particle, point) {
     const time = content.time.value()
@@ -19,12 +22,12 @@ content.programs.mainSequence = content.programs.invent({
   alterParticleVertex: function (particle, point) {
     const time = content.time.value()
 
-    const radius = engine.fn.lerp(1.5, 2.5, this.options.star.radius) + engine.fn.lerpExp(0, 0.5, this.fields.radius4d.valueAt({
+    const radius = engine.fn.lerp(2, 3, this.options.star.radius) + engine.fn.lerpExp(0, this.properties.radius4dAmplitude, this.fields.radius4d.valueAt({
       time,
       x: point.x,
       y: point.y,
       z: point.z,
-    }, 3, engine.fn.lerp(0, 0.5, this.properties.activity)), 2)
+    }, this.properties.radius4dScale, this.properties.radius4dTimeScale), this.properties.radius4dPower)
 
     particle.target.x = point.x * radius
     particle.target.y = point.y * radius

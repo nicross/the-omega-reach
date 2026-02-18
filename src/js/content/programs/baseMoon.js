@@ -1,18 +1,38 @@
-content.programs.baseMoon = content.programs.invent({
-  id: 'baseMoon',
-  onLoad: function () {
-    content.sphereIndex.randomize()
+;(() => {
+  const baseDefinition = {
+    id: 'baseMoon',
+    bumpiness: 2,
+    onLoad: function () {
+      content.sphereIndex.randomize()
 
-    const alterParticleVertex = this.alterParticleVertex.bind(this)
-    this.alterParticleVertex = (particle, point) => alterParticleVertex(particle, point) * 0.5
+      const alterParticle = this.alterParticle.bind(this)
 
-    return this
-  },
-}, content.programs.basePlanet)
+      this.alterParticle = (particle) => {
+        alterParticle(particle)
 
-// Dynamic types, e.g. terranPlanet -> terranMoon
-for (const [id, parentId] of Object.entries({
+        if (content.scans.is(this.options.body.name)) {
+          particle.target.x *= 0.5
+          particle.target.y *= 0.5
+          particle.target.z *= 0.5
+        }
+      }
 
-})) {
-  content.programs[id] = content.programs.invent({...content.programs[parentId], id}, content.programs.baseMoon)
-}
+      return this
+    },
+    getRotationRate: function () {return 0.1 * this.properties.rotationRate},
+  }
+
+  content.programs.baseMoon = content.programs.invent(baseDefinition, content.programs.basePlanet)
+
+  // Dynamic subtypes prototype chain: subtype -> baseMoon -> parentPlanet -> basePlanet -> base
+  for (const [parentId, id ] of Object.entries({
+    acidPlanet: 'acidMoon',
+    arcticPlanet: 'arcticMoon',
+    desertPlanet: 'desertMoon',
+    rockyPlanet: 'rockyMoon',
+    terranPlanet: 'terranMoon',
+  })) {
+    content.programs[id] = content.programs.invent({id}, content.programs[parentId].extend(baseDefinition))
+  }
+
+})()
