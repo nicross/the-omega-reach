@@ -8,7 +8,9 @@ app.screen.game.interact = (() => {
     isCooldown = false,
     lastFrame = 0,
     proximity = 0,
-    value = 0
+    proximityAccelerated = 0,
+    value = 0,
+    valueAccelerated = 0
 
   rootElement.addEventListener('click', () => {
     if (!app.settings.computed.inputHold) {
@@ -33,6 +35,12 @@ app.screen.game.interact = (() => {
   }
 
   return pubsub.decorate({
+    accelerate: function () {
+      proximityAccelerated = engine.fn.accelerateValue(proximityAccelerated, proximity, proximity ? 3 : 1)
+      valueAccelerated = engine.fn.accelerateValue(valueAccelerated, value, value ? 3 : 1)
+
+      return this
+    },
     click: function () {
       if (isCooldown || !canInteract) {
         return this
@@ -75,6 +83,7 @@ app.screen.game.interact = (() => {
       return this
     },
     proximity: () => proximity,
+    proximityAccelerated: () => proximityAccelerated,
     setCooldown: function (nextValue) {
       isCooldown = Boolean(nextValue)
 
@@ -111,5 +120,6 @@ app.screen.game.interact = (() => {
       return this
     },
     value: () => value,
+    valueAccelerated: () => valueAccelerated,
   })
 })()
