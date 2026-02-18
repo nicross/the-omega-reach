@@ -27,6 +27,9 @@ content.rooms.planet = content.rooms.invent({
       ? planet.type
       : 'Unexamined'
   },
+  getInteractLabel: function () {
+    return this.isDiscovered() ? 'Examine' : 'Skim'
+  },
   getName: function () {
     return this.getPlanet().name
   },

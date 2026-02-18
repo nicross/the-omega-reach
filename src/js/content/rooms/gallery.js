@@ -34,6 +34,11 @@ content.rooms.gallery = content.rooms.invent({
       ? instrument.rarityLabel.toLowerCase()
       : ''
   },
+  getInteractLabel: function () {
+    return this.getInstrument()
+      ? this.isDiscovered() ? 'Examine' : 'Appraise'
+      : 'Examine'
+  },
   getName: function () {
     return this.getInstrument()?.name || 'The gallery'
   },
@@ -89,7 +94,7 @@ content.rooms.gallery = content.rooms.invent({
       if (instrument.quirks.length) {
         message.push(`${instrument.quirks.length} quirk${instrument.quirks.length == 1 ? '' : 's'} detected`)
       }
-      
+
       content.sphereIndex.randomize()
     } else if (instrument.state.scans <= 1 + instrument.quirks.length) {
       message.push(`${instrument.quirks[instrument.state.scans - 2].name} found`)

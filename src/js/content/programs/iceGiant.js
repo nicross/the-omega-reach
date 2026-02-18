@@ -12,7 +12,7 @@ content.programs.iceGiant = content.programs.invent({
     colorBands: (srand) => srand(6, 18),
     colorTimeScale: (srand) => srand(1/60, 1/15),
     saturationBands: (srand) => srand(6, 18),
-    saturationCenter: (srand) => srand(0, 0.5),
+    saturationCenter: (srand) => srand(0.5, 1),
     saturationRange: (srand) => srand(0, 0.5),
     saturationTimeScale: (srand) => srand(1/60, 1/15),
     zFactor: function () {return engine.fn.lerp(1, 0.875, this.options.body.mass)},

@@ -25,6 +25,9 @@ content.rooms.moon = content.rooms.invent({
       ? moon.type
       : 'Unexamined'
   },
+  getInteractLabel: function () {
+    return this.isDiscovered() ? 'Examine' : 'Skim'
+  },
   getName: function () {
     return this.getMoon().name
   },

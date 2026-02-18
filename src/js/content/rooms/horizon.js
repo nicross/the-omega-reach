@@ -4,6 +4,7 @@ content.rooms.horizon = content.rooms.invent({
   name: 'The horizon',
   description: 'Zooming into focus',
   defaultProgram: 'horizon',
+  interactLabel: 'Reach',
   moveDownLabel: 'Zoom out',
   moveUpLabel: 'Zoom in',
   // Transitions

@@ -3,6 +3,7 @@ content.rooms.galaxy = content.rooms.invent({
   id: 'galaxy',
   name: '(Galaxy name)',
   description: '(Galaxy description)',
+  interactLabel: 'Reach',
   moveDownLabel: 'Zoom out',
   moveLeftLabel: 'Previous galaxy',
   moveRightLabel: 'Next galaxy',

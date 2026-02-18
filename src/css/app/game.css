@@ -164,6 +164,7 @@
     font-family: FiraCodeRegular, monospace;
     height: unset !important;
     margin-bottom: 2rem !important;
+    min-width: 10ch;
     overflow: hidden;
     position: relative;
     padding-bottom: 0.25em !important;
