@@ -3,7 +3,7 @@
   max-width: unset;
   position: relative;
 }
-  .a-game-blanked::after {
+  .a-game-blanked::before {
     background-color: #000000;
     content: '';
     height: 100%;
@@ -11,7 +11,7 @@
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 0;
+    z-index: -1;
   }
   .a-game > * {
     max-width: unset;

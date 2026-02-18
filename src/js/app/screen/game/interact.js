@@ -20,6 +20,9 @@ app.screen.game.interact = (() => {
 
   function trigger() {
     isCooldown = true
+    proximityAccelerated = Math.max(0.75, proximityAccelerated)
+    valueAccelerated = Math.max(0.75, valueAccelerated)
+
     rootElement.classList.remove('a-game--interact-active')
 
     const room = content.location.get()
