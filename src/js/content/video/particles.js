@@ -27,6 +27,7 @@ ${content.gl.sl.defineOuts()}
 ${content.gl.sl.defineUniforms()}
 ${content.gl.sl.commonVertex()}
 
+uniform vec3 u_lightSource;
 uniform vec3 u_pointers[8];
 uniform mat4 u_rotation;
 
@@ -63,9 +64,21 @@ void main(void) {
 
   gl_Position = u_projection * gl_Position;
 
+  // Apply shadow
+  vec3 hsv = vec3(color_in);
+
+  if (length(u_lightSource) > 0.0) {
+    float d = dot(rotated.xyz, u_lightSource);
+
+    if (d < 0.0) {
+      hsv.y *= mix(0.5, 1.0, pow(1.0 + d, 4.0));
+      hsv.z *= mix(0.25, 1.0, pow(1.0 + d, 4.0));
+    }
+  }
+
   ${content.gl.sl.passUniforms()}
   alpha = 1.0;
-  color_out = hsv2rgb(color_in);
+  color_out = hsv2rgb(hsv);
 }
 `
 
@@ -133,7 +146,11 @@ void main(void) {
       gl.vertexAttribPointer(program.attributes.offset, 3, gl.FLOAT, false, 0, 0)
       gl.vertexAttribDivisor(program.attributes.offset, 1)
 
-      // Bind pointers
+      // Bind u_lightSource
+      const lightSource = activeProgram?.getLightSource() || engine.tool.vector3d.create()
+      gl.uniform3fv(program.uniforms.u_lightSource, [lightSource.x, lightSource.y, lightSource.z])
+
+      // Bind u_pointers[0]
       const points = []
 
       for (const point of app.controls.interactions.points()) {
@@ -197,6 +214,7 @@ void main(void) {
         ],
         uniforms: [
           ...content.gl.sl.uniformNames(),
+          'u_lightSource',
           'u_pointers[0]',
           'u_rotation',
         ],

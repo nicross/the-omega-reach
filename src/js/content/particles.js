@@ -1,5 +1,5 @@
 content.particles = (() => {
-  const limit = 5000,
+  const limit = 10000,
     particles = []
 
   while (particles.length < limit) {

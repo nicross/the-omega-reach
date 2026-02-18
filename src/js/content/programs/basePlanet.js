@@ -4,6 +4,11 @@ content.programs.basePlanet = content.programs.invent({
     radius: {},
   },
   propertyDefinitions: {
+    lightSource: (srand) => engine.tool.vector3d.create({
+      x: srand(0, 1),
+      y: srand(-1, 1),
+      z: srand(-1, 1),
+    }),
     rotation: (srand) => engine.tool.quaternion.fromEuler({
       pitch: srand(-Math.PI, Math.PI),
       roll: srand(-Math.PI, Math.PI),
@@ -37,12 +42,15 @@ content.programs.basePlanet = content.programs.invent({
 
     if (!this.alterParticleColor(particle, particle.spheres[index])) {
       particle.target.h = 335/360
-      particle.target.s = particle.target.x > 0 ? 1 : 0.5
-      particle.target.v = particle.target.x > 0 ? 1 : 0.25
+      particle.target.s = 1
+      particle.target.v = 1
     }
   },
   alterParticleColor: function (particle, point) {},
   alterParticleVertex: function (particle, point) {},
+  getLightSource: function () {
+    return this.properties.lightSource.clone()
+  },
   getRotation: function () {
     const isScanned = content.scans.is(this.options.body.name)
 

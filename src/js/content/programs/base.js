@@ -224,6 +224,7 @@ content.programs.base = {
     particle.target.y = particle.spheres[index].y
     particle.target.z = particle.spheres[index].z
   },
+  getLightSource: () => engine.tool.vector3d.create(),
   getRotation: function () {
     return engine.tool.quaternion.identity()
   },
