@@ -47,6 +47,7 @@ content.particles = (() => {
         engine.fn.randomFloat(1/8, 1),
         engine.fn.randomFloat(1/8, 1),
       ],
+      value: Math.random(),
     })
   }
 

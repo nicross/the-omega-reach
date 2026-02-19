@@ -28,7 +28,7 @@ content.programs.desertPlanet = content.programs.invent({
       particle.target.v = engine.fn.lerp(0.875, 1, this.fields.colorValue.valueAt(point, this.properties.colorValueScale * 2))
     } else {
       particle.target.s = engine.fn.lerp(0.75, 1, this.fields.colorSaturation.valueAt(point, this.properties.colorSaturationScale))
-      particle.target.v = engine.fn.lerp(0.75, 1, this.fields.colorValue.valueAt(point, this.properties.colorValueScale))
+      particle.target.v = engine.fn.lerp(0.75, 1, this.fields.colorValue.valueAt(point, this.properties.colorValueScale) * particle.value)
     }
 
     return true
