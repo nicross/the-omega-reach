@@ -25,7 +25,7 @@ content.rooms.star = content.rooms.invent({
 
     return content.scans.is(star.name)
       ? star.type
-      : 'Unexamined'
+      : 'Unexamined star'
   },
   getInteractLabel: function () {
     return this.isDiscovered() ? 'Examine' : 'Skim'

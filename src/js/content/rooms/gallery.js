@@ -22,7 +22,7 @@ content.rooms.gallery = content.rooms.invent({
     if (instrument) {
       return instrument.state.scans > 0
         ? `${instrument.rarityLabel} instrument`
-        : 'Unappraised'
+        : 'Unappraised instrument'
     }
 
     return 'Bereft of instruments'

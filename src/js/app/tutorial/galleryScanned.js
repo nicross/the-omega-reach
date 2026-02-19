@@ -11,7 +11,7 @@ app.tutorial.galleryScanned = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] Free play:`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> Free play:`,
         description: `Some instruments have quirks as well! They can be freely played once fully appraised.`,
         actions: [
           {

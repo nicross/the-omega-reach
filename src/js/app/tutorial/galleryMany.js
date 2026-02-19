@@ -11,7 +11,7 @@ app.tutorial.galleryMany = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] Instruments:`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> Instruments:`,
         description: () => ({
           gamepad: `<strong>The gallery</strong> can hold many instruments. Press <kbd>D-Pad Right</kbd> and <kbd>D-Pad Left</kbd> to navigate between the instruments you've collected.`,
           keyboard: `<strong>The gallery</strong> can hold many instruments. Press <kbd>Right Arrow</kbd> and <kbd>Left Arrow</kbd> to navigate between the instruments you've collected.`,

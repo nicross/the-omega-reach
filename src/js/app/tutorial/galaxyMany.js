@@ -15,7 +15,7 @@ app.tutorial.galaxyMany = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] Galaxies:`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> Galaxies:`,
         description: () => ({
           gamepad: `You can revisit any galaxy at any time. Press <kbd>D-Pad Right</kbd> and <kbd>D-Pad Left</kbd> to navigate between the galaxies you've reached.`,
           keyboard: `You can revisit any galaxy at any time. Press <kbd>Right Arrow</kbd> and <kbd>Left Arrow</kbd> to navigate between the galaxies you've reached.`,

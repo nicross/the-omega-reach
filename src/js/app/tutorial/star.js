@@ -15,7 +15,7 @@ app.tutorial.star = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] Stars:`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> Stars:`,
         description: `Stars may host complex systems of planets and moons—some with <em>legendary instruments</em> to recover! Interact to reveal more details about a star.`,
         actions: [
           {

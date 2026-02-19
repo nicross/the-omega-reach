@@ -24,7 +24,7 @@ app.tutorial.galaxy = app.tutorial.invent({
         ],
       },
       {
-        title: `[Tutorial] Galaxies:`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> Galaxies:`,
         description: `Galaxies are hosts to countless stars. Interact to reach toward a random star within them. You will zoom in automagically to any new stars that you reach.`,
         actions: [
           {

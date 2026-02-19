@@ -15,7 +15,7 @@ app.tutorial.planet = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] Planets:`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> Planets:`,
         description: `Planets can also be hosts to interesting systems. Interact to reveal more details about a planet.`,
         actions: [
           {

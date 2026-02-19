@@ -24,6 +24,9 @@ app.tutorial.atrium = app.tutorial.invent({
         description: `It connects the various rooms of <strong>The Omega Conservatory</strong>. From this vantage, everything seems to happen all at once through the above skylight. Perhaps you might dwell a bit longer to ponder its wonder?`,
         actions: [
           {
+            label: 'Fall back to sleep',
+          },
+          {
             label: 'Snap out of it',
           }
         ],
@@ -38,7 +41,7 @@ app.tutorial.atrium = app.tutorial.invent({
         ],
       },
       {
-        title: `[Tutorial] Moving:`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> Moving:`,
         description: () => ({
           gamepad: `Use the <kbd>Directional Pad</kbd> to navigate the conservatory. Find your way to <strong>the reach</strong> to fulfill your duties.`,
           keyboard: `Use the <kbd>Arrow Keys</kbd> to navigate the conservatory. Find your way to <strong>the reach</strong> to fulfill your duties.`,

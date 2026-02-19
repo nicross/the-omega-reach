@@ -25,7 +25,7 @@ content.rooms.planet = content.rooms.invent({
 
     return content.scans.is(planet.name)
       ? planet.type
-      : 'Unexamined'
+      : 'Unexamined planet'
   },
   getInteractLabel: function () {
     return this.isDiscovered() ? 'Examine' : 'Skim'

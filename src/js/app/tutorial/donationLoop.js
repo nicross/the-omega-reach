@@ -20,7 +20,7 @@ app.tutorial.donationLoop = app.tutorial.invent({
         ],
       })
       app.screen.game.dialog.push({
-        title: `[Tutorial] The lobby`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> The lobby:`,
         description: `Donations will accumulate in <strong>the lobby</strong> as you explore the universe. Return here to collect them often.`,
         actions: [
           {

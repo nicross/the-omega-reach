@@ -20,7 +20,7 @@ app.tutorial.reachOff = app.tutorial.invent({
         ],
       },
       {
-        title: `[Tutorial] The reach:`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> The reach:`,
         description: `<strong>The horizon</strong> is inaccessible to you while <strong>the reach</strong> is in this state. Interact with it again when you're ready to explore more of the universe.`,
         actions: [
           {

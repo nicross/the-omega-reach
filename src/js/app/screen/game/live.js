@@ -11,3 +11,17 @@ app.screen.game.live = (() => {
     },
   }
 })()
+
+// Put room description into live region on move when dialog isn't open
+// XXX: Probably the most important bit of a11y code
+engine.ready(() => {
+  app.screen.game.movement.on('move', () => {
+    engine.loop.once('frame', () => {
+      if (!app.screen.game.dialog.isOpen()) {
+        app.screen.game.live.set(
+          app.screen.game.info.describe()
+        )
+      }
+    })
+  })
+})

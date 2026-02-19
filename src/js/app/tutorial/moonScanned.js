@@ -15,7 +15,7 @@ app.tutorial.moonScanned = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] Instruments:`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> Instruments:`,
         description: `Some objects have the artifacts you seek. Interact to recover this instrument for <strong>the gallery</strong>.`,
         actions: [
           {

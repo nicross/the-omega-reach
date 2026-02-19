@@ -15,7 +15,7 @@ app.tutorial.planetMany = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] Planets:`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> Planets:`,
         description: () => ({
           gamepad: `Some stars have multiple planets to examine. Press <kbd>D-Pad Right</kbd> and <kbd>D-Pad Left</kbd> to navigate between the planets around this star.`,
           keyboard: `Some stars have multiple planets to examine. Press <kbd>Right Arrow</kbd> and <kbd>Left Arrow</kbd> to navigate between the planets around this star.`,

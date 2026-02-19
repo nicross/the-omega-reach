@@ -18,6 +18,23 @@ app.screen.game.info = (() => {
   }
 
   return {
+    describe: function () {
+      const {
+        attributes,
+        description,
+        isComplete,
+        nameShort,
+      } = getRoomInfo()
+
+      const descriptors = [
+        nameShort,
+        description,
+        isComplete ? 'Complete' : '',
+        ...attributes.map(({label}) => label),
+      ]
+
+      return descriptors.filter((x) => x).join(', ')
+    },
     update: function () {
       const {
         attributes,

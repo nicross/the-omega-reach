@@ -38,7 +38,7 @@ content.rooms.reach = content.rooms.invent({
   getAttributeLabels: function () {
     return [
       {
-        label: `Reach ${this.state.online ? 'online' : 'offline'}`,
+        label: `Ability ${this.state.online ? 'online' : 'offline'}`,
         modifiers: this.state.online ? ['rare'] : ['undiscovered'],
       },
     ]
