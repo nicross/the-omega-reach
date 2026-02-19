@@ -12,13 +12,19 @@ content.programs.basePlanet = content.programs.invent({
     }).normalize(),
     radiusPower: (srand) => srand(1, 2),
     radiusScale: (srand) => srand(1, 4),
-    rotation: (srand) => engine.tool.quaternion.fromEuler({
-      pitch: srand(-Math.PI, Math.PI),
-      roll: srand(-Math.PI, Math.PI),
-      yaw: srand(-Math.PI, Math.PI),
-    }).normalize(),
+    rotation: function (srand) {
+      return this.properties.lightSource.quaternion().conjugate().multiply(
+        engine.tool.quaternion.fromEuler({
+          pitch: srand(-1, 1) * engine.const.tau / 16,
+          roll: srand(-1, 1) * engine.const.tau / 16,
+          yaw: srand(-1, 1) * engine.const.tau / 16,
+        })
+      )
+    },
     rotationRate: (srand) => srand(),
-    rotationVelocity: (srand) => engine.tool.quaternion.fromEuler({pitch: srand(-Math.PI, Math.PI), roll: srand(-Math.PI, Math.PI), yaw: srand(-Math.PI, Math.PI)}).normalize(),
+    rotationVelocity: function (srand) {
+      return engine.tool.quaternion.fromEuler({yaw: srand() > 0.5 ? 1 : -1}).normalize()
+    },
   },
   onLoad: function () {
     content.sphereIndex.randomize()

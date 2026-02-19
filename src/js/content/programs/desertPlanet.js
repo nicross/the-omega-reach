@@ -2,12 +2,36 @@ content.programs.desertPlanet = content.programs.invent({
   id: 'desertPlanet',
   fieldDefinitions: {
     ...content.programs.basePlanet.fieldDefinitions,
+    colorHue: {},
+    colorSaturation: {},
+    colorValue: {},
   },
   propertyDefinitions: {
     ...content.programs.basePlanet.propertyDefinitions,
+    colorHueCenter: (srand) => srand(),
+    colorHueScale: (srand) => srand(1, 3),
+    colorSaturationScale: (srand) => srand(1, 3),
+    colorValueScale: (srand) => srand(1, 3),
+    iceNorth: (srand) => srand() > 0.5,
+    iceNorthScale: (srand) => srand(1/16, 1/3),
+    iceSouth: (srand) => srand() > 0.5,
+    iceSouthScale: (srand) => srand(1/16, 1/3),
   },
   alterParticleColor: function (particle, point) {
-    //return true
+    const isIce = (this.properties.iceNorth && point.z > 1 - this.properties.iceNorthScale)
+      || (this.properties.iceSouth && point.z < -1 + this.properties.iceSouthScale)
+
+    particle.target.h = (engine.fn.lerp(-15, 45, this.properties.colorHueCenter) + engine.fn.lerp(-15, 15, this.fields.colorHue.valueAt(point, this.properties.colorHueScale))) / 360
+
+    if (isIce) {
+      particle.target.s = 0
+      particle.target.v = engine.fn.lerp(0.875, 1, this.fields.colorValue.valueAt(point, this.properties.colorValueScale * 2))
+    } else {
+      particle.target.s = engine.fn.lerp(0.75, 1, this.fields.colorSaturation.valueAt(point, this.properties.colorSaturationScale))
+      particle.target.v = engine.fn.lerp(0.75, 1, this.fields.colorValue.valueAt(point, this.properties.colorValueScale))
+    }
+
+    return true
   },
   alterParticleVertex: function (particle, point) {
     //return true

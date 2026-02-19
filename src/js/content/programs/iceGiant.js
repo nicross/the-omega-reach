@@ -23,7 +23,7 @@ content.programs.iceGiant = content.programs.invent({
     particle.target.h = engine.fn.lerp(this.properties.color1, this.properties.color2, content.fn.gain(
       this.fields.color.valueAt({
         x: 0,
-        y: point.y * this.properties.colorBands,
+        y: point.z * this.properties.colorBands,
         z: time * this.properties.saturationTimeScale,
       }, 1), 2
     ))
@@ -31,7 +31,7 @@ content.programs.iceGiant = content.programs.invent({
     particle.target.s = engine.fn.clamp(engine.fn.lerp(this.properties.saturationCenter - this.properties.saturationRange, this.properties.saturationCenter + this.properties.saturationRange,
       this.fields.saturation.valueAt({
         x: 0,
-        y: point.y * this.properties.saturationBands,
+        y: point.z * this.properties.saturationBands,
         z: time * this.properties.colorTimeScale,
       }, 1)
     ))
