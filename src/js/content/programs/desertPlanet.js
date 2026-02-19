@@ -12,9 +12,9 @@ content.programs.desertPlanet = content.programs.invent({
     colorHueScale: (srand) => srand(1, 3),
     colorSaturationScale: (srand) => srand(1, 3),
     colorValueScale: (srand) => srand(1, 3),
-    iceNorth: (srand) => srand() > 0.5,
+    iceNorth: (srand) => srand() > 1/3,
     iceNorthScale: (srand) => srand(1/16, 1/3),
-    iceSouth: (srand) => srand() > 0.5,
+    iceSouth: (srand) => srand() > 1/3,
     iceSouthScale: (srand) => srand(1/16, 1/3),
   },
   alterParticleColor: function (particle, point) {

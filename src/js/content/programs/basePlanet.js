@@ -42,7 +42,7 @@ content.programs.basePlanet = content.programs.invent({
 
     if (!this.alterParticleVertex(particle, particle.spheres[index])) {
       const radius = engine.fn.lerp(1, 2, this.options.body.radius)
-        + (0.25 * this.bumpiness * (this.fields.radius.valueAt(particle.spheres[index], this.properties.radiusScale) ** this.properties.radiusPower))
+        * (1 + (0.125 * this.bumpiness * (this.fields.radius.valueAt(particle.spheres[index], this.properties.radiusScale) ** this.properties.radiusPower)))
 
       particle.target.x = particle.spheres[index].x * radius
       particle.target.y = particle.spheres[index].y * radius
