@@ -70,10 +70,16 @@ void main(void) {
   if (length(u_lightSource) > 0.0) {
     float d = dot(normalize(rotated.xyz), u_lightSource);
 
-    if (d < 0.0) {
-      hsv.y *= mix(0.125, 1.0, pow(1.0 + d, 2.0));
-      hsv.z *= mix(0.0625, 1.0, pow(1.0 + d, 8.0));
-    }
+    float lighting = pow(max(
+      min(
+        1.0 - clamp(-d, 0.0, 1.0),
+        1.0 - clamp(-rotated.x, 0.0, 1.0)
+      ),
+      proximityRatio
+    ), 6.0);
+
+    hsv.y *= mix(0.125, 1.0, lighting);
+    hsv.z *= mix(0.0625, 1.0, lighting);
   }
 
   ${content.gl.sl.passUniforms()}
