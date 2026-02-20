@@ -62,6 +62,12 @@ app.screen.game = app.screenManager.invent({
     let closest = Infinity,
       interacted = false
 
+    const threshold = {
+      gamepad: 2/3,
+      keyboard: 1/6,
+      mouse: 1/2,
+    }[app.settings.computed.inputPreference]
+
     if (solution && content.location.get().canInteract()) {
       for (const interaction of interactions) {
         const distance = engine.fn.distance(interaction, solution)
@@ -70,7 +76,7 @@ app.screen.game = app.screenManager.invent({
           closest = distance
         }
 
-        if (distance < 1/2 && !interacted) {
+        if (distance < threshold && !interacted) {
           if (app.settings.computed.inputHold) {
             this.interact.increment()
           } else {
@@ -83,7 +89,7 @@ app.screen.game = app.screenManager.invent({
     }
 
     this.interact.setProximity(
-      isFinite(closest) ? engine.fn.clamp(engine.fn.scale(closest, 1/2, 2, 1, 0), 0, 1) : 0
+      isFinite(closest) ? engine.fn.clamp(engine.fn.scale(closest, threshold, 2, 1, 0), 0, 1) : 0
     )
 
     // Handle UI controls

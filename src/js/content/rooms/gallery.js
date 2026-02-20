@@ -36,7 +36,7 @@ content.rooms.gallery = content.rooms.invent({
   },
   getInteractLabel: function () {
     return this.getInstrument()
-      ? this.isDiscovered() ? 'Examine' : 'Appraise'
+      ? this.isDiscovered() ? (this.isComplete() ? 'Sell' : 'Examine') : 'Appraise'
       : 'Examine'
   },
   getName: function () {
@@ -59,6 +59,9 @@ content.rooms.gallery = content.rooms.invent({
   },
   // Interaction
   canInteract: function () {
+    return Boolean(this.getInstrument())
+  },
+  hasSolution: function () {
     const instrument = this.getInstrument()
 
     return instrument
@@ -86,6 +89,12 @@ content.rooms.gallery = content.rooms.invent({
   },
   onInteract: function () {
     const instrument = this.getInstrument()
+
+    if (this.isComplete()) {
+      content.location.emit('try-sell', {instrument})
+      return
+    }
+
     instrument.state.scans = (instrument.state.scans || 0) + 1
 
     const message = []
@@ -103,6 +112,7 @@ content.rooms.gallery = content.rooms.invent({
     if (this.isComplete()) {
       content.location.emit('interact-complete', {room: this})
       message.push(`Instrument complete`)
+      message.push(`Valued at ${instrument.value} credits`)
     }
 
     return message.join(', ')
@@ -131,6 +141,13 @@ content.rooms.gallery = content.rooms.invent({
           modifiers: ['undiscovered'],
         })
       }
+    }
+
+    if (this.isComplete()) {
+      attributes.push({
+        label: app.utility.format.currency(instrument.value),
+        modifiers: ['instrument'],
+      })
     }
 
     return attributes
@@ -186,5 +203,27 @@ content.rooms.gallery = content.rooms.invent({
     } else {
       content.programs.load('galleryEmpty')
     }
+  },
+  // Selling
+  onSell: function () {
+    const instrument = this.getInstrument(),
+      names = content.instruments.names()
+
+    content.wallet.add(instrument.value)
+    content.instruments.remove(instrument.name)
+
+    this.setInstrumentByName(
+      names.length > 1
+        ? names[
+            engine.fn.wrap(names.indexOf(this.state.name) - 1, 0, names.length)
+          ]
+        : undefined
+    )
+
+    content.solution.generate()
+    this.updateProgram()
+    this.move('left')
+
+    return this
   },
 })

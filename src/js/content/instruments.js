@@ -26,11 +26,14 @@ content.instruments = (() => {
         'Legendary',
       ], rarity),
       rarity,
+      value: engine.fn.lerp(10, 100, rarity),
     }
 
     const quirks = generateQuirks(srand)
     quirks.common = engine.fn.shuffle(quirks.common, engine.fn.srand(srand('sort','common')))
     quirks.rare = engine.fn.shuffle(quirks.rare, engine.fn.srand(srand('sort','rare')))
+
+    let multiplier = 1
 
     if (quirks.common.length && (isTutorial || srand('quirk', 'common1', 'roll') < rarity)) {
       instrument.quirks.push({
@@ -39,6 +42,8 @@ content.instruments = (() => {
           srand('quirk', 'common1', 'type')
         ),
       })
+
+      multiplier += 1/6
     }
 
     if (!isTutorial && quirks.common.length && srand('quirk', 'common2', 'roll') < rarity) {
@@ -48,6 +53,8 @@ content.instruments = (() => {
           srand('quirk', 'common2', 'type')
         ),
       })
+
+      multiplier += 1/6
     }
 
     if (!isTutorial && quirks.rare.length && srand('quirk', 'rare1', 'roll') < rarity) {
@@ -58,6 +65,8 @@ content.instruments = (() => {
           srand('quirk', 'rare1', 'type')
         ),
       })
+
+      multiplier += 1/3
     }
 
     if (!isTutorial && quirks.rare.length && srand('quirk', 'rare2', 'roll') < rarity) {
@@ -68,7 +77,11 @@ content.instruments = (() => {
           srand('quirk', 'rare2', 'type')
         ),
       })
+
+      multiplier += 1/3
     }
+
+    instrument.value = Math.ceil(instrument.value * multiplier)
 
     return instrument
   }

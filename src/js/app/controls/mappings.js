@@ -5,6 +5,9 @@ app.controls.mappings = {
       gamepadAxis: [],
       gamepadDigital: [
         0,
+        1,
+        2,
+        3,
       ],
       keyboard: [
         'Enter',

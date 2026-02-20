@@ -10,7 +10,7 @@ content.solution = (() => {
         previous = solution
       }
 
-      if (!content.location.get()?.canInteract()) {
+      if (!content.location.get()?.hasSolution()) {
         solution = undefined
 
         return this

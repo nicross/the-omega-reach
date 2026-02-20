@@ -26,9 +26,11 @@ app.screen.game.interact = (() => {
     rootElement.classList.remove('a-game--interact-active')
 
     const room = content.location.get()
-    const result = room.interact()
 
-    pubsub.emit('trigger', {room})
+    const action = room.getInteractLabel(),
+      result = room.interact()
+
+    pubsub.emit('trigger', {action, result, room})
 
     if (result) {
       app.screen.game.live.set(result)

@@ -67,16 +67,22 @@ content.rooms.base = {
   // Interaction
   canInteract: () => false,
   canInteractFreely: () => false,
+  hasSolution: function () {
+    return this.canInteract()
+  },
   getInteractJingle: () => 2,
   interact: function () {
     if (!this.canInteract()) {
       return this
     }
 
+    const action = this.getInteractLabel()
+
     const result = this.onInteract()
     content.solution.generate()
 
     content.location.emit('interact', {
+      action,
       result,
       room: this,
     })
@@ -87,10 +93,7 @@ content.rooms.base = {
   // Movement
   canEnter: () => true,
   canMove: function (direction) {
-    // TODO: Handle scrollable rooms
-
-    return content.rooms.get(this.transitions[direction])?.canEnter()
-      ?? false
+    return content.rooms.get(this.transitions[direction])?.canEnter() ?? false
   },
   canMoveDown: function () {
     return this.canMove('down')

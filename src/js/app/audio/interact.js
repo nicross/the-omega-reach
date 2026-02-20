@@ -1,7 +1,13 @@
 engine.ready(() => {
-  app.screen.game.interact.on('trigger', ({room}) => content.audio.interactSuccess.trigger({
-    index: room.getInteractJingle(),
-  }))
+  app.screen.game.interact.on('trigger', ({action, room}) => {
+    if (action == 'Sell') {
+      return
+    }
+
+    content.audio.interactSuccess.trigger({
+      index: room.getInteractJingle(),
+    })
+  })
 
   content.location.on('interact-complete', () => content.audio.interactComplete.trigger())
 
