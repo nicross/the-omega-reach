@@ -44,6 +44,9 @@ content.rooms.planet = content.rooms.invent({
   isDiscovered: function () {
     return content.scans.is(this.getPlanet().name)
   },
+  isIncomplete: function () {
+    return !this.isComplete()
+  },
   setPlanetByName: function (name) {
     this.state.name = name
 

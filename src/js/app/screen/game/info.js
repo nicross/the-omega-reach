@@ -12,6 +12,7 @@ app.screen.game.info = (() => {
       descriptionModifier: room.getDescriptionModifier(),
       isComplete: room.isComplete(),
       isDiscovered: room.isDiscovered(),
+      isIncomplete: room.isIncomplete(),
       name: room.getName(),
       nameShort: room.getNameShort(),
     }
@@ -42,6 +43,7 @@ app.screen.game.info = (() => {
         descriptionModifier,
         isComplete,
         isDiscovered,
+        isIncomplete,
         name,
         nameShort,
       } = getRoomInfo()
@@ -49,6 +51,10 @@ app.screen.game.info = (() => {
       descriptionElement.innerHTML = description
       nameElement.ariaLabel = nameShort
       nameElement.innerHTML = name
+
+      if (isIncomplete) {
+        content.audio.incomplete.trigger()
+      }
 
       attributesElement.innerHTML = (isComplete ? `<li class="a-game--attribute a-game--attribute-complete"><i aria-hidden="true">✓</i>Complete</li>` : '')
         + attributes.map(

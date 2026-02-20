@@ -63,6 +63,9 @@ content.rooms.base = {
   isComplete: function () {
     return false
   },
+  isIncomplete: function () {
+    return false
+  },
   isDiscovered: () => true,
   // Interaction
   canInteract: () => false,

@@ -49,6 +49,13 @@ content.rooms.gallery = content.rooms.invent({
       ? (instrument.state.scans || 0) >= 1 + instrument.quirks.length
       : false
   },
+  isIncomplete: function () {
+    const instrument = this.getInstrument()
+
+    return instrument
+      ? (instrument.state.scans || 0) < 1 + instrument.quirks.length
+      : false
+  },
   isDiscovered: function () {
     return (this.getInstrument()?.state.scans || 0) > 0
   },

@@ -42,6 +42,9 @@ content.rooms.moon = content.rooms.invent({
   isDiscovered: function () {
     return content.scans.is(this.getMoon().name)
   },
+  isIncomplete: function () {
+    return !this.isComplete()
+  },
   setMoonByName: function (name) {
     this.state.name = name
 

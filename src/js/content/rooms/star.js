@@ -44,6 +44,9 @@ content.rooms.star = content.rooms.invent({
   isDiscovered: function () {
     return content.scans.is(this.getStar().name)
   },
+  isIncomplete: function () {
+    return !this.isComplete()
+  },
   setStarByName: function (name) {
     this.state.name = name
 

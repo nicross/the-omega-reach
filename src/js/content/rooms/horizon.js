@@ -37,6 +37,7 @@ content.rooms.horizon = content.rooms.invent({
       },
     ]
   },
+  isIncomplete: () => true,
   // Movement
   canEnter: () => Boolean(content.rooms.reach.state.online),
   moveUp: function () {
