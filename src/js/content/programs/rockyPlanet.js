@@ -11,9 +11,9 @@ content.programs.rockyPlanet = content.programs.invent({
     colorHueCenter: (srand) => srand(),
     colorHueRange: (srand) => srand(0, 0.5),
     colorHueScale: (srand) => srand(1, 4),
-    colorSaturationCenter: (srand) => srand(0, 0.125),
-    colorSaturationRange: (srand) => srand(0, 0.125),
-    colorSaturationScale: (srand) => srand(1, 4),
+    colorSaturationCenter: (srand) => srand(0.125, 0.375),
+    colorSaturationRange: (srand) => srand(0, 0.25),
+    colorSaturationScale: (srand) => srand(2, 4),
     colorValueCenter: (srand) => srand(0.333, 0.666),
     colorValueRange: (srand) => srand(0, 0.333),
     colorValueScale: (srand) => srand(1, 4),
@@ -37,7 +37,7 @@ content.programs.rockyPlanet = content.programs.invent({
       engine.fn.lerp(
         this.properties.colorValueCenter - this.properties.colorValueRange,
         this.properties.colorValueCenter + this.properties.colorValueRange,
-        this.fields.colorValue.valueAt(point, this.properties.colorValueScale) * particle.value
+        content.fn.gain(this.fields.colorValue.valueAt(point, this.properties.colorValueScale), 2) * particle.value
       )
     )
 

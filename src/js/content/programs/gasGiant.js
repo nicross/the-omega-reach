@@ -16,6 +16,7 @@ content.programs.gasGiant = content.programs.invent({
     ], srand())()},
     colorBands: (srand) => srand(6, 18),
     colorTimeScale: (srand) => srand(1/60, 1/15),
+    ring: (srand) => Math.max(0, srand() - 0.5) * 2,
     saturationBands: (srand) => srand(6, 18),
     saturationCenter: (srand) => srand(0, 1),
     saturationRange: (srand) => srand(0, 1),
@@ -53,6 +54,11 @@ content.programs.gasGiant = content.programs.invent({
       }, 1)
     ))
 
+    if (this.properties.ring && Math.abs(point.z) < 0.025) {
+      particle.target.s *= 0.125
+      particle.target.v = 1
+    }
+
     return true
   },
   alterParticleVertex: function (particle, point) {
@@ -61,6 +67,12 @@ content.programs.gasGiant = content.programs.invent({
     particle.target.x = point.x * radius
     particle.target.y = point.y * radius
     particle.target.z = point.z * radius * this.properties.zFactor
+
+    if (this.properties.ring && Math.abs(point.z) < 0.025) {
+      particle.target.x *= engine.fn.lerp(1.5, 2, this.properties.ring)
+      particle.target.y *= engine.fn.lerp(1.5, 2, this.properties.ring)
+      particle.target.z *= engine.fn.lerp(1.5, 2, this.properties.ring)
+    }
 
     return true
   },

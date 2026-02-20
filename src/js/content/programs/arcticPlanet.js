@@ -8,10 +8,10 @@ content.programs.arcticPlanet = content.programs.invent({
   },
   propertyDefinitions: {
     ...content.programs.basePlanet.propertyDefinitions,
-    colorHueCenter: (srand) => srand(-1/3, -1/4),
-    colorHueRange: (srand) => srand(0, 1/6),
+    colorHueCenter: (srand) => srand(),
+    colorHueRange: (srand) => srand(0, 0.5),
     colorHueScale: (srand) => srand(1, 4),
-    colorSaturationCenter: (srand) => srand(0, 0.125),
+    colorSaturationCenter: (srand) => srand(0, 0.25),
     colorSaturationPower: (srand) => srand(0.125, 0.5),
     colorSaturationRange: (srand) => srand(0.25, 0.5),
     colorSaturationScale: (srand) => srand(2, 6),
