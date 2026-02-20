@@ -1,7 +1,9 @@
 app.tutorial.donationLoop = app.tutorial.invent({
   id: 'donationLoop',
   // State
-  state: {},
+  state: {
+    tutorial: false,
+  },
   // Lifecycle
   shouldActivate: () => content.donations.has(),
   onUpdate: function () {

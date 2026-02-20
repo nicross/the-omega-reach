@@ -2,10 +2,10 @@ content.location.on('try-sell', ({instrument}) => {
 
   app.screen.game.dialog.push({
     title: `Sell this instrument?`,
-    description: `You will receive <strong>${app.utility.format.currency(instrument.value)}</strong> for <strong>${instrument.name}</strong>.`,
+    description: `You will get <strong>${app.utility.format.currency(instrument.value)}</strong> for <strong>${instrument.name}</strong>.`,
     actions: [
       {
-        label: 'Sell instrument',
+        label: 'Sell it',
         after: () => {
           content.rooms.gallery.onSell()
           app.screen.game.update()
@@ -16,7 +16,7 @@ content.location.on('try-sell', ({instrument}) => {
         },
       },
       {
-        label: 'Decline',
+        label: 'Not now',
         after: () => {},
       }
     ],

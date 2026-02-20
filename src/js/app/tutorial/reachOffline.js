@@ -20,37 +20,37 @@ app.tutorial.reachOffline = app.tutorial.invent({
         ],
       },
       {
-        title: `[Select input device:]`,
+        title: `[Select input device…]`,
         description: `You sit at the device. Upon its inert console rests…`,
         actions: [
           {
-            label: 'two joysticks',
+            label: 'two joysticks.',
             before: () => app.settings.setInputPreference('gamepad'),
             after: () => app.settings.save(),
           },
           {
-            label: 'a trackball',
+            label: 'a trackball.',
             before: () => app.settings.setInputPreference('mouse'),
             after: () => app.settings.save(),
           },
           {
-            label: 'an array of keys',
+            label: 'an array of keys.',
             before: () => app.settings.setInputPreference('keyboard'),
             after: () => app.settings.save(),
           },
         ],
       },
       {
-        title: `[Select input preference:]`,
+        title: `[Select input preference…]`,
         description: `To confirm your choices at the console, you…`,
         actions: [
           {
-            label: 'hold for a moment',
+            label: 'hold for a second.',
             before: () => app.settings.setInputHold(true),
             after: () => app.settings.save(),
           },
           {
-            label: 'let go immediately',
+            label: 'reach it immediately.',
             before: () => app.settings.setInputHold(false),
             after: () => app.settings.save(),
           },

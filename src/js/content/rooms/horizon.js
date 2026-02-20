@@ -32,7 +32,7 @@ content.rooms.horizon = content.rooms.invent({
 
     return [
       {
-        label: 'Unexamined galaxies',
+        label: 'Unreached galaxies',
         modifiers: ['undiscovered'],
       },
     ]

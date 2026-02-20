@@ -12,7 +12,7 @@ app.tutorial.firstInstrument = app.tutorial.invent({
     [
       {
         title: `It sings:`,
-        description: `<q>You've finally reached the treasure you seek!</q> Its fanfare recedes into the telescopic esophagus for its analysis by your hand. By zooming out to <strong>the gallery</strong>, you might feel its truths that you could never reach.`,
+        description: `<q>You've finally reached the treasure you seek!</q> Its fanfare recedes into the telescopic esophagus for its analysis by your hand. By zooming out to <strong>the gallery</strong>, you might reveal its truths that you could never reach.`,
         actions: [
           {
             label: 'Get zooming',

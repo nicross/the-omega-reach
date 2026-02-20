@@ -1,11 +1,11 @@
-app.tutorial.lobbyClosed = app.tutorial.invent({
-  id: 'lobbyClosed',
+app.tutorial.lobbyFirst = app.tutorial.invent({
+  id: 'lobbyFirst',
   // State
   state: {},
   // Lifecycle
-  shouldActivate: () => content.location.is('lobby') && !content.rooms.lobby.isOpen(),
+  shouldActivate: () => content.location.is('lobby'),
   onUpdate: function () {
-    if (!content.location.is('lobby')) {
+    if (!content.location.is('lobby') || content.donations.has()) {
       return
     }
 

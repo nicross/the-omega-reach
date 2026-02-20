@@ -39,13 +39,13 @@ engine.ready(() => {
   const allowedRooms = new Set(['star','planet','moon'])
 
   content.location.on('interact', ({room}) => {
-    if (allowedRooms.has(room.id) && content.instruments.count()) {
+    if (allowedRooms.has(room.id) && content.conservatory.isOpen()) {
       content.donations.add(1)
     }
   })
 
   content.location.on('interact-complete', ({room}) => {
-    if (allowedRooms.has(room.id) && content.instruments.count()) {
+    if (allowedRooms.has(room.id) && content.conservatory.isOpen()) {
       content.donations.add(2)
     }
   })

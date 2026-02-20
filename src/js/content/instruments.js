@@ -11,6 +11,7 @@ content.instruments = (() => {
   }
 
   function generate(name) {
+    // @todo Need a better way of determining this, now that selling is a thing, perhaps check against first moon?
     const isTutorial = [undefined, name].includes(firstName())
 
     const srand = (...seed) => engine.fn.srand('instrument', name, 'attribute', ...seed)()
@@ -35,50 +36,58 @@ content.instruments = (() => {
 
     let multiplier = 1
 
-    if (quirks.common.length && (isTutorial || srand('quirk', 'common1', 'roll') < rarity)) {
+    if (isTutorial) {
       instrument.quirks.push({
-        name: engine.fn.chooseSplice(
-          quirks.common,
-          srand('quirk', 'common1', 'type')
-        ),
+        name: 'Stolen',
       })
 
       multiplier += 1/6
-    }
+    } else {
+      if (quirks.common.length && srand('quirk', 'common1', 'roll') < rarity) {
+        instrument.quirks.push({
+          name: engine.fn.chooseSplice(
+            quirks.common,
+            srand('quirk', 'common1', 'type')
+          ),
+        })
 
-    if (!isTutorial && quirks.common.length && srand('quirk', 'common2', 'roll') < rarity) {
-      instrument.quirks.push({
-        name: engine.fn.chooseSplice(
-          quirks.common,
-          srand('quirk', 'common2', 'type')
-        ),
-      })
+        multiplier += 1/6
+      }
 
-      multiplier += 1/6
-    }
+      if (quirks.common.length && srand('quirk', 'common2', 'roll') < rarity) {
+        instrument.quirks.push({
+          name: engine.fn.chooseSplice(
+            quirks.common,
+            srand('quirk', 'common2', 'type')
+          ),
+        })
 
-    if (!isTutorial && quirks.rare.length && srand('quirk', 'rare1', 'roll') < rarity) {
-      instrument.quirks.push({
-        isRare: true,
-        name: engine.fn.chooseSplice(
-          quirks.rare,
-          srand('quirk', 'rare1', 'type')
-        ),
-      })
+        multiplier += 1/6
+      }
 
-      multiplier += 1/3
-    }
+      if (quirks.rare.length && srand('quirk', 'rare1', 'roll') < rarity) {
+        instrument.quirks.push({
+          isRare: true,
+          name: engine.fn.chooseSplice(
+            quirks.rare,
+            srand('quirk', 'rare1', 'type')
+          ),
+        })
 
-    if (!isTutorial && quirks.rare.length && srand('quirk', 'rare2', 'roll') < rarity) {
-      instrument.quirks.push({
-        isRare: true,
-        name: engine.fn.chooseSplice(
-          quirks.rare,
-          srand('quirk', 'rare2', 'type')
-        ),
-      })
+        multiplier += 1/3
+      }
 
-      multiplier += 1/3
+      if (quirks.rare.length && srand('quirk', 'rare2', 'roll') < rarity) {
+        instrument.quirks.push({
+          isRare: true,
+          name: engine.fn.chooseSplice(
+            quirks.rare,
+            srand('quirk', 'rare2', 'type')
+          ),
+        })
+
+        multiplier += 1/3
+      }
     }
 
     instrument.value = Math.ceil(instrument.value * multiplier)
@@ -256,6 +265,15 @@ content.instruments = (() => {
       }
     },
     has: (name) => states.has(name),
+    hasScanned: function () {
+      for (const [name, state] of states.entries()) {
+        if (state.scans) {
+          return true
+        }
+      }
+
+      return false
+    },
     hasUnscanned: function () {
       return Boolean(this.getFirstUnscannedName())
     },

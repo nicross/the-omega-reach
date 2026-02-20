@@ -47,7 +47,7 @@ content.rooms.galaxy = content.rooms.invent({
 
     return [
       {
-        label: 'Unexamined stars',
+        label: 'Unreached stars',
         modifiers: ['undiscovered'],
       },
     ]

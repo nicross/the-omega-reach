@@ -25,10 +25,10 @@ content.rooms.planet = content.rooms.invent({
 
     return content.scans.is(planet.name)
       ? planet.type
-      : 'Unexamined planet'
+      : 'Unreached planet'
   },
   getInteractLabel: function () {
-    return this.isDiscovered() ? 'Examine' : 'Skim'
+    return this.isDiscovered() ? (this.hasInstrumentReady() ? 'Recover' : 'Examine') : 'Reach'
   },
   getName: function () {
     return this.getPlanet().name
@@ -225,5 +225,15 @@ content.rooms.planet = content.rooms.invent({
       body: planet,
       seed: planet.name,
     })
+  },
+  // Methods
+  hasInstrumentReady: function () {
+    const planet = this.getPlanet()
+
+    if (!planet.instrument) {
+      return false
+    }
+
+    return content.scans.get(planet.name) == 1 + planet.quirks.length
   },
 })

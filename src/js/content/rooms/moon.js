@@ -23,10 +23,10 @@ content.rooms.moon = content.rooms.invent({
 
     return content.scans.is(moon.name)
       ? moon.type
-      : 'Unexamined moon'
+      : 'Unreached moon'
   },
   getInteractLabel: function () {
-    return this.isDiscovered() ? 'Examine' : 'Skim'
+    return this.isDiscovered() ? (this.hasInstrumentReady() ? 'Recover' : 'Examine') : 'Reach'
   },
   getName: function () {
     return this.getMoon().name
@@ -154,9 +154,7 @@ content.rooms.moon = content.rooms.invent({
   canEnter: () => content.moons.namesForPlanet(content.rooms.planet.getPlanet()?.name).length > 0,
   canMoveLeft: () => content.moons.namesForPlanet(content.rooms.planet.getPlanet()?.name).length > 1,
   canMoveRight: () => content.moons.namesForPlanet(content.rooms.planet.getPlanet()?.name).length > 1,
-  getMoveUpLabel: function () {
-    return this.canMoveUp() ? 'Zoom in' : 'Max zoom reached'
-  },
+  getMoveUpLabel: () => 'Max zoom reached',
   moveLeft: function () {
     const names = content.moons.namesForMoon(this.getMoon().name)
 
@@ -194,5 +192,15 @@ content.rooms.moon = content.rooms.invent({
       body: moon,
       seed: moon.name,
     })
+  },
+  // Methods
+  hasInstrumentReady: function () {
+    const moon = this.getMoon()
+
+    if (!moon.instrument) {
+      return false
+    }
+
+    return content.scans.get(moon.name) == 1 + moon.quirks.length
   },
 })

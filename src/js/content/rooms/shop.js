@@ -18,6 +18,6 @@ content.rooms.shop = content.rooms.invent({
   isDiscovered: function () {
     return this.isOpen()
   },
-  isOpen: () => content.instruments.count() > 0,
+  isOpen: () => content.conservatory.isOpen(),
   // ...
 })

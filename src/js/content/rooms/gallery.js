@@ -22,7 +22,7 @@ content.rooms.gallery = content.rooms.invent({
     if (instrument) {
       return instrument.state.scans > 0
         ? `${instrument.rarityLabel} instrument`
-        : 'Unappraised instrument'
+        : 'Unrevealed instrument'
     }
 
     return 'Bereft of instruments'
@@ -36,7 +36,7 @@ content.rooms.gallery = content.rooms.invent({
   },
   getInteractLabel: function () {
     return this.getInstrument()
-      ? this.isDiscovered() ? (this.isComplete() ? 'Sell' : 'Examine') : 'Appraise'
+      ? this.isDiscovered() ? (this.isComplete() ? 'Sell' : 'Examine') : 'Reveal'
       : 'Examine'
   },
   getName: function () {

@@ -16,7 +16,7 @@ app.tutorial.galaxy = app.tutorial.invent({
     [
       {
         title: `Just keep zooming.`,
-        description: `You repeat this mantra like that <q>fish</q> from the <em>earthen picture</em>. Though not as aloof, this confluence of zooms might consume you as profusely.`,
+        description: `Zooming, zooming… You repeat this mantra like that <q>fish</q> from the <em>earthen picture</em>. Though not as aloof, this confluence of zooms might consume you as profusely.`,
         actions: [
           {
             label: 'Reach deeper',
