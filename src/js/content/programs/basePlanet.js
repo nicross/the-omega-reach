@@ -2,7 +2,7 @@ content.programs.basePlanet = content.programs.invent({
   id: 'basePlanet',
   bumpiness: 1,
   fieldDefinitions: {
-    radius: {},
+    radius: {octaves: 2},
   },
   propertyDefinitions: {
     lightSource: (srand) => engine.tool.vector3d.create({
@@ -73,5 +73,5 @@ content.programs.basePlanet = content.programs.invent({
 
     return this.properties.rotation
   },
-  getRotationRate: function () {return 0.05 * this.properties.rotationRate},
+  getRotationRate: function () {return 0.1 * this.properties.rotationRate},
 })

@@ -62,5 +62,5 @@ content.programs.baseStar = content.programs.invent({
 
     return this.properties.rotation
   },
-  getRotationRate: function () {return 0.025 * this.properties.rotationRate},
+  getRotationRate: function () {return 0.05 * this.properties.rotationRate},
 })

@@ -32,7 +32,7 @@ content.programs.gasGiant = content.programs.invent({
 
     particle.target.h = engine.fn.lerp(this.properties.color1, this.properties.color2, content.fn.gain(
       this.fields.color.valueAt({
-        x: 0,
+        x: point.x * 0.25,
         y: point.z * this.properties.colorBands,
         z: time * this.properties.colorTimeScale,
       }, 1), 8
@@ -40,7 +40,7 @@ content.programs.gasGiant = content.programs.invent({
 
     particle.target.s = engine.fn.clamp(engine.fn.lerp(this.properties.saturationCenter - this.properties.saturationRange, this.properties.saturationCenter + this.properties.saturationRange,
       this.fields.saturation.valueAt({
-        x: 0,
+        x: point.x * 0.25,
         y: point.z * this.properties.saturationBands,
         z: time * this.properties.saturationTimeScale,
       }, 1)
@@ -48,7 +48,7 @@ content.programs.gasGiant = content.programs.invent({
 
     particle.target.v = engine.fn.clamp(engine.fn.lerp(this.properties.valueCenter - this.properties.valueRange, this.properties.valueCenter + this.properties.valueRange,
       this.fields.value.valueAt({
-        x: 0,
+        x: point.x * 0.25,
         y: point.z * this.properties.valueBands,
         z: time * this.properties.valueTimeScale,
       }, 1)

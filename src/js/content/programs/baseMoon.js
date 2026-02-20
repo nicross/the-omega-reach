@@ -19,7 +19,7 @@
 
       return this
     },
-    getRotationRate: function () {return 0.1 * this.properties.rotationRate},
+    getRotationRate: function () {return 0.2 * this.properties.rotationRate},
   }
 
   content.programs.baseMoon = content.programs.invent(baseDefinition, content.programs.basePlanet)
