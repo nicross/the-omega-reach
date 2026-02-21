@@ -1,7 +1,7 @@
 content.rooms.shop = content.rooms.invent({
   // Attributes
   id: 'shop',
-  name: 'The shop',
+  name: 'The gift shop',
   description: 'Out for lunch',
   defaultProgram: 'shop',
   moveLeftLabel: 'To the atrium',
