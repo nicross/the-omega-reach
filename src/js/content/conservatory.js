@@ -11,6 +11,7 @@ content.conservatory = (() => {
       return this
     },
     isOpen: () => isReady && content.instruments.hasScanned(),
+    isReady: () => isReady,
     reset: function () {
       isReady = false
 

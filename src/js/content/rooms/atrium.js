@@ -35,7 +35,13 @@ content.rooms.atrium = content.rooms.invent({
       })
     }
 
-    // TODO: New wares, chimeNote: 70
+    if (content.shop.isOpen()) {
+      attributes.push({
+        label: 'New offer',
+        modifiers: ['undiscovered'],
+        chimeNote: 70,
+      })
+    }
 
     return attributes
   },
