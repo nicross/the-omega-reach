@@ -96,6 +96,8 @@ content.shop = (() => {
   ]
 
   const uniques = [
+    // Me???
+    'shiftBacktick',
     // Games
     'Audo',
     'Auroboros',
@@ -120,6 +122,7 @@ content.shop = (() => {
     'The easter egg',
     'The fourth wall',
     'The inside joke',
+    'The password generator',
   ]
 
   let previous = new Set(),
@@ -137,7 +140,7 @@ content.shop = (() => {
         ].join(' '),
         engine.fn.choose(uniques, Math.random()),
       ], Math.random() ** 2)
-    } while (name && previous.has(name))
+    } while (name && (previous.has(name) || content.instruments.has(name)))
 
     if (previous.size > qualifiers.length * ingredients.length * types.length * 0.5) {
       previous.clear()
@@ -149,7 +152,7 @@ content.shop = (() => {
   }
 
   function getCost() {
-    return engine.fn.lerp(100, 200, engine.fn.clamp(engine.fn.scale(content.wallet.amount(), 100, 1000, 0, 1)))
+    return engine.fn.lerp(100, 300, engine.fn.clamp(engine.fn.scale(content.wallet.amount(), 100, 1000, 0, 1)))
   }
 
   return {

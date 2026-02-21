@@ -17,13 +17,13 @@ content.wallet = (() => {
 
       return this
     },
-    remove: function (value = 0) {
-      amount -= Math.abs(value) || 0
+    reset: function () {
+      amount = 0
 
       return this
     },
-    reset: function () {
-      amount = 0
+    subtract: function (value = 0) {
+      amount -= Math.abs(value) || 0
 
       return this
     },
