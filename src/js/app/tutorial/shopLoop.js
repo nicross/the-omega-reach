@@ -46,7 +46,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
       description: `The shopkeeper disappears once more through the cellar door for their mandated lunch break.`,
       actions: [
         {
-          label: 'Back to the reach',
+          label: 'Back to work',
           before: () => {
             content.shop.resetTimer()
             app.screen.game.update()

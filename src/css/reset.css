@@ -7,6 +7,7 @@
   font: inherit;
   margin: 0;
   padding: 0;
+  text-decoration: none;
 }
 
 button, button *, button *::after, button *::before {

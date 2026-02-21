@@ -186,7 +186,12 @@ content.shop = (() => {
   }
 
   function getCost() {
-    return engine.fn.lerp(100, 300, engine.fn.clamp(engine.fn.scale(content.wallet.amount(), 100, 1000, 0, 1)))
+    return Math.ceil(
+      engine.fn.lerp(
+        100, 300,
+        engine.fn.clamp(engine.fn.scale(content.wallet.amount(), 100, 1000, 0, 1))
+      )
+    )
   }
 
   return {
