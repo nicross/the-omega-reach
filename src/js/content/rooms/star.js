@@ -219,5 +219,5 @@ content.rooms.star = content.rooms.invent({
       seed: star.name,
     })
   },// Reach
-  getReachMuffle: () => 1 - (1/6),
+  getReachMuffle: () => 1 - (1/3),
 })

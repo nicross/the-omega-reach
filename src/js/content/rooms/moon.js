@@ -220,5 +220,5 @@ content.rooms.moon = content.rooms.invent({
     return content.scans.get(moon.name) == 1 + moon.quirks.length
   },
   // Reach
-  getReachMuffle: () => 1 - (1/12),
+  getReachMuffle: () => 1 - (1/5),
 })

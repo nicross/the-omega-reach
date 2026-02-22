@@ -20,6 +20,6 @@ content.rooms.shop = content.rooms.invent({
   },
   isOpen: () => content.shop.isOpen(),
   // Reach
-  getReachMuffle: () => 1 - (1/8),
+  getReachMuffle: () => 1 - (1/6),
   getReachPan: () => -1/2,
 })

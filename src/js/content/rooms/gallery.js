@@ -245,4 +245,6 @@ content.rooms.gallery = content.rooms.invent({
 
     return this
   },
+  // Reach
+  getReachMuffle: () => 1 - (1/12),
 })

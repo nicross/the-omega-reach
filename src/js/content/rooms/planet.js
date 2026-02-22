@@ -252,5 +252,5 @@ content.rooms.planet = content.rooms.invent({
     return content.scans.get(planet.name) == 1 + planet.quirks.length
   },
   // Reach
-  getReachMuffle: () => 1 - (1/9),
+  getReachMuffle: () => 1 - (1/4),
 })

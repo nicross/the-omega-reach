@@ -124,5 +124,5 @@ content.rooms.galaxy = content.rooms.invent({
     })
   },
   // Reach
-  getReachMuffle: () => 1 - (1/3),
+  getReachMuffle: () => 1 - (1/2),
 })

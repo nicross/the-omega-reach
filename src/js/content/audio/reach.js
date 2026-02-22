@@ -1,6 +1,7 @@
 content.audio.reach = (() => {
-  const baseGain = engine.fn.fromDb(-9),
-    bus = content.audio.channel.default.createBus()
+  const baseGain = engine.fn.fromDb(-15),
+    bus = content.audio.channel.default.createBus(),
+    rootFrequency = engine.fn.fromMidi(24)
 
   let muffle = 0,
     pan = 0,
@@ -17,43 +18,89 @@ content.audio.reach = (() => {
     muffle = isImmediate ? targetMuffle : engine.fn.accelerateValue(muffle, targetMuffle, 4)
 
     targetPower = content.rooms.reach.state.online ? 1 : 0
-    power = isImmediate ? targetPower : engine.fn.accelerateValue(power, targetPower, 1/4)
+    power = isImmediate ? targetPower : engine.fn.accelerateValue(power, targetPower, 1/3)
 
     targetPan = content.location.get()?.getReachPan() || 0
     pan = isImmediate ? targetPan : engine.fn.accelerateValue(pan, targetPan, 4)
 
     targetStress = engine.fn.accelerateValue(targetStress, 0, 2)
-    stress = isImmediate ? targetStress : engine.fn.accelerateValue(stress, targetStress, 8)
+    stress = isImmediate ? targetStress : engine.fn.accelerateValue(stress, targetStress, 16)
   }
 
   function calculateParameters() {
     return {
-
+      carrierDetune: engine.fn.lerp(-1200, 0, power) + engine.fn.lerp(0, 2400, stress),
+      carrierGain: (power ** 0.75) * engine.fn.fromDb(engine.fn.lerp(0, -3, muffle)),
+      color: engine.fn.lerp(8, 1, muffle),
     }
   }
 
   function createSynth() {
+    if (synth) {
+      return
+    }
+
+    const context = engine.context()
+
     const {
-      test,
+      carrierDetune,
+      carrierGain,
+      color,
     } = calculateParameters()
 
-    synth = true
+    synth = engine.synth.pwm({
+      detune: carrierDetune,
+      frequency: rootFrequency,
+      gain: carrierGain,
+      type: 'triangle',
+      width: 0.5,
+    }).filtered({
+      frequency: rootFrequency * color,
+    }).chainAssign(
+      'panner', context.createStereoPanner()
+    ).chainAssign(
+      'fader', context.createGain()
+    ).connect(bus)
+
+    synth.panner.pan.value = pan
+    content.audio.reverb().from(synth)
+
+    // Fader
+    const attack = 1/8
+    synth.fader.gain.value = 0
+    engine.fn.rampLinear(synth.fader.gain, baseGain, attack)
   }
 
   function destroySynth() {
+    if (!synth) {
+      return
+    }
+
+    const now = engine.time(),
+      release = 1/8
+
+    engine.fn.rampLinear(synth.fader.gain, 0, release)
+    synth.stop(now + release)
+
     synth = undefined
   }
 
   function updateSynth() {
     const {
-      test,
+      carrierDetune,
+      carrierGain,
+      color,
     } = calculateParameters()
 
+    engine.fn.setParam(synth.filter.frequency, rootFrequency * color)
+    engine.fn.setParam(synth.panner.pan, pan)
+    engine.fn.setParam(synth.param.detune, carrierDetune)
+    engine.fn.setParam(synth.param.gain, carrierGain)
   }
 
   return {
     applyStress: function (value = 0, randomization = 1/4) {
-      targetStress += value * engine.fn.randomFloat(1 - randomization, 1)
+      targetStress += value * engine.fn.randomFloat(1 - randomization, 1 + randomization)
       targetStress = engine.fn.clamp(targetStress, -1, 1)
 
       return this
@@ -120,14 +167,14 @@ engine.ready(() => {
 
   content.location.on('move', ({direction, from, to}) => {
     if (direction == 'up' && from.id == 'reach') {
-      return
+      return content.audio.reach.applyStress(1)
     }
 
     if (['horizon','galaxy','star','planet','moon'].includes(from.id)) {
       return content.audio.reach.applyStress({
         down: -1,
-        left: -1/4,
-        right: 1/4,
+        left: 1/2,
+        right: 1/2,
         up: 1,
       }[direction] || 0)
     }
