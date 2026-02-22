@@ -12,6 +12,17 @@ content.scans = (() => {
 
       return data
     },
+    firstMoon: () => {
+      let i = 0
+
+      for (const [name, count] of map.entries()) {
+        i += 1
+
+        if (i == 3) {
+          return name.split(' ').slice(2,4).join(' ')
+        }
+      }
+    },
     import: function (data = {}) {
       for (const [name, count] of Object.entries(data)) {
         map.set(name, count)
