@@ -121,6 +121,7 @@ content.programs.instrument = content.programs.invent({
       fmDepth,
       fmDetune,
       fmFrequency,
+      gain,
       width,
       wmDepth,
       wmFrequency,
@@ -131,7 +132,7 @@ content.programs.instrument = content.programs.invent({
 
     const synth = engine.synth.pwm({
       detune,
-      gain: 1 - amDepth,
+      gain: (1 - amDepth) * gain,
       frequency,
       type: this.properties.carrierType,
       width,
@@ -200,6 +201,7 @@ content.programs.instrument = content.programs.invent({
         fmDepth,
         fmDetune,
         fmFrequency,
+        gain,
         width,
         wmDepth,
         wmFrequency,
@@ -219,7 +221,7 @@ content.programs.instrument = content.programs.invent({
       engine.fn.setParam(synth.param.fm.depth, fmDepth)
       engine.fn.setParam(synth.param.fm.frequency, fmFrequency)
       engine.fn.setParam(synth.param.frequency, frequency)
-      engine.fn.setParam(synth.param.gain, 1 - amDepth)
+      engine.fn.setParam(synth.param.gain, (1 - amDepth) * gain)
       engine.fn.setParam(synth.param.width, width)
       engine.fn.setParam(synth.param.wm.depth, wmDepth)
       engine.fn.setParam(synth.param.wm.frequency, wmFrequency)
@@ -273,7 +275,9 @@ content.programs.instrument = content.programs.invent({
     )
   },
   calculateParameters: function (point) {
-    const frequency = this.calculateFrequency(point)
+    const frequency = this.calculateFrequency(point),
+      isComplete = content.rooms.gallery.isComplete(),
+      proximity = app.screen.game.interact.proximity()
 
     const maxField = 2.5,
       minField = 0.5
@@ -291,9 +295,9 @@ content.programs.instrument = content.programs.invent({
       cmFrequency: engine.fn.lerpExp(1/8, 8, engine.fn.clamp(
         engine.fn.lerp(this.properties.cmFrequencyCenter - this.properties.cmFrequencyRange, this.properties.cmFrequencyCenter + this.properties.cmFrequencyRange, this.fields.cmFrequency.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.cmFrequencyScale))),
       ), 4),
-      color: engine.fn.lerp(1, 8, engine.fn.clamp(
+      color: engine.fn.lerp(1, 8, engine.fn.lerp(engine.fn.clamp(
         engine.fn.lerp(this.properties.colorCenter - this.properties.colorRange, this.properties.colorCenter + this.properties.colorRange, this.fields.color.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.colorScale))),
-      )),
+      ), 0, isComplete ? 0 : 1)),
       detune: engine.fn.lerp(
         -50 * this.properties.detuneRange,
         50 * this.properties.detuneRange,
@@ -317,6 +321,7 @@ content.programs.instrument = content.programs.invent({
       fmFrequency: engine.fn.lerp(1/4, 4, engine.fn.clamp(
         engine.fn.lerp(this.properties.fmFrequencyCenter - this.properties.fmFrequencyRange, this.properties.fmFrequencyCenter + this.properties.fmFrequencyRange, this.fields.fmFrequency.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.fmFrequencyScale))),
       )) * frequency,
+      gain: engine.fn.fromDb(isComplete ? 0 : -18),
       width: engine.fn.lerp(0.375, 0.625, engine.fn.clamp(
         engine.fn.lerp(this.properties.widthCenter - this.properties.widthRange, this.properties.widthCenter + this.properties.widthRange, this.fields.color.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.widthScale))),
       )),

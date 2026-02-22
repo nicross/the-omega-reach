@@ -11,7 +11,7 @@ app.tutorial.atriumWallet = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] <span class="u-screenReader">for</span> Your wallet:`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> Your credits:`,
         description: `You may now check your credits from <strong>the atrium</strong>. These are needed to purchase instruments from <strong>the shop</strong>.`,
         actions: [
           {

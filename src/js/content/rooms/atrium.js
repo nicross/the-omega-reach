@@ -45,7 +45,7 @@ content.rooms.atrium = content.rooms.invent({
 
     if (content.wallet.has()) {
       attributes.push({
-        label: `${app.utility.format.currency(content.wallet.amount())} available`,
+        label: `${app.utility.format.currency(content.wallet.amount())}`,
         modifiers: ['rare'],
       })
     }
