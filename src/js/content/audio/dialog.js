@@ -7,7 +7,6 @@ content.audio.dialog = (() => {
     duration,
     frequency,
     pan,
-    tail,
     when,
     width,
   } = {}) {
@@ -29,20 +28,16 @@ content.audio.dialog = (() => {
     synth.param.gain.linearRampToValueAtTime(baseGain, when + 1/64)
     synth.param.gain.setValueAtTime(baseGain, when + duration - 1/64)
     synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration)
-    synth.param.gain.exponentialRampToValueAtTime(baseGain/8, when + duration + tail - 1/32)
-    synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration + tail)
 
     synth.panner.pan.setValueAtTime(pan, when + duration)
-    synth.panner.pan.linearRampToValueAtTime(-Math.sign(pan), when + duration + tail)
 
-    synth.stop(when + duration + tail)
+    synth.stop(when + duration)
   }
 
   return {
     trigger: function ({
       duration = 1/24,
       delay = 1/24,
-      tail = 0,
       when = engine.time() + 1/8,
     } = {}) {
       const notes = engine.fn.shuffle([
@@ -55,7 +50,6 @@ content.audio.dialog = (() => {
           duration,
           frequency: notes[i],
           pan: engine.fn.randomFloat(-0.25, 0.25),
-          tail,
           when: when + (i * delay),
           width: engine.fn.randomFloat(0.25, 0.75),
         })

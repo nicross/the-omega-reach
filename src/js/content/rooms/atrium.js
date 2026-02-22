@@ -19,11 +19,11 @@ content.rooms.atrium = content.rooms.invent({
   getAttributeLabels: function () {
     const attributes = []
 
-    if (content.instruments.hasUnscanned()) {
+    if (content.shop.isOpen()) {
       attributes.push({
-        label: 'New instruments',
+        label: 'New offer',
         modifiers: ['undiscovered'],
-        chimeNote: 63,
+        chimeNote: 70,
       })
     }
 
@@ -35,11 +35,11 @@ content.rooms.atrium = content.rooms.invent({
       })
     }
 
-    if (content.shop.isOpen()) {
+    if (content.instruments.hasUnscanned()) {
       attributes.push({
-        label: 'New offer',
+        label: 'New instruments',
         modifiers: ['undiscovered'],
-        chimeNote: 70,
+        chimeNote: 63,
       })
     }
 

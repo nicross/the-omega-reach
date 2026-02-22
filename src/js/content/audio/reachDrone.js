@@ -1,5 +1,5 @@
-content.audio.reach = (() => {
-  const baseGain = engine.fn.fromDb(-15),
+content.audio.reachDrone = (() => {
+  const baseGain = engine.fn.fromDb(-13.5),
     bus = content.audio.channel.default.createBus(),
     rootFrequency = engine.fn.fromMidi(24)
 
@@ -18,7 +18,7 @@ content.audio.reach = (() => {
     muffle = isImmediate ? targetMuffle : engine.fn.accelerateValue(muffle, targetMuffle, 4)
 
     targetPower = content.rooms.reach.state.online ? 1 : 0
-    power = isImmediate ? targetPower : engine.fn.accelerateValue(power, targetPower, 1/3)
+    power = isImmediate ? targetPower : engine.fn.accelerateValue(power, targetPower, 1/2)
 
     targetPan = content.location.get()?.getReachPan() || 0
     pan = isImmediate ? targetPan : engine.fn.accelerateValue(pan, targetPan, 4)
@@ -29,7 +29,7 @@ content.audio.reach = (() => {
 
   function calculateParameters() {
     return {
-      carrierDetune: engine.fn.lerp(-1200, 0, power) + engine.fn.lerp(0, 2400, stress),
+      carrierDetune: engine.fn.lerp(-1200, 0, power) + engine.fn.lerp(0, 2400, Math.abs(stress)),
       carrierGain: (power ** 0.75) * engine.fn.fromDb(engine.fn.lerp(0, -3, muffle)),
       color: engine.fn.lerp(8, 1, muffle),
     }
@@ -159,19 +159,19 @@ engine.ready(() => {
       return
     }
 
-    content.audio.reach.update()
+    content.audio.reachDrone.update()
   })
 
-  engine.state.on('import', () => content.audio.reach.import())
-  engine.state.on('reset', () => content.audio.reach.reset())
+  engine.state.on('import', () => content.audio.reachDrone.import())
+  engine.state.on('reset', () => content.audio.reachDrone.reset())
 
   content.location.on('move', ({direction, from, to}) => {
     if (direction == 'up' && from.id == 'reach') {
-      return content.audio.reach.applyStress(1)
+      return content.audio.reachDrone.applyStress(1)
     }
 
     if (['horizon','galaxy','star','planet','moon'].includes(from.id)) {
-      return content.audio.reach.applyStress({
+      return content.audio.reachDrone.applyStress({
         down: -1,
         left: 1/2,
         right: 1/2,

@@ -32,6 +32,8 @@ content.rooms.reach = content.rooms.invent({
       content.rooms.moon.reset()
     }
 
+    content.audio.reachSwitch.trigger(this.state.online)
+
     return this.getAttributeLabels()[0]?.label
   },
   // Attributes
