@@ -22,7 +22,7 @@ app.screen.splash = app.screenManager.invent({
     root.querySelector('.a-splash--version').innerHTML = `v${app.version()}`
   },
   onEnter: function () {
-
+    content.audio.reachDrone.reset()
   },
   onFrame: function () {
     const ui = app.controls.ui()

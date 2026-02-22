@@ -7,7 +7,14 @@ app.screen.gameMenu = app.screenManager.invent({
     back: function () {
       this.change('game')
     },
-    mainMenu: function () {
+    quit: function () {
+      app.autosave.trigger()
+      app.quit()
+    },
+    settings: function () {
+      this.change('settings')
+    },
+    splash: function () {
       app.screen.gameMenu.clearFocusMemory()
 
       app.autosave.trigger()
@@ -16,14 +23,7 @@ app.screen.gameMenu = app.screenManager.invent({
       // XXX: Autosave trigger uses setTimeout, so enqueue a state reset to prevent progress loss.
       setTimeout(() => engine.state.reset(), 0)
 
-      this.change('mainMenu')
-    },
-    quit: function () {
-      app.autosave.trigger()
-      app.quit()
-    },
-    settings: function () {
-      this.change('settings')
+      this.change('splash')
     },
   },
   // State
@@ -34,9 +34,9 @@ app.screen.gameMenu = app.screenManager.invent({
 
     Object.entries({
       back: root.querySelector('.a-gameMenu--back'),
-      mainMenu: root.querySelector('.a-gameMenu--mainMenu'),
       quit: root.querySelector('.a-gameMenu--quit'),
       settings: root.querySelector('.a-gameMenu--settings'),
+      splash: root.querySelector('.a-gameMenu--splash'),
     }).forEach(([event, element]) => {
       element.addEventListener('click', () => app.screenManager.dispatch(event))
     })

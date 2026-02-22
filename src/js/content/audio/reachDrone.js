@@ -14,16 +14,19 @@ content.audio.reachDrone = (() => {
     targetStress = 0
 
   function accelerate(isImmediate = false) {
-    targetMuffle = content.location.get()?.getReachMuffle() || 0
+    const isTitle = Boolean(engine.loop.isPaused() && !content.location.get())
+    isImmediate = isImmediate && !isTitle
+
+    targetMuffle = isTitle ? 0.125 : (content.location.get()?.getReachMuffle() || 0)
     muffle = isImmediate ? targetMuffle : engine.fn.accelerateValue(muffle, targetMuffle, 4)
 
-    targetPower = content.rooms.reach.state.online ? 1 : 0
-    power = isImmediate ? targetPower : engine.fn.accelerateValue(power, targetPower, 1/2)
+    targetPower = isTitle ? 1 : (content.rooms.reach.state.online ? 1 : 0)
+    power = isImmediate ? targetPower : engine.fn.accelerateValue(power, targetPower, isTitle ? 1/4 : 1/2)
 
-    targetPan = content.location.get()?.getReachPan() || 0
+    targetPan = isTitle ? 0 : (content.location.get()?.getReachPan() || 0)
     pan = isImmediate ? targetPan : engine.fn.accelerateValue(pan, targetPan, 4)
 
-    targetStress = engine.fn.accelerateValue(targetStress, 0, 2)
+    targetStress = isTitle ? 0 : engine.fn.accelerateValue(targetStress, 0, 2)
     stress = isImmediate ? targetStress : engine.fn.accelerateValue(stress, targetStress, 16)
   }
 
@@ -77,8 +80,8 @@ content.audio.reachDrone = (() => {
 
     // Width LFO
     synth.assign('wm', engine.synth.lfo({
-      depth: 0.25,
-      frequency: 1/31,
+      depth: 0.1666,
+      frequency: 1/59,
     }))
 
     synth.wm.connect(synth.param.width)
@@ -173,11 +176,7 @@ content.audio.reachDrone = (() => {
 
 engine.ready(() => {
 
-  engine.loop.on('frame', ({paused}) => {
-    if (paused) {
-      return
-    }
-
+  engine.loop.on('frame', () => {
     content.audio.reachDrone.update()
   })
 

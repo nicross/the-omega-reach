@@ -57,6 +57,6 @@ engine.loop.on('resume', () => {
 })
 
 engine.loop.on('pause', () => {
-  engine.fn.rampLinear(content.audio.main().gain, 1/4, 0.25)
-  engine.fn.rampLinear(engine.mixer.reverb.param.gain, 1/4, 0.25)
+  engine.fn.rampLinear(content.audio.main().gain, 1/3, 0.25)
+  engine.fn.rampLinear(engine.mixer.reverb.param.gain, 1/3, 0.25)
 })

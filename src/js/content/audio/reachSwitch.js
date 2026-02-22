@@ -37,23 +37,23 @@ content.audio.reachSwitch = (() => {
       if (isOnline) {
         trigger({
           duration: 1/2,
-          frequency: 1000,
-          when: now,
-        })
-        trigger({
-          duration: 3/2,
-          frequency: 2000,
-          when: now + 1/16,
-        })
-      } else {
-        trigger({
-          duration: 1/2,
-          frequency: 2500,
+          frequency: 750,
           when: now,
         })
         trigger({
           duration: 3/2,
           frequency: 1500,
+          when: now + 1/16,
+        })
+      } else {
+        trigger({
+          duration: 1/2,
+          frequency: 2000,
+          when: now,
+        })
+        trigger({
+          duration: 3/2,
+          frequency: 1000,
           when: now + 1/16,
         })
       }
