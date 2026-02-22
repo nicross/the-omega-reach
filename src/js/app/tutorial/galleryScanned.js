@@ -11,8 +11,8 @@ app.tutorial.galleryScanned = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] <span class="u-screenReader">for</span> Free play:`,
-        description: `Some instruments have quirks as well! They can be freely played once fully appraised.`,
+        title: `[Tutorial] <span class="u-screenReader">for</span> Appraisal:`,
+        description: `Some instruments have quirks as well! Continue interacting to fully appraise an instrument.`,
         actions: [
           {
             label: 'Regain control',
@@ -20,7 +20,6 @@ app.tutorial.galleryScanned = app.tutorial.invent({
           }
         ],
       },
-      // TODO: Tutorial for selling when implemented
     ].forEach((x) => app.screen.game.dialog.push(x))
   },
 })

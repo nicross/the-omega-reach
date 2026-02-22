@@ -12,7 +12,7 @@ app.tutorial.atriumUnlocked = app.tutorial.invent({
     [
       {
         title: `[Tutorial] <span class="u-screenReader">for</span> The atrium:`,
-        description: `You may now receive notifications about other rooms from <strong>the atrium</strong>. For instance, that instrument you recovered has just arrived in <strong>the gallery</strong>!`,
+        description: `You may now receive notifications about other rooms from <strong>the atrium</strong>. For instance, that instrument you recovered has just arrived in <strong>the gallery</strong>! Go there to proceed.`,
         actions: [
           {
             label: 'Regain control',

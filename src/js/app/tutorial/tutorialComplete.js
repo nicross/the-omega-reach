@@ -4,7 +4,7 @@ app.tutorial.tutorialComplete = app.tutorial.invent({
   state: {},
   // Lifecycle
   // TODO: Require tutorial for shop when implemented
-  shouldActivate: () => content.location.is('atrium') && app.tutorial.galleryScanned.complete,
+  shouldActivate: () => content.location.is('atrium') && app.tutorial.galleryComplete.complete,
   onUpdate: function () {
     if (!content.location.is('atrium')) {
       return

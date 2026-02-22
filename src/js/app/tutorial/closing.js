@@ -1,0 +1,21 @@
+app.tutorial.closing = app.tutorial.invent({
+  id: 'closing',
+  // State
+  state: {},
+  // Lifecycle
+  shouldActivate: () => app.tutorial.galleryComplete.complete && !content.conservatory.isOpen(),
+  onUpdate: function () {
+    [
+      {
+        title: `[Tutorial] <span class="u-screenReader">for</span> Closing:`,
+        description: `<strong>The Omega Conservatory</strong> is now closed to visitors. <strong>The gallery</strong> must display at least one instrument for it to reopen to the public.`,
+        actions: [
+          {
+            label: 'Regain control',
+            before: () => this.markComplete(),
+          }
+        ],
+      },
+    ].forEach((x) => app.screen.game.dialog.push(x))
+  },
+})

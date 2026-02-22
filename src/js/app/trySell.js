@@ -9,6 +9,7 @@ content.location.on('try-sell', ({instrument}) => {
         after: () => {
           content.rooms.gallery.onSell()
           app.screen.game.update()
+          app.tutorial.update()
           content.audio.interactComplete.trigger()
           content.audio.interactSuccess.trigger({
             index: 2,
