@@ -1,7 +1,7 @@
 app.utility.format = {}
 
 app.utility.format.currency = function (x) {
-  const s = s == 1 ? '' : 's'
+  const s = x == 1 ? '' : 's'
   return `${this.number(x)} <abbr aria-label="credit${s}" title="credit${s}">¤</abbr>`
 }
 

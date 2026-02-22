@@ -27,7 +27,6 @@ content.rooms.galaxy = content.rooms.invent({
   getName: function () {
     return this.getGalaxy().name
   },
-  isIncomplete: () => true,
   setGalaxyByName: function (name) {
     this.state.name = name
 

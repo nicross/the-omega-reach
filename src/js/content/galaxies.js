@@ -78,6 +78,15 @@ content.galaxies = (() => {
 
       return generated.get(name)
     },
+    hasIncomplete: function () {
+      for (const galaxyName of names) {
+        if (!this.isComplete(galaxyName)) {
+          return true
+        }
+      }
+
+      return false
+    },
     import: function ({
       discovered = [],
     } = {}) {
@@ -86,6 +95,17 @@ content.galaxies = (() => {
       }
 
       return this
+    },
+    isComplete: function (galaxyName) {
+      const galaxy = this.get(galaxyName)
+
+      for (const starName of content.stars.namesForGalaxy(galaxyName)) {
+        if (!content.stars.isComplete(starName)) {
+          return false
+        }
+      }
+
+      return true
     },
     new: function () {
       const name = uniqueName()
