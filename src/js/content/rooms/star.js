@@ -169,6 +169,12 @@ content.rooms.star = content.rooms.invent({
 
     this.updateProgram()
 
+    content.location.emit('move', {
+      direction: 'left',
+      from: this,
+      to: this,
+    })
+
     return this.move('left')
   },
   moveRight: function () {
@@ -185,6 +191,12 @@ content.rooms.star = content.rooms.invent({
     content.rooms.moon.reset()
 
     this.updateProgram()
+
+    content.location.emit('move', {
+      direction: 'right',
+      from: this,
+      to: this,
+    })
 
     return this.move('right')
   },
@@ -206,5 +218,6 @@ content.rooms.star = content.rooms.invent({
       star,
       seed: star.name,
     })
-  },
+  },// Reach
+  getReachMuffle: () => 1 - (1/6),
 })

@@ -47,4 +47,6 @@ content.rooms.horizon = content.rooms.invent({
 
     return this.move('up')
   },
+  // Reach
+  getReachMuffle: () => 1 - (2/3),
 })

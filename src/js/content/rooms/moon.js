@@ -170,6 +170,12 @@ content.rooms.moon = content.rooms.invent({
     content.solution.generate()
     this.updateProgram()
 
+    content.location.emit('move', {
+      direction: 'left',
+      from: this,
+      to: this,
+    })
+
     return this.move('left')
   },
   moveRight: function () {
@@ -184,8 +190,15 @@ content.rooms.moon = content.rooms.invent({
     content.solution.generate()
     this.updateProgram()
 
+    content.location.emit('move', {
+      direction: 'right',
+      from: this,
+      to: this,
+    })
+
     return this.move('right')
-  },onEnter: function () {
+  },
+  onEnter: function () {
     this.updateProgram()
   },
   updateProgram: function () {
@@ -206,4 +219,6 @@ content.rooms.moon = content.rooms.invent({
 
     return content.scans.get(moon.name) == 1 + moon.quirks.length
   },
+  // Reach
+  getReachMuffle: () => 1 - (1/12),
 })

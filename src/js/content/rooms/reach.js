@@ -43,5 +43,6 @@ content.rooms.reach = content.rooms.invent({
       },
     ]
   },
-  // ...
+  // Reach
+  getReachMuffle: () => 0,
 })

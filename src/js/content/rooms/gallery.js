@@ -174,6 +174,12 @@ content.rooms.gallery = content.rooms.invent({
     content.solution.generate()
     this.updateProgram()
 
+    content.location.emit('move', {
+      direction: 'left',
+      from: this,
+      to: this,
+    })
+
     return this.move('left')
   },
   moveRight: function () {
@@ -187,6 +193,12 @@ content.rooms.gallery = content.rooms.invent({
 
     content.solution.generate()
     this.updateProgram()
+
+    content.location.emit('move', {
+      direction: 'right',
+      from: this,
+      to: this,
+    })
 
     return this.move('right')
   },

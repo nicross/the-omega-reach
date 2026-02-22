@@ -132,6 +132,12 @@ content.rooms.base = {
       return this
     }
 
+    content.location.emit('move', {
+      direction,
+      from: this,
+      to: content.rooms.get(this.transitions[direction]),
+    })
+
     content.location.set(this.transitions[direction])
 
     return this
@@ -150,4 +156,7 @@ content.rooms.base = {
   },
   onEnter: function () {},
   onExit: function () {},
+  // Reach
+  getReachMuffle: () => 1,
+  getReachPan: () => 0,
 }
