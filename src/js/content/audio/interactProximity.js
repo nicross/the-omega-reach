@@ -1,5 +1,5 @@
 content.audio.interactProximity = (() => {
-  const baseGain = engine.fn.fromDb(-6),
+  const baseGain = engine.fn.fromDb(-4.5),
     bus = content.audio.channel.default.createBus(),
     rootFrequency = engine.fn.fromMidi(72)
 
@@ -19,7 +19,7 @@ content.audio.interactProximity = (() => {
       detune: engine.fn.lerp(-2400, 0, value),
       fmDepth: engine.fn.lerpExp(0.25, 0.5, value, 2) * rootFrequency,
       fmFrequency: engine.fn.lerpExp(4, 1, value, 2) * rootFrequency,
-      gain: baseGain * engine.fn.lerpExp(1/16, 1, value, 2),
+      gain: baseGain * engine.fn.lerpExp(1/8, 1, value, 2),
       pan: engine.fn.lerpExp(2/3 * vector.y, 0, value, 3),
     }
   }
