@@ -32,6 +32,7 @@ content.shop = (() => {
     'Spiced',
     'Sweetened',
     'Special',
+    'Super',
     'Toasted',
     'Zested',
   ]

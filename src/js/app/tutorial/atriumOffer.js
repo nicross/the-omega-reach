@@ -12,7 +12,7 @@ app.tutorial.atriumOffer = app.tutorial.invent({
     [
       {
         title: `The eagle has landed!`,
-        description: `The delicious aromatics manifesting their profits waft in from <strong>the shop</strong>. They typically have something to share—despite your many philosophical disagreements.`,
+        description: `The delicious aromatics manifesting their profits waft in from <strong>the shop</strong>. They typically have something delightful to share—despite your many philosophical snares.`,
         actions: [
           {
             label: 'Check it out',
