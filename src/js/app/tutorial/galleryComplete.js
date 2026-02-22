@@ -38,7 +38,10 @@ app.tutorial.galleryComplete = app.tutorial.invent({
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
+            before: () => {
+              content.conservatory.setReady(true)
+              this.markComplete()
+            },
           }
         ],
       },

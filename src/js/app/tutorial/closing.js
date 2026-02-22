@@ -5,6 +5,10 @@ app.tutorial.closing = app.tutorial.invent({
   // Lifecycle
   shouldActivate: () => app.tutorial.galleryComplete.complete && !content.conservatory.isOpen(),
   onUpdate: function () {
+    if (this.preventDouble()) {
+      return
+    }
+
     [
       {
         title: `[Tutorial] <span class="u-screenReader">for</span> Closing:`,

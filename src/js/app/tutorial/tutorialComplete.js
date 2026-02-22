@@ -18,7 +18,6 @@ app.tutorial.tutorialComplete = app.tutorial.invent({
           {
             label: 'End tutorial',
             before: () => {
-              content.conservatory.setReady(true)
               this.markComplete()
             },
           }

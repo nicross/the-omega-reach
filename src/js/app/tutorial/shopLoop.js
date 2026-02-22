@@ -24,7 +24,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
         },
         {
           title: `<q>Question for you:</q>`,
-          description: `<q>Is this <em>earthen hot dog</em> a sandwich?</q> They gesticulate with it forcefully in your direction. It's open-faced, of seed bread and mammal sausage, and rather long—save for the generous bite drawn from its end.`,
+          description: `<q>Is this <em>earthen hot dog</em> a sandwich?</q> They gesticulate with it forcefully in your direction. It's open-faced, of seed bread and mammal sausage, and rather long—except for the generous bite drawn from its end.`,
           actions: [
             {
               label: 'Definitely!',

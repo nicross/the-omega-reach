@@ -46,13 +46,19 @@ app.tutorial.reachOffline = app.tutorial.invent({
         actions: [
           {
             label: 'hold for a second.',
-            before: () => app.settings.setInputHold(true),
-            after: () => app.settings.save(),
+            before: () => {
+              app.settings.setInputHold(false)
+              app.settings.save()
+              app.screen.game.interact.update()
+            },
           },
           {
             label: 'reach it immediately.',
-            before: () => app.settings.setInputHold(false),
-            after: () => app.settings.save(),
+            before: () => {
+              app.settings.setInputHold(false)
+              app.settings.save()
+              app.screen.game.interact.update()
+            },
           },
         ],
       },

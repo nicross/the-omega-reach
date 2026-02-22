@@ -43,7 +43,7 @@ content.rooms.atrium = content.rooms.invent({
       })
     }
 
-    if (content.wallet.has()) {
+    if (content.wallet.has(51) || app.tutorial.atriumWallet.complete) {
       attributes.push({
         label: `${app.utility.format.currency(content.wallet.amount())}`,
         modifiers: ['rare'],
