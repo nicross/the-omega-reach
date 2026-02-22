@@ -31,7 +31,7 @@ content.audio.reachDrone = (() => {
     return {
       carrierDetune: engine.fn.lerp(-1200, 0, power) + engine.fn.lerp(0, 2400, Math.abs(stress)),
       carrierGain: (power ** 0.75) * engine.fn.fromDb(engine.fn.lerp(0, -3, muffle)),
-      color: engine.fn.lerp(8, 1, muffle),
+      color: engine.fn.lerp(3, 1, muffle),
     }
   }
 
@@ -55,7 +55,8 @@ content.audio.reachDrone = (() => {
       type: 'triangle',
       width: 0.5,
     }).filtered({
-      frequency: rootFrequency * color,
+      detune: color * 1200,
+      frequency: rootFrequency,
     }).chainAssign(
       'panner', context.createStereoPanner()
     ).chainAssign(
@@ -64,6 +65,24 @@ content.audio.reachDrone = (() => {
 
     synth.panner.pan.value = pan
     content.audio.reverb().from(synth)
+
+    // Color LFO
+    synth.assign('cm', engine.synth.lfo({
+      depth: 600,
+      frequency: 1/29,
+    }))
+
+    synth.cm.connect(synth.filter.detune)
+    synth.chainStop(synth.cm)
+
+    // Width LFO
+    synth.assign('wm', engine.synth.lfo({
+      depth: 0.25,
+      frequency: 1/31,
+    }))
+
+    synth.wm.connect(synth.param.width)
+    synth.chainStop(synth.wm)
 
     // Fader
     const attack = 1/8
@@ -92,7 +111,7 @@ content.audio.reachDrone = (() => {
       color,
     } = calculateParameters()
 
-    engine.fn.setParam(synth.filter.frequency, rootFrequency * color)
+    engine.fn.setParam(synth.filter.detune, color * 1200)
     engine.fn.setParam(synth.panner.pan, pan)
     engine.fn.setParam(synth.param.detune, carrierDetune)
     engine.fn.setParam(synth.param.gain, carrierGain)
