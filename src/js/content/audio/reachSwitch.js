@@ -41,20 +41,20 @@ content.audio.reachSwitch = (() => {
           when: now,
         })
         trigger({
-          duration: 3/2,
+          duration: 2,
           frequency: 1500,
-          when: now + 1/16,
+          when: now + 1/8,
         })
       } else {
         trigger({
           duration: 1/2,
-          frequency: 2000,
+          frequency: 3000,
           when: now,
         })
         trigger({
-          duration: 3/2,
-          frequency: 1000,
-          when: now + 1/16,
+          duration: 2,
+          frequency: 1500,
+          when: now + 1/8,
         })
       }
     },
