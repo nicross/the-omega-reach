@@ -1,6 +1,6 @@
 content.audio.reachMoon = (() => {
   const allowedRooms = new Set(['moon']),
-    baseGain = engine.fn.fromDb(-13.5 + -9),
+    baseGain = engine.fn.fromDb(-12 + -13.5),
     bus = content.audio.channel.default.createBus(),
     context = engine.context(),
     primes = [67, 71, 73],

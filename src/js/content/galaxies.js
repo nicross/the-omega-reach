@@ -30,7 +30,7 @@ content.galaxies = (() => {
       mass: srand('mass'),
       name,
       program: 'baseGalaxy',
-      scale: [0,3,5,7,10],
+      scale: [3,5,7,10,12],
       type: engine.fn.chooseWeighted([
         {label: 'Elliptical', weight: 1/3},
         {label: 'Lenticular', weight: 1/3/3},
