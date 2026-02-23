@@ -1,10 +1,10 @@
 content.audio.reachStar = (() => {
   const allowedRooms = new Set(['star','planet','moon']),
-    baseGain = engine.fn.fromDb(-12 + -4.5),
+    baseGain = engine.fn.fromDb(-15 + -6),
     bus = content.audio.channel.default.createBus(),
     context = engine.context(),
     primes = [97, 101, 103],
-    rootNote = 36 + (12 * 1)
+    rootNote = 36 + (12 * 2)
 
   let current,
     synth

@@ -153,6 +153,7 @@ content.rooms.gallery = content.rooms.invent({
     if (this.isComplete()) {
       attributes.push({
         label: app.utility.format.currency(instrument.value),
+        labelPlain: `${instrument.value} credits`,
         modifiers: ['instrument'],
       })
     }

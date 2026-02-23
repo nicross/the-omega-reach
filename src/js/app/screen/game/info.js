@@ -31,7 +31,7 @@ app.screen.game.info = (() => {
         nameShort,
         description,
         isComplete ? 'Complete' : '',
-        ...attributes.map(({label}) => label),
+        ...attributes.map(({label, labelPlain}) => labelPlain || label),
       ]
 
       return descriptors.filter((x) => x).join(', ')
