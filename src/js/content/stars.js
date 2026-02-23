@@ -40,6 +40,7 @@ content.stars = (() => {
       children: isTutorial ? 1 : Math.round(engine.fn.lerpExp(0, 12, srand('children'), type.planets)),
       habitability: srand('habitability') * galaxy.habitability * type.habitability,
       galaxy,
+      index: [...getNamesForGalaxy(galaxyName)].indexOf(name),
       isTutorial,
       mass: srand('mass') * galaxy.mass,
       name,
@@ -291,6 +292,7 @@ content.stars = (() => {
 
       return this
     },
+    indexOf: (starName) => [...getNamesForGalaxy(extractGalaxyName(starName))].indexOf(starName),
     isComplete: function (starName) {
       const star = this.get(starName)
 

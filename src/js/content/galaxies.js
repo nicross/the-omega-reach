@@ -20,14 +20,17 @@ content.galaxies = (() => {
   ]
 
   function generate(name) {
+    const index = [...names].indexOf(name)
     const srand = (...seed) => engine.fn.srand('galaxy', name, 'attribute', ...seed)()
 
     return {
       age: srand('age'),
       habitability: srand('habitability'),
+      index,
       mass: srand('mass'),
       name,
       program: 'baseGalaxy',
+      scale: [0,3,5,7,10],
       type: engine.fn.chooseWeighted([
         {label: 'Elliptical', weight: 1/3},
         {label: 'Lenticular', weight: 1/3/3},

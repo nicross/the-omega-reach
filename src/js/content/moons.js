@@ -1,11 +1,17 @@
 content.moons = (() => {
   const generated = new Map()
 
+  function extractIndex(name) {
+    return Number(name.substring(extractPlanetName(name).length)) - 2
+  }
+
   function extractPlanetName(name) {
     return /(.+\D)\d+/.exec(name)[1]
   }
 
   function generate(name) {
+    const index = extractIndex(name)
+
     const planetName = extractPlanetName(name)
     const planet = content.planets.get(planetName)
 
@@ -25,6 +31,7 @@ content.moons = (() => {
       age: srand('age') * planet.age,
       habitability: planet.habitability, // Inherit from planet
       heat: planet.habitability, // Inherit from planet
+      index,
       mass: srand('mass') * planet.mass,
       name,
       planet,
