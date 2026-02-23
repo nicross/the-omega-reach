@@ -46,7 +46,7 @@ content.audio.reachPlanet = (() => {
 
     // Color LFO
     synth.assign('cm', engine.synth.lfo({
-      depth: engine.fn.randomSign() * 1200,
+      depth: -1200,
       frequency: 1/(prime/2),
     }))
 
@@ -55,7 +55,7 @@ content.audio.reachPlanet = (() => {
 
     // Pan LFO
     synth.assign('pm', engine.synth.lfo({
-      depth: engine.fn.randomSign() * 1,
+      depth: [-1, 1][index % 2] * 1,
       frequency: 1/(prime/3),
     }))
 

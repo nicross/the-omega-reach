@@ -1,5 +1,5 @@
 content.audio.reachSwitch = (() => {
-  const baseGain = engine.fn.fromDb(-6),
+  const baseGain = engine.fn.fromDb(-3),
     bus = content.audio.channel.default.createBus()
 
   function trigger({
@@ -8,7 +8,7 @@ content.audio.reachSwitch = (() => {
     when,
   } = {}) {
     const synth = engine.synth.amBuffer({
-      buffer: content.audio.buffer.whiteNoise.choose(),
+      buffer: content.audio.buffer.pinkNoise.choose(),
       carrierGain: 0.75,
       modDepth: 0.25,
       modFrequency: engine.fn.randomFloat(10, 20),
