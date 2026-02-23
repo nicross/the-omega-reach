@@ -9,8 +9,6 @@ content.audio.reachStar = (() => {
   let current,
     synth
 
-  content.audio.reverb().from(bus)
-
   function createSynth() {
     if (synth) {
       return
@@ -34,6 +32,8 @@ content.audio.reachStar = (() => {
     ).chainAssign(
       'fader', context.createGain()
     ).connect(bus)
+
+    content.audio.reverb().from(synth)
 
     // Gain LFO
     synth.assign('am', engine.synth.lfo({

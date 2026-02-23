@@ -9,8 +9,6 @@ content.audio.reachMoon = (() => {
   let current,
     synth
 
-  content.audio.reverb().from(bus)
-
   function createSynth() {
     if (synth) {
       return
@@ -34,6 +32,8 @@ content.audio.reachMoon = (() => {
     ).chainAssign(
       'fader', context.createGain()
     ).connect(bus)
+
+    content.audio.reverb().from(synth)
 
     // Gain LFO
     synth.assign('am', engine.synth.lfo({
