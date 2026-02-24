@@ -60,7 +60,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
         },
         {
           title: `<q>Let's just agree to disagree.</q>`,
-          description: `They suck their teeth as they finish their treat. <q>It's a solid seven out of ten snack, but I could eat these all day! Anyway—you know me—I'm sorry for how hunger makes me speak. That reminds me! Just sixteen milliseconds…</q>`,
+          description: `They suck their teeth as they finish their treat. <q>It's a solid seven out of ten snack, but I could eat these all day! Anyway—you know me—I'm sorry for how hunger makes me speak. That reminds me! Just sixteen milli…</q>`,
           actions: [
             {
               label: `Wait patiently`,

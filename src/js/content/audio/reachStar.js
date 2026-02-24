@@ -82,7 +82,7 @@ content.audio.reachStar = (() => {
     }
 
     const now = engine.time(),
-      release = 1/4
+      release = 1
 
     engine.fn.rampLinear(synth.fader.gain, 0, release)
     synth.stop(now + release)

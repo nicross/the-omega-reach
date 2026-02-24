@@ -37,7 +37,7 @@ content.rooms.atrium = content.rooms.invent({
 
     if (content.instruments.hasUnscanned()) {
       attributes.push({
-        label: 'New instruments',
+        label: 'New instrument',
         modifiers: ['undiscovered'],
         chimeNote: 63,
       })
