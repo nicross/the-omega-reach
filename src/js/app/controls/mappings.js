@@ -141,7 +141,9 @@ app.controls.mappings = {
         'Numpad4',
       ],
       mouseAxis: [],
-      mouseButton: [],
+      mouseButton: [
+        3,
+      ],
       mouseWheel: [
         ['getWheelX', -1],
       ],
@@ -157,7 +159,9 @@ app.controls.mappings = {
         'Numpad6',
       ],
       mouseAxis: [],
-      mouseButton: [],
+      mouseButton: [
+        4,
+      ],
       mouseWheel: [
         ['getWheelX', 1],
       ],
@@ -210,9 +214,7 @@ app.controls.mappings = {
         'Pause',
       ],
       mouseAxis: [],
-      mouseButton: [
-        3,
-      ],
+      mouseButton: [],
       mouseWheel: [],
     },
     interact: {
