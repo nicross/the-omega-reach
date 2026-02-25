@@ -33,7 +33,7 @@ content.programs.mainSequence = content.programs.invent({
     return true
   },
   // Rumble
-  getRumble: function () {
+  getRumble: function (point) {
     return this.fields.radius4d.valueAt({
       time: content.time.value(),
       x: point.x,
