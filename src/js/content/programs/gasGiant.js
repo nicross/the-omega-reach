@@ -74,4 +74,12 @@ content.programs.gasGiant = content.programs.invent({
 
     return true
   },
+  // Rumble
+  getRumble: function (point) {
+    return content.fn.gain(this.fields.color.valueAt({
+      x: point.x * 0.25,
+      y: point.z * this.properties.colorBands,
+      z: content.time.value() * this.properties.colorTimeScale,
+    }, 1), 8)
+  },
 }, content.programs.basePlanet)

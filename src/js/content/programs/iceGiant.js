@@ -21,17 +21,17 @@ content.programs.iceGiant = content.programs.invent({
 
     particle.target.h = engine.fn.lerp(this.properties.color1, this.properties.color2, content.fn.gain(
       this.fields.color.valueAt({
-        x: 0,
+        x: point.x * 0.25,
         y: point.z * this.properties.colorBands,
-        z: time * this.properties.saturationTimeScale,
+        z: time * this.properties.colorTimeScale,
       }, 1), 2
     ))
 
     particle.target.s = engine.fn.clamp(engine.fn.lerp(this.properties.saturationCenter - this.properties.saturationRange, this.properties.saturationCenter + this.properties.saturationRange,
       this.fields.saturation.valueAt({
-        x: 0,
+        x: point.x * 0.25,
         y: point.z * this.properties.saturationBands,
-        z: time * this.properties.colorTimeScale,
+        z: time * this.properties.saturationTimeScale,
       }, 1)
     ))
 
@@ -57,5 +57,13 @@ content.programs.iceGiant = content.programs.invent({
     }
 
     return true
+  },
+  // Rumble
+  getRumble: function (point) {
+    return content.fn.gain(this.fields.color.valueAt({
+      x: point.x * 0.25,
+      y: point.z * this.properties.colorBands,
+      z: content.time.value() * this.properties.colorTimeScale,
+    }, 1), 2)
   },
 }, content.programs.basePlanet)

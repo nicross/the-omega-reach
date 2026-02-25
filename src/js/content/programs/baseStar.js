@@ -63,4 +63,13 @@ content.programs.baseStar = content.programs.invent({
     return this.properties.rotation
   },
   getRotationRate: function () {return 0.05 * this.properties.rotationRate},
+  // Rumble
+  getRumble: function (point) {
+    return this.fields.radius4d.valueAt({
+      time: content.time.value(),
+      x: point.x,
+      y: point.y,
+      z: point.z,
+    }, 2, 0.0125)
+  },
 })

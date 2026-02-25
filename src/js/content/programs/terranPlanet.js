@@ -60,4 +60,8 @@ content.programs.terranPlanet = content.programs.invent({
 
     return true
   },
+  // Rumble
+  getRumble: function (point) {
+    return this.fields.radius.valueAt(point, this.properties.radiusScale) ** this.properties.radiusPower
+  },
 }, content.programs.basePlanet)

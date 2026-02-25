@@ -60,4 +60,12 @@ content.programs.acidPlanet = content.programs.invent({
 
     return true
   },
+  // Rumble
+  getRumble: function (point) {
+    return content.fn.gain(this.fields.color.valueAt({
+      x: point.x * 0.25,
+      y: point.y * 0.25,
+      z: point.z * this.properties.colorBands,
+    }, this.properties.colorScale), 2)
+  },
 }, content.programs.basePlanet)

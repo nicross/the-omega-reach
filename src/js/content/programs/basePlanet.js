@@ -74,4 +74,8 @@ content.programs.basePlanet = content.programs.invent({
     return this.properties.rotation
   },
   getRotationRate: function () {return 0.1 * this.properties.rotationRate},
+  // Rumble
+  getRumble: function (point) {
+    return this.fields.radius.valueAt(point, this.properties.radiusScale) ** this.properties.radiusPower
+  },
 })

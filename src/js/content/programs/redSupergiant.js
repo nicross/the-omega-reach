@@ -3,9 +3,9 @@ content.programs.redSupergiant = content.programs.invent({
   fieldDefinitions: {},
   propertyDefinitions: {
     radius4dAmplitude: (srand) => srand(0.5, 1),
-    radius4dPower: (srand) => srand(1, 3),
-    radius4dScale: (srand) => srand(3, 6),
-    radius4dTimeScale: (srand) => engine.fn.lerp(1/60, 1/15, srand()),
+    radius4dPower: (srand) => srand(0.5, 1.5),
+    radius4dScale: (srand) => srand(4, 8),
+    radius4dTimeScale: (srand) => engine.fn.lerp(1/8, 1/4, srand()),
   },
   alterParticleColor: function (particle, point) {
     const time = content.time.value()
@@ -31,5 +31,14 @@ content.programs.redSupergiant = content.programs.invent({
     particle.target.z = point.z * radius
 
     return true
+  },
+  // Rumble
+  getRumble: function (point) {
+    return this.fields.radius4d.valueAt({
+      time: content.time.value(),
+      x: point.x,
+      y: point.y,
+      z: point.z,
+    }, this.properties.radius4dScale, this.properties.radius4dTimeScale) ** this.properties.radius4dPower
   },
 }, content.programs.baseStar)

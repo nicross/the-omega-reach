@@ -366,4 +366,8 @@ content.programs.instrument = content.programs.invent({
 
     return this.properties.rotation
   },
+  // Rumble
+  getRumble: function (point) {
+    return this.fields.particleRadius.valueAt(point, this.properties.particleRadiusScale) ** this.properties.particleRadiusPower
+  },
 })

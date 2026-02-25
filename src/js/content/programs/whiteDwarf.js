@@ -29,4 +29,13 @@ content.programs.whiteDwarf = content.programs.invent({
 
     return true
   },
+  // Rumble
+  getRumble: function (point) {
+    return this.fields.radius4d.valueAt({
+      time: content.time.value(),
+      x: point.x,
+      y: point.y,
+      z: point.z,
+    }, 2, engine.fn.lerp(0.125, 0.5, this.properties.activity))
+  },
 }, content.programs.baseStar)

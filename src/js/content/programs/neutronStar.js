@@ -4,7 +4,7 @@ content.programs.neutronStar = content.programs.invent({
   propertyDefinitions: {
     radius4dLength: (srand) => srand(0.5, 1.5),
     radius4dScale: (srand) => srand(3, 6),
-    radius4dTimeScale: (srand) => srand(0.25, 0.75),
+    radius4dTimeScale: (srand) => srand(1/8, 1/4),
   },
   alterParticleColor: function (particle, point) {
     const time = content.time.value()
@@ -32,4 +32,13 @@ content.programs.neutronStar = content.programs.invent({
     return true
   },
   getRotationRate: function () {return engine.fn.lerp(0.25, 1, this.properties.rotationRate)},
+  // Rumble
+  getRumble: function (point) {
+    return this.fields.radius4d.valueAt({
+      time: content.time.value(),
+      x: point.x,
+      y: point.y,
+      z: point.z,
+    }, this.properties.radius4dScale, this.properties.radius4dTimeScale)
+  },
 }, content.programs.baseStar)
