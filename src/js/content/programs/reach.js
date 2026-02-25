@@ -56,4 +56,12 @@ content.programs.reach = content.programs.invent({
 
     return this.properties.rotation
   },
+  // Haptics
+  getRumble: function (point) {
+    return Math.max(
+      Math.abs(point.x),
+      Math.abs(point.y),
+      Math.abs(point.z),
+    ) ** 4
+  },
 })

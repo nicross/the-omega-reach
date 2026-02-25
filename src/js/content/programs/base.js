@@ -3,9 +3,10 @@ content.programs.base = {
   id: undefined,
   channel: 'default',
   hasReverb: false,
-  hasSynths: false,
+  hasSynths: true,
   fieldDefinitions: {
     // Hash of names to objects for engine.fn.createNoise()
+    rumble3d: {},
   },
   fields: {
     // Hash of named fields for this instance
@@ -33,6 +34,11 @@ content.programs.base = {
   },
   extend: function (definition) {
     const prototype = engine.fn.extend(this, definition)
+
+    prototype.defaultState = {
+      ...(this.defaultState || {}),
+      ...(definition.defaultState || {}),
+    }
 
     prototype.fieldDefinitions = {
       ...(this.fieldDefinitions || {}),
@@ -165,7 +171,72 @@ content.programs.base = {
     return this
   },
   // Synthesis - override createSynth as needed
-  createSynth: function ({point, wrapper}) {},
+  calculateParameters: function (point) {
+    const rootFrequency = engine.fn.fromMidi(48)
+
+    const value = Math.max(
+      content.solution.has() ? engine.fn.clamp(engine.fn.scale(engine.fn.distance(point, content.solution.get()), 1, 1/3, 0, 1)) ** 2 : 0,
+      this.getRumble(point)
+    )
+
+    return {
+      color: engine.fn.lerp(2, 4, value),
+      detune: engine.fn.lerp(-1200, 0, value),
+      fmDepth: rootFrequency * engine.fn.lerp(1/6, 1, value),
+      fmFrequency: engine.fn.lerp(4, 16, value),
+      frequency: rootFrequency,
+      gain: engine.fn.fromDb(-9, -3, value),
+    }
+  },
+  createSynth: function ({point, wrapper}) {
+    const {
+      color,
+      detune,
+      fmDepth,
+      fmFrequency,
+      frequency,
+      gain,
+    } = this.calculateParameters(point)
+
+    wrapper.maxColor = color
+    wrapper.rootFrequency = frequency
+
+    const synth = engine.synth.pwm({
+      detune,
+      gain,
+      frequency,
+      type: 'triangle',
+    }).connect(wrapper.input)
+
+    synth.assign('fm', engine.synth.lfo({
+      depth: fmDepth,
+      detune: detune,
+      frequency: fmFrequency,
+    }))
+
+    synth.fm.connect(synth.param.frequency)
+    synth.chainStop(synth.fm)
+
+    wrapper.onStop = () => synth.stop()
+
+    wrapper.onUpdate = () => {
+      const {
+        color,
+        detune,
+        fmDepth,
+        fmFrequency,
+        gain,
+      } = this.calculateParameters(point)
+
+      wrapper.maxColor = color
+
+      engine.fn.setParam(synth.param.detune, detune)
+      engine.fn.setParam(synth.param.fm.detune, detune)
+      engine.fn.setParam(synth.param.fm.depth, fmDepth)
+      engine.fn.setParam(synth.param.fm.frequency, fmFrequency)
+      engine.fn.setParam(synth.param.gain, gain)
+    }
+  },
   createSynthWrapper: function (point) {
     const _this = this
 
@@ -239,5 +310,9 @@ content.programs.base = {
   getLightSource: () => engine.tool.vector3d.create(),
   getRotation: function () {
     return engine.tool.quaternion.identity()
+  },
+  // Haptics
+  getRumble: function (point) {
+    return this.fields.rumble3d.valueAt(point, 1)
   },
 }
