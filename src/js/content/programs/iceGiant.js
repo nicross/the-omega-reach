@@ -1,12 +1,10 @@
 content.programs.iceGiant = content.programs.invent({
   id: 'iceGiant',
   fieldDefinitions: {
-    ...content.programs.basePlanet.fieldDefinitions,
     color: {},
     saturation: {},
   },
   propertyDefinitions: {
-    ...content.programs.basePlanet.propertyDefinitions,
     color1: (srand) => srand(1/3, 2/3),
     color2: function (srand) {return this.properties.color1 + srand(15/360, 45/360)},
     colorBands: (srand) => srand(6, 18),

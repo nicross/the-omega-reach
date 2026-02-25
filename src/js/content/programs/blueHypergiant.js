@@ -1,10 +1,7 @@
 content.programs.blueHypergiant = content.programs.invent({
   id: 'blueHypergiant',
-  fieldDefinitions: {
-    ...content.programs.baseStar.fieldDefinitions,
-  },
+  fieldDefinitions: {},
   propertyDefinitions: {
-    ...content.programs.baseStar.propertyDefinitions,
     radius4dAmplitude: (srand) => srand(0.5, 1),
     radius4dPower: (srand) => srand(1, 3),
     radius4dScale: (srand) => srand(3, 6),

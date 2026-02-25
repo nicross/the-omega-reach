@@ -1,14 +1,11 @@
 content.programs.acidPlanet = content.programs.invent({
   id: 'acidPlanet',
   fieldDefinitions: {
-    ...content.programs.basePlanet.fieldDefinitions,
     color: {},
     saturation: {},
     value: {},
   },
   propertyDefinitions: {
-    ...content.programs.basePlanet.propertyDefinitions,
-    ...content.programs.basePlanet.propertyDefinitions,
     color1: (srand) => srand(1/6, 1/2),
     color2: function (srand) {return engine.fn.wrap(this.properties.color1 + engine.fn.choose([
       () => ((srand() > 0.5 ? 1 : -1) * 1/3) + srand(-10/360, 10/360),

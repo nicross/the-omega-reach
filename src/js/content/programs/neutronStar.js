@@ -1,10 +1,7 @@
 content.programs.neutronStar = content.programs.invent({
   id: 'neutronStar',
-  fieldDefinitions: {
-    ...content.programs.baseStar.fieldDefinitions,
-  },
+  fieldDefinitions: {},
   propertyDefinitions: {
-    ...content.programs.baseStar.propertyDefinitions,
     radius4dLength: (srand) => srand(0.5, 1.5),
     radius4dScale: (srand) => srand(3, 6),
     radius4dTimeScale: (srand) => srand(0.25, 0.75),

@@ -1,10 +1,7 @@
 content.programs.whiteDwarf = content.programs.invent({
   id: 'whiteDwarf',
-  fieldDefinitions: {
-    ...content.programs.baseStar.fieldDefinitions,
-  },
+  fieldDefinitions: {},
   propertyDefinitions: {
-    ...content.programs.baseStar.propertyDefinitions,
     activity: (srand) => srand(),
   },
   alterParticleColor: function (particle, point) {

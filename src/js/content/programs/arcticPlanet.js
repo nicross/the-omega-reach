@@ -1,13 +1,11 @@
 content.programs.arcticPlanet = content.programs.invent({
   id: 'arcticPlanet',
   fieldDefinitions: {
-    ...content.programs.basePlanet.fieldDefinitions,
     colorHue: {},
     colorSaturation: {},
     colorValue: {},
   },
   propertyDefinitions: {
-    ...content.programs.basePlanet.propertyDefinitions,
     colorHueCenter: (srand) => srand(),
     colorHueRange: (srand) => srand(0, 0.5),
     colorHueScale: (srand) => srand(1, 4),

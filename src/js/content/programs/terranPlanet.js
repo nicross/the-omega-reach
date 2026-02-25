@@ -1,10 +1,7 @@
 content.programs.terranPlanet = content.programs.invent({
   id: 'terranPlanet',
-  fieldDefinitions: {
-    ...content.programs.basePlanet.fieldDefinitions,
-  },
+  fieldDefinitions: {},
   propertyDefinitions: {
-    ...content.programs.basePlanet.propertyDefinitions,
     iceNorth: (srand) => srand() > 1/3,
     iceNorthScale: (srand) => srand(1/16, 1/3),
     iceSouth: (srand) => srand() > 1/3,

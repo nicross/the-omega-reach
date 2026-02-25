@@ -32,7 +32,19 @@ content.programs.base = {
     return this
   },
   extend: function (definition) {
-    return engine.fn.extend(this, definition)
+    const prototype = engine.fn.extend(this, definition)
+
+    prototype.fieldDefinitions = {
+      ...(this.fieldDefinitions || {}),
+      ...(definition.fieldDefinitions || {}),
+    }
+
+    prototype.propertyDefinitions = {
+      ...(this.propertyDefinitions || {}),
+      ...(definition.propertyDefinitions || {}),
+    }
+
+    return prototype
   },
   // Lifecycle
   load: function (options = {}) {

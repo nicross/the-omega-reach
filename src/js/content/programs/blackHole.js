@@ -1,11 +1,7 @@
 content.programs.blackHole = content.programs.invent({
   id: 'blackHole',
-  fieldDefinitions: {
-    ...content.programs.baseStar.fieldDefinitions,
-  },
-  propertyDefinitions: {
-    ...content.programs.baseStar.propertyDefinitions,
-  },
+  fieldDefinitions: {},
+  propertyDefinitions: {},
   alterParticleColor: function (particle, point) {
     const time = content.time.value()
 

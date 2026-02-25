@@ -1,13 +1,11 @@
 content.programs.gasGiant = content.programs.invent({
   id: 'gasGiant',
   fieldDefinitions: {
-    ...content.programs.basePlanet.fieldDefinitions,
     color: {},
     saturation: {},
     value: {},
   },
   propertyDefinitions: {
-    ...content.programs.basePlanet.propertyDefinitions,
     color1: (srand) => srand(-1/4, 1/4),
     color2: function (srand) {return this.properties.color1 + engine.fn.choose([
       () => 0.5 + srand(-5/360, 5/360),

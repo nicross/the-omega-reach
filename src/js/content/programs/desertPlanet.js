@@ -1,13 +1,11 @@
 content.programs.desertPlanet = content.programs.invent({
   id: 'desertPlanet',
   fieldDefinitions: {
-    ...content.programs.basePlanet.fieldDefinitions,
     colorHue: {},
     colorSaturation: {},
     colorValue: {},
   },
   propertyDefinitions: {
-    ...content.programs.basePlanet.propertyDefinitions,
     colorHueCenter: (srand) => srand(),
     colorHueScale: (srand) => srand(1, 3),
     colorSaturationScale: (srand) => srand(1, 3),
