@@ -24,14 +24,14 @@ content.audio.reachGalaxy = (() => {
       frequency: rootFrequency,
       gain: 0.75,
       type: 'sawtooth',
-    }).filtered({
-      detune: 0,
-      frequency: rootFrequency,
     }).chainAssign(
       'panner', context.createStereoPanner()
     ).chainAssign(
       'fader', context.createGain()
-    ).connect(bus)
+    ).filtered({
+      detune: 0,
+      frequency: rootFrequency,
+    }).connect(bus)
 
     content.audio.reverb().from(synth)
 
