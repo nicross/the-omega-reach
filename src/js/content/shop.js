@@ -221,7 +221,7 @@ content.shop = (() => {
       return this
     },
     update: function () {
-      if (content.conservatory.isOpen()) {
+      if (content.conservatory.isOpen() && !content.location.is('shop') && !content.location.is('atrium')) {
         timer = engine.fn.accelerateValue(timer, 0, 1)
       }
 
