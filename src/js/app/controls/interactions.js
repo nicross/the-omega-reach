@@ -191,7 +191,7 @@ app.controls.interactions = (() => {
       z: mouseMemory.y,
     }).normalize()
 
-    if (engine.input.mouse.isButton(0)) {
+    if (mouseAllowed && engine.input.mouse.isButton(0)) {
       mousePrimaryPoint = mousePrimaryPoint || {}
       mousePrimaryPoint.depth = engine.fn.accelerateValue(mousePrimaryPoint.depth || 0, 1, 24)
       mousePrimaryPoint.x = point.x
@@ -201,7 +201,7 @@ app.controls.interactions = (() => {
       mousePrimaryPoint = undefined
     }
 
-    if (engine.input.mouse.isButton(2)) {
+    if (mouseAllowed && engine.input.mouse.isButton(2)) {
       mouseSecondaryPoint = mouseSecondaryPoint || {}
       mouseSecondaryPoint.depth = engine.fn.accelerateValue(mouseSecondaryPoint.depth || 0, 1, 24)
       mouseSecondaryPoint.x = point.x
