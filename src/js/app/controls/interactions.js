@@ -73,7 +73,8 @@ app.controls.interactions = (() => {
   let gamepadLeftPoint,
     gamepadRightPoint,
     keyboardPoints,
-    mousePoint,
+    mousePrimaryPoint,
+    mouseSecondaryPoint,
     points = []
 
   let mouseAllowed = false
@@ -173,7 +174,7 @@ app.controls.interactions = (() => {
   function updateKeyboard() {
     keyboardPoints = []
 
-    for (const [key, vector] of Object.entries(keyboardMappings)) {
+    for (let [key, vector] of Object.entries(keyboardMappings)) {
       if (engine.input.keyboard.is(key)) {
         keyboardPoints.push(vector)
         vector.depth = engine.fn.accelerateValue(vector.depth || 0, 1, 24)
@@ -184,14 +185,30 @@ app.controls.interactions = (() => {
   }
 
   function updateMouse() {
-    if (mouseAllowed && engine.input.mouse.isButton(0))  {
-      mousePoint = mousePoint || {}
-      mousePoint.x = 1 - mouseMemory.distance()
-      mousePoint.y = mouseMemory.x
-      mousePoint.z = mouseMemory.y
-      mousePoint.depth = engine.fn.accelerateValue(mousePoint.depth || 0, 1, 24)
+    const point = engine.tool.vector3d.create({
+      x: 1 - mouseMemory.distance(),
+      y: mouseMemory.x,
+      z: mouseMemory.y,
+    }).normalize()
+
+    if (engine.input.mouse.isButton(0)) {
+      mousePrimaryPoint = mousePrimaryPoint || {}
+      mousePrimaryPoint.depth = engine.fn.accelerateValue(mousePrimaryPoint.depth || 0, 1, 24)
+      mousePrimaryPoint.x = point.x
+      mousePrimaryPoint.y = point.y
+      mousePrimaryPoint.z = point.z
     } else {
-      mousePoint = undefined
+      mousePrimaryPoint = undefined
+    }
+
+    if (engine.input.mouse.isButton(2)) {
+      mouseSecondaryPoint = mouseSecondaryPoint || {}
+      mouseSecondaryPoint.depth = engine.fn.accelerateValue(mouseSecondaryPoint.depth || 0, 1, 24)
+      mouseSecondaryPoint.x = point.x
+      mouseSecondaryPoint.y = -point.y
+      mouseSecondaryPoint.z = -point.z
+    } else {
+      mouseSecondaryPoint = undefined
     }
   }
 
@@ -213,7 +230,8 @@ app.controls.interactions = (() => {
 
         points.push(
           ...keyboardPoints, // If more than limit, prefer most recent keys and other inputs
-          mousePoint,
+          mouseSecondaryPoint,
+          mousePrimaryPoint,
           gamepadLeftPoint,
           gamepadRightPoint,
         )

@@ -26,6 +26,12 @@ app.screen.game = app.screenManager.invent({
     this.menuElement.addEventListener('click', () => app.screenManager.dispatch('pause'))
     this.rightElement.addEventListener('click', () => this.movement.right())
     this.upElement.addEventListener('click', () => this.movement.up())
+
+    this.rootElement.addEventListener('contextmenu', (e) => {
+      if (!app.utility.focus.isFocusable(e.target)) {
+        e.preventDefault()
+      }
+    })
   },
   onEnter: function () {
     this.setBlanked(!app.settings.computed.graphicsOn)
