@@ -11,8 +11,7 @@ content.instruments = (() => {
   }
 
   function generate(name) {
-    // @todo Need a better way of determining this, now that selling is a thing, perhaps check against first moon?
-    const isTutorial = name.includes(content.scans.firstMoon())
+    const isTutorial = name.includes(content.scans.firstMoon().split(' ').slice(-2, -1).join(' '))
 
     const srand = (...seed) => engine.fn.srand('instrument', name, 'attribute', ...seed)()
     const rarity = srand('rarity') * (isTutorial ? 1/8 : 1)
