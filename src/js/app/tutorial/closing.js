@@ -12,7 +12,7 @@ app.tutorial.closing = app.tutorial.invent({
     [
       {
         title: `[Tutorial] <span class="u-screenReader">for</span> Closing:`,
-        description: `<strong>The Omega Conservatory</strong> is now closed to visitors. <strong>The gallery</strong> must display at least one instrument for it to reopen to the public.`,
+        description: `<strong>The Omega Conservatory</strong> is now closed to visitors. <strong>The gallery</strong> must have an appraised instrument for it to reopen to the public.`,
         actions: [
           {
             label: 'Regain control',

@@ -34,7 +34,7 @@ app.tutorial.galleryComplete = app.tutorial.invent({
       },
       {
         title: `[Tutorial] <span class="u-screenReader">for</span> Visitors:`,
-        description: `<strong>The Omega Conservatory</strong> is now open to visitors! <strong>The gallery</strong> must display at least one instrument for it to remain open.`,
+        description: `Congratulations! <strong>The Omega Conservatory</strong> is now open to visitors. <strong>The gallery</strong> must have an appraised instrument for it to remain open.`,
         actions: [
           {
             label: 'Regain control',

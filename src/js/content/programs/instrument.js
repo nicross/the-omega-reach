@@ -295,9 +295,9 @@ content.programs.instrument = content.programs.invent({
       cmFrequency: engine.fn.lerpExp(1/8, 8, engine.fn.clamp(
         engine.fn.lerp(this.properties.cmFrequencyCenter - this.properties.cmFrequencyRange, this.properties.cmFrequencyCenter + this.properties.cmFrequencyRange, this.fields.cmFrequency.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.cmFrequencyScale))),
       ), 4),
-      color: engine.fn.lerp(1, 8, engine.fn.lerp(engine.fn.clamp(
+      color: isComplete ? engine.fn.lerp(1, 8, engine.fn.clamp(
         engine.fn.lerp(this.properties.colorCenter - this.properties.colorRange, this.properties.colorCenter + this.properties.colorRange, this.fields.color.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.colorScale))),
-      ), 0, isComplete ? 0 : 1)),
+      )) : 0.5,
       detune: engine.fn.lerp(
         -50 * this.properties.detuneRange,
         50 * this.properties.detuneRange,

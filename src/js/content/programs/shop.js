@@ -25,7 +25,7 @@ content.programs.shop = content.programs.invent({
     particle.target.z = particle.floor.z + (particle.floor.y > -10 ? countertop : Math.max(0, -particle.floor.x - 20))
 
     if (isCellar) {
-      particle.target.z = particle.floor.z //+ Math.round(Math.min(0, engine.fn.scale(particle.target.x, -25, -26, 0, -1)))
+      particle.target.z = particle.floor.z
     }
 
     if (particle.floor.y < -10 && particle.floor.x <= -20) {

@@ -1,5 +1,6 @@
 content.shop = (() => {
-  const cooldownTime = 60
+  const cooldownTime = 60,
+    cooldownDisallowed = new Set(['lobby','atrium','shop'])
 
   const qualifiers = [
     'Active',
@@ -221,7 +222,7 @@ content.shop = (() => {
       return this
     },
     update: function () {
-      if (content.conservatory.isOpen() && !content.location.is('shop') && !content.location.is('atrium')) {
+      if (content.conservatory.isOpen() && !cooldownDisallowed.has(content.location.id())) {
         timer = engine.fn.accelerateValue(timer, 0, 1)
       }
 
