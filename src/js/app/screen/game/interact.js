@@ -75,7 +75,7 @@ app.screen.game.interact = (() => {
       lastFrame = frame
 
       value = app.settings.computed.inputHold
-        ? engine.fn.accelerateValue(value, 1, 1)
+        ? engine.fn.accelerateValue(value, 1, 3/2)
         : 0
 
       rootElement.classList.add('a-game--interact-active')

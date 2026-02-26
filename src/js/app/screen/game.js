@@ -68,7 +68,7 @@ app.screen.game = app.screenManager.invent({
     const threshold = {
       gamepad: 2/3,
       keyboard: 1/6,
-      mouse: 1/2,
+      mouse: 2/3,
     }[app.settings.computed.inputPreference]
 
     if (solution && content.location.get().canInteract()) {
