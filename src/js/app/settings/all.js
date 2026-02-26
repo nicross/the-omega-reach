@@ -1,3 +1,11 @@
+app.settings.register('gamepadDeadzone', {
+  default: engine.fn.scale(0.25, 0, 0.5, 0, 1),
+  compute: (rawValue) => engine.fn.lerp(0, 0.5, rawValue),
+  update: function (computedValue) {
+    engine.input.gamepad.setDeadzone(computedValue)
+  },
+})
+
 app.settings.register('gamepadVibration', {
   default: 1,
   update: function (computedValue) {

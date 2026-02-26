@@ -40,6 +40,7 @@ app.screen.settings = app.screenManager.invent({
 
     // Sliders
     this.sliders = [
+      ['.a-settings--gamepadDeadzone', app.settings.raw.gamepadDeadzone, app.settings.setGamepadDeadzone],
       ['.a-settings--gamepadVibration', app.settings.raw.gamepadVibration, app.settings.setGamepadVibration],
       ['.a-settings--mainVolume', app.settings.raw.mainVolume, app.settings.setMainVolume],
     ].map(([selector, initialValue, setter]) => {
