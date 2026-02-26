@@ -73,7 +73,7 @@ void main(void) {
     float lighting = max(
       min(
         1.0 - clamp(-d, 0.0, 1.0),
-        1.0 - clamp(-rotated.x, 0.0, 1.0)
+        1.0 - (clamp(-rotated.x, 0.0, 1.0) * 0.5)
       ),
       proximityRatio
     );
