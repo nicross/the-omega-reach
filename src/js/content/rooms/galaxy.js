@@ -41,16 +41,24 @@ content.rooms.galaxy = content.rooms.invent({
   },
   // Attributes
   getAttributeLabels: function () {
-    if (!this.canInteract()) {
-      return []
+    const attributes = [],
+      count = content.stars.countForGalaxy(this.getGalaxy().name)
+
+    if (count) {
+      attributes.push({
+        label: `${app.utility.format.number(count)} star${count == 1 ? '' : 's'} reached`,
+        modifiers: [],
+      })
     }
 
-    return [
-      {
+    if (this.canInteract()) {
+      attributes.push({
         label: 'Unreached stars',
         modifiers: ['undiscovered'],
-      },
-    ]
+      })
+    }
+
+    return attributes
   },
   // Movement
   canEnter: () => content.galaxies.count() > 0,

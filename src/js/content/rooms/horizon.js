@@ -26,16 +26,24 @@ content.rooms.horizon = content.rooms.invent({
   },
   // Attributes
   getAttributeLabels: function () {
-    if (!this.canInteract()) {
-      return []
+    const attributes = [],
+      count = content.galaxies.count()
+
+    if (count) {
+      attributes.push({
+        label: `${app.utility.format.number(count)} ${count == 1 ? 'galaxy' : 'galaxies'} reached`,
+        modifiers: [],
+      })
     }
 
-    return [
-      {
+    if (this.canInteract()) {
+      attributes.push({
         label: 'Unreached galaxies',
         modifiers: ['undiscovered'],
-      },
-    ]
+      })
+    }
+
+    return attributes
   },
   // Movement
   canEnter: () => Boolean(content.rooms.reach.state.online),
