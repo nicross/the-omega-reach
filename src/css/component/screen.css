@@ -13,19 +13,19 @@
     max-width: 75%;
   }
   .c-screen > * + * {
-    margin-top: 1rem;
+    margin-top: 1em;
   }
   .c-screen > * + *,
   .c-screen--actions > * + *,
   .c-screen--fields > * + *,
   .c-screen--items > * + * {
-    margin-top: 1rem;
+    margin-top: 1em;
   }
   .c-screen--actions,
   .c-screen--description,
   .c-screen--fields,
   .c-screen--status {
-    margin-top: 2rem;
+    margin-top: 2em;
   }
   .c-screen--actions {
     list-style-type: none;
@@ -74,7 +74,7 @@
     }
     .c-screen--table td,
     .c-screen--table th {
-      padding: 0.5rem 0;
+      padding: 0.5em 0;
     }
     .c-screen--table td {
       text-align: right;

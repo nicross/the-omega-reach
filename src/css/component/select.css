@@ -11,7 +11,7 @@
     position: relative;
     transition: all 0.125s ease;
     transition-property: border-color, color;
-    width: 3rem;
+    width: 3em;
   }
   .c-select--button:focus,
   .c-select--button:hover {

@@ -57,8 +57,11 @@
       </div>
 
       <div class="a-app--screen a-app--gameMenu">
-        <section class="c-screen a-gameMenu" aria-label="Paused">
-          <h1 class="c-screen--title">Paused</h1>
+        <section class="c-screen a-gameMenu" aria-labelledby="a-gameMenu--title">
+          <div id="a-gameMenu--title">
+            <h1 class="c-screen--title" title="Warning">Paused</h1>
+            <p class="a-newGame--warning">Your collection was saved.</p>
+          </div>
           <ul class="c-screen--actions">
             <li class="c-screen--action">
               <button class="c-menuButton a-gameMenu--settings" type="button">Settings</button>
