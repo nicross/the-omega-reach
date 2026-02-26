@@ -44,11 +44,15 @@ app.controls = (() => {
         )
       }, 0),
       mappings.mouseWheel.reduce((value, mapping) => {
-        const reading = mapping[1] * engine.input.mouse[mapping[0]]()
+        const isShift = engine.input.keyboard.is('ShiftLeft') || engine.input.keyboard.is('ShiftRight')
+
+        const reading = mapping[2] == isShift
+          ? mapping[1] * engine.input.mouse[mapping[0]]()
+          : 0
 
         return Math.max(
           value,
-          reading > 0 ? reading : 0,
+          Math.sign(reading),
         )
       }, 0),
       // Mouse buttons

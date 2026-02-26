@@ -111,7 +111,7 @@ app.controls.mappings = {
       mouseAxis: [],
       mouseButton: [],
       mouseWheel: [
-        ['getWheelY', -1],
+        ['getWheelY', -1, false],
       ],
     },
     moveDown: {
@@ -127,7 +127,7 @@ app.controls.mappings = {
       mouseAxis: [],
       mouseButton: [],
       mouseWheel: [
-        ['getWheelY', 1],
+        ['getWheelY', 1, false],
       ],
     },
     moveLeft: {
@@ -145,7 +145,8 @@ app.controls.mappings = {
         3,
       ],
       mouseWheel: [
-        ['getWheelX', -1],
+        //['getWheelX', -1, false],
+        ['getWheelY', 1, true],
       ],
     },
     moveRight: {
@@ -163,7 +164,8 @@ app.controls.mappings = {
         4,
       ],
       mouseWheel: [
-        ['getWheelX', 1],
+        //['getWheelX', 1, false],
+        ['getWheelY', -1, true],
       ],
     },
     // Actions
