@@ -120,6 +120,25 @@ app.screen.game.dialog = (() => {
       const focus = app.utility.focus.get(),
         ui = app.controls.ui()
 
+      const focusables = app.utility.focus.selectFocusable(rootElement)
+
+      const mappings = {
+        dialogA: focusables[1],
+        dialogB: focusables[focusables.length - 1],
+      }
+
+      for (const [key, target] of Object.entries(mappings)) {
+        if (ui[key]) {
+          if (focus === target) {
+            target.click()
+            return this
+          } else if (!focus || focus === focusables[0]) {
+            target.focus()
+            return this
+          }
+        }
+      }
+
       if (ui.confirm && focus) {
         focus.click()
       }

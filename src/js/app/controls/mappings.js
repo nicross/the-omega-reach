@@ -236,6 +236,38 @@ app.controls.mappings = {
       ],
       mouseWheel: [],
     },
+    // Dialog shortcuts
+    dialogA: {
+      gamepadAnalog: [],
+      gamepadAxis: [],
+      gamepadDigital: [
+        0,
+      ],
+      keyboard: [
+        'Enter',
+        'NumpadEnter',
+        'Space',
+      ],
+      mouseAxis: [],
+      mouseButton: [],
+      mouseWheel: [],
+    },
+    dialogB: {
+      gamepadAnalog: [],
+      gamepadAxis: [],
+      gamepadDigital: [
+        1,
+      ],
+      keyboard: [
+        'Backspace',
+        'Delete',
+        'Escape',
+        'NumpadDecimal',
+      ],
+      mouseAxis: [],
+      mouseButton: [],
+      mouseWheel: [],
+    },
     // Individual special buttons
     enter: {
       gamepadAnalog: [],
