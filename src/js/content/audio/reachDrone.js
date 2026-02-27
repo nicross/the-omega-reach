@@ -13,6 +13,8 @@ content.audio.reachDrone = (() => {
     targetPower = 0,
     targetStress = 0
 
+  content.audio.reverb().from(bus)
+
   function accelerate(isImmediate = false) {
     const isTitle = Boolean(engine.loop.isPaused() && !content.location.get())
     isImmediate = isImmediate && !isTitle
@@ -67,7 +69,6 @@ content.audio.reachDrone = (() => {
     ).connect(bus)
 
     synth.panner.pan.value = pan
-    content.audio.reverb().from(synth)
 
     // Color LFO
     synth.assign('cm', engine.synth.lfo({

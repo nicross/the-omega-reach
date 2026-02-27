@@ -9,6 +9,8 @@ content.audio.reachGalaxy = (() => {
   let current,
     synth
 
+  content.audio.reverb().from(bus)
+
   function createSynth() {
     if (synth) {
       return
@@ -32,8 +34,6 @@ content.audio.reachGalaxy = (() => {
       detune: 0,
       frequency: rootFrequency,
     }).connect(bus)
-
-    content.audio.reverb().from(synth)
 
     // Gain LFO
     synth.assign('am', engine.synth.lfo({
