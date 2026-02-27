@@ -60,10 +60,10 @@ content.programs.iceGiant = content.programs.invent({
   },
   // Rumble
   getRumble: function (point) {
-    return content.fn.gain(this.fields.color.valueAt({
+    return this.fields.color.valueAt({
       x: point.x * 0.25,
       y: point.z * this.properties.colorBands,
       z: content.time.value() * this.properties.colorTimeScale,
-    }, 1), 2)
+    }, 1)
   },
 }, content.programs.basePlanet)

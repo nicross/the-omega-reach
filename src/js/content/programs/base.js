@@ -137,6 +137,7 @@ content.programs.base = {
   },
   update: function (options = {}) {
     this.updateSynths(options)
+    this.onUpdate()
 
     return this
   },
@@ -176,7 +177,7 @@ content.programs.base = {
 
     const value = Math.max(
       content.solution.has() ? engine.fn.clamp(engine.fn.scale(engine.fn.distance(point, content.solution.get()), 1, 1/3, 0, 1)) ** 2 : 0,
-      this.getRumble(point)
+      this.getRumbleRotated(point)
     )
 
     return {
@@ -185,7 +186,7 @@ content.programs.base = {
       fmDepth: rootFrequency * engine.fn.lerp(1/6, 1, value),
       fmFrequency: engine.fn.lerp(4, 16, value),
       frequency: rootFrequency,
-      gain: engine.fn.fromDb(-9, -3, value),
+      gain: engine.fn.fromDb(-1.5, 0, value),
     }
   },
   createSynth: function ({point, wrapper}) {
@@ -273,8 +274,8 @@ content.programs.base = {
 
         this.onUpdate(point)
 
-        engine.fn.setParam(wrapper.filter.frequency, wrapper.rootFrequency * engine.fn.scale(point.x * depth, -1 * depth, 1, wrapper.minColor, wrapper.maxColor))
-        engine.fn.setParam(wrapper.input.gain, baseGain/(_this.synths.size*0.5)*depth)
+        engine.fn.setParam(wrapper.filter.frequency, wrapper.rootFrequency * engine.fn.scale(point.x, -1, 1, wrapper.minColor, engine.fn.lerp(wrapper.minColor, wrapper.maxColor, depth)))
+        engine.fn.setParam(wrapper.input.gain, depth * baseGain / ((1+_this.synths.size)*0.5))
         engine.fn.setParam(wrapper.panner.pan, point.y)
 
         return this
@@ -315,4 +316,11 @@ content.programs.base = {
   getRumble: function (point) {
     return this.fields.rumble3d.valueAt(point, 1)
   },
+  getRumbleRotated: function (point) {
+    return this.getRumble(
+      engine.tool.vector3d.create(point).rotateQuaternion(
+        this.getRotation()
+      ).invertZ()
+    )
+  }
 }

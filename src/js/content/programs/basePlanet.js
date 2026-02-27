@@ -30,6 +30,11 @@ content.programs.basePlanet = content.programs.invent({
     content.sphereIndex.randomize()
     return this
   },
+  onUpdate: function () {
+    this.properties.rotation = this.properties.rotation.multiply(
+      this.properties.rotationVelocity.lerpFrom({}, engine.loop.delta() * this.getRotationRate())
+    ).normalize()
+  },
   // Particles
   alterParticle: function (particle) {
     const index = content.sphereIndex.get(),
@@ -61,17 +66,9 @@ content.programs.basePlanet = content.programs.invent({
     return this.properties.lightSource.clone()
   },
   getRotation: function () {
-    const isScanned = content.scans.is(this.options.body.name)
-
-    if (!isScanned) {
-      return engine.tool.quaternion.identity()
-    }
-
-    this.properties.rotation = this.properties.rotation.multiply(
-      this.properties.rotationVelocity.lerpFrom({}, engine.loop.delta() * this.getRotationRate())
-    ).normalize()
-
-    return this.properties.rotation
+    return content.scans.is(this.options.body.name)
+      ? this.properties.rotation
+      : engine.tool.quaternion.identity()
   },
   getRotationRate: function () {return 0.1 * this.properties.rotationRate},
   // Rumble

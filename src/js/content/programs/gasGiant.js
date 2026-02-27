@@ -80,6 +80,6 @@ content.programs.gasGiant = content.programs.invent({
       x: point.x * 0.25,
       y: point.z * this.properties.colorBands,
       z: content.time.value() * this.properties.colorTimeScale,
-    }, 1), 8)
+    }, 1), 2)
   },
 }, content.programs.basePlanet)

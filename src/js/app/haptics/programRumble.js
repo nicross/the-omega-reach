@@ -10,7 +10,7 @@ engine.loop.on('frame', ({paused}) => {
   }
 
   const max = app.controls.interactions.points().reduce(
-    (max, point) => Math.max(max, program.getRumble(point) * point.depth),
+    (max, point) => Math.max(max, program.getRumbleRotated(point) * point.depth),
     0
   )
 

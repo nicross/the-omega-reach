@@ -7,6 +7,25 @@ content.programs.reach = content.programs.invent({
     content.sphereIndex.randomize()
     return this
   },
+  onUpdate: function () {
+    if (content.rooms.reach.state.online) {
+      if (!this.properties.rotationVelocity) {
+        const primes = [2,3,5,7]
+        this.properties.rotationVelocity = engine.tool.quaternion.fromEuler({
+          pitch: engine.fn.randomSign() * engine.fn.chooseSplice(primes, Math.random()),
+          roll: engine.fn.randomSign() * engine.fn.chooseSplice(primes, Math.random()),
+          yaw: engine.fn.randomSign() * engine.fn.chooseSplice(primes, Math.random()),
+        }).normalize()
+      }
+
+      this.properties.rotation = this.properties.rotation.multiply(
+        this.properties.rotationVelocity.lerpFrom({}, engine.loop.delta() / 5)
+      ).normalize()
+    } else {
+      this.properties.rotation = engine.tool.quaternion.identity()
+      this.properties.rotationVelocity = undefined
+    }
+  },
   onExit: function () {
     this.properties.rotationVelocity = undefined
   },
@@ -34,27 +53,9 @@ content.programs.reach = content.programs.invent({
     particle.target.z = isOnline ? engine.fn.clamp(particle.spheres[index].z, -0.5, 0.5) * 2 : (particle.floor.z + Math.max(0, -particle.floor.x - 10) + (distanceFactor * 2))
   },
   getRotation: function () {
-    const isOnline = content.rooms.reach.state.online
-
-    if (!isOnline) {
-      this.properties.rotation = engine.tool.quaternion.identity()
-      this.properties.rotationVelocity = undefined
-    } else {
-      if (!this.properties.rotationVelocity) {
-        const primes = [2,3,5,7]
-        this.properties.rotationVelocity = engine.tool.quaternion.fromEuler({
-          pitch: engine.fn.randomSign() * engine.fn.chooseSplice(primes, Math.random()),
-          roll: engine.fn.randomSign() * engine.fn.chooseSplice(primes, Math.random()),
-          yaw: engine.fn.randomSign() * engine.fn.chooseSplice(primes, Math.random()),
-        }).normalize()
-      }
-
-      this.properties.rotation = this.properties.rotation.multiply(
-        this.properties.rotationVelocity.lerpFrom({}, engine.loop.delta() / 5)
-      ).normalize()
-    }
-
-    return this.properties.rotation
+    return content.rooms.reach.state.online
+      ? this.properties.rotation
+      : engine.tool.quaternion.identity()
   },
   // Haptics
   getRumble: function (point) {

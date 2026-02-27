@@ -107,6 +107,11 @@ content.programs.instrument = content.programs.invent({
     rotation: () => engine.tool.quaternion.fromEuler({pitch: engine.fn.randomFloat(-Math.PI, Math.PI), roll: engine.fn.randomFloat(-Math.PI, Math.PI), yaw: engine.fn.randomFloat(-Math.PI, Math.PI)}).normalize(),
     rotationVelocity: () => engine.tool.quaternion.fromEuler({pitch: engine.fn.randomFloat(-Math.PI, Math.PI), roll: engine.fn.randomFloat(-Math.PI, Math.PI), yaw: engine.fn.randomFloat(-Math.PI, Math.PI)}).normalize(),
   },
+  onUpdate: function () {
+    this.properties.rotation = this.properties.rotation.multiply(
+      this.properties.rotationVelocity.lerpFrom({}, engine.loop.delta() / 30)
+    ).normalize()
+  },
   createSynth: function ({point, wrapper}) {
     const {
       amDepth,
@@ -357,17 +362,9 @@ content.programs.instrument = content.programs.invent({
   },
   getLightSource: () => engine.tool.euler.create().forward(),
   getRotation: function () {
-    const isScanned = this.options.instrument.state.scans > 0
-
-    if (!isScanned) {
-      return engine.tool.quaternion.identity()
-    }
-
-    this.properties.rotation = this.properties.rotation.multiply(
-      this.properties.rotationVelocity.lerpFrom({}, engine.loop.delta() / 30)
-    ).normalize()
-
-    return this.properties.rotation
+    return this.options.instrument.state.scans > 0
+      ? this.properties.rotation
+      : engine.tool.quaternion.identity()
   },
   // Rumble
   getRumble: function (point) {

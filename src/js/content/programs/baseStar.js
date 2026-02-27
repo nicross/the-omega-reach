@@ -16,6 +16,11 @@ content.programs.baseStar = content.programs.invent({
     content.sphereIndex.randomize()
     return this
   },
+  onUpdate: function () {
+    this.properties.rotation = this.properties.rotation.multiply(
+      this.properties.rotationVelocity.lerpFrom({}, engine.loop.delta() * this.getRotationRate())
+    ).normalize()
+  },
   // Particles
   alterParticle: function (particle) {
     const index = content.sphereIndex.get(),
@@ -50,17 +55,9 @@ content.programs.baseStar = content.programs.invent({
   alterParticleColor: function (particle, point) {},
   alterParticleVertex: function (particle, point) {},
   getRotation: function () {
-    const isScanned = content.scans.is(this.options.star.name)
-
-    if (!isScanned) {
-      return engine.tool.quaternion.identity()
-    }
-
-    this.properties.rotation = this.properties.rotation.multiply(
-      this.properties.rotationVelocity.lerpFrom({}, engine.loop.delta() * this.getRotationRate())
-    ).normalize()
-
-    return this.properties.rotation
+    return content.scans.is(this.options.star.name)
+      ? this.properties.rotation
+      : engine.tool.quaternion.identity()
   },
   getRotationRate: function () {return 0.05 * this.properties.rotationRate},
   // Rumble
