@@ -32,7 +32,7 @@ content.programs.baseGalaxy = content.programs.invent({
       zScale = this.properties.zScale
 
     const radius = this.options.galaxy.type == 'Irregular' || this.options.galaxy.type == 'Peculiar'
-      ? engine.fn.lerp(this.properties.galaxyRadius * 0.5, this.properties.galaxyRadius * 1.5, this.fields.irregularRadius.valueAt(particle.spheres[index], this.properties.irregularRadiusScale))
+      ? engine.fn.lerp(this.properties.galaxyRadius * 0.25, this.properties.galaxyRadius * 1.75, this.fields.irregularRadius.valueAt(particle.spheres[index], this.properties.irregularRadiusScale))
       : this.properties.galaxyRadius
 
     const distance = engine.fn.distance({

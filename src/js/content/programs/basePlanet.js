@@ -12,6 +12,7 @@ content.programs.basePlanet = content.programs.invent({
     }).normalize(),
     radiusPower: (srand) => srand(1, 2),
     radiusScale: (srand) => srand(1, 4),
+    ring: function (srand) {return this.hasAttribute('Ring system') ? srand() : 0},
     rotation: function (srand) {
       return this.properties.lightSource.quaternion().conjugate().multiply(
         engine.tool.quaternion.fromEuler({
@@ -59,6 +60,14 @@ content.programs.basePlanet = content.programs.invent({
       particle.target.s = 1
       particle.target.v = 1
     }
+
+    if (this.properties.ring && Math.abs(particle.spheres[index].z) < 0.025) {
+      particle.target.s *= 0.125
+      particle.target.v = engine.fn.lerp(0.875, 1, particle.target.v)
+      particle.target.x *= engine.fn.lerp(1.5, 2, this.properties.ring)
+      particle.target.y *= engine.fn.lerp(1.5, 2, this.properties.ring)
+      particle.target.z *= engine.fn.lerp(1.5, 2, this.properties.ring)
+    }
   },
   alterParticleColor: function (particle, point) {},
   alterParticleVertex: function (particle, point) {},
@@ -69,6 +78,15 @@ content.programs.basePlanet = content.programs.invent({
     return content.scans.is(this.options.body.name)
       ? this.properties.rotation
       : engine.tool.quaternion.identity()
+  },
+  hasAttribute: function (name) {
+    for (const quirk of this.options.body.quirks) {
+      if (quirk.name == name) {
+        return
+      }
+    }
+
+    return false
   },
   getRotationRate: function () {return 0.1 * this.properties.rotationRate},
   // Rumble

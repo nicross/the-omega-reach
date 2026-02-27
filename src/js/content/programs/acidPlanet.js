@@ -11,24 +11,26 @@ content.programs.acidPlanet = content.programs.invent({
       () => ((srand() > 0.5 ? 1 : -1) * 1/3) + srand(-10/360, 10/360),
       () => ((srand() > 0.5 ? 1 : -1) * 1/2) + srand(-10/360, 10/360),
     ], srand())(), -0.5, 0.5)},
-    colorBands: (srand) => srand(3, 6),
+    colorBands: (srand) => srand(1, 2),
     colorScale: (srand) => srand(1, 2),
-    saturationBands: (srand) => srand(2, 6),
-    saturationCenter: (srand) => srand(0.75, 1),
-    saturationRange: (srand) => srand(0, 0.125),
+    saturationBands: (srand) => srand(8, 16),
+    saturationCenter: (srand) => srand(0.125, 0.375),
+    saturationRange: (srand) => srand(0.375, 0.75),
     saturationScale: (srand) => srand(1, 2),
-    valueBands: (srand) => srand(2, 6),
-    valueCenter: (srand) => srand(7/8, 1),
+    saturationTimeScale: (srand) => srand(1/16, 1/8),
+    valueBands: (srand) => srand(8, 16),
+    valueCenter: (srand) => srand(3/4, 1),
     valueRange: (srand) => srand(0, 1/4),
     valueScale: (srand) => srand(2, 6),
+    valueTimeScale: (srand) => srand(1/16, 1/8),
   },
   alterParticleColor: function (particle, point) {
     const time = content.time.value()
 
     particle.target.h = engine.fn.lerp(this.properties.color1, this.properties.color2, content.fn.gain(
       this.fields.color.valueAt({
-        x: point.x * 0.25,
-        y: point.y * 0.25,
+        x: point.x * 0.5,
+        y: point.y * 0.5,
         z: point.z * this.properties.colorBands,
       }, this.properties.colorScale), 2)
     )
@@ -36,16 +38,16 @@ content.programs.acidPlanet = content.programs.invent({
     particle.target.s = engine.fn.clamp(engine.fn.lerp(this.properties.saturationCenter - this.properties.saturationRange, this.properties.saturationCenter + this.properties.saturationRange,
       this.fields.saturation.valueAt({
         x: point.x * 0.25,
-        y: point.y * 0.25,
-        z: point.z * this.properties.saturationBands,
+        y: point.z * this.properties.saturationBands,
+        z: time * this.properties.saturationTimeScale,
       }, this.properties.saturationScale)
     ))
 
     particle.target.v = engine.fn.clamp(engine.fn.lerp(this.properties.valueCenter - this.properties.valueRange, this.properties.valueCenter + this.properties.valueRange,
       this.fields.saturation.valueAt({
         x: point.x * 0.25,
-        y: point.y * 0.25,
-        z: point.z * this.properties.valueBands,
+        y: point.z * this.properties.valueBands,
+        z: time * this.properties.valueTimeScale,
       }, this.properties.valueScale)
     ))
 

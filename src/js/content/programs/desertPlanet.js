@@ -10,9 +10,9 @@ content.programs.desertPlanet = content.programs.invent({
     colorHueScale: (srand) => srand(1, 3),
     colorSaturationScale: (srand) => srand(1, 3),
     colorValueScale: (srand) => srand(1, 3),
-    iceNorth: (srand) => srand() > 1/3,
+    iceNorth: function (srand) {return (this.hasAttribute('Polar ice') && srand() > 1/2) || srand() > 1/2},
     iceNorthScale: (srand) => srand(1/16, 1/3),
-    iceSouth: (srand) => srand() > 1/3,
+    iceSouth: function (srand) {return (this.hasAttribute('Polar ice') && (!this.properties.iceNorth || srand() > 1/2)) || srand() > 1/2},
     iceSouthScale: (srand) => srand(1/16, 1/3),
   },
   alterParticleColor: function (particle, point) {

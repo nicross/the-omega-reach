@@ -2,9 +2,9 @@ content.programs.terranPlanet = content.programs.invent({
   id: 'terranPlanet',
   fieldDefinitions: {},
   propertyDefinitions: {
-    iceNorth: (srand) => srand() > 1/3,
+    iceNorth: function (srand) {return (this.hasAttribute('Polar ice') && srand() > 1/2) || srand() > 1/2},
     iceNorthScale: (srand) => srand(1/16, 1/3),
-    iceSouth: (srand) => srand() > 1/3,
+    iceSouth: function (srand) {return (this.hasAttribute('Polar ice') && (!this.properties.iceNorth || srand() > 1/2)) || srand() > 1/2},
     iceSouthScale: (srand) => srand(1/16, 1/3),
     radiusScale: (srand) => srand(1, 5),
   },
