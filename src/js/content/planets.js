@@ -226,7 +226,7 @@ content.planets = (() => {
         program: 'acidPlanet',
         instrument: 1,
         moons: 3,
-        weight: habitability * 0.5,
+        weight: (1 - habitability) * 0.5,
         commonQuirks: [
           ...commonQuirks,
           ...commonTerrestrialQuirks,
@@ -281,7 +281,7 @@ content.planets = (() => {
         program: 'desertPlanet',
         instrument: 1,
         moons: 3,
-        weight: (1 - habitability) * 0.5,
+        weight: 1 * 0.5,
         commonQuirks: [
           ...commonQuirks,
           ...commonTerrestrialQuirks,

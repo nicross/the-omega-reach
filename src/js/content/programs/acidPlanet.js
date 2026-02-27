@@ -52,7 +52,9 @@ content.programs.acidPlanet = content.programs.invent({
     return true
   },
   alterParticleVertex: function (particle, point) {
-    const radius = engine.fn.lerp(1, 2, this.options.body.radius)
+    const amplitude = 0.125 * this.bumpiness * 0.5
+
+    const radius = engine.fn.lerp(1, 2, this.options.body.radius) * (1 + amplitude)
 
     particle.target.x = point.x * radius
     particle.target.y = point.y * radius

@@ -137,7 +137,7 @@ content.moons = (() => {
         label: 'Acid moon',
         program: 'acidMoon',
         instrument: 1,
-        weight: planet.habitability,
+        weight: 1 - planet.habitability,
         commonQuirks: [
           ...commonQuirks,
           'Acid ocean',
@@ -158,7 +158,7 @@ content.moons = (() => {
         label: 'Terran moon',
         program: 'terranMoon',
         instrument: 1,
-        weight: planet.habitability,
+        weight: 2 * planet.habitability,
         commonQuirks: [
           ...commonQuirks,
           lifeQuirks[1],
@@ -186,7 +186,7 @@ content.moons = (() => {
         label: 'Desert moon',
         program: 'desertMoon',
         instrument: 1,
-        weight: 1 - planet.habitability,
+        weight: 1,
         commonQuirks: [
           ...commonQuirks,
           lifeQuirks[0],

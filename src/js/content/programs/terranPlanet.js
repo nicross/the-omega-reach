@@ -19,7 +19,7 @@ content.programs.terranPlanet = content.programs.invent({
     const depth = engine.fn.clamp(engine.fn.scale(roll, 0, 0.5, 1, 0))
 
     const radius = engine.fn.lerp(1, 2, this.options.body.radius)
-      * (1 + (bump * amplitude))
+      * (1 + ((bump * 0.5) * amplitude))
 
     const isIce = (this.properties.iceNorth && point.z > 1 - this.properties.iceNorthScale)
       || (this.properties.iceSouth && point.z < -1 + this.properties.iceSouthScale)
@@ -33,7 +33,7 @@ content.programs.terranPlanet = content.programs.invent({
       particle.target.s = 0
       particle.target.v = 1
     } else if (bump <= 0) {
-      particle.target.h = -1/3
+      particle.target.h = 2/3
       particle.target.s = engine.fn.lerp(0.5, 1, depth)
       particle.target.v = engine.fn.lerp(1, 0.5, depth)
     } else if (bump < 0.0625) {

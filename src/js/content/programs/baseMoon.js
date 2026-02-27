@@ -1,19 +1,20 @@
 ;(() => {
   const baseDefinition = {
     id: 'baseMoon',
-    bumpiness: 8,
+    bumpiness: 6,
     onLoad: function () {
       content.sphereIndex.randomize()
 
-      const alterParticle = this.alterParticle.bind(this)
+      const alterParticle = this.alterParticle.bind(this),
+        radiusFactor = engine.fn.lerp(0.4, 0.5, this.options.body.planet.radius)
 
       this.alterParticle = (particle) => {
         alterParticle(particle)
 
         if (content.scans.is(this.options.body.name)) {
-          particle.target.x *= 0.5
-          particle.target.y *= 0.5
-          particle.target.z *= 0.5
+          particle.target.x *= radiusFactor
+          particle.target.y *= radiusFactor
+          particle.target.z *= radiusFactor
         }
       }
 

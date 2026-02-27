@@ -44,7 +44,7 @@ content.programs.iceGiant = content.programs.invent({
     return true
   },
   alterParticleVertex: function (particle, point) {
-    const radius = engine.fn.lerp(2, 3, this.options.body.radius)
+    const radius = engine.fn.lerp(2.5, 3.5, this.options.body.radius)
 
     particle.target.x = point.x * radius
     particle.target.y = point.y * radius
