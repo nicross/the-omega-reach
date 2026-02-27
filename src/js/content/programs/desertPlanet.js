@@ -7,9 +7,9 @@ content.programs.desertPlanet = content.programs.invent({
   },
   propertyDefinitions: {
     colorHueCenter: (srand) => srand(),
-    colorHueScale: (srand) => srand(1, 3),
-    colorSaturationScale: (srand) => srand(1, 3),
-    colorValueScale: (srand) => srand(1, 3),
+    colorHueScale: (srand) => srand(2, 6),
+    colorSaturationScale: (srand) => srand(2, 6),
+    colorValueScale: (srand) => srand(2, 6),
     iceNorth: function (srand) {return (this.hasAttribute('Polar ice') && srand() > 1/2) || srand() > 1/2},
     iceNorthScale: (srand) => srand(1/16, 1/3),
     iceSouth: function (srand) {return (this.hasAttribute('Polar ice') && (!this.properties.iceNorth || srand() > 1/2)) || srand() > 1/2},

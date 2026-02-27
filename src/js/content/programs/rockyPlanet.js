@@ -8,13 +8,13 @@ content.programs.rockyPlanet = content.programs.invent({
   propertyDefinitions: {
     colorHueCenter: (srand) => srand(),
     colorHueRange: (srand) => srand(0, 0.5),
-    colorHueScale: (srand) => srand(1, 4),
-    colorSaturationCenter: (srand) => srand(0.125, 0.375),
+    colorHueScale: (srand) => srand(2, 6),
+    colorSaturationCenter: (srand) => srand(0, 0.125),
     colorSaturationRange: (srand) => srand(0, 0.25),
     colorSaturationScale: (srand) => srand(2, 4),
-    colorValueCenter: (srand) => srand(0.333, 0.666),
+    colorValueCenter: function (srand) {return srand(0.25, 0.5) + (this.hasAttribute('High albedo') ? 0.25 : 0)},
     colorValueRange: (srand) => srand(0, 0.333),
-    colorValueScale: (srand) => srand(1, 4),
+    colorValueScale: (srand) => srand(2, 6),
   },
   alterParticleColor: function (particle, point) {
     particle.target.h = engine.fn.lerp(

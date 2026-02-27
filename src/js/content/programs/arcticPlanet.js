@@ -8,14 +8,14 @@ content.programs.arcticPlanet = content.programs.invent({
   propertyDefinitions: {
     colorHueCenter: (srand) => srand(),
     colorHueRange: (srand) => srand(0, 0.5),
-    colorHueScale: (srand) => srand(1, 4),
+    colorHueScale: (srand) => srand(2, 6),
     colorSaturationCenter: (srand) => srand(0, 0.25),
     colorSaturationPower: (srand) => srand(0.125, 0.5),
     colorSaturationRange: (srand) => srand(0.25, 0.5),
     colorSaturationScale: (srand) => srand(2, 6),
     colorValueCenter: (srand) => srand(0.875, 1),
     colorValueRange: (srand) => srand(0, 0.25),
-    colorValueScale: (srand) => srand(1, 4),
+    colorValueScale: (srand) => srand(2, 6),
   },
   alterParticleColor: function (particle, point) {
     particle.target.h = engine.fn.lerp(

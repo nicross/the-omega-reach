@@ -14,17 +14,19 @@ content.programs.basePlanet = content.programs.invent({
     radiusScale: (srand) => srand(1, 4),
     ring: function (srand) {return this.hasAttribute('Ring system') ? srand() : 0},
     rotation: function (srand) {
+      const tiltFactor  = this.hasAttribute('Extreme tilt') ? 1 : 16
+
       return this.properties.lightSource.quaternion().conjugate().multiply(
         engine.tool.quaternion.fromEuler({
-          pitch: srand(-1, 1) * engine.const.tau / 16,
-          roll: srand(-1, 1) * engine.const.tau / 16,
-          yaw: srand(-1, 1) * engine.const.tau / 16,
+          pitch: srand(-1, 1) * engine.const.tau / tiltFactor,
+          roll: srand(-1, 1) * engine.const.tau / tiltFactor,
+          yaw: srand(-1, 1) * engine.const.tau / tiltFactor,
         })
       )
     },
-    rotationRate: (srand) => srand(),
+    rotationRate: function (srand) {return this.hasAttribute('Tidally locked') ? 0 : srand()},
     rotationVelocity: function (srand) {
-      return engine.tool.quaternion.fromEuler({yaw: srand() > 0.5 ? 1 : -1}).normalize()
+      return engine.tool.quaternion.fromEuler({yaw: this.hasAttribute('Retrograde spin') ? -1 : 1}).normalize()
     },
   },
   onLoad: function () {
@@ -82,7 +84,7 @@ content.programs.basePlanet = content.programs.invent({
   hasAttribute: function (name) {
     for (const quirk of this.options.body.quirks) {
       if (quirk.name == name) {
-        return
+        return true
       }
     }
 
