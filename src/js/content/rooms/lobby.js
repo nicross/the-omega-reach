@@ -19,6 +19,9 @@ content.rooms.lobby = content.rooms.invent({
     return this.isOpen()
   },
   isOpen: () => content.conservatory.isOpen(),
+  // Atrium
+  getAtriumMuffle: () => 1/4,
+  getAtriumPan: () => 2/3,
   // Reach
   getReachMuffle: () => 1 - (1/32),
   getReachPan: () => 1/2,

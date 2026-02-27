@@ -55,6 +55,9 @@ content.rooms.horizon = content.rooms.invent({
 
     return this.move('up')
   },
+  // Atrium
+  getAtriumMuffle: () => 1/3,
+  getAtriumPan: () => 0,
   // Reach
   getReachMuffle: () => 1 - (2/3),
 })

@@ -156,6 +156,9 @@ content.rooms.base = {
   },
   onEnter: function () {},
   onExit: function () {},
+  // Atrium
+  getAtriumMuffle: () => 1,
+  getAtriumPan: () => 0,
   // Reach
   getReachMuffle: () => 1,
   getReachPan: () => 0,

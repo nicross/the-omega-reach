@@ -218,6 +218,10 @@ content.rooms.star = content.rooms.invent({
       star,
       seed: star.name,
     })
-  },// Reach
+  },
+  // Atrium
+  getAtriumMuffle: () => 3/4,
+  getAtriumPan: () => 0,
+  // Reach
   getReachMuffle: () => 1 - (1/3),
 })

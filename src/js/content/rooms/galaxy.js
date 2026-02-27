@@ -131,6 +131,9 @@ content.rooms.galaxy = content.rooms.invent({
       seed: galaxy.name,
     })
   },
+  // Atrium
+  getAtriumMuffle: () => 1/2,
+  getAtriumPan: () => 0,
   // Reach
   getReachMuffle: () => 1 - (1/2),
 })
