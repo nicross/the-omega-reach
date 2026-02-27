@@ -101,6 +101,11 @@ app.screen.game = app.screenManager.invent({
       isFinite(closest) ? engine.fn.clamp(engine.fn.scale(closest, threshold, 2, 1, 0), 0, 1) : 0
     )
 
+    // Program
+    content.programs.get()?.update({
+      points: interactions,
+    })
+
     // Handle UI controls
     const focus = app.utility.focus.get(),
       game = app.controls.game(),
@@ -148,11 +153,6 @@ app.screen.game = app.screenManager.invent({
     if (!interacted) {
       this.interact.decrement().setCooldown(false)
     }
-
-    // Programs
-    content.programs.get()?.update({
-      points: interactions,
-    })
   },
   // Methods
   getFocusWithinTarget: function () {

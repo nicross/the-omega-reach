@@ -85,12 +85,11 @@ app.tutorial.shopLoop = app.tutorial.invent({
             label: 'Buy it',
             before: () => {
               content.instruments.add(name)
+
               content.wallet.subtract(cost)
               content.shop.resetTimer()
-              content.audio.interactComplete.trigger()
-              content.audio.interactSuccess.trigger({
-                index: 2,
-              })
+
+              content.audio.interactSuccess.trigger({index: 2})
             },
           },
           {
