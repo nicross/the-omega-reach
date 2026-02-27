@@ -1,5 +1,5 @@
 content.audio.interactProximity = (() => {
-  const baseGain = engine.fn.fromDb(-4.5),
+  const baseGain = engine.fn.fromDb(-3),
     bus = content.audio.channel.default.createBus(),
     rootFrequency = engine.fn.fromMidi(72)
 

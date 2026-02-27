@@ -1,8 +1,7 @@
 content.audio.atriumAmbient = (() => {
-  const baseGain = engine.fn.fromDb(-16.5),
+  const baseGain = engine.fn.fromDb(-18),
     bus = content.audio.channel.default.createBus(),
-    fields = {},
-    rootFrequency = engine.fn.fromMidi(24)
+    fields = {}
 
   const fieldNames = [
     'brownModDepth',
@@ -203,6 +202,43 @@ content.audio.atriumAmbient = (() => {
     engine.fn.setParam(synth.white.param.playbackRate, whitePlaybackRate)
   }
 
+  function tweet({
+    color = engine.fn.lerpExp(0.5, 2, Math.random() * (1 - muffle), 0.5),
+    detune = engine.fn.randomFloat(-10, 10),
+    duration = engine.fn.randomFloat(1/8, 1),
+    frequency = engine.fn.fromMidi(engine.fn.choose([60,63,65,67,70,72], Math.random()) + 24),
+    gain = engine.fn.fromDb(engine.fn.lerp(-39, -27, Math.random() * (1 - muffle))),
+    pan2 = engine.fn.randomFloat(-1, 1) * (pan ? Math.abs(pan) : 1),
+    when = engine.time(),
+    width = engine.fn.randomFloat(0.25, 0.75),
+  } = {}) {
+    const synth = engine.synth.pwm({
+      detune: -1200,
+      frequency,
+      type: 'triangle',
+      when,
+      width,
+    }).chainAssign(
+      'panner', engine.context().createStereoPanner()
+    ).filtered({
+      frequency: frequency * color,
+    }).connect(bus)
+
+    synth.panner.pan.value = engine.fn.clamp(pan + pan2, -1, 1)
+
+    synth.param.gain.linearRampToValueAtTime(gain, when + 1/64)
+    synth.param.gain.linearRampToValueAtTime(gain/4, when + 1/16)
+    synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration)
+
+    synth.param.detune.linearRampToValueAtTime(detune, when + duration + 1/64)
+    synth.param.detune.setValueAtTime(detune, when + duration/2)
+    synth.param.detune.linearRampToValueAtTime(1200, when + duration)
+
+    synth.param.width.linearRampToValueAtTime(0.5, when + duration)
+
+    synth.stop(when + duration)
+  }
+
   return {
     import: function () {
       if (synth) {
@@ -237,6 +273,10 @@ content.audio.atriumAmbient = (() => {
           createSynth()
         } else {
           updateSynth()
+        }
+
+        if (Math.random() < 2/engine.performance.fps()) {
+          tweet()
         }
       } else if (synth) {
         destroySynth()

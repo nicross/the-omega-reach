@@ -24,7 +24,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
         },
         {
           title: `<q>Question for you:</q>`,
-          description: `<q>Is this <em>earthen hot dog</em> a sandwich?</q> They gesticulate with it forcefully in your direction. It's open-faced, of seed bread and mammal sausage, and rather long—except for the generous bite drawn from its end.`,
+          description: `<q>Is this <em>earthen hot dog</em> a sandwich?</q> They gesticulate with it forcefully in your direction. It's open-faced, of mammal sausage and seed bread, and rather oblong—except for the generous bite drawn from its end.`,
           actions: [
             {
               label: 'Definitely!',
@@ -60,7 +60,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
         },
         {
           title: `<q>Let's just agree to disagree.</q>`,
-          description: `They suck their teeth as they finish their treat. <q>It's a solid seven out of ten snack, but I could eat these all day! Anyway—you know me—I'm sorry for how hunger makes me speak. That reminds me! Just sixteen milli…</q>`,
+          description: `They suck their teeth as they finish their treat. <q>It's a solid seven out of ten snack, but I could eat these for eternity! Anyway—you know me—I'm sorry for how hunger makes me speak. That reminds me! Just sixteen milli…</q>`,
           actions: [
             {
               label: `Wait patiently`,

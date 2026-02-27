@@ -14,7 +14,7 @@ app.tutorial.donationLoop = app.tutorial.invent({
     if (!this.state.tutorial) {
       app.screen.game.dialog.push({
         title: `Perfect timing!`,
-        description: `It appears you missed some visitors while you were busy with <strong>the reach</strong>. Beyond the usual indicators—like dust on the doormat or missing pens—when left, their generous donations are the most enticing!`,
+        description: `It appears you missed some visitors while you were busy with <strong>the reach</strong>. Beyond the usual indicators—like dust on the doormat or missing pencils—when left, their generous donations are the most enticing!`,
         actions: [
           {
             label: 'Collect earnings',
@@ -28,11 +28,15 @@ app.tutorial.donationLoop = app.tutorial.invent({
           {
             label: 'Regain control',
             before: () => this.state.tutorial = true,
+            after: () => this.earnCredits()
           }
         ],
       })
+    } else {
+      this.earnCredits()
     }
-
+  },
+  earnCredits: function () {
     content.audio.interactSuccess.trigger({index: 2})
 
     const amount = content.donations.amount()
