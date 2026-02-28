@@ -5,7 +5,7 @@ content.programs.shop = content.programs.invent({
   },
   // Particles
   alterParticle: function (particle) {
-    const isCellar = engine.fn.between(particle.floor.y, 10, 15) && !content.rooms.shop.isOpen(),
+    const isCellar = engine.fn.between(particle.floor.y, 10, 15) && content.cellar.isOpen(),
       isOnline = content.rooms.reach.state.online,
       time = content.time.value()
 
