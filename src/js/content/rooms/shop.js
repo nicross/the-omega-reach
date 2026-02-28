@@ -25,6 +25,6 @@ content.rooms.shop = content.rooms.invent({
   getAtriumMuffle: () => 1/4,
   getAtriumPan: () => -2/3,
   // Reach
-  getReachMuffle: () => 1 - (1/32),
+  getReachMuffle: () => 1 - (1/4),
   getReachPan: () => -1/2,
 })

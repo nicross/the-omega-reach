@@ -82,6 +82,6 @@ content.rooms.atrium = content.rooms.invent({
   getAtriumMuffle: () => 0,
   getAtriumPan: () => 0,
   // Reach
-  getReachMuffle: () => 1 - (1/3),
+  getReachMuffle: () => 1 - (1/2),
   getReachPan: () => 0,
 })

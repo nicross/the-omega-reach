@@ -35,7 +35,7 @@ content.audio.reachDrone = (() => {
   function calculateParameters() {
     return {
       carrierDetune: engine.fn.lerp(-1200, 0, power) + engine.fn.lerp(0, 2400, Math.abs(stress)),
-      carrierGain: (power ** 0.75) * engine.fn.fromDb(engine.fn.lerp(0, -3, engine.fn.lerp(muffle, 0, stress))),
+      carrierGain: (power ** 0.75) * engine.fn.lerp((1 - muffle) ** 0.5, engine.fn.fromDb(-3), stress),
       color: engine.fn.lerp(3, 1, engine.fn.lerp(muffle, 0, stress)),
     }
   }

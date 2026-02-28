@@ -166,12 +166,11 @@ content.rooms.cellar = content.rooms.invent({
   getAtriumMuffle: () => 1,
   // Reach
   getReachMuffle: () => {
-    const base = 1/2,
-      distance = content.cellar.position.get().distance(),
+    const distance = content.cellar.position.get().distance(),
       max = content.cellar.health.max(),
       value = engine.fn.clamp(distance / max)
 
-    return 1 - engine.fn.lerpExp(0.5, 0, value, 2)
+    return 1 - engine.fn.lerpExp(1/4, 0, value, 0.5)
   },
   getReachPan: () => -content.cellar.position.get().normalize().x,
 })
