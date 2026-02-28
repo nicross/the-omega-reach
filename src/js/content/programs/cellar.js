@@ -16,6 +16,10 @@ content.programs.cellar = content.programs.invent({
   onLoad: function () {
     setTimeout(() => this.loadProperties(), 0)
   },
+  // Synthesis
+  invertSynthX: function () {
+    return !content.solution.has()
+  },
   // Particles
   alterParticle: function (particle) {
     const isOnline = content.rooms.reach.state.online,

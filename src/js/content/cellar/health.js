@@ -3,7 +3,7 @@ content.cellar.health = (() => {
 
   function calculateMax() {
     const count = content.instruments.count()
-    return 2 + (count ? Math.round(Math.log2(count)) : 0)
+    return 4 + (count ? Math.round(Math.log2(count)) : 0)
   }
 
   return {

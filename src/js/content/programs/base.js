@@ -181,7 +181,7 @@ content.programs.base = {
     )
 
     return {
-      color: engine.fn.lerp(2, 4, value),
+      color: engine.fn.lerp(3, 4, value),
       detune: engine.fn.lerp(-1200, 0, value),
       fmDepth: rootFrequency * engine.fn.lerp(1/6, 1, value),
       fmFrequency: engine.fn.lerp(4, 16, value),
@@ -200,7 +200,7 @@ content.programs.base = {
     } = this.calculateParameters(point)
 
     wrapper.maxColor = color
-    wrapper.minColor = 1
+    wrapper.minColor = 2
     wrapper.rootFrequency = frequency
 
     const synth = engine.synth.pwm({
@@ -275,7 +275,7 @@ content.programs.base = {
 
         this.onUpdate(point)
 
-        engine.fn.setParam(wrapper.filter.frequency, wrapper.rootFrequency * engine.fn.scale(point.x, -1, 1, wrapper.minColor, engine.fn.lerp(wrapper.minColor, wrapper.maxColor, depth)))
+        engine.fn.setParam(wrapper.filter.frequency, wrapper.rootFrequency * engine.fn.scale((_this.invertSynthX() ? -1 : 1) * point.x, -1, 1, wrapper.minColor, engine.fn.lerp(wrapper.minColor, wrapper.maxColor, depth)))
         engine.fn.setParam(wrapper.input.gain, depth * baseGain / ((1+_this.synths.size)*0.5))
         engine.fn.setParam(wrapper.panner.pan, point.y)
 
@@ -288,15 +288,19 @@ content.programs.base = {
     wrapper.filter.connect(wrapper.output)
     wrapper.output.connect(this.destination)
 
-    wrapper.filter.frequency.value = wrapper.rootFrequency * engine.fn.scale(point.x * depth, -1 * depth, 1, wrapper.minColor, wrapper.maxColor)
+    wrapper.filter.frequency.value = wrapper.rootFrequency * engine.fn.scale((_this.invertSynthX() ? -1 : 1) * point.x, -1, 1, wrapper.minColor, engine.fn.lerp(wrapper.minColor, wrapper.maxColor, depth))
     wrapper.input.gain.value = 0
     wrapper.panner.pan.value = point.y
 
     wrapper.output.gain.value = 0
     engine.fn.rampLinear(wrapper.output.gain, baseGain, attack)
 
+    this.decorateSynthWrapper(wrapper)
+
     return wrapper
   },
+  decorateSynthWrapper: (wrapper) => {},
+  invertSynthX: () => false,
   // Particles
   alterParticle: function (particle) {},
   alterParticleUnscanned: function (particle) {

@@ -21,7 +21,7 @@ content.rooms.cellar = content.rooms.invent({
     return [
       {
         label: `${app.utility.format.health(content.cellar.health.amount())}`,
-        modifiers: [content.cellar.health.has(2) ? 'legendary' : 'rare'],
+        modifiers: ['legendary'],
       },
     ]
   },

@@ -142,10 +142,11 @@ app.controls.interactions = (() => {
 
     if (left) {
       gamepadLeftPoint = gamepadLeftPoint || {}
+      gamepadLeftPoint.depth = left.depth
       gamepadLeftPoint.x = left.x
       gamepadLeftPoint.y = left.y
       gamepadLeftPoint.z = left.z
-      gamepadLeftPoint.depth = left.depth
+      gamepadLeftPoint.xPrime = gamepadLeftPoint.x
     } else {
       gamepadLeftPoint = undefined
     }
@@ -154,10 +155,11 @@ app.controls.interactions = (() => {
 
     if (right) {
       gamepadRightPoint = gamepadRightPoint || {}
+      gamepadRightPoint.depth = right.depth
       gamepadRightPoint.x = right.x
       gamepadRightPoint.y = right.y
       gamepadRightPoint.z = right.z
-      gamepadRightPoint.depth = right.depth
+      gamepadRightPoint.xPrime = gamepadRightPoint.x
     } else {
       gamepadRightPoint = undefined
     }
@@ -189,6 +191,7 @@ app.controls.interactions = (() => {
       mousePrimaryPoint.x = point.x
       mousePrimaryPoint.y = point.y
       mousePrimaryPoint.z = point.z
+      mousePrimaryPoint.xPrime = mousePrimaryPoint.x
     } else {
       mousePrimaryPoint = undefined
     }
@@ -199,6 +202,7 @@ app.controls.interactions = (() => {
       mouseSecondaryPoint.x = -point.x
       mouseSecondaryPoint.y = point.y
       mouseSecondaryPoint.z = point.z
+      mouseSecondaryPoint.xPrime = mouseSecondaryPoint.x
     } else {
       mouseSecondaryPoint = undefined
     }
@@ -232,6 +236,17 @@ app.controls.interactions = (() => {
 
         if (points.length > pointLimit) {
           points = points.slice(points.length - pointLimit - 1, points.length)
+        }
+
+        // Handle point inversion?
+        const isInverted = content.programs.get()?.invertSynthX() ? -1 : 1
+
+        for (const point of points) {
+          if (!('xPrime' in point)) {
+            point.xPrime = point.x
+          }
+
+          point.x = isInverted * point.xPrime
         }
       }
 
