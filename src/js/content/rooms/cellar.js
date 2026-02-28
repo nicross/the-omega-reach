@@ -168,7 +168,7 @@ content.rooms.cellar = content.rooms.invent({
   getReachMuffle: () => {
     const base = 1/2,
       distance = content.cellar.position.get().distance(),
-      max = content.cellar.health.max() - 1,
+      max = content.cellar.health.max(),
       value = engine.fn.clamp(distance / max)
 
     return 1 - engine.fn.lerpExp(0.5, 0, value, 2)
