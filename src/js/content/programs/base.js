@@ -200,6 +200,7 @@ content.programs.base = {
     } = this.calculateParameters(point)
 
     wrapper.maxColor = color
+    wrapper.minColor = 1
     wrapper.rootFrequency = frequency
 
     const synth = engine.synth.pwm({

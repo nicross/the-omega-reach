@@ -85,6 +85,7 @@ content.rooms.cellar = content.rooms.invent({
     }
 
     content.cellar.position.set(next)
+    this.updateProgram()
 
     content.location.emit('move', {
       direction: 'down',
@@ -104,6 +105,7 @@ content.rooms.cellar = content.rooms.invent({
     }
 
     content.cellar.position.set(next)
+    this.updateProgram()
 
     content.location.emit('move', {
       direction: 'left',
@@ -123,6 +125,7 @@ content.rooms.cellar = content.rooms.invent({
     }
 
     content.cellar.position.set(next)
+    this.updateProgram()
 
     content.location.emit('move', {
       direction: 'right',
@@ -146,6 +149,7 @@ content.rooms.cellar = content.rooms.invent({
     }
 
     content.cellar.position.set(next)
+    this.updateProgram()
 
     content.location.emit('move', {
       direction: 'up',
@@ -154,6 +158,9 @@ content.rooms.cellar = content.rooms.invent({
     })
 
     return this.move('up')
+  },
+  updateProgram: function () {
+    content.programs.load(this.defaultProgram)
   },
   // Atrium
   getAtriumMuffle: () => 1,

@@ -204,7 +204,7 @@ app.controls.interactions = (() => {
     if (mouseAllowed && engine.input.mouse.isButton(2)) {
       mouseSecondaryPoint = mouseSecondaryPoint || {}
       mouseSecondaryPoint.depth = engine.fn.accelerateValue(mouseSecondaryPoint.depth || 0, 1, 24)
-      mouseSecondaryPoint.x = point.x
+      mouseSecondaryPoint.x = -point.x
       mouseSecondaryPoint.y = -point.y
       mouseSecondaryPoint.z = -point.z
     } else {
