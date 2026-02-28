@@ -15,12 +15,12 @@ content.rooms.cellar = content.rooms.invent({
       return 'Cellar entrance'
     }
 
-    return ''
+    return app.utility.format.coordinates(content.cellar.position.get())
   },
   getAttributeLabels: function () {
     return [
       {
-        label: `${content.cellar.health.amount()} sanity`,
+        label: `${app.utility.format.health(content.cellar.health.amount())}`,
         modifiers: [content.cellar.health.has(2) ? 'legendary' : 'rare'],
       },
     ]
