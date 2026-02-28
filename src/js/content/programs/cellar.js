@@ -82,9 +82,9 @@ content.programs.cellar = content.programs.invent({
     }
 
     const test = {
-      x: Math.sign(point.x) * (Math.abs(point.x)) ** 2,
-      y: Math.sign(point.y) * (Math.abs(point.y)) ** 2,
-      z: Math.sign(point.z) * (Math.abs(point.z)) ** 2,
+      x: Math.sign(point.x) * (Math.abs(point.x)) ** 3,
+      y: Math.sign(point.y) * (Math.abs(point.y)) ** 3,
+      z: Math.sign(point.z) * (Math.abs(point.z)) ** 3,
     }
 
     return vectors.reduce((value, vector) => {
