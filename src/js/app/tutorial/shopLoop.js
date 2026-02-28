@@ -106,6 +106,8 @@ app.tutorial.shopLoop = app.tutorial.invent({
             label: 'Back to work',
             before: () => {
               content.shop.resetTimer()
+              content.cellar.startRun()
+
               app.screen.game.update()
             },
           },
