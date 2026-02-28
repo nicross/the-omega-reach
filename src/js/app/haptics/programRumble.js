@@ -20,11 +20,11 @@ engine.loop.on('frame', ({paused}) => {
 
   const factor = content.location.is('cellar') && !content.solution.has()
     ? 1
-    : 0.25
+    : 0.5
 
   app.haptics.enqueue({
     duration: engine.loop.delta() * 1000,
-    strongMagnitude: (max ** 2) * (Math.random()) * factor,
-    weakMagnitude: (max ** 2) * (Math.random()) * factor,
+    strongMagnitude: max * engine.fn.lerp(0.5, 1, Math.random()) * factor,
+    weakMagnitude: max * engine.fn.lerp(0.5, 1, Math.random()) * factor,
   })
 })
