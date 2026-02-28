@@ -124,15 +124,7 @@ app.controls.interactions = (() => {
       z: engine.input.gamepad.getAxis(mappings.xAxis),
     })
 
-    let magnitude = point.distance()
-
-    if (magnitude > 1) {
-      point.y /= magnitude
-      point.z /= magnitude
-      magnitude = 1
-    }
-
-    point.x = 1 - magnitude
+    point.x = Math.sqrt(1 - point.distance()) || 0
 
     const rotated = point.rotateQuaternion(mappings.rotation).normalize()
 
@@ -186,7 +178,7 @@ app.controls.interactions = (() => {
 
   function updateMouse() {
     const point = engine.tool.vector3d.create({
-      x: 1 - mouseMemory.distance(),
+      x: Math.sqrt(1 - mouseMemory.distance()) || 0,
       y: mouseMemory.x,
       z: mouseMemory.y,
     }).normalize()
