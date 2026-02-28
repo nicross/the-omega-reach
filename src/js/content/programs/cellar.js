@@ -1,6 +1,7 @@
 content.programs.cellar = content.programs.invent({
   id: 'cellar',
   fieldDefinitions: {
+    flicker: {type: '1d'},
     terrain: {type: 'simplex3d', octaves: 3}
   },
   propertyDefinitions: {
@@ -17,7 +18,12 @@ content.programs.cellar = content.programs.invent({
   },
   // Particles
   alterParticle: function (particle) {
-    particle.target.h = 0
+    const isOnline = content.rooms.reach.state.online,
+      time = content.time.value()
+
+    let isBoundary = false
+
+    particle.target.h = content.rooms.reach.state.online ? -25/360 : -1/3
     particle.target.s = 0
     particle.target.v = 1
     particle.target.x = particle.floor.x
@@ -25,25 +31,31 @@ content.programs.cellar = content.programs.invent({
     particle.target.z = particle.floor.z
 
     if (
-         (particle.target.y < -7.5 && !this.properties.canMoveLeft)
-      || (particle.target.y > 7.5 && !this.properties.canMoveRight)
-      || (particle.target.x < -7.5 && !this.properties.canMoveUp)
+         (particle.target.y < -5 && !this.properties.canMoveLeft)
+      || (particle.target.y > 5 && !this.properties.canMoveRight)
+      || (particle.target.x < -5 && !this.properties.canMoveUp)
     ) {
-      particle.target.v = 0.125
+      isBoundary = true
     }
 
-    if (this.properties.isEntrance && particle.target.x < -7.5) {
-      if (Math.abs(particle.target.y) < 7.5) {
-        particle.target.z += engine.fn.scale(particle.target.x, -7.5, -8.5, 0, 0.25)
+    if (this.properties.isEntrance && particle.target.x < -5) {
+      if (Math.abs(particle.target.y) < 5) {
+        particle.target.z += Math.round(engine.fn.scale(particle.target.x, -7.5, -8.5, 0, 0.25) * 2) * 0.5
       } else {
-        particle.target.v = 0.125
+        isBoundary = true
       }
-    } else if (particle.target.v <= 0.125) {
-      particle.target.z += (this.fields.terrain.valueAt({
-        x: ((this.properties.position.x * 30) + particle.target.x) * 0.5,
-        y: ((this.properties.position.y * 30) + particle.target.y) * 0.5,
-        z: Math.sin(engine.const.tau * content.time.value() * engine.fn.lerp(0, 1/2, this.properties.health)),
-      }, 1) ** 4) * 2 * this.properties.health
+    }
+
+    if (isBoundary) {
+      particle.target.h = isOnline ? (engine.fn.lerp(-25, 25, content.fn.gain(this.fields.flicker.valueAt({x: time}, 6), 1.5)) / 360) : engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]), -1, 1, -1/2, -1/4)
+      particle.target.s = engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1]), -1, 1, 0.333, 1)
+      particle.target.v = engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]), -1, 1, 0, 1)
+
+      particle.target.z += ((this.fields.terrain.valueAt({
+        x: ((this.properties.position.x * 30) + particle.target.x) * 0.0625,
+        y: ((this.properties.position.y * 30) + particle.target.y) * 0.0625,
+        z: time * engine.fn.lerp(0, 1/4, this.properties.health),
+      }, 1) ** 2) * 4 * this.properties.health) - 2
     }
   },
   // Rumble

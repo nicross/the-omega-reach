@@ -15,7 +15,7 @@ content.rooms.cellar = content.rooms.invent({
       return 'Cellar entrance'
     }
 
-    return `Cellar room`
+    return ''
   },
   getAttributeLabels: function () {
     return [
