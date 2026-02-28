@@ -20,6 +20,7 @@ content.cellar.discovered = (() => {
     is: ({x, y}) => cache.has(x, y),
     reset: function () {
       cache.reset()
+      flattened.length = 0
 
       return this
     },
