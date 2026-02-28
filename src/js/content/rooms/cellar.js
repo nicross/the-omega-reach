@@ -60,7 +60,7 @@ content.rooms.cellar = content.rooms.invent({
       ? 'Go south'
       : 'No south'
   },
-  getMoveDownLabel: function () {
+  getMoveLeftLabel: function () {
     return this.canMoveLeft()
       ? 'Go west'
       : 'No west'
@@ -72,7 +72,7 @@ content.rooms.cellar = content.rooms.invent({
   },
   getMoveUpLabel: function () {
     return this.canMoveUp()
-      ? (this.isEntrance() ? 'To shop' : 'Go north')
+      ? (this.isEntrance() ? 'To the shop' : 'Go north')
       : 'No north'
   },
   moveDown: function () {

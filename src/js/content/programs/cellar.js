@@ -34,6 +34,7 @@ content.programs.cellar = content.programs.invent({
          (particle.target.y < -5 && !this.properties.canMoveLeft)
       || (particle.target.y > 5 && !this.properties.canMoveRight)
       || (particle.target.x < -5 && !this.properties.canMoveUp)
+      || (particle.target.x < -5 && Math.abs(particle.target.y) > 5)
     ) {
       isBoundary = true
     }
