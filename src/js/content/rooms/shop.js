@@ -5,9 +5,11 @@ content.rooms.shop = content.rooms.invent({
   description: 'Out for lunch',
   defaultProgram: 'shop',
   moveLeftLabel: 'To the atrium',
+  moveDownLabel: 'To the cellar',
   // Transitions
   transitions: {
     left: 'atrium',
+    down: 'cellar',
   },
   // Methods
   getDescription: function () {

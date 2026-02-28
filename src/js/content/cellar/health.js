@@ -18,6 +18,7 @@ content.cellar.health = (() => {
         amount,
       }
     },
+    has: (value = 1) => amount >= value,
     import: function (data = {}) {
       amount = data.amount || 0
 

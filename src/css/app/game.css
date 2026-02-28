@@ -83,6 +83,11 @@
       font-weight: 500;
       margin-right: 0.5em;
     }
+    .a-game--attribute-legendary {
+      color: #FF55AA;
+      font-family: FiraCodeMedium, monospace;
+      font-weight: 500;
+    }
     .a-game--attribute-rare {
       color: #FFAA55;
       font-family: FiraCodeMedium, monospace;

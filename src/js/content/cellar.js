@@ -2,12 +2,16 @@ content.cellar = (() => {
   return {
     export: function () {
       return {
+        discovered: this.discovered.export(),
         health: this.health.export(),
+        position: this.position.export(),
         run: this.run.export(),
       }
     },
     import: function (data = {}) {
+      this.discovered.import(data.discovered)
       this.health.import(data.health)
+      this.position.import(data.position)
       this.run.import(data.run)
 
       return this
@@ -18,10 +22,13 @@ content.cellar = (() => {
         && this.isRunning()
     },
     isRunning: function () {
+      const health = this.health.amount()
+
       // TODO: BUT NOT when health == 1 and zero interactive tiles remain, teleport back to shop at this point
-      return this.health.amount() > 0
+      return health >= 1
     },
     reset: function () {
+      this.discovered.reset()
       this.health.reset()
       this.run.reset()
 
@@ -32,6 +39,7 @@ content.cellar = (() => {
       this.run.increment()
       this.health.setMax()
       this.position.reset()
+      this.discovered.reset().set(this.position.get())
 
       return this
     },

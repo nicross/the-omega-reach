@@ -18,6 +18,7 @@ content.cellar.position = (() => {
 
       return this
     },
+    is: ({x, y}) => vector.x == x && vector.y == y,
     reset: function () {
       vector = engine.tool.vector2d.create()
 
