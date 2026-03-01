@@ -8,7 +8,8 @@ content.cellar.tiles = (() => {
     0.1 - big
     0.05 - instrument
     0.2 - heal
-    0.2 - damage
+    0.175 - damage
+    0.025 - death
     */
     // Nothing
     {
@@ -52,9 +53,10 @@ content.cellar.tiles = (() => {
             content.wallet.add(reward)
           },
           attribute: {
-            label: `${app.utility.format.currency(reward)} received`,
+            label: `${app.utility.format.currency(reward)}`,
             modifiers: ['rare'],
           },
+          liveLabel: `${${app.utility.format.currency(reward)} recovered`,
         }
       },
     },
@@ -69,9 +71,10 @@ content.cellar.tiles = (() => {
             content.wallet.add(reward)
           },
           attribute: {
-            label: `${app.utility.format.currency(reward)} received`,
+            label: `${app.utility.format.currency(reward)}`,
             modifiers: ['rare'],
           },
+          liveLabel: `${${app.utility.format.currency(reward)} recovered`,
         }
       },
     },
@@ -101,7 +104,7 @@ content.cellar.tiles = (() => {
             content.cellar.health.add(1)
           },
           attribute: {
-            label: `Sanity gained`,
+            label: `Sanity recovered`,
             modifiers: ['legendary'],
           },
         }
@@ -109,14 +112,30 @@ content.cellar.tiles = (() => {
     },
     // Damage
     {
-      weight: 0.2,
+      weight: 0.175,
       generate: (srand) => {
         return {
           apply: () => {
             content.cellar.health.subtract(1)
           },
           attribute: {
-            label: `Sanity lost`,
+            label: `Sanity drained`,
+            modifiers: ['legendary'],
+          },
+        }
+      },
+    // Death
+    {
+      weight: 0.025,
+      generate: (srand) => {
+        return {
+          apply: () => {
+            content.cellar.health.subtract(
+              content.cellar.health.amount()
+            )
+          },
+          attribute: {
+            label: `Sanity broken`,
             modifiers: ['legendary'],
           },
         }
