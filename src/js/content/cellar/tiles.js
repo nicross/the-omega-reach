@@ -18,9 +18,8 @@ content.cellar.tiles = (() => {
     0.2 - damage
     0.15 - heal
     0.1 - big donation
-    0.075 - restore
+    0.1 - restore
     0.05 - instrument
-    0.025 - death
     */
     // Nothing
     {
@@ -136,7 +135,7 @@ content.cellar.tiles = (() => {
     },
     // Full heal
     {
-      weight: 0.075,
+      weight: 0.1,
       generate: (srand) => {
         return {
           apply: () => {
@@ -163,23 +162,6 @@ content.cellar.tiles = (() => {
             modifiers: ['legendary'],
           },
           liveLabel: `Lost ${app.utility.format.health(1)}`,
-        }
-      },
-    },
-    // Death
-    {
-      weight: 0.025,
-      generate: (srand) => {
-        return {
-          apply: () => {
-            content.cellar.health.subtract(
-              content.cellar.health.amount()
-            )
-          },
-          attribute: {
-            label: `Sanity devourer`,
-            modifiers: ['legendary'],
-          },
         }
       },
     },
