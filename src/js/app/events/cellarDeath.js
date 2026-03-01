@@ -1,10 +1,10 @@
 content.location.on('cellar-death', () => {
   const penalty = Math.min(
     content.wallet.amount(),
-    Math.ceil(content.shop.getCost() / 2),
+    Math.ceil(content.shop.getCost() * 0.75),
   )
 
-  content.donations.add(Math.round(penalty * 0.5))
+  content.donations.add(Math.round(penalty * engine.fn.randomFloat(0.25, 0.75)))
   content.wallet.subtract(penalty)
 
   content.audio.interactComplete.trigger({duration: 2})
