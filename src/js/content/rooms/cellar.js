@@ -18,12 +18,30 @@ content.rooms.cellar = content.rooms.invent({
     return app.utility.format.coordinates(content.cellar.position.get())
   },
   getAttributeLabels: function () {
-    return [
+    const attributes = [
       {
         label: `${app.utility.format.health(content.cellar.health.amount())}`,
         modifiers: ['legendary'],
       },
     ]
+
+    const tile = content.cellar.tiles.current()
+    const scans = content.cellar.scans.get(tile)
+
+    for (let i = 0; i < tile.effects.length; i += 1) {
+      const effect = tile.effects[i]
+
+      if (scans >= i + 1) {
+        attributes.push(effect.attribute)
+      } else {
+        attributes.push({
+          label: `Unexamined anomaly`,
+          modifiers: ['undiscovered'],
+        })
+      }
+    }
+
+    return attributes
   },
   isDiscovered: function () {
     return true
@@ -31,21 +49,32 @@ content.rooms.cellar = content.rooms.invent({
   isEntrance: () => content.cellar.position.is({x: 0, y: 0}),
   // Interaction
   canInteract: function () {
-    // TODO: OR when interactive object
-    return false
+    const tile = content.cellar.tiles.current()
+    return tile.effects.length > content.cellar.scans.get(tile)
   },
   canInteractFreely: function () {
     return true
   },
-  isComplete: () => false,
-  isIncomplete: function () {
-    // TODO: OR when interactive and completed
+  isComplete: function () {
     return false
+  },
+  isIncomplete: function () {
+    return this.canInteract()
   },
   onInteract: function () {
     const message = []
 
-    // TODO: discovered things
+    const tile = content.cellar.tiles.current()
+    const scans = content.cellar.scans.increment(tile)
+    const effect = tile.effects[scans - 1]
+
+    message.push(effect.liveLabel || effect.attribute.label)
+    effect.apply()
+
+    if (scans == tile.effects.length) {
+      message.push('Area complete')
+      content.location.emit('interact-complete', {room: this})
+    }
 
     return message.join(', ')
   },
@@ -85,6 +114,7 @@ content.rooms.cellar = content.rooms.invent({
     }
 
     content.cellar.position.set(next)
+    content.solution.generate()
     this.updateProgram()
 
     content.location.emit('move', {
@@ -105,6 +135,7 @@ content.rooms.cellar = content.rooms.invent({
     }
 
     content.cellar.position.set(next)
+    content.solution.generate()
     this.updateProgram()
 
     content.location.emit('move', {
@@ -125,6 +156,7 @@ content.rooms.cellar = content.rooms.invent({
     }
 
     content.cellar.position.set(next)
+    content.solution.generate()
     this.updateProgram()
 
     content.location.emit('move', {
@@ -149,6 +181,7 @@ content.rooms.cellar = content.rooms.invent({
     }
 
     content.cellar.position.set(next)
+    content.solution.generate()
     this.updateProgram()
 
     content.location.emit('move', {

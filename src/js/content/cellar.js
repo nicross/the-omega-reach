@@ -4,15 +4,19 @@ content.cellar = (() => {
       return {
         discovered: this.discovered.export(),
         health: this.health.export(),
+        instruments: this.instruments.export(),
         position: this.position.export(),
         run: this.run.export(),
+        scans: this.scans.export(),
       }
     },
     import: function (data = {}) {
       this.discovered.import(data.discovered)
       this.health.import(data.health)
+      this.instruments.import(data.instruments)
       this.position.import(data.position)
       this.run.import(data.run)
+      this.scans.import(data.scans)
 
       return this
     },
@@ -30,16 +34,23 @@ content.cellar = (() => {
     reset: function () {
       this.discovered.reset()
       this.health.reset()
+      this.instruments.reset()
       this.run.reset()
+      this.scans.reset()
 
       return this
     },
     // Runs
     startRun: function () {
       this.run.increment()
-      this.health.setMax()
+
+      this.discovered.reset()
       this.position.reset()
-      this.discovered.reset().set(this.position.get())
+      this.scans.reset()
+      this.tiles.reset()
+
+      this.health.setMax()
+      this.discovered.set(this.position.get())
 
       return this
     },
