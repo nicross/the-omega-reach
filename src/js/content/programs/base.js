@@ -319,7 +319,9 @@ content.programs.base = {
   },
   // Haptics
   getRumble: function (point) {
-    return this.fields.rumble3d.valueAt(point, 1)
+    return this.useNavigationalRumble()
+      ? this.getNavigationalRumble(point)
+      : this.fields.rumble3d.valueAt(point, 1)
   },
   getRumbleRotated: function (point) {
     return this.getRumble(
@@ -327,5 +329,40 @@ content.programs.base = {
         this.getRotation()
       ).invertZ()
     )
-  }
+  },
+  useNavigationalRumble: () => false,
+  getNavigationalRumble: function (point) {
+    const location = content.location.get()
+
+    const vectors = [
+      engine.tool.vector3d.unitZ(),
+      engine.tool.vector3d.unitZ().inverse(),
+    ]
+
+    if (!location.canMoveDown()) {
+      vectors.push(engine.tool.vector3d.unitX())
+    }
+
+    if (!location.canMoveLeft()) {
+      vectors.push(engine.tool.vector3d.unitY().inverse())
+    }
+
+    if (!location.canMoveRight()) {
+      vectors.push(engine.tool.vector3d.unitY())
+    }
+
+    if (!location.canMoveUp()) {
+      vectors.push(engine.tool.vector3d.unitX().inverse())
+    }
+
+    const test = {
+      x: Math.sign(point.x) * (Math.abs(point.x)) ** 3,
+      y: Math.sign(point.y) * (Math.abs(point.y)) ** 3,
+      z: Math.sign(point.z) * (Math.abs(point.z)) ** 3,
+    }
+
+    return vectors.reduce((value, vector) => {
+      return Math.max(vector.dotProduct(test), value)
+    }, 0)
+  },
 }

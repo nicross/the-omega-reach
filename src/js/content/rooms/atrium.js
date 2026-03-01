@@ -55,6 +55,8 @@ content.rooms.atrium = content.rooms.invent({
 
     return attributes
   },
+  // Interactions
+  canInteractFreely: () => true,
   // Movement
   moveDown: function () {
     const unscanned = content.instruments.getFirstUnscannedName()

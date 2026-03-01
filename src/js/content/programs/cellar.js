@@ -80,36 +80,5 @@ content.programs.cellar = content.programs.invent({
     }
   },
   // Rumble
-  getRumble: function (point) {
-    const vectors = [
-      engine.tool.vector3d.unitZ(),
-      engine.tool.vector3d.unitZ().inverse(),
-    ]
-
-    if (!this.properties.canMoveDown) {
-      vectors.push(engine.tool.vector3d.unitX())
-    }
-
-    if (!this.properties.canMoveLeft) {
-      vectors.push(engine.tool.vector3d.unitY().inverse())
-    }
-
-    if (!this.properties.canMoveRight) {
-      vectors.push(engine.tool.vector3d.unitY())
-    }
-
-    if (!this.properties.canMoveUp) {
-      vectors.push(engine.tool.vector3d.unitX().inverse())
-    }
-
-    const test = {
-      x: Math.sign(point.x) * (Math.abs(point.x)) ** 3,
-      y: Math.sign(point.y) * (Math.abs(point.y)) ** 3,
-      z: Math.sign(point.z) * (Math.abs(point.z)) ** 3,
-    }
-
-    return vectors.reduce((value, vector) => {
-      return Math.max(vector.dotProduct(test), value)
-    }, 0)
-  },
+  useNavigationalRumble: () => true,
 })

@@ -52,12 +52,8 @@ content.rooms.cellar = content.rooms.invent({
     const tile = content.cellar.tiles.current()
     return tile.effects.length > content.cellar.scans.get(tile)
   },
-  canInteractFreely: function () {
-    return true
-  },
-  isComplete: function () {
-    return false
-  },
+  canInteractFreely: () => true,
+  isComplete: () => false,
   isIncomplete: function () {
     return this.canInteract()
   },

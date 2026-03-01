@@ -76,7 +76,7 @@ content.rooms.gallery = content.rooms.invent({
       : false
   },
   canInteractFreely: function () {
-    return this.getInstrument() && !content.solution.has()
+    return true
   },
   getInteractJingle: function () {
     const instrument = this.getInstrument()

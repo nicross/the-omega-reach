@@ -3,6 +3,10 @@ content.programs.shop = content.programs.invent({
   fieldDefinitions: {
     flicker: {type: '1d'},
   },
+  // Synthesis
+  invertSynthX: function () {
+    return !content.solution.has()
+  },
   // Particles
   alterParticle: function (particle) {
     const isCellar = engine.fn.between(particle.floor.y, 10, 15) && content.cellar.isOpen(),
@@ -35,4 +39,6 @@ content.programs.shop = content.programs.invent({
       particle.target.z = particle.target.z - particle.floor.z + engine.fn.wrap(particle.target.z - (time * 0.333), particle.floor.z, particle.target.z)
     }
   },
+  // Rumble
+  useNavigationalRumble: () => true,
 })

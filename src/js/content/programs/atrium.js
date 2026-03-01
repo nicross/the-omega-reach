@@ -3,6 +3,10 @@ content.programs.atrium = content.programs.invent({
   fieldDefinitions: {
     flicker: {type: '1d'},
   },
+  // Synthesis
+  invertSynthX: function () {
+    return !content.solution.has()
+  },
   // Particles
   alterParticle: function (particle) {
     const isOnline = content.rooms.reach.state.online,
@@ -26,4 +30,6 @@ content.programs.atrium = content.programs.invent({
       particle.target.z = particle.target.z - particle.floor.z + engine.fn.wrap(particle.target.z - (time * 0.333), particle.floor.z, particle.target.z)
     }
   },
+  // Rumble
+  useNavigationalRumble: () => true,
 })

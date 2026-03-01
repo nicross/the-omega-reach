@@ -1,5 +1,9 @@
 content.programs.galleryEmpty = content.programs.invent({
   id: 'galleryEmpty',
+  // Synthesis
+  invertSynthX: function () {
+    return !content.solution.has()
+  },
   // Particles
   alterParticle: function (particle) {
     particle.target.h = 0
@@ -9,4 +13,6 @@ content.programs.galleryEmpty = content.programs.invent({
     particle.target.y = particle.floor.y
     particle.target.z = particle.floor.z
   },
+  // Rumble
+  useNavigationalRumble: () => true,
 })
