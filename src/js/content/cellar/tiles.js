@@ -3,33 +3,46 @@ content.cellar.tiles = (() => {
 
   const effectTypes = [
     /*
-    0.25 - nothing
-    0.2 - small
-    0.1 - big
-    0.05 - instrument
+    Chances
+    0.2 - nothing
+    0.2 - small donation
+    0.2 - damage
     0.15 - heal
-    0.05 - restore
-    0.1875 - damage
-    0.0125 - death
+    0.1 - big donation
+    0.075 - restore
+    0.05 - instrument
+    0.025 - death
     */
     // Nothing
     {
-      weight: 0.25,
+      weight: 0.2,
       generate: (srand) => {
         const label = engine.fn.choose([
           'Antimatter residue',
           'Breadcrumb trail',
-          'Burning smell',
+          'Burning odor',
           'Cracked ceiling',
           'Discarded thesauruses',
           'Dusty encyclopedias',
-          'Gravitational anomaly',
+          'Earthen rodents',
+          'Electric hum',
+          'Experimental decor',
+          'Gravitational blip',
+          'Guest books',
           'Large cobwebs',
+          'Magnetic interference',
+          'Mysterious presence',
           'Putrid stench',
+          'Quiet air',
           'Random detritis',
-          'Rusty equipment',
+          'Really nothing',
+          'Recipe books',
+          'Research chemicals',
+          'Smitten kitten',
           'Stacked boxes',
           'Uneven flooring',
+          'Vestigial wiring',
+          'Vintage synthesizers',
           'Vinyl records',
         ], srand())
 
@@ -47,7 +60,7 @@ content.cellar.tiles = (() => {
     {
       weight: 0.2,
       generate: (srand) => {
-        const reward = Math.round(srand(1, 10))
+        const reward = Math.round(srand(5, 15))
 
         return {
           apply: () => {
@@ -114,7 +127,7 @@ content.cellar.tiles = (() => {
     },
     // Full heal
     {
-      weight: 0.05,
+      weight: 0.075,
       generate: (srand) => {
         return {
           apply: () => {
@@ -130,7 +143,7 @@ content.cellar.tiles = (() => {
     },
     // Damage
     {
-      weight: 0.1875,
+      weight: 0.2,
       generate: (srand) => {
         return {
           apply: () => {
@@ -146,7 +159,7 @@ content.cellar.tiles = (() => {
     },
     // Death
     {
-      weight: 0.0125,
+      weight: 0.025,
       generate: (srand) => {
         return {
           apply: () => {
