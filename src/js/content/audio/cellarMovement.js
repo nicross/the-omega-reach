@@ -1,5 +1,5 @@
 content.audio.cellarMovement = (() => {
-  const baseGain = engine.fn.fromDb(-9),
+  const baseGain = engine.fn.fromDb(-6),
     bus = content.audio.channel.default.createBus()
 
   const directions = {

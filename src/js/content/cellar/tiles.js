@@ -1,6 +1,15 @@
 content.cellar.tiles = (() => {
   const cache = engine.tool.cache2d.create()
 
+  const offLimits = [
+    engine.tool.vector2d.create({x: 0, y: 2}), // easter egg (what is the shopkeeper hiding?)
+    engine.tool.vector2d.create({x: 0, y: 1}), // shop
+    engine.tool.vector2d.create({x: -1, y: 1}), // atrium
+    engine.tool.vector2d.create({x: -1, y: 2}), // reach
+    engine.tool.vector2d.create({x: -2, y: 1}), // lobby
+    engine.tool.vector2d.create({x: -1, y: 0}), // gallery
+  ]
+
   const effectTypes = [
     /*
     Chances
@@ -219,6 +228,15 @@ content.cellar.tiles = (() => {
       }
 
       return cache.get(x, y)
+    },
+    isOffLimits: ({x, y}) => {
+      for (let vector of offLimits) {
+        if (vector.x == x && vector.y == y) {
+          return true
+        }
+      }
+
+      return false
     },
     reset: function () {
       cache.reset()

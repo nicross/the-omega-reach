@@ -81,10 +81,10 @@ content.rooms.cellar = content.rooms.invent({
   },
   // Movement
   canEnter: () => content.cellar.isRunning(),
-  canMoveDown: () => !content.cellar.position.is({x: 0, y: 2}) && (content.cellar.health.has(2) || content.cellar.discovered.is(content.cellar.position.get().add({y: -1}))),
-  canMoveLeft: () => !content.cellar.position.is({x: 1, y: 1}) && (content.cellar.health.has(2) || content.cellar.discovered.is(content.cellar.position.get().add({x: -1}))),
-  canMoveRight: () => !content.cellar.position.is({x: -1, y: 1}) && (content.cellar.health.has(2) || content.cellar.discovered.is(content.cellar.position.get().add({x: 1}))),
-  canMoveUp: function() {return this.isEntrance() || content.cellar.health.has(2) || content.cellar.discovered.is(content.cellar.position.get().add({y: 1}))},
+  canMoveDown: () => !content.cellar.tiles.isOffLimits(content.cellar.position.get().add({y: -1})) && (content.cellar.health.has(2) || content.cellar.discovered.is(content.cellar.position.get().add({y: -1}))),
+  canMoveLeft: () => !content.cellar.tiles.isOffLimits(content.cellar.position.get().add({x: -1})) && (content.cellar.health.has(2) || content.cellar.discovered.is(content.cellar.position.get().add({x: -1}))),
+  canMoveRight: () => !content.cellar.tiles.isOffLimits(content.cellar.position.get().add({x: 1})) && (content.cellar.health.has(2) || content.cellar.discovered.is(content.cellar.position.get().add({x: 1}))),
+  canMoveUp: function() {return this.isEntrance() || (!content.cellar.tiles.isOffLimits(content.cellar.position.get().add({y: 1})) && (content.cellar.health.has(2) || content.cellar.discovered.is(content.cellar.position.get().add({y: 1}))))},
   getMoveDownLabel: function () {
     return this.canMoveDown()
       ? 'Go south'
