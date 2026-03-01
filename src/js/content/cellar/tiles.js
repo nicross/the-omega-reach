@@ -7,9 +7,10 @@ content.cellar.tiles = (() => {
     0.2 - small
     0.1 - big
     0.05 - instrument
-    0.2 - heal
-    0.175 - damage
-    0.025 - death
+    0.15 - heal
+    0.05 - restore
+    0.1875 - damage
+    0.0125 - death
     */
     // Nothing
     {
@@ -97,7 +98,7 @@ content.cellar.tiles = (() => {
     },
     // Heal
     {
-      weight: 0.2,
+      weight: 0.15,
       generate: (srand) => {
         return {
           apply: () => {
@@ -110,9 +111,24 @@ content.cellar.tiles = (() => {
         }
       },
     },
+    // Heal
+    {
+      weight: 0.05,
+      generate: (srand) => {
+        return {
+          apply: () => {
+            content.cellar.health.setMax()
+          },
+          attribute: {
+            label: `Sanity restored`,
+            modifiers: ['legendary'],
+          },
+        }
+      },
+    },
     // Damage
     {
-      weight: 0.175,
+      weight: 0.1875,
       generate: (srand) => {
         return {
           apply: () => {
@@ -127,7 +143,7 @@ content.cellar.tiles = (() => {
     },
     // Death
     {
-      weight: 0.025,
+      weight: 0.0125,
       generate: (srand) => {
         return {
           apply: () => {
