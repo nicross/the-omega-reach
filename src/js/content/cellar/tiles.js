@@ -26,32 +26,18 @@ content.cellar.tiles = (() => {
       weight: 0.2,
       generate: (srand) => {
         const label = engine.fn.choose([
-          'Antimatter residue',
-          'Breadcrumb trail',
-          'Burning odor',
           'Cracked ceiling',
-          'Discarded thesauruses',
-          'Dusty encyclopedias',
-          'Earthen rodents',
-          'Electric hum',
-          'Experimental decor',
-          'Gravitational blip',
-          'Guest books',
+          'Donation logs',
+          'Employee records',
+          'Guest ledgers',
           'Large cobwebs',
-          'Magnetic interference',
-          'Mysterious presence',
-          'Putrid stench',
-          'Quiet air',
           'Random detritis',
-          'Really nothing',
           'Recipe books',
-          'Research chemicals',
-          'Smitten kitten',
+          'Really nothing',
           'Stacked boxes',
+          'Stacked newspapers',
           'Uneven flooring',
           'Vestigial wiring',
-          'Vintage synthesizers',
-          'Vinyl records',
         ], srand())
 
         return {
@@ -68,17 +54,19 @@ content.cellar.tiles = (() => {
     {
       weight: 0.2,
       generate: (srand) => {
-        const reward = Math.round(srand(5, 15))
+        const roll = srand()
+        const reward = Math.round(engine.fn.lerp(1, 10, roll))
+        const label = engine.fn.choose(['Microscopic', 'Meager', 'Modest'], roll)
 
         return {
           apply: () => {
             content.wallet.add(reward)
           },
           attribute: {
-            label: `Modest donation`,
+            label: `${label} donation`,
             modifiers: ['rare'],
           },
-          liveLabel: `Modest donation found`,
+          liveLabel: `${label} donation found`,
         }
       },
     },
@@ -86,17 +74,19 @@ content.cellar.tiles = (() => {
     {
       weight: 0.1,
       generate: (srand) => {
-        const reward = Math.round(srand(25, 75))
+        const roll = srand()
+        const reward = Math.round(engine.fn.lerp(25, 75, roll))
+        const label = engine.fn.choose(['Generous', 'Grandiose', 'Gargantuan'], roll)
 
         return {
           apply: () => {
             content.wallet.add(reward)
           },
           attribute: {
-            label: `Generous donation`,
+            label: `${label} donation`,
             modifiers: ['rare'],
           },
-          liveLabel: `Generous donation found`,
+          liveLabel: `${label} donation found`,
         }
       },
     },
@@ -121,15 +111,28 @@ content.cellar.tiles = (() => {
     {
       weight: 0.15,
       generate: (srand) => {
+        const label = engine.fn.choose([
+          'Astronomical observations',
+          'Calm atmosphere',
+          'Discarded thesauruses',
+          'Dusty encyclopedias',
+          'Faded dictionaries',
+          'Musical compositions',
+          'Smitten kittens',
+          'Stellar catalogs',
+          'Vintage synthesizers',
+          'Vinyl records',
+        ], srand())
+
         return {
           apply: () => {
             content.cellar.health.add(1)
           },
           attribute: {
-            label: `Sanity well`,
+            label,
             modifiers: ['legendary'],
           },
-          liveLabel: `Gained ${app.utility.format.health(1)}`,
+          liveLabel: `${label} found, gained ${app.utility.format.health(1)}`,
         }
       },
     },
@@ -137,15 +140,22 @@ content.cellar.tiles = (() => {
     {
       weight: 0.1,
       generate: (srand) => {
+        const label = engine.fn.choose([
+          'Breadcrumb trail',
+          'Familiar landmark',
+          'Rest area',
+          'Water cooler',
+        ], srand())
+
         return {
           apply: () => {
             content.cellar.health.setMax()
           },
           attribute: {
-            label: `Sanity fountain`,
+            label,
             modifiers: ['legendary'],
           },
-          liveLabel: `Sanity fully restored`,
+          liveLabel: `${label} found, sanity fully restored`,
         }
       },
     },
@@ -153,15 +163,30 @@ content.cellar.tiles = (() => {
     {
       weight: 0.2,
       generate: (srand) => {
+        const label = engine.fn.choose([
+          'Antimatter residue',
+          'Burning odor',
+          'Dutch angle',
+          'Earthen rodents',
+          'Electrical hum',
+          'Flickering light',
+          'Gravitational blip',
+          'Magnetic interference',
+          'Mysterious presence',
+          'Putrid stench',
+          'Research chemicals',
+          'Temporal distortion',
+        ], srand())
+
         return {
           apply: () => {
             content.cellar.health.subtract(1)
           },
           attribute: {
-            label: `Sanity sink`,
+            label,
             modifiers: ['legendary'],
           },
-          liveLabel: `Lost ${app.utility.format.health(1)}`,
+          liveLabel: `${label} found, lost ${app.utility.format.health(1)}`,
         }
       },
     },
