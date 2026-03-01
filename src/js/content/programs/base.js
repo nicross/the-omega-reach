@@ -186,7 +186,7 @@ content.programs.base = {
       fmDepth: rootFrequency * engine.fn.lerp(1/6, 1, value),
       fmFrequency: engine.fn.lerp(4, 16, value),
       frequency: rootFrequency,
-      gain: engine.fn.fromDb(-4.5, -3, value),
+      gain: engine.fn.fromDb(-7.5, -3, value),
     }
   },
   createSynth: function ({point, wrapper}) {
