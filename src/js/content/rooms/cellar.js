@@ -114,6 +114,8 @@ content.rooms.cellar = content.rooms.invent({
       content.cellar.discovered.set(next)
     }
 
+    content.audio.cellarMovement.down()
+
     content.cellar.position.set(next)
     content.solution.generate()
     this.updateProgram()
@@ -135,6 +137,8 @@ content.rooms.cellar = content.rooms.invent({
       content.cellar.discovered.set(next)
     }
 
+    content.audio.cellarMovement.left()
+
     content.cellar.position.set(next)
     content.solution.generate()
     this.updateProgram()
@@ -155,6 +159,8 @@ content.rooms.cellar = content.rooms.invent({
       content.cellar.health.subtract(1)
       content.cellar.discovered.set(next)
     }
+
+    content.audio.cellarMovement.right()
 
     content.cellar.position.set(next)
     content.solution.generate()
@@ -180,6 +186,8 @@ content.rooms.cellar = content.rooms.invent({
       content.cellar.health.subtract(1)
       content.cellar.discovered.set(next)
     }
+
+    content.audio.cellarMovement.up()
 
     content.cellar.position.set(next)
     content.solution.generate()
