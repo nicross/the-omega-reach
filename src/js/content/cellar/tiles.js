@@ -56,7 +56,7 @@ content.cellar.tiles = (() => {
             label: `${app.utility.format.currency(reward)}`,
             modifiers: ['rare'],
           },
-          liveLabel: `${${app.utility.format.currency(reward)} recovered`,
+          liveLabel: `${app.utility.format.currency(reward)} recovered`,
         }
       },
     },
@@ -74,7 +74,7 @@ content.cellar.tiles = (() => {
             label: `${app.utility.format.currency(reward)}`,
             modifiers: ['rare'],
           },
-          liveLabel: `${${app.utility.format.currency(reward)} recovered`,
+          liveLabel: `${app.utility.format.currency(reward)} recovered`,
         }
       },
     },
@@ -124,6 +124,7 @@ content.cellar.tiles = (() => {
           },
         }
       },
+    },
     // Death
     {
       weight: 0.025,
