@@ -1,4 +1,6 @@
 content.cellar.health = (() => {
+  const pubsub = engine.tool.pubsub.create()
+
   let amount = 0
 
   function calculateMax() {
@@ -6,9 +8,10 @@ content.cellar.health = (() => {
     return 4 + (count ? Math.round(Math.sqrt(count)) : 0)
   }
 
-  return {
+  return pubsub.decorate({
     add: function (value = 1) {
       amount = engine.fn.clamp(amount + value, 0, calculateMax())
+      pubsub.emit('add')
 
       return this
     },
@@ -38,8 +41,9 @@ content.cellar.health = (() => {
     },
     subtract: function (value = 1) {
       amount = engine.fn.clamp(amount - value, 0, calculateMax())
+      pubsub.emit('subtract')
 
       return this
     },
-  }
+  })
 })()
