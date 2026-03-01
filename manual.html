@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>THE OMEGA REACH documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    <style>
+      @font-face {
+        font-family: FiraCodeLight;
+        font-style: normal;
+        font-weight: 300;
+        src: url('font/firacode-light.woff') format('woff');
+      }
+      @font-face {
+        font-family: FiraCodeMedium;
+        font-style: normal;
+        font-weight: 500;
+        src: url('font/firacode-medium.woff') format('woff');
+      }
+      @font-face {
+        font-family: FiraCodeRegular;
+        font-style: normal;
+        font-weight: 400;
+        src: url('font/firacode-regular.woff') format('woff');
+      }
+      @font-face {
+        font-family: RobotoBold;
+        font-style: normal;
+        font-weight: 700;
+        src: url('font/roboto-bold.woff') format('woff');
+      }
+      @font-face {
+        font-family: RobotoLight;
+        font-style: normal;
+        font-weight: 300;
+        src: url('font/roboto-light.woff') format('woff');
+      }
+      @font-face {
+        font-family: RobotoRegular;
+        font-style: normal;
+        font-weight: 400;
+        src: url('font/roboto-regular.woff') format('woff');
+      }
+      @font-face {
+        font-family: RobotoRegularItalic;
+        font-style: italic;
+        font-weight: 400;
+        src: url('font/roboto-italic.woff') format('woff');
+      }
+
+      *, *::after, *::before {
+        background: transparent;
+        border: 0;
+        box-sizing: border-box;
+        color: inherit;
+        font: inherit;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        background-color: #FFFFFF;
+        font-family: RobotoRegular, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+
+      main ::selection {
+        background-color: #FF0069;
+        color: #FFFFFF;
+        text-decoration-color: #FFFFFF;
+      }
+
+      a {
+        color: #FF0069;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
+      blockquote {
+        border-left: 0.5em solid #FF0069;
+        padding-left: 1em;
+      }
+
+      code {
+        font-family: monospace;
+      }
+
+      details > * + * {
+        margin-top: 1.25em;
+      }
+
+      em {
+        font-family: RobotoRegularItalic, sans-serif;
+        font-style: italic;
+      }
+
+      h2 {
+        font-size: 2em;
+      }
+
+      h3 {
+        font-size: 1.5em;
+        margin-top: 3rem;
+      }
+
+      h4 {
+        font-size: 1.25em;
+        margin-top: 3rem;
+      }
+
+      kbd {
+        border: 2px solid #FF0069;
+        border-radius: 0.25em;
+        display: inline-block;
+        font-family: FiraCodeMedium, monospace;
+        font-weight: 500;
+        padding: 0 0.5em;
+      }
+
+      strong, th {
+        font-family: RobotoBold, sans-serif;
+        font-weight: 700;
+      }
+
+      section {
+        margin: 0 auto;
+        max-width: calc(60ch + 4em);
+        padding: 3em 1em;
+      }
+
+      section + section {
+        border-top: 1px dotted #CCCCCC;
+      }
+
+      section > * + *:not(h3):not(h4) {
+        margin-top: 1.25em;
+      }
+
+      section > h2 + *,
+      section > h3 + *,
+      section > h4 + * {
+        margin-top: 0.75em !important;
+      }
+
+      table, td, th {
+        border: 1px solid #000000;
+        border-collapse: collapse;
+      }
+
+      td, th {
+        padding: 0.25em 0.5em;
+      }
+
+      th {
+        text-align: left;
+      }
+
+      ul {
+        list-style-position: outside;
+        padding-left: 1.5em;
+      }
+
+      .hero {
+        align-items: center;
+        background-color: #000000;
+        color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        line-height: 1.25;
+        padding: 4em 1em;
+        text-align: center;
+      }
+        .hero--author {
+          font-family: monospace;
+          margin-top: 2em;
+        }
+        .hero--logo {
+          font-size: 3em;
+          text-transform: uppercase;
+        }
+
+      .scrollable {
+        max-width: 100%;
+        overflow: auto;
+        white-space: nowrap;
+      }
+
+      .uppercase {
+        text-transform: uppercase;
+      }
+
+      @media (min-width: 20rem) {
+        :root {
+          font-size: calc(1rem + ((1vw - 0.2rem) * 0.25));
+        }
+      }
+
+      @media (min-width: 48rem) {
+        section {
+          padding-left: 2em;
+          padding-right: 2em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <h1>
+        <div class="hero--lockup">
+          <div class="hero--logo">The Omega Reach</div>
+          <div class="hero--author">by shiftBacktick</div>
+        </div>
+      </h1>
+    </header>
+
+    <main>
+      <section>
+        <h2>Wake up.</h2>
+        <p>Reach for the stars, gather their instruments, and curate the best collection in the universe in this submission to <a href="https://itch.io/jam/games-for-blind-gamers-5" rel="nofollow noopener" target="_blank">Games for Blind Gamers 5</a>.</p>
+      </section>
+
+      <section>
+        <h2>Accessibility</h2>
+        <p><span class="uppercase">The Omega Reach</span> is designed to conform with WCAG (Web Content Accessibility Guidelines) 2.2 at Level AA. Its menus are fully operable with a keyboard and screen readers such as NVDA. It is recommended to turn off <strong>speech interrupts for typed characters</strong> for the best experience.</p>
+      </section>
+
+      <section>
+        <h2>Controls</h2>
+        <p><span class="uppercase">The Omega Reach</span> supports a variety of input devices—each providing a unique way to interact. Although its menus can be navigated intuitively like a web page, the unique controls for each device type are detailed in the rest of this section.</p>
+
+        <h3>Input preferences</h3>
+        <p>You will be prompted during the tutorial to select your preferred input settings for the best experience. They can be changed at any time from the <strong>Settings</strong> screen. Here is an explanation of these settings:</p>
+        <ul>
+          <li><strong>Input preference.</strong> This determines where the solutions to interactions are placed. This is necessary because each device type has its strengths. For example, a keyboard may explore objects at fixed points around them, whereas a mouse may click anywhere on the front hemisphere. This also affects what buttons are shown in tutorials.</li>
+          <li><strong>Hold interactions.</strong> This determines how long a solution must be held to register. When enabled, the correct solution (or button to skip) must be held for one second. Otherwise, interactions are instantaneous. You will be prompted for any interactions that may be destructive.</li>
+        </ul>
+
+        <h3>Gamepad controls</h3>
+        <p><span class="uppercase">The Omega Reach</span> is best experienced with a gamepad for its analog controls and haptic feedback. Use an Xbox-compatible controller for the best results. Others can be configured with utilities like <a href="https://github.com/x360ce/x360ce" rel="nofollow noopener" target="_blank">x360ce</a>.</p>
+        <p>The conservatory is navigated with the <kbd>Directional Pad</kbd>. Interact with objects by holding either <kbd>Trigger</kbd> or <kbd>Bumper</kbd> and then moving the corresponding <kbd>Analog Stick</kbd>. These interactions can also be skipped by pressing any <kbd>Face Button</kbd>.</p>
+
+        <h4>Haptic feedback</h4>
+        <p>Vibration can be reduced or removed from the <strong>Settings</strong> screen. Beware that vibration is helpful for successfully interacting with objects.</p>
+
+        <h3>Keyboard controls</h3>
+        <p><span class="uppercase">The Omega Reach</span> can also be played entirely with a keyboard.</p>
+        <p>The conservatory can be navigated with the <kbd>Arrow Keys</kbd>. Interact with objects by pressing most keys, from <kbd>1</kbd> to <kbd>/</kbd>, to <kbd>Z</kbd> to <kbd>=</kbd>. These interactions can also be skipped by pressing <kbd>Space</kbd> or <kbd>Enter</kbd>.</p>
+
+        <h3>Mouse controls</h3>
+        <p><span class="uppercase">The Omega Reach</span> can also be played entirely with a mouse.</p>
+        <p>The conservatory can be navigated by clicking the arrow buttons on the screen. Interact with objects by clicking anywhere else on the screen. These interactions can also be skipped by clicking the button to interact.</p>
+        <blockquote>Hey! I like using the <kbd>Mouse Wheel</kbd> to zoom in and out. You can also hold <kbd>Shift</kbd> to scroll left and right.</blockquote>
+
+        <h3>Touch controls</h3>
+        <p><span class="uppercase">The Omega Reach</span> does not support touch input beyond its menus. A gamepad is strongly recommended for best results on mobile devices.</p>
+      </section>
+
+      <section>
+        <h2>How to play</h2>
+        <blockquote><span class="uppercase">The Omega Reach</span> rewards exploration and experimentation. Please try following its tutorial before referencing this section.</blockquote>
+        <p>As the curator for The Omega Conservatory, you are entrusted with its eponymous reach: a telescopic hand that extends into the past. With it, you examine distant galaxies, stars, planets, and moons in search for instruments to add to your collection. Once recovered and fully appraised, you may play them freely in your gallery, or trade them for whatever the gift shop is offering.</p>
+
+        <h3>The Omega Conservatory</h3>
+        <p>The conservatory is laid out in a grid that can be naviagted with up, down, left, and right controls. It consists of five main rooms:</p>
+        <ul>
+          <li><strong>The atrium.</strong> At the center, the atrium connects all the other rooms.</li>
+          <li><strong>The reach.</strong> To the north, the reach is how you'll gather new instruments.</li>
+          <li><strong>The lobby.</strong> To the west, the lobby is where donations accumulate.</li>
+          <li><strong>The gallery.</strong> To the south, the gallery holds your instruments.</li>
+          <li><strong>The shop.</strong> To the east, the shop will offer new instruments to buy.</li>
+          <li><strong>The cellar.</strong> South of the shop, the cellar is a place of unspeakable evils.</li>
+        </ul>
+        <p>Typically, you may find yourself recovering new instruments with <strong>the reach</strong>, collecting donations from <strong>the lobby</strong>, buying any available instrument from <strong>the shop</strong>, and appriasing them in <strong>the gallery</strong>. This loop can be repeated until you are satisfied with your collection of instruments.</p>
+
+        <h3>Interactions</h3>
+        <p>Nearly all objects inside and outside of the conservatory are interactive. To interact with an object, you must find its sweet spot. Press the controls and let the audio, visual, or haptic cues guide you to the correct solution.</p>
+        <p>Visually, objects will grow brighter and shake when near the sweet spot. Additionally, a sound will grow louder and higher pitched, and vibrations will grow stronger, as you get closer.</p>
+        <p>If you are having difficulty with a certain interaction, then you may skip it without penalty. This can be done with a special button press.</p>
+
+        <h3>The Omega Reach</h3>
+        <p><strong>The reach</strong> is your first interactive object—and test—in <span class="uppercase">The Omega Reach</span>. Once online, it zooms in progressively to the following levels:</p>
+        <ul>
+          <li><strong>The horizon.</strong> From here you unlock new galaxies to reach.</li>
+          <li><strong>Galaxies.</strong> From here you unlock new stars to reach. You can scroll between the galaxies you've reached.</li>
+          <li><strong>Stars.</strong> Interact to reveal its planets and quirks. You can scroll between the stars you've reached in this galaxy.</li>
+          <li><strong>Planets.</strong> Interact to reveal its moons and quirks and recover instruments. You can scroll between the planets around this star.</li>
+          <li><strong>Moons.</strong> Interact to reveal its quirks and recover instruments. You can scroll between moons around this planet.</li>
+        </ul>
+        <p>After the tutorial, <strong>the reach</strong> may be powered off and on at any time. When offline, you are unable to reach into <strong>the horizon</strong>.</p>
+
+        <h3>Your collection</h3>
+        <p>The instruments that you collect will appear in <strong>the gallery</strong>. They appear randomly in rarities that range from <em>common</em> to <em>legendary</em>.</p>
+        <p>Interact with an instrument to reveal it to the public. At least one instrument must be revealed for the conservatory to remain open, otherwise it will close temporarily. This affects your ability to access services other than <strong>the reach</strong>.</p>
+        <p>Instruments may have additional quirks to appraise, which increase in likelihood with their rarity. Once an instrument is fully appraised, you may play with them freely.</p>
+
+        <h3>The economy</h3>
+        <p>Credits are the currency of <span class="uppercase">The Omega Reach</span>.</p>
+        <p>You will accumulate donations while you explore the universe. They can be collected by visiting <strong>the lobby</strong> at any time. You will receive the most credits from thoroughly examining everything you find.</p>
+        <blockquote>Beware! The conservatory must be open to accrue donations.</blockquote>
+        <p>You will receive periodic offers from <strong>the shop</strong> to exchange credits for unique instruments. Their cost scales with your wallet. At first, they may be an interesting gamble, but they soon become your gold sink.</p>
+        <p>To curate your collection, you may sell any instrument at any time. You will earn credits based on their rarity and number of quirks.</p>
+        <blockquote>Importantly, instruments are sold with a special buton press.</blockquote>
+
+        <h3>The cellar</h3>
+        <blockquote>Beware! This area is best discovered at your own pace.</blockquote>
+        <p><strong>The cellar</strong> is a maze of your creation. It becomes accessible whenever the shopkeeper leaves for their lunch break. Interact with them to explore new layouts of it often.</p>
+        <p>Sanity is the main resource of <strong>the cellar</strong>. You begin each visit with an amount of sanity points that correlates to the number of instruments in your gallery. Points are spent normally by moving into new tiles in the maze for the first time. You will be prevented from revealing new tiles when it would cause you to spend your last point.</p>
+        <p>Certain tiles in the maze have anomalies to examine. Anomalies may be purely benign, extremely rewarding, or risky enough to end your run prematurely. Approach them cautiously with low sanity.</p>
+        <p>You will faint whenever your sanity points are depleted. When you wake in <strong>the atrium</strong>, you may notice that some credits are missing.</p>
+        <blockquote>Try checking <strong>the lobby</strong> after you faint. The shopkeeper is less greedy than you think!</blockquote>
+      </section>
+
+      <section>
+        <h2>System requirements</h2>
+        <p><span class="uppercase">The Omega Reach</span> is best experienced with headphones and a gamepad.</p>
+        <p>Real-time synthesis is an <em>extremely</em> CPU-intensive process. It will attempt to run on any machine that meets its minimum requirements; however, you may experience stuttering or drop-outs when running below the recommended requirements.</p>
+
+        <h3>Minimum system requirements</h3>
+        <table>
+          <tr>
+            <th>CPU</th>
+            <td>SSE2 capable (64-bit)</td>
+          </tr>
+          <tr>
+            <th>RAM</th>
+            <td>2 GB</td>
+          </tr>
+        </table>
+
+        <h3>Recommended system requirements</h3>
+        <table>
+          <tr>
+            <th>CPU</th>
+            <td>3.5 GHz Quad-Core (64-bit)</td>
+          </tr>
+          <tr>
+            <th>RAM</th>
+            <td>4 GB</td>
+          </tr>
+        </table>
+
+        <h3>Browser support</h3>
+        <p>The HTML5 build is intended to be played in a recent version of a Chromium-based browser, such as Google Chrome, Microsoft Edge, or Opera. Browser extensions that alter page behavior are not recommended. Other browsers must support modern JavaScript features and the current Web Audio API specification.</p>
+      </section>
+
+      <section>
+        <h2>Credits</h2>
+        <p>The following typefaces belong to their respective owners:</p>
+        <ul>
+          <li><strong>Fira Code</strong> by Nikita Prokopov</li>
+          <li><strong>Roboto</strong> by Google</li>
+        </ul>
+        <p>Thanks for playing!</p>
+      </section>
+    </main>
+  </body>
+</html>
