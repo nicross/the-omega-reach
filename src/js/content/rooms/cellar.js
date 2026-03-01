@@ -18,12 +18,7 @@ content.rooms.cellar = content.rooms.invent({
     return app.utility.format.coordinates(content.cellar.position.get())
   },
   getAttributeLabels: function () {
-    const attributes = [
-      {
-        label: `${app.utility.format.health(content.cellar.health.amount())}`,
-        modifiers: ['legendary'],
-      },
-    ]
+    const attributes = []
 
     const tile = content.cellar.tiles.current()
     const scans = content.cellar.scans.get(tile)
@@ -40,6 +35,11 @@ content.rooms.cellar = content.rooms.invent({
         })
       }
     }
+
+    attributes.push({
+      label: `${app.utility.format.health(content.cellar.health.amount())}`,
+      modifiers: ['legendary'],
+    })
 
     return attributes
   },
@@ -70,6 +70,11 @@ content.rooms.cellar = content.rooms.invent({
 
     message.push(effect.liveLabel || effect.attribute.label)
     effect.apply()
+
+    if (!content.cellar.health.has()) {
+      content.location.emit('cellar-death')
+      return
+    }
 
     if (scans == tile.effects.length) {
       message.push('Area complete')

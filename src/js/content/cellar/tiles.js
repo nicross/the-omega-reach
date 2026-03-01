@@ -54,10 +54,10 @@ content.cellar.tiles = (() => {
             content.wallet.add(reward)
           },
           attribute: {
-            label: `${app.utility.format.currency(reward)}`,
+            label: `Modest donation`,
             modifiers: ['rare'],
           },
-          liveLabel: `${app.utility.format.currency(reward)} recovered`,
+          liveLabel: `Modest donation found`,
         }
       },
     },
@@ -72,10 +72,10 @@ content.cellar.tiles = (() => {
             content.wallet.add(reward)
           },
           attribute: {
-            label: `${app.utility.format.currency(reward)}`,
+            label: `Generous donation`,
             modifiers: ['rare'],
           },
-          liveLabel: `${app.utility.format.currency(reward)} recovered`,
+          liveLabel: `Generous donation found`,
         }
       },
     },
@@ -105,13 +105,14 @@ content.cellar.tiles = (() => {
             content.cellar.health.add(1)
           },
           attribute: {
-            label: `Sanity recovered`,
+            label: `Sanity well`,
             modifiers: ['legendary'],
           },
+          liveLabel: `Gained ${app.utility.format.health(1)}`,
         }
       },
     },
-    // Heal
+    // Full heal
     {
       weight: 0.05,
       generate: (srand) => {
@@ -120,9 +121,10 @@ content.cellar.tiles = (() => {
             content.cellar.health.setMax()
           },
           attribute: {
-            label: `Sanity restored`,
+            label: `Sanity fountain`,
             modifiers: ['legendary'],
           },
+          liveLabel: `Sanity fully restored`,
         }
       },
     },
@@ -135,9 +137,10 @@ content.cellar.tiles = (() => {
             content.cellar.health.subtract(1)
           },
           attribute: {
-            label: `Sanity drained`,
+            label: `Sanity sink`,
             modifiers: ['legendary'],
           },
+          liveLabel: `Lost ${app.utility.format.health(1)}`,
         }
       },
     },
@@ -152,7 +155,7 @@ content.cellar.tiles = (() => {
             )
           },
           attribute: {
-            label: `Sanity broken`,
+            label: `Sanity devourer`,
             modifiers: ['legendary'],
           },
         }

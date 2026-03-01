@@ -128,6 +128,8 @@ content.shop = (() => {
     'Melody Heights',
     'Secret Bread',
     // Jokes
+    'Adjective noun',
+    'Adjective adjective noun',
     'the easter egg',
     'the fourth wall',
     'the inside joke',
