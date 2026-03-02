@@ -31,29 +31,29 @@ content.audio.reachSwitch = (() => {
   }
 
   return {
-    trigger: function (isOnline) {
+    trigger: function (isOnline, frequencyScale = 1) {
       const now = engine.time()
 
       if (isOnline) {
         trigger({
           duration: 1/2,
-          frequency: 750,
+          frequency: 750 * frequencyScale,
           when: now,
         })
         trigger({
           duration: 2,
-          frequency: 1500,
+          frequency: 1500 * frequencyScale,
           when: now + 1/8,
         })
       } else {
         trigger({
           duration: 1/2,
-          frequency: 3000,
+          frequency: 3000 * frequencyScale,
           when: now,
         })
         trigger({
           duration: 2,
-          frequency: 1500,
+          frequency: 1500 * frequencyScale,
           when: now + 1/8,
         })
       }

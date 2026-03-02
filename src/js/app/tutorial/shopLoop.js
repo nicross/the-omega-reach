@@ -19,6 +19,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
           actions: [
             {
               label: 'Brace for it',
+              after: () => content.audio.reachSwitch.trigger(true, 0.25),
             },
           ],
         },
@@ -107,6 +108,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
             before: () => {
               content.shop.resetTimer()
               content.cellar.startRun()
+              content.audio.reachSwitch.trigger(false, 0.25)
 
               app.screen.game.update()
             },
