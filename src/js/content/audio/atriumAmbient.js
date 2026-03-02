@@ -137,9 +137,11 @@ content.audio.atriumAmbient = (() => {
     synth.output.connect(bus)
 
     // Fader
-    const attack = 1/8
-    synth.output.gain.value = 0
-    engine.fn.rampLinear(synth.output.gain, baseGain, attack)
+    const attack = 1/8,
+      now = engine.time()
+
+    synth.output.gain.setValueAtTime(0, now)
+    synth.output.gain.linearRampToValueAtTime(baseGain, now + attack)
   }
 
   function destroySynth() {

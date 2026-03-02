@@ -293,6 +293,7 @@ content.programs.base = {
     wrapper.panner.pan.value = point.y
 
     wrapper.output.gain.value = 0
+    engine.fn.setParam(wrapper.output.gain, 0)
     engine.fn.rampLinear(wrapper.output.gain, baseGain, attack)
 
     this.decorateSynthWrapper(wrapper)

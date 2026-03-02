@@ -29,8 +29,6 @@ content.audio.dialog = (() => {
     synth.param.gain.setValueAtTime(baseGain, when + duration - 1/64)
     synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration)
 
-    synth.panner.pan.setValueAtTime(pan, when + duration)
-
     synth.stop(when + duration)
   }
 

@@ -89,9 +89,11 @@ content.audio.reachDrone = (() => {
     synth.chainStop(synth.wm)
 
     // Fader
-    const attack = 1/8
-    synth.fader.gain.value = 0
-    engine.fn.rampLinear(synth.fader.gain, baseGain, attack)
+    const attack = 1/8,
+      now = engine.time()
+
+    synth.fader.gain.setValueAtTime(0, now)
+    synth.fader.gain.linearRampToValueAtTime(baseGain, now + attack)
   }
 
   function destroySynth() {

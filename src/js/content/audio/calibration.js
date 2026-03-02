@@ -26,6 +26,7 @@ content.audio.calibration = (() => {
     ).connect(bus)
 
     synth.panner.pan.value = pan
+    engine.fn.setParam(synth.panner.pan, pan)
     synth.panner.pan.linearRampToValueAtTime(-pan, when + duration)
 
     synth.param.mod.frequency.linearRampToValueAtTime(modFrequency/2, when + duration)

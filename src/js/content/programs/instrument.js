@@ -84,7 +84,7 @@ content.programs.instrument = content.programs.invent({
     wmFrequencyScale: function (srand) {return srand() * (1 - this.options.instrument.rarity)},
     // TODO: Haptics
     // Particles
-    particleHueCenter: (srand) => srand(),
+    particleHueCenter: (srand) => srand(-0.5, 0.5),
     particleHueRange: function (srand) {return (srand() * 0.125) + (this.options.instrument.rarity * 0.375)},
     particleHueScale: function (srand) {return engine.fn.lerp(1, 2, (srand() * 0.25) + (this.options.instrument.rarity * 0.75))},
     particleHueMax: function () {return this.properties.particleHueCenter + this.properties.particleHueRange},
