@@ -51,6 +51,7 @@ content.cellar = (() => {
 
       this.health.setMax()
       this.discovered.set(this.position.get())
+      content.audio.cellarInteractives.reset()
 
       return this
     },

@@ -12,7 +12,7 @@ content.audio.cellarHealth = (() => {
       cmDepth: engine.fn.lerpExp(1200, 600, health, 0.5),
       cmFrequency: 1/5 * engine.fn.lerpExp(5, 1, health, 0.5),
       filterFrequency: engine.fn.lerpExp(500, 100, health, 0.5),
-      gain: engine.fn.fromDb(engine.fn.lerp(-4.5, 0, health)),
+      gain: engine.fn.fromDb(engine.fn.lerp(-6, 0, health)),
       pmDepth: engine.fn.lerpExp(0.75, 0.125, health, 0.5),
       pmFrequency: 1/13 * engine.fn.lerp(5, 1, health),
     }

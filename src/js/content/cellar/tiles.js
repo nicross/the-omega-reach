@@ -130,7 +130,7 @@ content.cellar.tiles = (() => {
           },
           attribute: {
             label,
-            modifiers: ['legendary'],
+            modifiers: [],
           },
           liveLabel: `${label} found, gained ${app.utility.format.health(1)}`,
         }
@@ -184,7 +184,7 @@ content.cellar.tiles = (() => {
           },
           attribute: {
             label,
-            modifiers: ['legendary'],
+            modifiers: [],
           },
           liveLabel: `${label} found, lost ${app.utility.format.health(1)}`,
         }
@@ -219,6 +219,9 @@ content.cellar.tiles = (() => {
 
       types.splice(types.indexOf(type), 1)
     }
+
+    tile.note = engine.fn.choose([1,2,3,4,5,6,7,8,10,11,12], srand())
+    tile.prime = engine.fn.choose([59, 61, 67, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113], srand())
 
     return tile
   }

@@ -67,12 +67,16 @@ content.rooms.cellar = content.rooms.invent({
     message.push(effect.liveLabel || effect.attribute.label)
     effect.apply()
 
+    // Force walls to update
+    content.programs.get().loadProperties()
+
     if (!content.cellar.health.has()) {
       content.location.emit('cellar-death')
       return
     }
 
     if (scans == tile.effects.length) {
+      content.audio.cellarInteractives.update(true)
       message.push('Area complete')
       content.location.emit('interact-complete', {room: this})
     }
@@ -210,9 +214,9 @@ content.rooms.cellar = content.rooms.invent({
   getReachMuffle: () => {
     const distance = content.cellar.position.get().distance(),
       max = content.cellar.health.max(),
-      value = engine.fn.clamp(distance / max)
+      value = engine.fn.clamp(distance / (max * max))
 
-    return 1 - engine.fn.lerpExp(1/4, 0, value, 0.5)
+    return 1 - engine.fn.lerpExp(1/4, 0, value, 1/3)
   },
   getReachPan: () => -content.cellar.position.get().normalize().x,
 })
