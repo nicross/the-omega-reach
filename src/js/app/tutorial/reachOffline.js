@@ -47,7 +47,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
           {
             label: 'hold for a second.',
             before: () => {
-              app.settings.setInputHold(false)
+              app.settings.setInputHold(true)
               app.settings.save()
               app.screen.game.interact.update()
             },

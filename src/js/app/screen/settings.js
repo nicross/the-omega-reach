@@ -63,6 +63,7 @@ app.screen.settings = app.screenManager.invent({
     this.state.previousState = e.previousState
 
     this.selects[0].setValue(app.settings.raw.inputPreference)
+    this.toggles[1].setValue(app.settings.raw.inputHold, true)
   },
   onExit: function () {
     app.settings.save()
