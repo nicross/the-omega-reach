@@ -202,6 +202,7 @@ content.programs.base = {
     wrapper.maxColor = color
     wrapper.minColor = 2
     wrapper.rootFrequency = frequency
+    wrapper.stereoWidth = 0.666
 
     const synth = engine.synth.pwm({
       detune,
@@ -258,6 +259,7 @@ content.programs.base = {
       panner: context.createStereoPanner(),
       onUpdate: () => {},
       onStop: () => {},
+      stereoWidth: 1,
       stop: async function () {
         engine.fn.rampLinear(this.output.gain, 0, release)
         await engine.fn.promise(release * 1000)
@@ -277,7 +279,7 @@ content.programs.base = {
 
         engine.fn.setParam(wrapper.filter.frequency, wrapper.rootFrequency * engine.fn.scale((_this.invertSynthX() ? -1 : 1) * point.x, -1, 1, wrapper.minColor, engine.fn.lerp(wrapper.minColor, wrapper.maxColor, depth)))
         engine.fn.setParam(wrapper.input.gain, depth * baseGain / ((1+_this.synths.size)*0.5))
-        engine.fn.setParam(wrapper.panner.pan, point.y)
+        engine.fn.setParam(wrapper.panner.pan, point.y * wrapper.stereoWidth)
 
         return this
       }
@@ -290,7 +292,7 @@ content.programs.base = {
 
     wrapper.filter.frequency.value = wrapper.rootFrequency * engine.fn.scale((_this.invertSynthX() ? -1 : 1) * point.x, -1, 1, wrapper.minColor, engine.fn.lerp(wrapper.minColor, wrapper.maxColor, depth))
     wrapper.input.gain.value = 0
-    wrapper.panner.pan.value = point.y
+    wrapper.panner.pan.value = point.y * wrapper.stereoWidth
 
     wrapper.output.gain.value = 0
     engine.fn.setParam(wrapper.output.gain, 0)
