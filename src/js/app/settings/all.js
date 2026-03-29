@@ -70,6 +70,14 @@ app.settings.register('particleLimit', {
   },
 })
 
+app.settings.register('reverbOn', {
+  compute: (rawValue) => Boolean(rawValue),
+  default: () => true,
+  update: (computedValue) => {
+    engine.mixer.reverb.setActive(computedValue)
+  },
+})
+
 app.settings.register('tutorialOn', {
   compute: (rawValue) => Boolean(rawValue),
   default: true,

@@ -4,6 +4,7 @@
 - Added a slider for interface scaling.
 - Added a slider for music volume.
 - Added a slider for particle density.
+- Added a toggle for reverb.
 - Added a slider for voice limit.
 - Doubled the health pool for the cellar.
 - Read aloud object types when first revealed.
