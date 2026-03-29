@@ -45,6 +45,7 @@ app.screen.settings = app.screenManager.invent({
       ['.a-settings--mainVolume', app.settings.raw.mainVolume, app.settings.setMainVolume],
       ['.a-settings--musicVolume', app.settings.raw.musicVolume, app.settings.setMusicVolume],
       ['.a-settings--particleLimit', app.settings.raw.particleLimit, app.settings.setParticleLimit],
+      ['.a-settings--polyphony', app.settings.raw.polyphony, app.settings.setPolyphony],
       ['.a-settings--uiScale', app.settings.raw.uiScale, app.settings.setUiScale],
     ].map(([selector, initialValue, setter]) => {
       const component = app.component.slider.hydrate(root.querySelector(selector), initialValue)

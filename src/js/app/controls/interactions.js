@@ -1,6 +1,5 @@
 app.controls.interactions = (() => {
-  const mouseMemory = engine.tool.vector2d.create(),
-    pointLimit = 8
+  const mouseMemory = engine.tool.vector2d.create()
 
   const gamepadMappings = {
     left: {
@@ -234,8 +233,8 @@ app.controls.interactions = (() => {
 
         points = points.filter((x) => x)
 
-        if (points.length > pointLimit) {
-          points = points.slice(points.length - pointLimit - 1, points.length)
+        if (points.length > app.settings.computed.polyphony) {
+          points = points.slice(points.length - app.settings.computed.polyphony, points.length)
         }
 
         // Handle point inversion?
