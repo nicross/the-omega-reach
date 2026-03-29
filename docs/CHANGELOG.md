@@ -2,6 +2,7 @@
 ## v1.1.0
 - Added a prompt and toggle for displaying tutorials.
 - Added a slider for particle density.
+- Added a slider for interface scaling.
 - Doubled the health pool for the cellar.
 - Read aloud object types when first revealed.
 - Scaled unrevealed objects visually based on type.

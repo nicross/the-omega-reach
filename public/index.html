@@ -133,6 +133,15 @@
               </div>
             </li>
             <li class="c-screen--field">
+              <label class="c-screen--label" id="a-settings--inputHoldLabel">Enable hold interactions</label>
+              <div class="c-toggle a-settings--inputHold">
+                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settings--inputHoldLabel">
+                  <span class="c-toggle--off">Off</span>
+                  <span class="c-toggle--on">On</span>
+                </button>
+              </div>
+            </li>
+            <li class="c-screen--field">
               <label class="c-screen--label" for="a-settings--mainVolumeInput">Main volume</label>
               <div class="c-slider a-settings--mainVolume">
                 <div class="c-slider--input">
@@ -160,12 +169,12 @@
               </div>
             </li>
             <li class="c-screen--field">
-              <label class="c-screen--label" id="a-settings--inputHoldLabel">Enable hold interactions</label>
-              <div class="c-toggle a-settings--inputHold">
-                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settings--inputHoldLabel">
-                  <span class="c-toggle--off">Off</span>
-                  <span class="c-toggle--on">On</span>
-                </button>
+              <label class="c-screen--label" for="a-settings--uiScaleInput">Interface scale</label>
+              <div class="c-slider a-settings--uiScale">
+                <div class="c-slider--input">
+                  <input id="a-settings--uiScaleInput" max="10" min="0" step="1" type="range" />
+                </div>
+                <div class="c-slider--value"></div>
               </div>
             </li>
             <li class="c-screen--field">

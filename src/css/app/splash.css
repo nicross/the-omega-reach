@@ -5,37 +5,37 @@
   text-align: center;
 }
   .a-splash--details {
-    bottom: 1.75rem;
+    bottom: 1.75em;
     font-family: FiraCodeLight, monospace;
     font-size: 0.75em;
     font-weight: 300;
-    left: 1.75rem;
+    left: 1.75em;
     letter-spacing: 0;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5em 0.75em;
     position: absolute;
     text-align: left;
   }
   .a-splash--instruction {
     animation: a-splash--instruction 1s linear 0s infinite alternate both;
-    bottom: 1.75rem;
+    bottom: 1.75em;
     line-height: 2;
     padding: 0.5em 0.75em;
     position: absolute;
-    right: 1.75rem;
+    right: 1.75em;
     text-transform: uppercase;
   }
   .a-splash--logo {
-    filter: drop-shadow(0 0 1rem #000000);
+    filter: drop-shadow(0 0 1em #000000);
     line-height: 0.75;
     opacity: 0;
     position: relative;
-    transform: translateY(-2rem) scale(0.125);
+    transform: translateY(-2em) scale(0.125);
     transition: all 1s ease;
     transition-property: opacity, transform;
   }
     .a-app--screen-active .a-splash--logo {
       opacity: 1;
-      transform: translateY(-2rem);
+      transform: translateY(-2em);
       transition-duration: 4s;
     }
   .a-splash--logoLine {
@@ -98,7 +98,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .a-splash--logo {
-    transform: translateY(-2rem) !important;
+    transform: translateY(-2em) !important;
   }
 
   .a-splash--logoSymbol {

@@ -37,8 +37,8 @@ const app = (() => {
         : readyContext
     },
     screen: {},
-    setColorScheme: function (value) {
-      document.documentElement.style.setProperty(`--color-scheme`, value)
+    setUiScale: function (value) {
+      document.documentElement.style.setProperty(`--ui-scale`, value)
 
       return this
     },

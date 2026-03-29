@@ -44,6 +44,7 @@ app.screen.settings = app.screenManager.invent({
       ['.a-settings--gamepadVibration', app.settings.raw.gamepadVibration, app.settings.setGamepadVibration],
       ['.a-settings--mainVolume', app.settings.raw.mainVolume, app.settings.setMainVolume],
       ['.a-settings--particleLimit', app.settings.raw.particleLimit, app.settings.setParticleLimit],
+      ['.a-settings--uiScale', app.settings.raw.uiScale, app.settings.setUiScale],
     ].map(([selector, initialValue, setter]) => {
       const component = app.component.slider.hydrate(root.querySelector(selector), initialValue)
       component.on('change', () => setter(component.getValueAsFloat()))
