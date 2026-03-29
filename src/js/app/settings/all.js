@@ -49,6 +49,14 @@ app.settings.register('mainVolume', {
   },
 })
 
+app.settings.register('particleLimit', {
+  compute: (rawValue) => engine.fn.clamp(Number(rawValue || 0)),
+  default: 0.5,
+  update: function (computedValue) {
+    content.particles.setLimit(computedValue)
+  },
+})
+
 app.settings.register('tutorialOn', {
   compute: (rawValue) => Boolean(rawValue),
   default: true,
