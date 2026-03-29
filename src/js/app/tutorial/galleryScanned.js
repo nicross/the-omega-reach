@@ -11,14 +11,15 @@ app.tutorial.galleryScanned = app.tutorial.invent({
 
     [
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Appraisal:`,
         description: `Some instruments have quirks as well! Continue interacting to fully appraise an instrument.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

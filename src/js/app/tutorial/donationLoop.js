@@ -12,26 +12,31 @@ app.tutorial.donationLoop = app.tutorial.invent({
     }
 
     if (!this.state.tutorial) {
-      app.screen.game.dialog.push({
-        title: `Perfect timing!`,
-        description: `It appears you missed some visitors while you were busy with <strong>the reach</strong>. Beyond the usual indicators—like dust on the doormat or missing pencils—when left, their generous donations are the most enticing!`,
-        actions: [
-          {
-            label: 'Collect earnings',
-          }
-        ],
-      })
-      app.screen.game.dialog.push({
-        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The lobby:`,
-        description: `Donations will accumulate in <strong>the lobby</strong> as you explore the universe. Return here to collect them often.`,
-        actions: [
-          {
-            label: 'Regain control',
-            before: () => this.state.tutorial = true,
-            after: () => this.earnCredits()
-          }
-        ],
-      })
+      [
+        {
+          title: `Perfect timing!`,
+          description: `It appears you missed some visitors while you were busy with <strong>the reach</strong>. Beyond the usual indicators—like dust on the doormat or missing pencils—when left, their generous donations are the most enticing!`,
+          actions: [
+            {
+              label: 'Collect earnings',
+            }
+          ],
+        },
+        {
+          tutorial: true,
+          title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The lobby:`,
+          description: `Donations will accumulate in <strong>the lobby</strong> as you explore the universe. Return here to collect them often.`,
+          actions: [
+            {
+              label: 'Regain control',
+            }
+          ],
+          finally: () => {
+            this.state.tutorial = true
+            this.earnCredits()
+          },
+        },
+      ].forEach((x) => app.screen.game.dialog.push(x))
     } else {
       this.earnCredits()
     }
@@ -50,7 +55,6 @@ app.tutorial.donationLoop = app.tutorial.invent({
       actions: [
         {
           label: 'Cheers!',
-          before: () => {},
         }
       ],
     })

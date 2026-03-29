@@ -15,14 +15,15 @@ app.tutorial.star = app.tutorial.invent({
 
     [
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Stars:`,
         description: `Stars may host complex systems of planets and moons—some with <em>legendary instruments</em> to recover! Interact to reveal more details about a star.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

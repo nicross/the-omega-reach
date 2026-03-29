@@ -11,15 +11,16 @@ app.tutorial.cellar = app.tutorial.invent({
 
     [
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The cellar?`,
         description: `Who put this <em>earthen labyrinth</em> here? Your surprise is as genuine as mine—so you're on your own in this maze! My best advice is to turn away—or explore it at your pace.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
-      ].forEach((x) => app.screen.game.dialog.push(x))
+    ].forEach((x) => app.screen.game.dialog.push(x))
   },
 })

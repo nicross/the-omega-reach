@@ -15,14 +15,15 @@ app.tutorial.planet = app.tutorial.invent({
 
     [
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Planets:`,
         description: `Planets can also be hosts to interesting systems. Interact to reveal more details about a planet.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

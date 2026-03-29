@@ -20,14 +20,15 @@ app.tutorial.horizon = app.tutorial.invent({
         ],
       },
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The horizon:`,
         description: `Interact to reach toward a random galaxy upon <strong>the horizon</strong>. You will zoom in automagically to any new galaxies that you reach.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

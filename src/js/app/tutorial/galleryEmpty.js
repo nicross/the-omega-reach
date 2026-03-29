@@ -16,9 +16,9 @@ app.tutorial.galleryEmpty = app.tutorial.invent({
         actions: [
           {
             label: 'Come back later',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

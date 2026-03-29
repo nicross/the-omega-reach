@@ -48,3 +48,8 @@ app.settings.register('mainVolume', {
     engine.fn.setParam(engine.mixer.param.gain, computedValue)
   },
 })
+
+app.settings.register('tutorialOn', {
+  compute: (rawValue) => Boolean(rawValue),
+  default: true,
+})

@@ -16,9 +16,9 @@ app.tutorial.atriumOffer = app.tutorial.invent({
         actions: [
           {
             label: 'Check it out',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

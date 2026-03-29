@@ -26,19 +26,19 @@ app.tutorial.reachOffline = app.tutorial.invent({
           {
             label: 'two joysticks.',
             before: () => app.settings.setInputPreference('gamepad'),
-            after: () => app.settings.save(),
           },
           {
             label: 'a trackball.',
             before: () => app.settings.setInputPreference('mouse'),
-            after: () => app.settings.save(),
           },
           {
             label: 'an array of keys.',
             before: () => app.settings.setInputPreference('keyboard'),
-            after: () => app.settings.save(),
           },
         ],
+        finally: () => {
+          app.settings.save()
+        },
       },
       {
         title: `<span class="u-highlight">[Select input preference…]</span>`,
@@ -48,19 +48,19 @@ app.tutorial.reachOffline = app.tutorial.invent({
             label: 'hold for a second.',
             before: () => {
               app.settings.setInputHold(true)
-              app.settings.save()
-              app.screen.game.interact.update()
             },
           },
           {
             label: 'reach it immediately.',
             before: () => {
               app.settings.setInputHold(false)
-              app.settings.save()
-              app.screen.game.interact.update()
             },
           },
         ],
+        finally: () => {
+          app.settings.save()
+          app.screen.game.interact.update()
+        },
       },
       {
         title: `Yet, it's offline.`,
@@ -72,6 +72,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
         ],
       },
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Interacting:`,
         description: () => ({
           gamepad: `Hold one or both <kbd>Triggers</kbd> and move the <kbd>Analog Sticks</kbd> to interact. Locate the sweet spot using audio, visual, and haptic cues to proceed.`,
@@ -85,6 +86,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
         ],
       },
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Skipping:`,
         description: () => ({
           gamepad: `${app.settings.computed.inputHold ? 'Hold' : 'Press'} the <kbd>A</kbd> button to skip the current interaction. You will not be penalized for doing so.`,
@@ -94,9 +96,9 @@ app.tutorial.reachOffline = app.tutorial.invent({
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

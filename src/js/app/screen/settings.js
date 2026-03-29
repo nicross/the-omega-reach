@@ -53,6 +53,7 @@ app.screen.settings = app.screenManager.invent({
     this.toggles = [
       ['.a-settings--graphicsOn', app.settings.raw.graphicsOn, app.settings.setGraphicsOn],
       ['.a-settings--inputHold', app.settings.raw.inputHold, app.settings.setInputHold],
+      ['.a-settings--tutorialOn', app.settings.raw.tutorialOn, app.settings.setTutorialOn],
     ].map(([selector, initialValue, setter]) => {
       const component = app.component.toggle.hydrate(root.querySelector(selector), initialValue)
       component.on('change', () => setter(component.getValue()))

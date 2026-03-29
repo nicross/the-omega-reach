@@ -15,6 +15,7 @@ app.tutorial.planetMany = app.tutorial.invent({
 
     [
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Planets:`,
         description: () => ({
           gamepad: `Some stars have multiple planets to examine. Press <kbd>D-Pad Right</kbd> and <kbd>D-Pad Left</kbd> to navigate between the planets around this star.`,
@@ -24,9 +25,9 @@ app.tutorial.planetMany = app.tutorial.invent({
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

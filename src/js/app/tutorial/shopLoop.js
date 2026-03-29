@@ -14,7 +14,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
     if (!this.state.tutorial) {
       [
         {
-          title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The shop?`,
+          title: app.settings.computed.tutorialOn ? `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The shop?` : `They're here.`,
           description: `You enter <strong>the shop</strong>, but immediately—`,
           actions: [
             {
@@ -119,14 +119,15 @@ app.tutorial.shopLoop = app.tutorial.invent({
 
     if (!this.state.tutorial) {
       app.screen.game.dialog.push({
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The shop:`,
         description: `The shopkeeper will periodically return with the fruits of their breaks. Visit <strong>the shop</strong> often to consider their offerings for your collection.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => this.state.tutorial = true,
           },
         ],
+        finally: () => this.state.tutorial = true,
       })
     }
   },

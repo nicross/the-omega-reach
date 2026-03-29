@@ -16,9 +16,9 @@ app.tutorial.firstInstrument = app.tutorial.invent({
         actions: [
           {
             label: 'Get zooming',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

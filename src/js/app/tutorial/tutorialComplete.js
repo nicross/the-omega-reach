@@ -16,12 +16,10 @@ app.tutorial.tutorialComplete = app.tutorial.invent({
         actions: [
           {
             label: 'End tutorial',
-            before: () => {
-              this.markComplete()
-            },
           }
         ],
+        finally: () => this.markComplete(),
       },
-      ].forEach((x) => app.screen.game.dialog.push(x))
+    ].forEach((x) => app.screen.game.dialog.push(x))
   },
 })

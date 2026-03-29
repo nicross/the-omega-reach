@@ -11,6 +11,7 @@ app.tutorial.galleryMany = app.tutorial.invent({
 
     [
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Instruments:`,
         description: () => ({
           gamepad: `<strong>The gallery</strong> can hold many instruments. Press <kbd>D-Pad Right</kbd> and <kbd>D-Pad Left</kbd> to navigate between the instruments you've collected.`,
@@ -20,9 +21,9 @@ app.tutorial.galleryMany = app.tutorial.invent({
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

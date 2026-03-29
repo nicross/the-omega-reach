@@ -15,6 +15,7 @@ app.tutorial.starMany = app.tutorial.invent({
 
     [
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Stars:`,
         description: () => ({
           gamepad: `You can revisit any star at any time. Press <kbd>D-Pad Right</kbd> and <kbd>D-Pad Left</kbd> to navigate between the stars you've reached within this galaxy.`,
@@ -24,9 +25,9 @@ app.tutorial.starMany = app.tutorial.invent({
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

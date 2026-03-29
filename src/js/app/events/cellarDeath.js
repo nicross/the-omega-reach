@@ -40,14 +40,15 @@ content.location.on('cellar-death', () => {
         ],
       },
       {
+        tutorial: true,
         title: `[Tutorial] <span class="u-screenReader">for</span> Fainting:`,
         description: `You will wake in <strong>the atrium</strong> whenever you faint for whatever reason.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => app.tutorial.death.markComplete(),
           }
         ],
+        finally: () => app.tutorial.death.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   } else {

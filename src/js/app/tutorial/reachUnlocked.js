@@ -11,18 +11,19 @@ app.tutorial.reachUnlocked = app.tutorial.invent({
 
     [
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The reach:`,
         description: `You may now interact with <strong>the reach</strong> at any time to power it off and on. There is no reason to do so, but I'll allow it.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
-            after: () => {
-              content.solution.generate()
-              app.screen.game.interact.update()
-            },
           }
         ],
+        finally: () => {
+          this.markComplete()
+          content.solution.generate()
+          app.screen.game.interact.update()
+        },
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

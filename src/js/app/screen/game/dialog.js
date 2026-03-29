@@ -32,6 +32,14 @@ app.screen.game.dialog = (() => {
     const next = queue.shift()
 
     if (next) {
+      if (next.tutorial && !app.settings.computed.tutorialOn) {
+        if (next.finally) {
+          next.finally()
+        }
+
+        return advance()
+      }
+
       current = next
       render(next)
 
@@ -51,6 +59,10 @@ app.screen.game.dialog = (() => {
   }
 
   function close() {
+    if (current?.finally) {
+      current.finally()
+    }
+
     document.querySelector('.a-game--info').removeAttribute('aria-hidden')
     document.querySelector('.a-game--nav').removeAttribute('aria-hidden')
 

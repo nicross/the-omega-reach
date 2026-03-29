@@ -15,14 +15,15 @@ app.tutorial.moonScanned = app.tutorial.invent({
 
     [
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Instruments:`,
         description: `Some objects have the artifacts you need. Interact to recover this instrument for <strong>the gallery</strong>.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

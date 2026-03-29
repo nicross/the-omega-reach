@@ -1,5 +1,6 @@
 # CHANGELOG
 ## v1.1.0
+- Added prompt and toggle for displaying tutorials.
 - Doubled the health pool for the cellar.
 - Read aloud object types when first revealed.
 - Scaled unrevealed objects visually based on type.

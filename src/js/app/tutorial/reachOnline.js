@@ -15,11 +15,12 @@ app.tutorial.reachOnline = app.tutorial.invent({
         description: `The device thrums back to life, returning vigorously to its preferred state! And lo, its console glows with the promise of your recurring fate.`,
         actions: [
           {
-            label: 'Use the device',
+            label: 'Zoom the device',
           }
         ],
       },
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The reach:`,
         description: () => ({
           gamepad: `Press <kbd>D-Pad Up</kbd> to extend <strong>the reach</strong> to its next zoom level. You may press <kbd>D-Pad Down</kbd> to zoom out from any level at any time. Zoom in to proceed.`,
@@ -29,10 +30,12 @@ app.tutorial.reachOnline = app.tutorial.invent({
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
-            after: () => app.screen.game.interact.update(),
           }
         ],
+        finally: () => {
+          this.markComplete()
+          app.screen.game.interact.update()
+        },
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

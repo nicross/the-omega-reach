@@ -11,14 +11,15 @@ app.tutorial.galleryInstrument = app.tutorial.invent({
 
     [
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Instruments:`,
         description: `They're your <em>earthen bread and butter</em>—or what keeps the conservatory's lights on. Interact to reveal more details about an instrument.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

@@ -20,14 +20,15 @@ app.tutorial.reachOff = app.tutorial.invent({
         ],
       },
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The reach:`,
         description: `<strong>The horizon</strong> is inaccessible to you while <strong>the reach</strong> is in this state. Interact with it again when you're ready to explore more of the universe.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

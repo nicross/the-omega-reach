@@ -41,6 +41,24 @@ app.tutorial.atrium = app.tutorial.invent({
         ],
       },
       {
+        title: `<span class="u-highlight">[Select tutorial preference…]</span>`,
+        description: `When you reach into the unknown, you prefer to…`,
+        actions: [
+          {
+            label: 'have your hand held.',
+            before: () => app.settings.setTutorialOn(true),
+          },
+          {
+            label: 'reach your own conclusions.',
+            before: () => app.settings.setTutorialOn(false),
+          },
+        ],
+        finally: () => {
+          app.settings.save()
+        },
+      },
+      {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Moving:`,
         description: () => ({
           gamepad: `Use the <kbd>Directional Pad</kbd> to navigate the conservatory. Find your way to <strong>the reach</strong> to fulfill your duties.`,
@@ -50,10 +68,10 @@ app.tutorial.atrium = app.tutorial.invent({
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
-      ].forEach((x) => app.screen.game.dialog.push(x))
+    ].forEach((x) => app.screen.game.dialog.push(x))
   },
 })

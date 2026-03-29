@@ -11,15 +11,16 @@ app.tutorial.atriumUnlocked = app.tutorial.invent({
 
     [
       {
+        tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The atrium:`,
         description: `You may now receive notifications about other rooms from <strong>the atrium</strong>. For instance, that instrument you recovered has just arrived in <strong>the gallery</strong>! Go there to proceed.`,
         actions: [
           {
             label: 'Regain control',
-            before: () => this.markComplete(),
           }
         ],
+        finally: () => this.markComplete(),
       },
-      ].forEach((x) => app.screen.game.dialog.push(x))
+    ].forEach((x) => app.screen.game.dialog.push(x))
   },
 })
