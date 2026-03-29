@@ -49,6 +49,14 @@ app.settings.register('mainVolume', {
   },
 })
 
+app.settings.register('musicVolume', {
+  compute: (rawValue) => engine.fn.fromDb(engine.fn.lerpExp(engine.const.zeroDb, 0, rawValue, 0.1)),
+  default: 1,
+  update: function (computedValue) {
+    engine.fn.setParam(content.audio.channel.music.param.gain, computedValue)
+  },
+})
+
 app.settings.register('particleLimit', {
   compute: (rawValue) => engine.fn.clamp(Number(rawValue || 0)),
   default: 0.5,

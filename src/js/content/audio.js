@@ -35,6 +35,9 @@ content.audio = (() => {
       },
       input,
       output,
+      param: {
+        gain: output.gain,
+      },
     }
   }
 
@@ -42,6 +45,7 @@ content.audio = (() => {
     channel: {
       bypass: createChannel(true),
       default: createChannel(),
+      music: createChannel(),
     },
     main: () => mainOutput,
     reverb: () => reverb,

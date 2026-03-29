@@ -1,6 +1,6 @@
 content.audio.cellarInteractives = (() => {
   const baseGain = engine.fn.fromDb(-12),
-    bus = content.audio.channel.default.createBus(),
+    bus = content.audio.channel.music.createBus(),
     context = engine.context(),
     maxSynths = 8,
     synths = []

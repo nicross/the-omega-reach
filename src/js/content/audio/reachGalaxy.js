@@ -1,7 +1,7 @@
 content.audio.reachGalaxy = (() => {
   const allowedRooms = new Set(['galaxy','star','planet','moon']),
     baseGain = engine.fn.fromDb(-15),
-    bus = content.audio.channel.default.createBus(),
+    bus = content.audio.channel.music.createBus(),
     context = engine.context(),
     primes = [107, 109, 113],
     rootNote = 36 + (12 * 1)

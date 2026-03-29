@@ -43,6 +43,7 @@ app.screen.settings = app.screenManager.invent({
       ['.a-settings--gamepadDeadzone', app.settings.raw.gamepadDeadzone, app.settings.setGamepadDeadzone],
       ['.a-settings--gamepadVibration', app.settings.raw.gamepadVibration, app.settings.setGamepadVibration],
       ['.a-settings--mainVolume', app.settings.raw.mainVolume, app.settings.setMainVolume],
+      ['.a-settings--musicVolume', app.settings.raw.musicVolume, app.settings.setMusicVolume],
       ['.a-settings--particleLimit', app.settings.raw.particleLimit, app.settings.setParticleLimit],
       ['.a-settings--uiScale', app.settings.raw.uiScale, app.settings.setUiScale],
     ].map(([selector, initialValue, setter]) => {
