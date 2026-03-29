@@ -119,113 +119,61 @@
       <div class="a-app--screen a-app--settings">
         <section class="c-screen a-settings" aria-label="Settings">
           <h1 class="c-screen--title">Settings</h1>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-settings--audio" type="button">Audio settings</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-settings--gameplay" type="button">Gameplay settings</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-settings--input" type="button">Input settings</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-settings--video" type="button">Video settings</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-settings--back" type="button">Back</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--settingsAudio">
+        <section class="c-screen a-settingsAudio" aria-label="Audio settings">
+          <h1 class="c-screen--title">Audio settings</h1>
           <ul class="c-screen--fields">
             <li class="c-screen--field">
-              <label class="c-screen--label">Input preference</label>
-              <div class="c-select a-settings--inputPreference">
-                <button class="c-select--button c-select--previous" aria-label="Previous input preference" aria-describedby="a-settings--inputPreferenceValue">
-                  <i aria-hidden="true" role="presentation">◀</i>
-                </button>
-                <div class="c-select--value" id="a-settings--inputPreferenceValue"></div>
-                <button class="c-select--button c-select--next" aria-label="Next input preference" aria-describedby="a-settings--inputPreferenceValue">
-                  <i aria-hidden="true" role="presentation">▶</i>
-                </button>
-              </div>
-            </li>
-            <li class="c-screen--field">
-              <label class="c-screen--label" id="a-settings--inputHoldLabel">Enable hold interactions</label>
-              <div class="c-toggle a-settings--inputHold">
-                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settings--inputHoldLabel">
-                  <span class="c-toggle--off">Off</span>
-                  <span class="c-toggle--on">On</span>
-                </button>
-              </div>
-            </li>
-            <li class="c-screen--field">
-              <label class="c-screen--label" for="a-settings--mainVolumeInput">Main volume</label>
-              <div class="c-slider a-settings--mainVolume">
+              <label class="c-screen--label" for="a-settingsAudio--mainVolumeInput">Main volume</label>
+              <div class="c-slider a-settingsAudio--mainVolume">
                 <div class="c-slider--input">
-                  <input id="a-settings--mainVolumeInput" max="10" min="0" step="1" type="range" />
+                  <input id="a-settingsAudio--mainVolumeInput" max="10" min="0" step="1" type="range" />
                 </div>
                 <div class="c-slider--value"></div>
               </div>
             </li>
             <li class="c-screen--field">
-              <label class="c-screen--label" for="a-settings--musicVolumeInput">Music volume</label>
-              <div class="c-slider a-settings--musicVolume">
+              <label class="c-screen--label" for="a-settingsAudio--musicVolumeInput">Music volume</label>
+              <div class="c-slider a-settingsAudio--musicVolume">
                 <div class="c-slider--input">
-                  <input id="a-settings--musicVolumeInput" max="10" min="0" step="1" type="range" />
+                  <input id="a-settingsAudio--musicVolumeInput" max="10" min="0" step="1" type="range" />
                 </div>
                 <div class="c-slider--value"></div>
               </div>
             </li>
             <li class="c-screen--field">
-              <label class="c-screen--label" for="a-settings--polyphonyInput">Interaction voice limit</label>
-              <div class="c-slider a-settings--polyphony">
+              <label class="c-screen--label" for="a-settingsAudio--polyphonyInput">Interaction voice limit</label>
+              <div class="c-slider a-settingsAudio--polyphony">
                 <div class="c-slider--input">
-                  <input id="a-settings--polyphonyInput" max="10" min="2" step="1" type="range" />
+                  <input id="a-settingsAudio--polyphonyInput" max="10" min="2" step="1" type="range" />
                 </div>
                 <div class="c-slider--value"></div>
               </div>
             </li>
             <li class="c-screen--field">
-              <div class="c-screen--label" id="a-settings--reverbOnLabel">Enable reverb</div>
-              <div class="c-toggle a-settings--reverbOn">
-                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settings--reverbOnLabel">
-                  <span class="c-toggle--off">Off</span>
-                  <span class="c-toggle--on">On</span>
-                </button>
-              </div>
-            </li>
-            <li class="c-screen--field">
-              <label class="c-screen--label" for="a-settings--gamepadVibrationInput">Vibration strength</label>
-              <div class="c-slider a-settings--gamepadVibration">
-                <div class="c-slider--input">
-                  <input id="a-settings--gamepadVibrationInput" max="10" min="0" step="1" type="range" />
-                </div>
-                <div class="c-slider--value"></div>
-              </div>
-            </li>
-            <li class="c-screen--field">
-              <label class="c-screen--label" for="a-settings--gamepadDeadzoneInput">Gamepad deadzone</label>
-              <div class="c-slider a-settings--gamepadDeadzone">
-                <div class="c-slider--input">
-                  <input id="a-settings--gamepadDeadzoneInput" max="50" min="0" step="5" type="range" />
-                </div>
-                <div class="c-slider--value"></div>
-              </div>
-            </li>
-            <li class="c-screen--field">
-              <label class="c-screen--label" for="a-settings--uiScaleInput">Interface scale</label>
-              <div class="c-slider a-settings--uiScale">
-                <div class="c-slider--input">
-                  <input id="a-settings--uiScaleInput" max="10" min="0" step="1" type="range" />
-                </div>
-                <div class="c-slider--value"></div>
-              </div>
-            </li>
-            <li class="c-screen--field">
-              <label class="c-screen--label" for="a-settings--particleLimitInput">Particle density</label>
-              <div class="c-slider a-settings--particleLimit">
-                <div class="c-slider--input">
-                  <input id="a-settings--particleLimitInput" max="10" min="0" step="1" type="range" />
-                </div>
-                <div class="c-slider--value"></div>
-              </div>
-            </li>
-            <li class="c-screen--field">
-              <div class="c-screen--label" id="a-settings--graphicsOnLabel">Enable graphics</div>
-              <div class="c-toggle a-settings--graphicsOn">
-                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settings--graphicsOnLabel">
-                  <span class="c-toggle--off">Off</span>
-                  <span class="c-toggle--on">On</span>
-                </button>
-              </div>
-            </li>
-            <li class="c-screen--field">
-              <label class="c-screen--label" id="a-settings--tutorialOnLabel">Enable tutorials</label>
-              <div class="c-toggle a-settings--tutorialOn">
-                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settings--tutorialOnLabel">
+              <div class="c-screen--label" id="a-settingsAudio--reverbOnLabel">Enable reverb</div>
+              <div class="c-toggle a-settingsAudio--reverbOn">
+                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settingsAudio--reverbOnLabel">
                   <span class="c-toggle--off">Off</span>
                   <span class="c-toggle--on">On</span>
                 </button>
@@ -234,7 +182,121 @@
           </ul>
           <ul class="c-screen--actions">
             <li class="c-screen--action">
-              <button class="c-menuButton a-settings--back" type="button">Back</button>
+              <button class="c-menuButton a-settingsAudio--back" type="button">Back</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--settingsGameplay">
+        <section class="c-screen a-settingsGameplay" aria-label="Gameplay settings">
+          <h1 class="c-screen--title">Gameplay settings</h1>
+          <ul class="c-screen--fields">
+            <li class="c-screen--field">
+              <label class="c-screen--label" id="a-settingsGameplay--tutorialOnLabel">Enable tutorials</label>
+              <div class="c-toggle a-settingsGameplay--tutorialOn">
+                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settingsGameplay--tutorialOnLabel">
+                  <span class="c-toggle--off">Off</span>
+                  <span class="c-toggle--on">On</span>
+                </button>
+              </div>
+            </li>
+          </ul>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-settingsGameplay--back" type="button">Back</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--settingsInput">
+        <section class="c-screen a-settingsInput" aria-label="Settings">
+          <h1 class="c-screen--title">Input settings</h1>
+          <ul class="c-screen--fields">
+            <li class="c-screen--field">
+              <label class="c-screen--label">Input preference</label>
+              <div class="c-select a-settingsInput--inputPreference">
+                <button class="c-select--button c-select--previous" aria-label="Previous input preference" aria-describedby="a-settingsInput--inputPreferenceValue">
+                  <i aria-hidden="true" role="presentation">◀</i>
+                </button>
+                <div class="c-select--value" id="a-settingsInput--inputPreferenceValue"></div>
+                <button class="c-select--button c-select--next" aria-label="Next input preference" aria-describedby="a-settingsInput--inputPreferenceValue">
+                  <i aria-hidden="true" role="presentation">▶</i>
+                </button>
+              </div>
+            </li>
+            <li class="c-screen--field">
+              <label class="c-screen--label" id="a-settingsInput--inputHoldLabel">Enable hold interactions</label>
+              <div class="c-toggle a-settingsInput--inputHold">
+                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settingsInput--inputHoldLabel">
+                  <span class="c-toggle--off">Off</span>
+                  <span class="c-toggle--on">On</span>
+                </button>
+              </div>
+            </li>
+            <li class="c-screen--field">
+              <label class="c-screen--label" for="a-settingsInput--gamepadVibrationInput">Vibration strength</label>
+              <div class="c-slider a-settingsInput--gamepadVibration">
+                <div class="c-slider--input">
+                  <input id="a-settingsInput--gamepadVibrationInput" max="10" min="0" step="1" type="range" />
+                </div>
+                <div class="c-slider--value"></div>
+              </div>
+            </li>
+            <li class="c-screen--field">
+              <label class="c-screen--label" for="a-settingsInput--gamepadDeadzoneInput">Gamepad deadzone</label>
+              <div class="c-slider a-settingsInput--gamepadDeadzone">
+                <div class="c-slider--input">
+                  <input id="a-settingsInput--gamepadDeadzoneInput" max="50" min="0" step="5" type="range" />
+                </div>
+                <div class="c-slider--value"></div>
+              </div>
+            </li>
+          </ul>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-settingsInput--back" type="button">Back</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--settingsVideo">
+        <section class="c-screen a-settingsVideo" aria-label="Video settings">
+          <h1 class="c-screen--title">Video settings</h1>
+          <ul class="c-screen--fields">
+            <li class="c-screen--field">
+              <label class="c-screen--label" for="a-settingsVideo--uiScaleInput">Interface scale</label>
+              <div class="c-slider a-settingsVideo--uiScale">
+                <div class="c-slider--input">
+                  <input id="a-settingsVideo--uiScaleInput" max="10" min="0" step="1" type="range" />
+                </div>
+                <div class="c-slider--value"></div>
+              </div>
+            </li>
+            <li class="c-screen--field">
+              <label class="c-screen--label" for="a-settingsVideo--particleLimitInput">Particle density</label>
+              <div class="c-slider a-settingsVideo--particleLimit">
+                <div class="c-slider--input">
+                  <input id="a-settingsVideo--particleLimitInput" max="10" min="0" step="1" type="range" />
+                </div>
+                <div class="c-slider--value"></div>
+              </div>
+            </li>
+            <li class="c-screen--field">
+              <div class="c-screen--label" id="a-settingsVideo--graphicsOnLabel">Enable graphics</div>
+              <div class="c-toggle a-settingsVideo--graphicsOn">
+                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settingsVideo--graphicsOnLabel">
+                  <span class="c-toggle--off">Off</span>
+                  <span class="c-toggle--on">On</span>
+                </button>
+              </div>
+            </li>
+          </ul>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-settingsVideo--back" type="button">Back</button>
             </li>
           </ul>
         </section>
