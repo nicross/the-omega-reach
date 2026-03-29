@@ -68,7 +68,7 @@ app.component.slider.prototype = {
   },
   setAriaLive: function (state) {
     if (state) {
-      this.valueElement.setAttribute('aria-live', 'polite')
+      this.valueElement.setAttribute('aria-live', 'assertive')
     } else {
       this.valueElement.removeAttribute('aria-live')
     }
