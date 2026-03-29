@@ -81,6 +81,8 @@ content.rooms.moon = content.rooms.invent({
 
     // Initial scan
     if (scans == 1) {
+      message.push(`${moon.type} revealed`)
+
       if (moon.quirks.length) {
         message.push(`${moon.quirks.length} quirk${moon.quirks.length == 1 ? '' : 's'} detected`)
       }

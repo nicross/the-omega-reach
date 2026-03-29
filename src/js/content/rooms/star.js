@@ -82,6 +82,8 @@ content.rooms.star = content.rooms.invent({
     const message = []
 
     if (scans == 1) {
+      message.push(`${star.type} revealed`)
+
       if (star.children) {
         message.push(`${star.children} planet${star.children == 1 ? '' : 's'} detected`)
       }

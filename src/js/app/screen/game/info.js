@@ -49,7 +49,6 @@ app.screen.game.info = (() => {
       } = getRoomInfo()
 
       descriptionElement.innerHTML = description
-      nameElement.ariaLabel = nameShort
       nameElement.innerHTML = name
 
       if (isIncomplete) {
