@@ -28,7 +28,7 @@ content.programs.baseStar = content.programs.invent({
       time = content.time.value()
 
     if (!isScanned) {
-      return this.alterParticleUnscanned(particle)
+      return this.alterParticleUnscanned(particle, 2)
     }
 
     if (!this.alterParticleVertex(particle, particle.spheres[index])) {

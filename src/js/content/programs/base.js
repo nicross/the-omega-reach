@@ -306,15 +306,15 @@ content.programs.base = {
   invertSynthX: () => false,
   // Particles
   alterParticle: function (particle) {},
-  alterParticleUnscanned: function (particle) {
+  alterParticleUnscanned: function (particle, radius = 1) {
     const index = content.sphereIndex.get()
 
     particle.target.h = 0
     particle.target.s = 0
     particle.target.v = 0.25
-    particle.target.x = particle.spheres[index].x
-    particle.target.y = particle.spheres[index].y
-    particle.target.z = particle.spheres[index].z
+    particle.target.x = particle.spheres[index].x * radius
+    particle.target.y = particle.spheres[index].y * radius
+    particle.target.z = particle.spheres[index].z * radius
   },
   getLightSource: () => engine.tool.vector3d.create(),
   getRotation: function () {

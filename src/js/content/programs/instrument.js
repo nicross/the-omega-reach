@@ -349,7 +349,7 @@ content.programs.instrument = content.programs.invent({
     particle.target.h = engine.fn.lerp(this.properties.particleHueMin, this.properties.particleHueMax, this.fields.particleHue.valueAt(particle.spheres[index], this.properties.particleHueScale))
 
     if (!isScanned) {
-      return this.alterParticleUnscanned(particle)
+      return this.alterParticleUnscanned(particle, 0.5)
     }
 
     const radius = engine.fn.lerpExp(1, 4, this.fields.particleRadius.valueAt(particle.spheres[index], this.properties.particleRadiusScale), this.properties.particleRadiusPower)

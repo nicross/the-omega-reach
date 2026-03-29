@@ -6,7 +6,7 @@
       content.sphereIndex.randomize()
 
       const alterParticle = this.alterParticle.bind(this),
-        radiusFactor = engine.fn.lerp(0.4, 0.5, this.options.body.planet.radius)
+        radiusFactor = engine.fn.lerp(0.4, 0.6, this.options.body.planet.radius)
 
       this.alterParticle = (particle) => {
         alterParticle(particle)
@@ -15,6 +15,10 @@
           particle.target.x *= radiusFactor
           particle.target.y *= radiusFactor
           particle.target.z *= radiusFactor
+        } else {
+          particle.target.x *= 0.5
+          particle.target.y *= 0.5
+          particle.target.z *= 0.5
         }
       }
 
