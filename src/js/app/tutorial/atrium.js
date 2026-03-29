@@ -41,7 +41,7 @@ app.tutorial.atrium = app.tutorial.invent({
         ],
       },
       {
-        title: `[Tutorial] <span class="u-screenReader">for</span> Moving:`,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Moving:`,
         description: () => ({
           gamepad: `Use the <kbd>Directional Pad</kbd> to navigate the conservatory. Find your way to <strong>the reach</strong> to fulfill your duties.`,
           keyboard: `Use the <kbd>Arrow Keys</kbd> to navigate the conservatory. Find your way to <strong>the reach</strong> to fulfill your duties.`,

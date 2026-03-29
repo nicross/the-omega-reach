@@ -20,7 +20,7 @@ app.tutorial.horizon = app.tutorial.invent({
         ],
       },
       {
-        title: `[Tutorial] <span class="u-screenReader">for</span> The horizon:`,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The horizon:`,
         description: `Interact to reach toward a random galaxy upon <strong>the horizon</strong>. You will zoom in automagically to any new galaxies that you reach.`,
         actions: [
           {

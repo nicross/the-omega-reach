@@ -20,7 +20,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
         ],
       },
       {
-        title: `[Select input device…]`,
+        title: `<span class="u-highlight">[Select input device…]</span>`,
         description: `You sit at the device. Upon its inert console rests…`,
         actions: [
           {
@@ -41,7 +41,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
         ],
       },
       {
-        title: `[Select input preference…]`,
+        title: `<span class="u-highlight">[Select input preference…]</span>`,
         description: `To confirm your choices at the console, you…`,
         actions: [
           {
@@ -72,7 +72,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
         ],
       },
       {
-        title: `[Tutorial] <span class="u-screenReader">for</span> Interacting:`,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Interacting:`,
         description: () => ({
           gamepad: `Hold one or both <kbd>Triggers</kbd> and move the <kbd>Analog Sticks</kbd> to interact. Locate the sweet spot using audio, visual, and haptic cues to proceed.`,
           keyboard: `Press one or more keys to interact. Each key points to a location. Locate the sweet spot using audio and visual cues to proceed.`,
@@ -85,7 +85,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
         ],
       },
       {
-        title: `[Tutorial] <span class="u-screenReader">for</span> Skipping:`,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Skipping:`,
         description: () => ({
           gamepad: `${app.settings.computed.inputHold ? 'Hold' : 'Press'} the <kbd>A</kbd> button to skip the current interaction. You will not be penalized for doing so.`,
           keyboard: `${app.settings.computed.inputHold ? 'Hold' : 'Press'} <kbd>Enter</kbd> or <kbd>Spacebar</kbd> to skip the current interaction. You will not be penalized for doing so.`,

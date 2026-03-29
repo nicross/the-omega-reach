@@ -15,7 +15,7 @@ app.tutorial.starScanned = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] <span class="u-screenReader">for</span> Quirks:`,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Quirks:`,
         description: `Some objects have interesting properties to be grazed. Interact to reveal their quirks. Beware that some quirks are rarer than others!`,
         actions: [
           {
@@ -24,7 +24,7 @@ app.tutorial.starScanned = app.tutorial.invent({
         ],
       },
       {
-        title: `[Tutorial] <span class="u-screenReader">for</span> Planets:`,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Planets:`,
         description: `Some stars may have planets orbiting around them. Continue zooming to examine their planets closer.`,
         actions: [
           {

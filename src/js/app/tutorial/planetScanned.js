@@ -15,7 +15,7 @@ app.tutorial.planetScanned = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] <span class="u-screenReader">for</span> Moons:`,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Moons:`,
         description: `Some planets may have moons orbiting around them. Continue zooming to examine their moons closer.`,
         actions: [
           {

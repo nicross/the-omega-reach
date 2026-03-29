@@ -11,7 +11,7 @@ app.tutorial.horizonUnlocked = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] <span class="u-screenReader">for</span> The horizon:`,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The horizon:`,
         description: 'You may now interact with <strong>the horizon</strong> at any time to reach new galaxies from it.',
         actions: [
           {

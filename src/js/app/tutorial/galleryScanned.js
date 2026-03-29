@@ -11,7 +11,7 @@ app.tutorial.galleryScanned = app.tutorial.invent({
 
     [
       {
-        title: `[Tutorial] <span class="u-screenReader">for</span> Appraisal:`,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Appraisal:`,
         description: `Some instruments have quirks as well! Continue interacting to fully appraise an instrument.`,
         actions: [
           {
