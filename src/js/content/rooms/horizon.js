@@ -13,7 +13,7 @@ content.rooms.horizon = content.rooms.invent({
     down: 'reach',
   },
   // Interaction
-  canInteract: () => Boolean(!app.tutorial.galaxy.complete || app.tutorial.horizonUnlocked.complete),
+  canInteract: () => Boolean(!app.tutorial.galaxy.complete || app.tutorial.horizonUnlocked.complete || !app.settings.computed.tutorialOn),
   onInteract: function () {
     const galaxy = content.galaxies.new()
 

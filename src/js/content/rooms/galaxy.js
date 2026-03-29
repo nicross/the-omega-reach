@@ -33,7 +33,7 @@ content.rooms.galaxy = content.rooms.invent({
     return this
   },
   // Interaction
-  canInteract: () => Boolean(!app.tutorial.star.complete || app.tutorial.galaxyUnlocked.complete),
+  canInteract: () => Boolean(!app.tutorial.star.complete || app.tutorial.galaxyUnlocked.complete || !app.settings.computed.tutorialOn),
   onInteract: function () {
     const star = content.stars.new(this.getGalaxy().name)
     content.rooms.star.setStarByName(star.name)

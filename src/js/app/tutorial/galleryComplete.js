@@ -30,23 +30,10 @@ app.tutorial.galleryComplete = app.tutorial.invent({
         }[app.settings.computed.inputPreference]),
         actions: [
           {
-            label: 'Next tutorial',
-          }
-        ],
-      },
-      {
-        tutorial: true,
-        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Visitors:`,
-        description: `Congratulations! <strong>The Omega Conservatory</strong> is now open to visitors. <strong>The gallery</strong> must have an appraised instrument for it to remain open.`,
-        actions: [
-          {
             label: 'Regain control',
           }
         ],
-        finally: () => {
-          content.conservatory.setReady(true)
-          this.markComplete()
-        },
+        finally: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

@@ -3,7 +3,7 @@ app.tutorial.tutorialComplete = app.tutorial.invent({
   // State
   state: {},
   // Lifecycle
-  shouldActivate: () => content.location.is('atrium') && app.tutorial.galleryComplete.complete,
+  shouldActivate: () => content.location.is('atrium') && content.conservatory.isOpen(),
   onUpdate: function () {
     if (!content.location.is('atrium')) {
       return
@@ -15,7 +15,7 @@ app.tutorial.tutorialComplete = app.tutorial.invent({
         description: `You've remembered all of the basics for success this cycle. You may recall more later, but until then? Reach for the stars, gather their instruments, and curate the best collection in the universe!`,
         actions: [
           {
-            label: 'End tutorial',
+            label: 'Live long and prosper',
           }
         ],
         finally: () => this.markComplete(),

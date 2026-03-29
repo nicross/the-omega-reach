@@ -37,6 +37,8 @@
   .c-screen--label {
     display: block;
     margin-bottom: 0.5em;
+    position: relative;
+    z-index: 999;
   }
   .c-screen--scrollable {
     overflow-y: auto;

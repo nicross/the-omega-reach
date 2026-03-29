@@ -63,9 +63,9 @@ button[disabled] * {
 
 @keyframes focus {
   0% {
-    outline-width: 0.375rem;
+    outline-width: 0.375em;
   }
   100% {
-    outline-width: 0.125rem;
+    outline-width: 0.125em;
   }
 }

@@ -16,7 +16,7 @@ content.rooms.reach = content.rooms.invent({
     online: false,
   },
   // Interaction
-  canInteract: () => Boolean(!app.tutorial.reachOnline.complete || app.tutorial.reachUnlocked.complete),
+  canInteract: () => Boolean(!app.tutorial.reachOnline.complete || app.tutorial.reachUnlocked.complete || !app.settings.computed.tutorialOn),
   getInteractJingle: function () {
     return this.state.online ? 2 : 0
   },

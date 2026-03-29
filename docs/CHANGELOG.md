@@ -7,6 +7,7 @@
 - Added a toggle for reverb.
 - Added a prompt and toggle for tutorials.
 - Added a slider for voice limit.
+- Opened the world sooner when tutorials are off.
 - Doubled the health pool for the cellar.
 - Read aloud object types when first revealed.
 - Scaled unrevealed objects visually based on type.
