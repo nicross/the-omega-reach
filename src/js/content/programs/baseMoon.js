@@ -34,6 +34,7 @@
     acidPlanet: 'acidMoon',
     arcticPlanet: 'arcticMoon',
     desertPlanet: 'desertMoon',
+    hyceanPlanet: 'hyceanMoon',
     lavaPlanet: 'lavaMoon',
     rockyPlanet: 'rockyMoon',
     terranPlanet: 'terranMoon',
