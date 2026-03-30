@@ -1,5 +1,6 @@
 # CHANGELOG
 ## v1.1.0
+- Added lava planets and moons.
 - Split settings into multiple screens.
 - Added a slider for interface scaling.
 - Added a slider for music volume.

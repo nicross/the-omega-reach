@@ -179,6 +179,7 @@ function getContentJs() {
     'src/js/content/programs/acidPlanet.js',
     'src/js/content/programs/arcticPlanet.js',
     'src/js/content/programs/desertPlanet.js',
+    'src/js/content/programs/lavaPlanet.js',
     'src/js/content/programs/rockyPlanet.js',
     'src/js/content/programs/terranPlanet.js',
     'src/js/content/programs/baseMoon.js',

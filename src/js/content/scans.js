@@ -13,15 +13,13 @@ content.scans = (() => {
       return data
     },
     firstMoon: () => {
-      let i = 0
+      const star = content.stars.firstName()
 
-      for (const [name, count] of map.entries()) {
-        i += 1
-
-        if (i == 3) {
-          return name.split(' ').slice(2,4).join(' ')
-        }
+      if (star) {
+        return `${star.split(' ').pop()} 2b`
       }
+
+      return ''
     },
     import: function (data = {}) {
       for (const [name, count] of Object.entries(data)) {

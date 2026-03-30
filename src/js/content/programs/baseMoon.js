@@ -34,6 +34,7 @@
     acidPlanet: 'acidMoon',
     arcticPlanet: 'arcticMoon',
     desertPlanet: 'desertMoon',
+    lavaPlanet: 'lavaMoon',
     rockyPlanet: 'rockyMoon',
     terranPlanet: 'terranMoon',
   })) {

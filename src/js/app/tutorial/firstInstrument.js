@@ -3,9 +3,9 @@ app.tutorial.firstInstrument = app.tutorial.invent({
   // State
   state: {},
   // Lifecycle
-  shouldActivate: () => content.location.is('moon') && content.instruments.count() > 0,
+  shouldActivate: () => (content.location.is('moon') || content.location.is('planet')) && content.instruments.count() > 0,
   onUpdate: function () {
-    if (!content.location.is('moon')) {
+    if (!(content.location.is('moon') || content.location.is('planet'))) {
       return
     }
 

@@ -233,6 +233,30 @@ content.moons = (() => {
           'Research stations',
         ],
       },
+      {
+        label: 'Lava moon',
+        program: 'lavaMoon',
+        habitability: 0,
+        instrument: 1,
+        weight: 1,
+        commonQuirks: [
+          ...commonQuirks,
+          'Ashen atmosphere',
+          'Lava rivers',
+          'Planetary impact',
+          'Volcanic activity',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          lifeQuirks[0],
+          lifeQuirks[1],
+          planet.heat > 0.5 ? 'Captured asteroid' : 'Captured comet',
+          'Lava oceans',
+          'Megaquakes',
+          'Mining sites',
+          'Supervolcanoes',
+        ],
+      },
     ]
   }
 

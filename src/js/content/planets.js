@@ -135,6 +135,7 @@ content.planets = (() => {
     ]
     const rareGiantQuirks = [
       'Decommissioned probes',
+      'Electric storms',
       'Internal heating',
       'Magnetic storms',
     ]
@@ -332,6 +333,33 @@ content.planets = (() => {
           'Captured comet',
           'Heavy water',
           'Research stations',
+        ],
+      },
+      {
+        label: 'Lava planet',
+        program: 'lavaPlanet',
+        habitability: 0,
+        instrument: 1,
+        moons: 3,
+        weight: 1 * 0.5,
+        commonQuirks: [
+          ...commonQuirks,
+          ...commonTerrestrialQuirks,
+          'Ashen atmosphere',
+          'Lava rivers',
+          'Planetary impact',
+          'Volcanic activity',
+        ],
+        rareQuirks: [
+          ...rareQuirks,
+          ...rareTerrestrialQuirks,
+          lifeQuirks[0],
+          lifeQuirks[1],
+          heat > 0.5 ? 'Captured asteroid' : 'Captured comet',
+          'Lava oceans',
+          'Megaquakes',
+          'Mining sites',
+          'Supervolcanoes',
         ],
       },
     ]

@@ -74,6 +74,11 @@ content.galaxies = (() => {
     export: () => ({
       discovered: [...names],
     }),
+    firstName: () => {
+      for (const name of names) {
+        return name
+      }
+    },
     get: function (name) {
       if (!generated.has(name)) {
         generated.set(name, generate(name))
