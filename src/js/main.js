@@ -26,6 +26,7 @@
   engine.mixer.param.limiter.ratio.value = 15
   engine.mixer.param.limiter.release.value = 0.125
   engine.mixer.param.limiter.threshold.value = -24
+  engine.mixer.param.lowpass.frequency.value = 7500
   engine.mixer.param.preGain.value = 1.5
   engine.mixer.reverb.param.delay.value = 1/8
 

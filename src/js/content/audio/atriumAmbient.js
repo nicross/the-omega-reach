@@ -129,7 +129,7 @@ content.audio.atriumAmbient = (() => {
       playbackRate: whitePlaybackRate,
     }).filtered({
       detune: whiteColor,
-      frequency: 17500,
+      frequency: 15000,
       type: 'highpass',
     }).connect(synth.panner)
 
