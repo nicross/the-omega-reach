@@ -18,7 +18,7 @@ app.tutorial.tutorialComplete = app.tutorial.invent({
             label: 'Live long and prosper',
           }
         ],
-        finally: () => this.markComplete(),
+        after: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

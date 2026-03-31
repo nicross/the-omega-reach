@@ -48,7 +48,7 @@ content.location.on('cellar-death', () => {
             label: 'Regain control',
           }
         ],
-        finally: () => app.tutorial.death.markComplete(),
+        after: () => app.tutorial.death.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   } else {

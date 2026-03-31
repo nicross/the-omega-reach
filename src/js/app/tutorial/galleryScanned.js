@@ -19,7 +19,7 @@ app.tutorial.galleryScanned = app.tutorial.invent({
             label: 'Next tutorial',
           }
         ],
-        finally: () => content.conservatory.setReady(true),
+        after: () => content.conservatory.setReady(true),
       },
       {
         tutorial: true,
@@ -30,7 +30,7 @@ app.tutorial.galleryScanned = app.tutorial.invent({
             label: 'Regain control',
           }
         ],
-        finally: () => this.markComplete(),
+        after: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

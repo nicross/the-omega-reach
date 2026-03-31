@@ -36,7 +36,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
             before: () => app.settings.setInputPreference('keyboard'),
           },
         ],
-        finally: () => {
+        after: () => {
           app.settings.save()
         },
       },
@@ -57,7 +57,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
             },
           },
         ],
-        finally: () => {
+        after: () => {
           app.settings.save()
           app.screen.game.interact.update()
         },
@@ -98,7 +98,7 @@ app.tutorial.reachOffline = app.tutorial.invent({
             label: 'Regain control',
           }
         ],
-        finally: () => this.markComplete(),
+        after: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

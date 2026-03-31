@@ -32,7 +32,7 @@ app.tutorial.reachOnline = app.tutorial.invent({
             label: 'Regain control',
           }
         ],
-        finally: () => {
+        after: () => {
           this.markComplete()
           app.screen.game.interact.update()
         },

@@ -28,7 +28,7 @@ app.tutorial.horizon = app.tutorial.invent({
             label: 'Regain control',
           }
         ],
-        finally: () => this.markComplete(),
+        after: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

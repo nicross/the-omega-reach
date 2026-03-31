@@ -127,7 +127,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
             label: 'Regain control',
           },
         ],
-        finally: () => this.state.tutorial = true,
+        after: () => this.state.tutorial = true,
       })
     }
   },

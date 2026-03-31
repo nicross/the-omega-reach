@@ -33,11 +33,17 @@ app.screen.game.dialog = (() => {
 
     if (next) {
       if (next.tutorial && !app.settings.computed.tutorialOn) {
-        if (next.finally) {
-          next.finally()
+        if (next.before) {
+          next.before()
         }
 
-        return advance()
+        advance()
+
+        if (next.after) {
+          next.after()
+        }
+
+        return
       }
 
       current = next
@@ -59,10 +65,6 @@ app.screen.game.dialog = (() => {
   }
 
   function close() {
-    if (current?.finally) {
-      current.finally()
-    }
-
     document.querySelector('.a-game--info').removeAttribute('aria-hidden')
     document.querySelector('.a-game--nav').removeAttribute('aria-hidden')
 
@@ -74,9 +76,15 @@ app.screen.game.dialog = (() => {
 
   function render({
     actions = [],
+    after,
+    before,
     description = '',
     title = '',
   } = {}) {
+    if (before) {
+      before()
+    }
+
     titleElement.innerHTML = typeof title == 'function' ? title() : title
     descriptionElement.innerHTML = typeof description == 'function' ? description() : description
 
@@ -98,6 +106,10 @@ app.screen.game.dialog = (() => {
 
         if (action.after) {
           action.after()
+        }
+
+        if (after) {
+          after()
         }
       }
 

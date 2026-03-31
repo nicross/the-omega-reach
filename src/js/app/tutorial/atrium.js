@@ -53,7 +53,7 @@ app.tutorial.atrium = app.tutorial.invent({
             before: () => app.settings.setTutorialOn(false),
           },
         ],
-        finally: () => {
+        after: () => {
           app.settings.save()
         },
       },
@@ -70,7 +70,7 @@ app.tutorial.atrium = app.tutorial.invent({
             label: 'Regain control',
           }
         ],
-        finally: () => this.markComplete(),
+        after: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

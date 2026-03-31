@@ -19,7 +19,7 @@ app.tutorial.atriumWallet = app.tutorial.invent({
             label: app.tutorial.tutorialComplete.complete ? 'Regain control' : 'Next tutorial',
           }
         ],
-        finally: () => this.markComplete(),
+        after: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

@@ -31,7 +31,7 @@ app.tutorial.donationLoop = app.tutorial.invent({
               label: 'Regain control',
             }
           ],
-          finally: () => {
+          after: () => {
             this.state.tutorial = true
             this.earnCredits()
           },
