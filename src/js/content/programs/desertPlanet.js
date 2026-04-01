@@ -14,6 +14,12 @@ content.programs.desertPlanet = content.programs.invent({
     iceNorthScale: (srand) => srand(1/16, 1/3),
     iceSouth: function (srand) {return (this.hasAttribute('Polar ice') && (!this.properties.iceNorth || srand() > 1/2)) || srand() > 1/2},
     iceSouthScale: (srand) => srand(1/16, 1/3),
+    radiusAlgorithm: (srand) => engine.fn.choose([
+      (x) => x,
+      (x) => content.fn.gain(x, 2),
+      (x) => 1 - Math.abs(Math.cos(Math.PI * x)),
+      (x) => 1 - Math.sin(Math.PI * x),
+    ], srand()),
   },
   alterParticleColor: function (particle, point) {
     const isIce = (this.properties.iceNorth && point.z > 1 - this.properties.iceNorthScale)

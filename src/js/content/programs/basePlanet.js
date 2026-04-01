@@ -10,6 +10,7 @@ content.programs.basePlanet = content.programs.invent({
       y: srand(-1, 1),
       z: srand(-1, 1),
     }).normalize(),
+    radiusAlgorithm: (srand) => (x) => x,
     radiusPower: (srand) => srand(1, 2),
     radiusScale: (srand) => srand(1, 4),
     ring: function (srand) {return this.hasAttribute('Ring system') ? srand() : 0},
@@ -50,7 +51,7 @@ content.programs.basePlanet = content.programs.invent({
 
     if (!this.alterParticleVertex(particle, particle.spheres[index])) {
       const radius = engine.fn.lerp(1, 2, this.options.body.radius)
-        * (1 + (0.125 * this.bumpiness * (this.fields.radius.valueAt(particle.spheres[index], this.properties.radiusScale) ** this.properties.radiusPower)))
+        * (1 + (0.125 * this.bumpiness * this.properties.radiusAlgorithm(this.fields.radius.valueAt(particle.spheres[index], this.properties.radiusScale) ** this.properties.radiusPower)))
 
       particle.target.x = particle.spheres[index].x * radius
       particle.target.y = particle.spheres[index].y * radius

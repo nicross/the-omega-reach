@@ -1,7 +1,7 @@
 ;(() => {
   const baseDefinition = {
     id: 'baseMoon',
-    bumpiness: 6,
+    bumpiness: 3,
     onLoad: function () {
       content.sphereIndex.randomize()
 

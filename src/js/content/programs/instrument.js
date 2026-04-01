@@ -329,7 +329,7 @@ content.programs.instrument = content.programs.invent({
       fmFrequency: engine.fn.lerp(1/4, 4, engine.fn.clamp(
         engine.fn.lerp(this.properties.fmFrequencyCenter - this.properties.fmFrequencyRange, this.properties.fmFrequencyCenter + this.properties.fmFrequencyRange, this.fields.fmFrequency.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.fmFrequencyScale))),
       )) * frequency,
-      gain: engine.fn.fromDb(isComplete ? 0 : -18),
+      gain: engine.fn.fromDb(isComplete ? 0 : -15),
       width: engine.fn.lerp(0.375, 0.625, engine.fn.clamp(
         engine.fn.lerp(this.properties.widthCenter - this.properties.widthRange, this.properties.widthCenter + this.properties.widthRange, this.fields.color.valueAt(point, engine.fn.lerp(minField, maxField, this.properties.widthScale))),
       )),

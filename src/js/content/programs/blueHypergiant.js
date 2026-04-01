@@ -2,7 +2,7 @@ content.programs.blueHypergiant = content.programs.invent({
   id: 'blueHypergiant',
   fieldDefinitions: {},
   propertyDefinitions: {
-    radius4dAmplitude: (srand) => srand(0.5, 1),
+    radius4dAmplitude: (srand) => srand(1, 2),
     radius4dPower: (srand) => srand(1, 3),
     radius4dScale: (srand) => srand(4, 8),
     radius4dTimeScale: (srand) => engine.fn.lerp(1/8, 1/4, srand()),
@@ -11,7 +11,7 @@ content.programs.blueHypergiant = content.programs.invent({
     const time = content.time.value()
 
     particle.target.h = (engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]), -1, 1, engine.fn.lerp(180, 270, this.options.star.mass), engine.fn.lerp(225, 315, this.options.star.mass)) / 360) - 1
-    particle.target.s = (engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1]), -1, 1, 0, 1) ** 0.5) * engine.fn.lerp(0.5, 1, this.options.star.radius)
+    particle.target.s = (engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1]), -1, 1, 0, 1) ** 0.5) * engine.fn.lerp(0.25, 1, this.options.star.radius)
     particle.target.v = engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]), -1, 1, 0, 1)
 
     return true

@@ -16,6 +16,12 @@ content.programs.arcticPlanet = content.programs.invent({
     colorValueCenter: (srand) => srand(0.875, 1),
     colorValueRange: (srand) => srand(0, 0.25),
     colorValueScale: (srand) => srand(2, 6),
+    radiusAlgorithm: (srand) => engine.fn.choose([
+      (x) => x,
+      (x) => content.fn.gain(x, 2),
+      (x) => 1 - Math.abs(Math.cos(Math.PI * x)),
+      (x) => 1 - Math.sin(Math.PI * x),
+    ], srand()),
   },
   alterParticleColor: function (particle, point) {
     particle.target.h = engine.fn.lerp(

@@ -6,7 +6,7 @@ content.programs.lavaPlanet = content.programs.invent({
     colorValue: {},
   },
   propertyDefinitions: {
-    colorHueScale: (srand) => srand(2, 6),
+    colorHueScale: (srand) => srand(1, 3),
     colorHuePower: (srand) => srand(1, 3),
     colorHueTimeScale: (srand) => engine.fn.lerp(1/20, 1/10, srand()),
     colorSaturationCenter: (srand) => srand(0.875, 1),
@@ -17,8 +17,9 @@ content.programs.lavaPlanet = content.programs.invent({
     colorValueScale: (srand) => srand(2, 6),
     radiusAlgorithm: (srand) => engine.fn.choose([
       (x) => x,
-      (x) => Math.abs(Math.cos(Math.PI * x)),
+      (x) => content.fn.gain(x, 2),
       (x) => 1 - Math.abs(Math.cos(Math.PI * x)),
+      (x) => 1 - Math.sin(Math.PI * x),
     ], srand()),
     radiusPower: (srand) => srand(0.75, 1.25),
     radiusScale: (srand) => srand(1, 5),

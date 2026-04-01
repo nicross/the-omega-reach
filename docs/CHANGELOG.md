@@ -2,6 +2,7 @@
 ## v1.1.0
 - Added hycean planets and moons.
 - Added lava planets and moons.
+- Added more terrain generation algorithms to terrestrial worlds.
 - Split settings into multiple screens.
 - Added a slider for interface scaling.
 - Added a slider for music volume.
@@ -16,8 +17,8 @@
 - Scaled unrevealed objects visually based on type.
 - Highlighted bracketed text in non-diegetic dialogs.
 - Applied a lowpass filter to the overall mix.
-- Made live regions more assertive.
 - Tweaked various aspects of the mix for clarity.
+- Made live regions more assertive.
 
 ## v1.0.0
 Initial release.

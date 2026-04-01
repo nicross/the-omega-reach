@@ -10,7 +10,7 @@ content.programs.mainSequence = content.programs.invent({
   alterParticleColor: function (particle, point) {
     const time = content.time.value()
 
-    particle.target.h = (engine.fn.lerp(45, 0, this.options.star.age * (1 - this.options.star.mass)) + (Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]) * 30)) / 360
+    particle.target.h = (engine.fn.lerp(45, -15, this.options.star.age * (1 - this.options.star.mass)) + (Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]) * 30)) / 360
     particle.target.s = engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1]), -1, 1, this.options.star.age, 1)
     particle.target.v = engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]), -1, 1, 0, 1)
 
