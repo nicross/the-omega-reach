@@ -1,5 +1,5 @@
 content.audio.interactSuccess = (() => {
-  const baseGain = engine.fn.fromDb(-6),
+  const baseGain = engine.fn.fromDb(-9),
     bus = content.audio.channel.default.createBus()
 
   function trigger({
@@ -19,7 +19,7 @@ content.audio.interactSuccess = (() => {
       when,
       width,
     }).filtered({
-      frequency: frequency * color * 2,
+      frequency: frequency * color,
     }).chainAssign(
       'panner', engine.context().createStereoPanner()
     ).connect(bus)
@@ -27,12 +27,12 @@ content.audio.interactSuccess = (() => {
     synth.panner.pan.value = pan
 
     synth.filter.frequency.linearRampToValueAtTime(frequency, when + duration)
-    synth.filter.frequency.linearRampToValueAtTime(frequency * color, when + duration + tail)
+    synth.filter.frequency.linearRampToValueAtTime(frequency * color * 0.5, when + duration + tail)
 
     synth.param.gain.linearRampToValueAtTime(baseGain, when + 1/64)
     synth.param.gain.setValueAtTime(baseGain, when + duration - 1/64)
     synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration)
-    synth.param.gain.linearRampToValueAtTime(baseGain/8, when + duration + tail - 1/32)
+    synth.param.gain.linearRampToValueAtTime(baseGain/4, when + duration + tail - 1/32)
     synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration + tail)
 
     synth.panner.pan.setValueAtTime(pan, when + duration)
@@ -57,7 +57,7 @@ content.audio.interactSuccess = (() => {
 
       for (const i in notes) {
         trigger({
-          color: 4,
+          color: 6,
           duration,
           frequency: notes[i] * 2,
           pan: engine.fn.randomFloat(-0.25, 0.25),

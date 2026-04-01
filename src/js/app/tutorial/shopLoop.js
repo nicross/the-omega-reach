@@ -86,11 +86,11 @@ app.tutorial.shopLoop = app.tutorial.invent({
             label: 'Buy it',
             before: () => {
               content.instruments.add(name)
-
               content.wallet.subtract(cost)
-              content.shop.resetTimer()
-
               content.audio.interactSuccess.trigger({index: 2})
+
+              // XXX: Prevent door open animation until next dialog
+              content.cellar.health.reset()
             },
           },
           {
