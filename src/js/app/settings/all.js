@@ -57,17 +57,22 @@ app.settings.register('musicVolume', {
   },
 })
 
-app.settings.register('polyphony', {
-  compute: (rawValue) => engine.fn.lerp(2, 10, rawValue),
-  default: 1,
-})
-
 app.settings.register('particleLimit', {
   compute: (rawValue) => engine.fn.clamp(Number(rawValue || 0)),
   default: 0.5,
   update: function (computedValue) {
     content.particles.setLimit(computedValue)
   },
+})
+
+app.settings.register('polyphony', {
+  compute: (rawValue) => engine.fn.lerp(2, 10, rawValue),
+  default: 1,
+})
+
+app.settings.register('puzzleDifficulty', {
+  compute: (rawValue) => engine.fn.lerpExp(2, 0.5, rawValue, 0.585),
+  default: 0.5,
 })
 
 app.settings.register('reverbOn', {

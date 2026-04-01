@@ -75,7 +75,7 @@ app.screen.game = app.screenManager.invent({
       gamepad: 2/3,
       keyboard: 1/6,
       mouse: 2/3,
-    }[app.settings.computed.inputPreference]
+    }[app.settings.computed.inputPreference] * app.settings.computed.puzzleDifficulty
 
     if (solution && content.location.get().canInteract()) {
       for (const interaction of interactions) {

@@ -1,5 +1,5 @@
 content.solution = (() => {
-  const minSequentialDistance = 1
+  const minSequentialDistance = 1.5
 
   let previous,
     solution

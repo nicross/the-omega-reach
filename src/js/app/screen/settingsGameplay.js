@@ -21,6 +21,15 @@ app.screen.settingsGameplay = app.screenManager.invent({
       element.addEventListener('click', () => app.screenManager.dispatch(event))
     })
 
+    // Sliders
+    this.sliders = [
+      ['.a-settingsInput--puzzleDifficulty', app.settings.raw.puzzleDifficulty, app.settings.setPuzzleDifficulty],
+    ].map(([selector, initialValue, setter]) => {
+      const component = app.component.slider.hydrate(root.querySelector(selector), initialValue)
+      component.on('change', () => setter(component.getValueAsFloat()))
+      return component
+    })
+
     // Toggles
     this.toggles = [
       ['.a-settingsGameplay--tutorialOn', app.settings.raw.tutorlaOn, app.settings.setTutorialOn],
@@ -39,6 +48,22 @@ app.screen.settingsGameplay = app.screenManager.invent({
 
     if (this.handleBasicInput()) {
       return
+    }
+
+    if (ui.left) {
+      for (const slider of this.sliders) {
+        if (app.utility.focus.isWithin(slider.rootElement)) {
+          return slider.decrement()
+        }
+      }
+    }
+
+    if (ui.right) {
+      for (const slider of this.sliders) {
+        if (app.utility.focus.isWithin(slider.rootElement)) {
+          return slider.increment()
+        }
+      }
     }
   },
 })
