@@ -25,7 +25,7 @@ content.galaxies = (() => {
 
     return {
       age: srand('age'),
-      habitability: srand('habitability'),
+      habitability: engine.fn.lerp(0.5, 1, srand('habitability')),
       index,
       mass: srand('mass'),
       name,

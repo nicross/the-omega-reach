@@ -109,7 +109,7 @@ content.stars = (() => {
       {
         label: 'White dwarf',
         program: 'whiteDwarf',
-        habitability: 1/2,
+        habitability: 3/4,
         planets: 2,
         weight: engine.fn.lerp(0, 1/2, galaxy.age),
         commonQuirks: [
@@ -131,7 +131,7 @@ content.stars = (() => {
       {
         label: 'Black hole',
         program: 'blackHole',
-        habitability: 1/8,
+        habitability: 1/4,
         planets: 3,
         weight: engine.fn.lerp(0, 1/6/2, galaxy.age),
         commonQuirks: [
@@ -154,7 +154,7 @@ content.stars = (() => {
       {
         label: 'Neutron star',
         program: 'neutronStar',
-        habitability: 1/8,
+        habitability: 1/4,
         planets: 3,
         weight: engine.fn.lerp(0, 1/6/2, galaxy.age),
         commonQuirks: [
@@ -178,7 +178,7 @@ content.stars = (() => {
       {
         label: 'Red supergiant',
         program: 'redSupergiant',
-        habitability: 1/2,
+        habitability: 3/4,
         planets: 2,
         weight: engine.fn.lerp(1/3/2, 1/6/2, galaxy.age),
         commonQuirks: [
@@ -203,7 +203,7 @@ content.stars = (() => {
       {
         label: 'Blue hypergiant',
         program: 'blueHypergiant',
-        habitability: 1/2,
+        habitability: 3/4,
         planets: 2,
         weight: engine.fn.lerp(1/3/2, 1/6/2, galaxy.age),
         commonQuirks: [
