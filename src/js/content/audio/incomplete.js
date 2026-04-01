@@ -1,5 +1,5 @@
 content.audio.incomplete = (() => {
-  const baseGain = engine.fn.fromDb(-4.5),
+  const baseGain = engine.fn.fromDb(-9),
     bus = content.audio.channel.default.createBus()
 
   function trigger({

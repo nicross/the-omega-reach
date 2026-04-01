@@ -17,6 +17,7 @@
 - Highlighted bracketed text in non-diegetic dialogs.
 - Applied a lowpass filter to the overall mix.
 - Made live regions more assertive.
+- Tweaked various aspects of the mix for clarity.
 
 ## v1.0.0
 Initial release.
