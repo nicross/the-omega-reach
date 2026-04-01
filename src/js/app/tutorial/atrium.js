@@ -45,7 +45,7 @@ app.tutorial.atrium = app.tutorial.invent({
         description: `When you reach into the unknown, you prefer to…`,
         actions: [
           {
-            label: 'have your hand held.',
+            label: 'have a guiding hand.',
             before: () => app.settings.setTutorialOn(true),
           },
           {

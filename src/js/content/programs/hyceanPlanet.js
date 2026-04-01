@@ -10,7 +10,7 @@ content.programs.hyceanPlanet = content.programs.invent({
     iceNorthScale: (srand) => srand(1/16, 1/3),
     iceSouth: function (srand) {return (this.hasAttribute('Polar ice') && (!this.properties.iceNorth || srand() > 1/2)) || srand() > 1/2},
     iceSouthScale: (srand) => srand(1/16, 1/3),
-    hueCenter: (srand) => srand(-180, -120) / 360,
+    hueCenter: (srand) => srand(180, 240) / 360,
     hueRange: (srand) => srand(0, 60) / 360,
     hueScale: (srand) => srand(2, 6),
     hueTimeScale: (srand) => srand(1/16, 1/8),
