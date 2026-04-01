@@ -216,7 +216,7 @@ content.instruments = (() => {
       return data
     },
     generateNameForBody: function (bodyName) {
-      const shortName = bodyName.split(' ').slice(-2, -1).join(' ')
+      const shortName = bodyName.split(' ').slice(-3, -1).join(' ')
 
       let name
 

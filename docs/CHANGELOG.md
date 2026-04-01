@@ -14,6 +14,7 @@
 - Increased the habitability of the universe.
 - Increased the maximum gold sink at the shop.
 - Doubled the health pool for the cellar.
+- Used full galaxy names for instruments.
 - Read aloud object types when first revealed.
 - Scaled unrevealed objects visually based on type.
 - Highlighted bracketed text in non-diegetic dialogs.
