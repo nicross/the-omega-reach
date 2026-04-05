@@ -3,6 +3,7 @@
 - Added hycean planets and moons.
 - Added lava planets and moons.
 - Added more terrain generation algorithms to terrestrial worlds.
+- Added random visitor encounters.
 - Split settings into multiple screens.
 - Added a slider for interface scaling.
 - Added a slider for music volume.
