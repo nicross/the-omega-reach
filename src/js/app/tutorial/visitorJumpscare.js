@@ -71,7 +71,7 @@ app.tutorial.visitorJumpscare = app.tutorial.invent({
         description: () => [
           `You feel their visible shock deeply within you. As the visitor recedes to the lobby and leaves in defeat, you debate the signposts and wayfinding within the conservatory.`,
           `Waves of disappointment and understanding pass through the visitor. Quickly, they exit and scurry toward the shop, who will be delighted to share this rare conversation.`,
-          `You gesture toward the shop which sends your guest hurrying away. They're much kinder when explaining the ongoing restroom situation anyway.`,
+          `You gesture toward <strong>the shop</strong>, sending your guest hurrying away. The shopkeeper is much kinder when explaining the ongoing restroom situation anyway.`,
         ][this.state.politeness],
         actions: [
           {

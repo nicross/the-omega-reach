@@ -1,5 +1,7 @@
 content.programs.stockroomEmpty = content.programs.invent({
   id: 'stockroomEmpty',
+  // Synthesis
+  invertSynthX: () => true,
   // Particles
   alterParticle: function (particle) {
     particle.target.h = 0
@@ -9,4 +11,6 @@ content.programs.stockroomEmpty = content.programs.invent({
     particle.target.y = particle.floor.y
     particle.target.z = particle.floor.z + Math.max(0, -particle.floor.x - 10)
   },
+  // Rumble
+  useNavigationalRumble: () => true,
 })

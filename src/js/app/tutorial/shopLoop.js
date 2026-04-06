@@ -117,7 +117,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
           description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
           actions: [
             {
-              label: `Cheers!`,
+              label: `Enjoy!`,
             },
           ],
         })
@@ -131,6 +131,8 @@ app.tutorial.shopLoop = app.tutorial.invent({
             {
               label: 'Buy it',
               before: () => {
+                this.state.bought = true
+
                 content.instruments.add(name)
                 content.wallet.subtract(cost)
                 content.audio.interactSuccess.trigger({index: 2})
@@ -141,11 +143,16 @@ app.tutorial.shopLoop = app.tutorial.invent({
             },
             {
               label: 'No thanks',
+              before: () => this.state.bought = false,
             },
           ],
         },
         {
-          title: `<q>Nice choice!</q>`,
+          title: () => (
+            this.state.bought
+              ? `<q>Nice choice!</q>`
+              : `<q>Makes sense!</q>`
+          ),
           description: `The shopkeeper disappears once more through the cellar door for their mandated lunch break.`,
           actions: [
             {
