@@ -13,6 +13,7 @@
 - Added a toggle for reverb.
 - Added a prompt and toggle for tutorials.
 - Added a slider for voice limit.
+- Autosaved whenever the atrium is entered.
 - Opened the world sooner when tutorials are off.
 - Increased the habitability of the universe.
 - Increased the maximum gold sink at the shop.

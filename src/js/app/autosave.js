@@ -60,4 +60,11 @@ engine.ready(() => {
       app.autosave.trigger()
     }
   })
+
+  // Autosave whenever entering atrium
+  content.location.on('enter', () => {
+    if (content.location.is('atrium')) {
+      app.autosave.trigger()
+    }
+  })
 })
