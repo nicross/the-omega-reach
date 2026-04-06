@@ -26,6 +26,7 @@ content.instruments = (() => {
         'Legendary',
       ], rarity),
       rarity,
+      state: {},
       value: engine.fn.lerp(10, 100, rarity),
     }
 
@@ -200,8 +201,8 @@ content.instruments = (() => {
   }
 
   return {
-    add: function (name) {
-      states.set(name, {...defaultState})
+    add: function (name, state = {}) {
+      states.set(name, {...defaultState, ...state})
 
       return this
     },
@@ -215,6 +216,7 @@ content.instruments = (() => {
 
       return data
     },
+    generateEphemeral: (name) => generate(name),
     generateNameForBody: function (bodyName) {
       const shortName = bodyName.split(' ').slice(-3, -1).join(' ')
 

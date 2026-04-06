@@ -33,6 +33,7 @@ content.rooms.base = {
   getAttributeLabels: function () {
     return []
   },
+  getCompleteLabel: () => `<li class="a-game--attribute a-game--attribute-complete"><i aria-hidden="true">✓</i>Complete</li>`,
   getDescription: function () {
     return this.description
   },

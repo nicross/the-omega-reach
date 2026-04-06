@@ -1,6 +1,6 @@
 engine.ready(() => {
   app.screen.game.interact.on('trigger', ({action, room}) => {
-    if (action == 'Sell') {
+    if (['Sell','Steal','Return'].includes(action)) {
       return
     }
 

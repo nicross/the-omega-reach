@@ -3,6 +3,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
   // State
   state: {
     tutorial: false,
+    tutorialStockroom: false,
   },
   // Lifecycle
   shouldActivate: () => content.shop.isOpen(),
@@ -77,45 +78,84 @@ app.tutorial.shopLoop = app.tutorial.invent({
     const cost = content.shop.getCost(),
       name = content.shop.generateUniqueName()
 
-    ;[
-      {
-        title: `<q>I found this ${content.cellar.discovered.hasAny() ? 'before' : 'for'} you!</q>`,
-        description: `You will get <strong>${name}</strong> for <strong>${app.utility.format.currency(cost)}</strong>.`,
-        actions: [
-          {
-            label: 'Buy it',
-            before: () => {
-              content.instruments.add(name)
-              content.wallet.subtract(cost)
-              content.audio.interactSuccess.trigger({index: 2})
+    const fromStockroom = content.location.was('stockroom'),
+      hasStolen = content.cellar.stockroom.hasStolen(),
+      stealingDetected = hasStolen && fromStockroom,
+      stolenCount = content.cellar.stockroom.countStolen()
 
-              // XXX: Prevent door open animation until next dialog
-              content.cellar.health.reset()
-            },
-          },
-          {
-            label: 'No thanks',
-            before: () => {},
-          },
-        ],
-      },
-      {
-        title: `<q>Nice choice!</q>`,
-        description: `The shopkeeper disappears once more through the cellar door for their mandated lunch break.`,
-        actions: [
-          {
-            label: 'Back to work',
-            before: () => {
-              content.shop.resetTimer()
-              content.cellar.startRun()
-              content.audio.reachSwitch.trigger(false, 0.25)
+    if (stealingDetected) {
+      content.audio.interactComplete.trigger({duration: 1})
 
-              app.screen.game.update()
+      ;[
+        {
+          title: `<q>Not so fast!</q>`,
+          description: `You forfeit <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
+          actions: [
+            {
+              label: `Put ${stolenCount == 1 ? 'it' : 'them'} back`,
             },
-          },
-        ],
-      },
-    ].forEach((x) => app.screen.game.dialog.push(x))
+          ],
+        },
+        {
+          title: `<q>Now excuse me…</q>`,
+          description: `The shopkeeper disappears once more through the cellar door for their mandated lunch break.`,
+          actions: [
+            {
+              label: 'Back to work',
+              before: () => this.startCellarRun(),
+            },
+          ],
+        }
+      ].forEach((x) => app.screen.game.dialog.push(x))
+    } else {
+      if (hasStolen) {
+        content.audio.interactSuccess.trigger({index: 0})
+        content.cellar.stockroom.keepStolen()
+
+        app.screen.game.dialog.push({
+          title: `Theft undetected!`,
+          description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
+          actions: [
+            {
+              label: `Cheers!`,
+            },
+          ],
+        })
+      }
+
+      [
+        {
+          title: `<q>I found this ${content.cellar.discovered.hasAny() ? 'before' : 'for'} you!</q>`,
+          description: `You will get <strong>${name}</strong> for <strong>${app.utility.format.currency(cost)}</strong>.`,
+          actions: [
+            {
+              label: 'Buy it',
+              before: () => {
+                content.instruments.add(name)
+                content.wallet.subtract(cost)
+                content.audio.interactSuccess.trigger({index: 2})
+
+                // XXX: Prevent door open animation until next dialog
+                content.cellar.health.reset()
+              },
+            },
+            {
+              label: 'No thanks',
+            },
+          ],
+        },
+        {
+          title: `<q>Nice choice!</q>`,
+          description: `The shopkeeper disappears once more through the cellar door for their mandated lunch break.`,
+          actions: [
+            {
+              label: 'Back to work',
+              before: () => this.startCellarRun(),
+            },
+          ],
+        },
+      ].forEach((x) => app.screen.game.dialog.push(x))
+    }
 
     if (!this.state.tutorial) {
       app.screen.game.dialog.push({
@@ -130,5 +170,27 @@ app.tutorial.shopLoop = app.tutorial.invent({
         after: () => this.state.tutorial = true,
       })
     }
+
+    if (!this.state.tutorialStockroom) {
+      app.screen.game.dialog.push({
+        tutorial: true,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Theft:`,
+        description: `The shopkeeper gets suspicious whenever they catch you passing through <strong>the stockroom</strong>. Browse their wares quickly to avoid their detection.`,
+        actions: [
+          {
+            label: 'Regain control',
+          },
+        ],
+        after: () => this.state.tutorialStockroom = true,
+      })
+    }
+  },
+  // Methods
+  startCellarRun: function () {
+    content.shop.resetTimer()
+    content.cellar.startRun()
+    content.audio.reachSwitch.trigger(false, 0.25)
+
+    app.screen.game.update()
   },
 })

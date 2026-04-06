@@ -284,7 +284,7 @@ content.programs.instrument = content.programs.invent({
   },
   calculateParameters: function (point) {
     const frequency = this.calculateFrequency(point),
-      isComplete = content.rooms.gallery.isComplete(),
+      isComplete = content.location.get().isComplete(),
       proximity = app.screen.game.interact.proximity()
 
     const maxField = 2.5,

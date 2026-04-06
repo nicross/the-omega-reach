@@ -8,6 +8,7 @@ app.screen.game.info = (() => {
 
     return {
       attributes: room.getAttributeLabels(),
+      completeLabel: room.getCompleteLabel(),
       description: room.getDescription(),
       descriptionModifier: room.getDescriptionModifier(),
       isComplete: room.isComplete(),
@@ -39,6 +40,7 @@ app.screen.game.info = (() => {
     update: function () {
       const {
         attributes,
+        completeLabel,
         description,
         descriptionModifier,
         isComplete,
@@ -55,7 +57,7 @@ app.screen.game.info = (() => {
         content.audio.incomplete.trigger()
       }
 
-      attributesElement.innerHTML = (isComplete ? `<li class="a-game--attribute a-game--attribute-complete"><i aria-hidden="true">✓</i>Complete</li>` : '')
+      attributesElement.innerHTML = (isComplete ? completeLabel : '')
         + attributes.map(
             ({label, modifiers}) => `<li class="a-game--attribute${modifiers.map((modifier) => ` a-game--attribute-${modifier}`).join('')}">${label}</li>`
           ).join('')

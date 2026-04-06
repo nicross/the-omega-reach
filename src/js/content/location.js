@@ -1,14 +1,17 @@
 content.location = (() => {
   const pubsub = engine.tool.pubsub.create()
 
-  let room
+  let previous,
+    room
 
   function load(id, state) {
-    room = content.rooms.get(id)
+    const next = content.rooms.get(id)
 
-    if (!room) {
+    if (!next) {
       return
     }
+
+    room = next
 
     // Import state to prevent errors when first loading the room
     if (state) {
@@ -26,6 +29,8 @@ content.location = (() => {
 
     room.exit()
     pubsub.emit('exit', room)
+
+    previous = room
     room = undefined
   }
 
@@ -45,8 +50,10 @@ content.location = (() => {
     is: function (id) {
       return id == room?.id
     },
+    previous: () => previous,
     reset: function () {
       unload()
+      previous = undefined
 
       return this
     },
@@ -55,7 +62,10 @@ content.location = (() => {
       load(id)
 
       return this
-    }
+    },
+    was: function (id) {
+      return id == previous?.id
+    },
   })
 })()
 

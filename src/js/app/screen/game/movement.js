@@ -14,7 +14,7 @@ app.screen.game.movement = (() => {
     down: function () {
       const e = {
         direction: 'down',
-        isFootstep: ['atrium','cellar','gallery','lobby','reach','shop'].includes(content.location.id()),
+        isFootstep: ['atrium','cellar','gallery','lobby','reach','shop','stockroom'].includes(content.location.id()),
         isOut: ['horizon','galaxy','star','planet','moon'].includes(content.location.id()),
       }
 
@@ -33,7 +33,7 @@ app.screen.game.movement = (() => {
       const e = {
         direction: 'left',
         isFootstep: ['atrium','cellar','lobby','reach','shop'].includes(content.location.id()),
-        isPrevious: ['gallery','galaxy','star','planet','moon'].includes(content.location.id()),
+        isPrevious: ['gallery','galaxy','star','planet','moon','stockroom'].includes(content.location.id()),
       }
 
       if (!canLeft) {
@@ -51,7 +51,7 @@ app.screen.game.movement = (() => {
       const e = {
         direction: 'right',
         isFootstep: ['atrium','cellar','lobby','reach','shop'].includes(content.location.id()),
-        isNext: ['gallery','galaxy','star','planet','moon'].includes(content.location.id()),
+        isNext: ['gallery','galaxy','star','planet','moon','stockroom'].includes(content.location.id()),
       }
 
       if (!canRight) {

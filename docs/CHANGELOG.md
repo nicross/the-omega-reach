@@ -1,9 +1,11 @@
 # CHANGELOG
 ## v1.1.0
+- Added a new room: the stockroom.
+- Added mechanics for stealing from the stockroom.
 - Added hycean planets and moons.
 - Added lava planets and moons.
 - Added more terrain generation algorithms to terrestrial worlds.
-- Added random visitor encounters.
+- Added a new visitor encounter.
 - Split settings into multiple screens.
 - Added a slider for interface scaling.
 - Added a slider for music volume.
@@ -15,6 +17,7 @@
 - Increased the habitability of the universe.
 - Increased the maximum gold sink at the shop.
 - Doubled the health pool for the cellar.
+- Tracked number of deaths in the cellar.
 - Used full galaxy names for instruments.
 - Read aloud object types when first revealed.
 - Scaled unrevealed objects visually based on type.

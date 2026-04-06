@@ -27,6 +27,26 @@ app.utility.format.health = function (x) {
   return `${this.number(x)} <i><i aria-hidden="true" role="presentation" title="sanity">☥</i><span class="u-screenReader"> sanity</span></i>`
 }
 
+app.utility.format.list = function (items = []) {
+  items = [...items]
+
+  if (items.length == 0) {
+    return ''
+  }
+
+  if (items.length == 1) {
+    return list[0]
+  }
+
+  if (items.length == 2) {
+    return items.join(' and ')
+  }
+
+  const last = items.pop()
+
+  return `${items.join(', ')}, and ${last}`
+}
+
 app.utility.format.number = (() => {
   const numberFormat = Intl.NumberFormat('en-US', {
     maximumFractionDigits: 0,

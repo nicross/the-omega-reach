@@ -54,5 +54,10 @@ app.autosave = (() => {
 })()
 
 engine.ready(() => {
-  content.location.on('interact-complete', () => app.autosave.trigger())
+  // Autosave whenever completing rooms (except stockroom)
+  content.location.on('interact-complete', () => {
+    if (!content.location.is('stockroom')) {
+      app.autosave.trigger()
+    }
+  })
 })

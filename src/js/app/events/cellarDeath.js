@@ -4,6 +4,12 @@ content.location.on('cellar-death', () => {
     Math.ceil(content.shop.getCost() * 0.75),
   )
 
+  const hasStolen = content.cellar.stockroom.hasStolen(),
+    stolenCount = content.cellar.stockroom.stolenCount()
+
+  content.cellar.deaths.increment()
+  content.cellar.stockroom.reset()
+
   content.donations.add(Math.round(penalty * engine.fn.randomFloat(0.25, 0.75)))
   content.wallet.subtract(penalty)
 
@@ -39,9 +45,12 @@ content.location.on('cellar-death', () => {
           },
         ],
       },
+    ].forEach((x) => app.screen.game.dialog.push(x))
+
+    ;[
       {
         tutorial: true,
-        title: `[Tutorial] <span class="u-screenReader">for</span> Fainting:`,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Fainting:`,
         description: `You will wake in <strong>the atrium</strong> whenever you faint for whatever reason.`,
         actions: [
           {
@@ -52,9 +61,21 @@ content.location.on('cellar-death', () => {
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   } else {
+    if (hasStolen) {
+      app.screen.game.dialog.push({
+        title: `<q>I'll take ${stolenCount == 1 ? 'that' : 'those'}!</q>`,
+        description: `You forfeit <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
+        actions: [
+          {
+            label: 'Groan',
+          },
+        ],
+      })
+    }
+
     app.screen.game.dialog.push({
       title: `It's the atrium.`,
-      description: `You lost <strong>${app.utility.format.currency(penalty)}</strong> to <strong>the cellar</strong> this run.`,
+      description: `You lose <strong>${app.utility.format.currency(penalty)}</strong> to <strong>the cellar</strong> this run.`,
       actions: [
         {
           label: 'Wake up',

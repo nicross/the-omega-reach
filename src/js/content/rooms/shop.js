@@ -4,12 +4,14 @@ content.rooms.shop = content.rooms.invent({
   name: 'The shop',
   description: 'Out for lunch',
   defaultProgram: 'shop',
-  moveLeftLabel: 'To the atrium',
   moveDownLabel: 'To the cellar',
+  moveLeftLabel: 'To the atrium',
+  moveUpLabel: 'To the stockroom',
   // Transitions
   transitions: {
-    left: 'atrium',
     down: 'cellar',
+    left: 'atrium',
+    up: 'stockroom',
   },
   // Methods
   getDescription: function () {
