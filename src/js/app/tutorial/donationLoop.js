@@ -46,7 +46,7 @@ app.tutorial.donationLoop = app.tutorial.invent({
 
     const amount = content.donations.amount()
 
-    content.donations.remove(amount)
+    content.donations.collect(amount)
     content.wallet.add(amount)
 
     app.screen.game.dialog.push({

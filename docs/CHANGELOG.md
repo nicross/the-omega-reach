@@ -20,6 +20,7 @@
 - Increased the maximum gold sink at the shop.
 - Doubled the health pool for the cellar.
 - Tracked number of deaths in the cellar.
+- Tracked number of donations collected.
 - Used full galaxy names for instruments.
 - Read aloud object types when first revealed.
 - Scaled unrevealed objects visually based on type.
