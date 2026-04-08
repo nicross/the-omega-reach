@@ -81,7 +81,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
       stealingDetected = hasStolen && fromStockroom,
       stolenCount = content.cellar.stockroom.countStolen()
 
-    if (this.state.tutorial && !this.state.visitorPineapple && !hasStolen && content.wallet.has(666)) {
+    if (this.state.tutorial && !this.state.visitorPineapple && !hasStolen && content.wallet.has(300)) {
       return this.visitorPineapple()
     }
 

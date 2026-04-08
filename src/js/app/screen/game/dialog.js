@@ -90,7 +90,7 @@ app.screen.game.dialog = (() => {
 
     actionsElement.innerHTML = '';
 
-    for (const action of actions) {
+    for (const action of (typeof actions == 'function' ? actions() : actions)) {
       const container = app.utility.dom.toElement(
         `<li><button class="c-menuButton" type="button">${action.label}</button></li>`
       )
