@@ -1,11 +1,11 @@
 # CHANGELOG
 ## v1.1.0
-- Added a new room: the stockroom.
-- Added mechanics for stealing from the stockroom.
+- Added the stockroom.
+- Added mechanics and tutorials for the stockroom.
 - Added hycean planets and moons.
 - Added lava planets and moons.
-- Added more terrain generation algorithms to terrestrial worlds.
-- Added a new visitor encounter.
+- Added more terrain generators to terrestrial worlds.
+- Added new visitor encounters.
 - Split settings into multiple screens.
 - Added a slider for interface scaling.
 - Added a slider for music volume.

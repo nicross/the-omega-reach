@@ -4,6 +4,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
   state: {
     tutorial: false,
     tutorialStockroom: false,
+    visitorPineapple: false,
   },
   // Lifecycle
   shouldActivate: () => content.shop.isOpen(),
@@ -75,13 +76,14 @@ app.tutorial.shopLoop = app.tutorial.invent({
       ].forEach((x) => app.screen.game.dialog.push(x))
     }
 
-    const cost = content.shop.getCost(),
-      name = content.shop.generateUniqueName()
-
     const fromStockroom = content.location.was('stockroom'),
       hasStolen = content.cellar.stockroom.hasStolen(),
       stealingDetected = hasStolen && fromStockroom,
       stolenCount = content.cellar.stockroom.countStolen()
+
+    if (this.state.tutorial && !this.state.visitorPineapple && !hasStolen && content.wallet.has(666)) {
+      return this.visitorPineapple()
+    }
 
     if (stealingDetected) {
       content.audio.interactComplete.trigger({duration: 1})
@@ -92,7 +94,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
           description: `You forfeit <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
           actions: [
             {
-              label: `Put ${stolenCount == 1 ? 'it' : 'them'} back`,
+              label: `Relinquish ${stolenCount == 1 ? 'it' : 'them'}`,
             },
           ],
         },
@@ -123,7 +125,10 @@ app.tutorial.shopLoop = app.tutorial.invent({
         })
       }
 
-      [
+      const cost = content.shop.getCost(),
+        name = content.shop.generateUniqueName()
+
+      ;[
         {
           title: `<q>I found this ${content.cellar.discovered.hasAny() ? 'before' : 'for'} you!</q>`,
           description: `You will get <strong>${name}</strong> for <strong>${app.utility.format.currency(cost)}</strong>.`,
@@ -178,11 +183,11 @@ app.tutorial.shopLoop = app.tutorial.invent({
       })
     }
 
-    if (!this.state.tutorialStockroom) {
+    if (!this.state.tutorialStockroom && hasStolen) {
       app.screen.game.dialog.push({
         tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Theft:`,
-        description: `The shopkeeper gets suspicious whenever they catch you passing through <strong>the stockroom</strong>. Browse their wares quickly to avoid their detection.`,
+        description: `The shopkeeper becomes suspicious whenever they catch you passing through <strong>the stockroom</strong> door. Be quick to avoid their detection.`,
         actions: [
           {
             label: 'Regain control',
@@ -199,5 +204,68 @@ app.tutorial.shopLoop = app.tutorial.invent({
     content.audio.reachSwitch.trigger(false, 0.25)
 
     app.screen.game.update()
+  },
+  // Other events
+  visitorPineapple: function () {
+    ;[
+      {
+        title: `<q>That's what I call music!</q>`,
+        description: `You interrupt a lively conversation. The shopkeeper grins in the shadow of your presence, motioning toward your visitor <span lang="fr">du jour</span>: <q>This is Gerg. She visits us from Earth—and has just become my favorite customer!</q>`,
+        actions: [
+          {
+            label: `It's my pleasure to meet an earthling in the flesh.`,
+            before: () => this.state.visitorPineappleGreet = true,
+          },
+          {
+            label: `And they're my favorite shopkeeper!`,
+            before: () => this.state.visitorPineappleGreet = false,
+          },
+        ],
+      },
+      {
+        title: () => (
+          this.state.visitorPineappleGreet
+            ? `<q>The pleasure is mine…</q>`
+            : `<q>I'm your only shopkeeper!</q>`
+        ),
+        description: () => `She buries an infrasonic giggle into her polydactyl hand. Was it from ${this.state.visitorPineappleGreet ? 'your mediocre advance' : 'their natural comeback'}? Without a beat to read the scene, the shopkeeper entrenches you deeper: <q>Let's ask you my opening question: does <em>earthen pineapple</em> belong on pizza?</q>`,
+        actions: [
+          {
+            label: `Absolutely!`,
+          },
+          {
+            label: `Definitely not.`,
+          },
+          {
+            label: `Only when paired with <em>earthen ham</em>.`,
+          },
+          {
+            label: `Does it have barbeque sauce?`,
+          },
+        ],
+      },
+      {
+        title: `<q>What a load of cosmic pain!</q>`,
+        description: `Gerg turns as pink as the perfect <em>earthen steak</em> as the shopkeeper catches their hungry mistake. <q>Excuse my eruption—let's blame the <em>eathern anchovies</em> which spoiled my breakfast earlier. Now, back to our transaction…</q>`,
+        actions: [
+          {
+            label: `Wave chummily`,
+          },
+          {
+            label: `Laugh nervously`,
+          },
+          {
+            label: `Shrug emotively`,
+          },
+          {
+            label: `Exit silently`,
+          },
+        ],
+        after: () => {
+          this.state.visitorPineapple = true
+          this.startCellarRun()
+        },
+      },
+    ].forEach((x) => app.screen.game.dialog.push(x))
   },
 })
