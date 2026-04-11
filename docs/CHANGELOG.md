@@ -20,6 +20,7 @@
 - Increased the maximum gold sink at the shop.
 - Increased the health pool for the cellar.
 - Adjusted anomaly rarities in the cellar.
+- Reset run if in the cellar in v1.0.0 save.
 - Tracked number of deaths in the cellar.
 - Tracked number of donations collected.
 - Used full galaxy names for instruments.
