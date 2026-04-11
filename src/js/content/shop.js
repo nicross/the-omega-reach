@@ -1,6 +1,6 @@
 content.shop = (() => {
   const cooldownTime = 60,
-    cooldownDisallowed = new Set(['lobby','atrium','shop'])
+    cooldownDisallowed = new Set(['atrium','shop'])
 
   const qualifiers = [
     'Active',

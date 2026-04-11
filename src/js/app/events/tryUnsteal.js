@@ -7,7 +7,7 @@ content.location.on('try-unsteal', ({instrument}) => {
       {
         label: 'Put it back',
         after: () => {
-          content.cellar.stockroom.unsteal(instrument.name)
+          content.stockroom.unsteal(instrument.name)
 
           app.screen.game.update()
           app.tutorial.update()

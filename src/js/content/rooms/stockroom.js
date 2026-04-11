@@ -12,8 +12,8 @@ content.rooms.stockroom = content.rooms.invent({
   },
   // Methods
   getInstrument: function () {
-    return this.state.name && content.cellar.stockroom.isGenerated(this.state.name)
-      ? content.cellar.stockroom.getInstrument(this.state.name)
+    return this.state.name && content.stockroom.isGenerated(this.state.name)
+      ? content.stockroom.getInstrument(this.state.name)
       : undefined
   },
   getDescription: function () {
@@ -38,7 +38,7 @@ content.rooms.stockroom = content.rooms.invent({
     const instrument = this.getInstrument()
 
     return instrument
-      ? this.isDiscovered() ? (this.isComplete() ? (content.cellar.stockroom.isStolen(instrument.name) ? 'Return' : 'Steal') : 'Examine') : 'Reveal'
+      ? this.isDiscovered() ? (this.isComplete() ? (content.stockroom.isStolen(instrument.name) ? 'Return' : 'Steal') : 'Examine') : 'Reveal'
       : 'Examine'
   },
   getName: function () {
@@ -97,7 +97,7 @@ content.rooms.stockroom = content.rooms.invent({
     const instrument = this.getInstrument()
 
     if (this.isComplete()) {
-      if (content.cellar.stockroom.isStolen(instrument.name)) {
+      if (content.stockroom.isStolen(instrument.name)) {
         content.location.emit('try-unsteal', {instrument})
       } else {
         content.location.emit('try-steal', {instrument})
@@ -165,7 +165,7 @@ content.rooms.stockroom = content.rooms.invent({
     return attributes
   },
   getCompleteLabel: function () {
-    const isStolen = content.cellar.stockroom.isStolen(
+    const isStolen = content.stockroom.isStolen(
       this.getInstrument()?.name
     )
 
@@ -175,10 +175,10 @@ content.rooms.stockroom = content.rooms.invent({
   },
   // Movement
   canEnter: () => content.cellar.isRunning(),
-  canMoveLeft: () => content.cellar.stockroom.countGenerated() > 1,
-  canMoveRight: () => content.cellar.stockroom.countGenerated() > 1,
+  canMoveLeft: () => content.stockroom.countGenerated() > 1,
+  canMoveRight: () => content.stockroom.countGenerated() > 1,
   moveLeft: function () {
-    const names = content.cellar.stockroom.generated()
+    const names = content.stockroom.generated()
 
     this.setInstrumentByName(
       names[
@@ -198,7 +198,7 @@ content.rooms.stockroom = content.rooms.invent({
     return this.move('left')
   },
   moveRight: function () {
-    const names = content.cellar.stockroom.generated()
+    const names = content.stockroom.generated()
 
     this.setInstrumentByName(
       names[
@@ -218,9 +218,9 @@ content.rooms.stockroom = content.rooms.invent({
     return this.move('right')
   },
   onEnter: function () {
-    if (!this.getInstrument() && content.cellar.stockroom.hasGenerated()) {
+    if (!this.getInstrument() && content.stockroom.hasGenerated()) {
       this.setInstrumentByName(
-        content.cellar.stockroom.generated()[0]
+        content.stockroom.generated()[0]
       )
     }
 

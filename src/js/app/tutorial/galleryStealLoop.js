@@ -3,16 +3,16 @@ app.tutorial.galleryStealLoop = app.tutorial.invent({
   // State
   state: {},
   // Lifecycle
-  shouldActivate: () => content.cellar.stockroom.hasStolen(),
+  shouldActivate: () => content.stockroom.hasStolen(),
   onUpdate: function () {
-    if (!(content.location.is('gallery') && content.cellar.stockroom.hasStolen())) {
+    if (!(content.location.is('gallery') && content.stockroom.hasStolen())) {
       return
     }
 
-    const stolenCount = content.cellar.stockroom.countStolen()
+    const stolenCount = content.stockroom.countStolen()
 
     content.audio.interactSuccess.trigger({index: 0})
-    content.cellar.stockroom.keepStolen()
+    content.stockroom.keepStolen()
 
     app.screen.game.dialog.push({
       title: `Checkpoint!`,

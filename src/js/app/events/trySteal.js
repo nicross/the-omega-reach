@@ -7,7 +7,7 @@ content.location.on('try-steal', ({instrument}) => {
       {
         label: 'Steal it',
         after: () => {
-          content.cellar.stockroom.steal(
+          content.stockroom.steal(
             content.rooms.stockroom.getInstrument().name
           )
 

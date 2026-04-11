@@ -1,4 +1,4 @@
-content.cellar.stockroom = (() => {
+content.stockroom = (() => {
   const generated = new Set(),
     instruments = new Map(),
     stolen = new Set()
@@ -83,3 +83,7 @@ content.cellar.stockroom = (() => {
     },
   }
 })()
+
+engine.state.on('export', (data) => data.stockroom = content.stockroom.export())
+engine.state.on('import', ({stockroom}) => content.stockroom.import(stockroom))
+engine.state.on('reset', () => content.stockroom.reset())

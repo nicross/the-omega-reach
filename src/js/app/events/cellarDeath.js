@@ -4,11 +4,11 @@ content.location.on('cellar-death', () => {
     Math.ceil(content.shop.getCost() * 0.75),
   )
 
-  const hasStolen = content.cellar.stockroom.hasStolen(),
-    stolenCount = content.cellar.stockroom.stolenCount()
+  const hasStolen = content.stockroom.hasStolen(),
+    stolenCount = content.stockroom.stolenCount()
 
   content.cellar.deaths.increment()
-  content.cellar.stockroom.reset()
+  content.stockroom.reset()
 
   content.donations.add(Math.round(penalty * engine.fn.randomFloat(0.25, 0.75)))
   content.wallet.subtract(penalty)

@@ -9,7 +9,6 @@ content.cellar = (() => {
         position: this.position.export(),
         run: this.run.export(),
         scans: this.scans.export(),
-        stockroom: this.stockroom.export(),
       }
     },
     import: function (data = {}) {
@@ -20,7 +19,6 @@ content.cellar = (() => {
       this.position.import(data.position)
       this.run.import(data.run)
       this.scans.import(data.scans)
-      this.stockroom.import(data.stockroom)
 
       return this
     },
@@ -42,7 +40,6 @@ content.cellar = (() => {
       this.instruments.reset()
       this.run.reset()
       this.scans.reset()
-      this.stockroom.reset()
 
       return this
     },
@@ -53,12 +50,13 @@ content.cellar = (() => {
       this.discovered.reset()
       this.position.reset()
       this.scans.reset()
-      this.stockroom.reset().generate()
       this.tiles.reset()
 
       this.health.setMax()
       this.discovered.set(this.position.get())
       content.audio.cellarInteractives.reset()
+
+      content.stockroom.reset().generate()
 
       return this
     },

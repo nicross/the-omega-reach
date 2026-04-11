@@ -77,9 +77,9 @@ app.tutorial.shopLoop = app.tutorial.invent({
     }
 
     const fromStockroom = content.location.was('stockroom'),
-      hasStolen = content.cellar.stockroom.hasStolen(),
+      hasStolen = content.stockroom.hasStolen(),
       stealingDetected = hasStolen && fromStockroom,
-      stolenCount = content.cellar.stockroom.countStolen()
+      stolenCount = content.stockroom.countStolen()
 
     if (this.state.tutorial && !this.state.visitorPineapple && !hasStolen && content.wallet.has(300)) {
       return this.visitorPineapple()
@@ -112,7 +112,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
     } else {
       if (hasStolen) {
         content.audio.interactSuccess.trigger({index: 0})
-        content.cellar.stockroom.keepStolen()
+        content.stockroom.keepStolen()
 
         app.screen.game.dialog.push({
           title: `Success!`,
