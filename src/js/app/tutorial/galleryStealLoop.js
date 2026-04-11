@@ -15,7 +15,7 @@ app.tutorial.galleryStealLoop = app.tutorial.invent({
     content.cellar.stockroom.keepStolen()
 
     app.screen.game.dialog.push({
-      title: `Theft undetected!`,
+      title: `Checkpoint!`,
       description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
       actions: [
         {

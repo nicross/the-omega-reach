@@ -2,7 +2,7 @@ content.cellar.tiles = (() => {
   const cache = engine.tool.cache2d.create()
 
   const offLimits = [
-    engine.tool.vector2d.create({x: 0, y: 2}), // easter egg (what is the shopkeeper hiding?)
+    engine.tool.vector2d.create({x: 0, y: 2}), // stockroom
     engine.tool.vector2d.create({x: 0, y: 1}), // shop
     engine.tool.vector2d.create({x: -1, y: 1}), // atrium
     engine.tool.vector2d.create({x: -1, y: 2}), // reach
@@ -13,12 +13,12 @@ content.cellar.tiles = (() => {
   const effectTypes = [
     /*
     Chances
+    0.3 - damage
     0.2 - nothing
-    0.2 - small donation
-    0.2 - damage
-    0.15 - heal
+    0.15 - small donation
+    0.125 - heal
     0.1 - big donation
-    0.1 - restore
+    0.075 - restore
     0.05 - instrument
     */
     // Nothing
@@ -52,7 +52,7 @@ content.cellar.tiles = (() => {
     },
     // Small credits
     {
-      weight: 0.2,
+      weight: 0.15,
       generate: (srand) => {
         const roll = srand()
         const reward = Math.round(engine.fn.lerp(1, 10, roll))
@@ -109,7 +109,7 @@ content.cellar.tiles = (() => {
     },
     // Heal
     {
-      weight: 0.15,
+      weight: 0.125,
       generate: (srand) => {
         const label = engine.fn.choose([
           'Astronomical observations',
@@ -138,7 +138,7 @@ content.cellar.tiles = (() => {
     },
     // Full heal
     {
-      weight: 0.1,
+      weight: 0.075,
       generate: (srand) => {
         const label = engine.fn.choose([
           'Breadcrumb trail',
@@ -161,7 +161,7 @@ content.cellar.tiles = (() => {
     },
     // Damage
     {
-      weight: 0.2,
+      weight: 0.3,
       generate: (srand) => {
         const label = engine.fn.choose([
           'Antimatter residue',

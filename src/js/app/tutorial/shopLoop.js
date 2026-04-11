@@ -115,7 +115,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
         content.cellar.stockroom.keepStolen()
 
         app.screen.game.dialog.push({
-          title: `Theft undetected!`,
+          title: `Success!`,
           description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
           actions: [
             {
@@ -156,7 +156,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
           title: () => (
             this.state.bought
               ? `<q>Nice choice!</q>`
-              : `<q>Makes sense!</q>`
+              : `<q>Makes sense.</q>`
           ),
           description: `The shopkeeper disappears once more through the cellar door for their mandated lunch break.`,
           actions: [
