@@ -76,6 +76,7 @@ app.screen.game.dialog = (() => {
 
   function render({
     actions = [],
+    actionsBlock = false,
     after,
     before,
     description = '',
@@ -87,6 +88,12 @@ app.screen.game.dialog = (() => {
 
     titleElement.innerHTML = typeof title == 'function' ? title() : title
     descriptionElement.innerHTML = typeof description == 'function' ? description() : description
+
+    if (actionsBlock) {
+      actionsElement.classList.add('a-game--dialogActions-block')
+    } else {
+      actionsElement.classList.remove('a-game--dialogActions-block')
+    }
 
     actionsElement.innerHTML = '';
 

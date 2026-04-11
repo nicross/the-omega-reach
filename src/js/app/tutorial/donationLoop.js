@@ -5,6 +5,7 @@ app.tutorial.donationLoop = app.tutorial.invent({
     tutorial: false,
     visitorWood: false,
     visitorWoodScore: 0,
+    visitorWoodWeird: false,
   },
   // Lifecycle
   shouldActivate: () => content.donations.has(),
@@ -71,7 +72,7 @@ app.tutorial.donationLoop = app.tutorial.invent({
   },
   // Visitors
   tryVisitorWood: function () {
-    if (!this.state.visitorWood && content.donations.collected() >= 300) {
+    if (!this.state.visitorWood && content.donations.collected() >= 300 && content.conservatory.isOpen()) {
       this.visitorWood()
       return true
     }
@@ -83,15 +84,15 @@ app.tutorial.donationLoop = app.tutorial.invent({
 
     ;[
       {
-        title: `<q>Hail, curator!</q>`,
-        description: `It's a rare visitor in <strong>the lobby</strong>. <em>TK: describe and question</em>`,
+        title: `<q>Yo dawg!</q>`,
+        description: `The elusive visitor hustles and arrives with an excited glimmer in their third eye. <q>Please, spill everything about this sick ceiling!</q> Seizing the opportunity to practice your pitch, you begin:`,
         actions: [
           {
-            label: `Forty-seven cycles ago…`,
+            label: `Seventeen cycles ago…`,
             before: () => previousChoice = 1,
           },
           {
-            label: `Where to begin…`,
+            label: `Well, it all started when…`,
             before: () => previousChoice = 0,
           },
           {
@@ -104,24 +105,24 @@ app.tutorial.donationLoop = app.tutorial.invent({
         before: () => this.state.visitorWoodScore = previousChoice,
         title: () => {
           if (this.state.visitorWoodScore == 1) {
-            return `<q>Incredible…</q>`
+            return `<q>Nuh-uh…</q>`
           }
           if (this.state.visitorWoodScore == 0) {
-            return `<q>Go on…</q>`
+            return `<q>Huh…</q>`
           }
           if (this.state.visitorWoodScore == -1) {
-            return `<q>Tell me more…</q>`
+            return `<q>Uh-huh…</q>`
           }
         },
         description: () => {
           if (previousChoice == 1) {
-            return `You remember fondly the day you randomly reached <em>Earth</em> from here. You'd reached dozens of terran worlds before, but none had its perfect confluence of nature and culture—and cuisine—in that goldilocks zone of spacetime.`
+            return `You recalled fondly the day you randomly reached <em>Earth</em> from here. You'd reached dozens of terran worlds before, but none had its confluence of nature and culture—and cuisine so sublime—in that goldilocks zone of spacetime.`
           }
           if (previousChoice == 0) {
-            return `You fumble unusually through your proven elevator pitch—whenever was the last <em>earthen elevator</em> you hitched? Your guest shows disinterest in the verbose astrophysics—the big words and the winding sentence structures with their specifics. How do you make the pieces fit?`
+            return `You fumbled unusually through your proven pitch—whenever was the last <em>earthen elevator</em> you hitched? Your guest showed disinterest in the verbose astrophysics—the big words and the winding sentence structures with their specifics. How do you make the pieces fit?`
           }
           if (previousChoice == -1) {
-            return `You tell the fantastical tale of <strong>the reach</strong>: its architects, its construction, and how it eventually found its residence in <strong>The Omega Conservatory</strong>. Yet, it's just the canon you've reconstructed and embellished since your last nap.`
+            return `You shared the fantastical tale of <strong>the reach</strong>: its architects, its construction, and how it eventually found its residence in <strong>The Omega Conservatory</strong>. Yet, it was just the canon you've reconstructed and embellished since your last nap.`
           }
         },
         actions: [
@@ -143,24 +144,24 @@ app.tutorial.donationLoop = app.tutorial.invent({
         before: () => this.state.visitorWoodScore += previousChoice,
         title: () => {
           if (this.state.visitorWoodScore == 2) {
-            return `<q>Unbelievable…</q>`
+            return `<q>Mm-mm…</q>`
           }
           if (Math.abs(this.state.visitorWoodScore) < 2) {
-            return `<q>Mmhmm…</q>`
+            return `<q>Hmm…</q>`
           }
           if (this.state.visitorWoodScore == -2) {
-            return `<q>That checks out…</q>`
+            return `<q>Mm-hmm…</q>`
           }
         },
         description: () => {
           if (previousChoice == 1) {
-            return `You may wax poetic of their music and everything deep-fried; yet, their legacy is like an <em>earthen onion</em>: so layered and mercurial that you'll inevitably cry. What horrors might happen when their final tree dies? In hindsight, was this a fool's predicament?`
+            return `You waxed poetic of their music and everything deep-fried; yet, their legacy is like an <em>earthen onion</em>: so layered and mercurial that everybody cries. What unspeakable horrors follow when the final tree dies? You summarized the worst outcomes and solutions that you'd devised.`
           }
           if (previousChoice == 0) {
-            return `You exhaust the merits of <em>earthen lumber</em>: its durability, safety, sustainability, and beauty. Specifically, you emphasize the visible knots and rings which marble the load-bearing material. Your guest drifts occasionally during your philosophical ramblings.`
+            return `You exhausted the merits of <em>earthen lumber</em>: its durability, safety, sustainability, and beauty. Specifically, you emphasized the visible knots and rings which marble the ornate ceiling. Your guest drifted occasionally during your semiscientific ramblings.`
           }
           if (previousChoice == -1) {
-            return `You incorporate and extrapolate the pertinent details, but shouldn't it differ every cycle? At this nexus it was a pale blue dot, a producer of elixir and cheese, and an island sustaining trillions of trees. Perhaps <em>earthen unicorns</em> were where its evolution peaked?`
+            return `You incorporated and extrapolated the pertinent details, but shouldn't it differ every cycle? At this nexus it was a pale blue dot, a producer of elixir and cheese, and an island sustaining trillions of trees. Perhaps <em>earthen unicorns</em> were where its evolution peaked?`
           }
         },
         actions: [
@@ -182,32 +183,38 @@ app.tutorial.donationLoop = app.tutorial.invent({
         before: () => this.state.visitorWoodScore += previousChoice,
         title: () => {
           if (this.state.visitorWoodScore >= 2) {
-            return `<q>That was fantastic!</q>`
+            return `<q>Far out!</q>`
           }
           if (Math.abs(this.state.visitorWoodScore) < 2) {
-            return `<q>I truly doubt that.</q>`
+            return `<q>My dawg…</q>`
           }
           if (this.state.visitorWoodScore <= -2) {
-            return `<q>I had no idea!</q>`
+            return `<q>Righteous!</q>`
           }
         },
         description: () => {
           if (previousChoice == 1) {
-            return `<em>TK: stealing with the reach</em>`
+            return `You confided the truth. By their poor stewardship, the <em>earthen trees</em> were rapidly depleting. The few acres of forest that you reached had deepened the conservatory's meaning. Perhaps one cycle it might inspire or provide a second chance to succeed?`
           }
           if (previousChoice == 0) {
-            return `<em>TK: is it theft in the grater context?</em>`
+            return `You questioned everything. There is a callousness to the timelessness of <strong>the reach</strong>—whose nuance you've barely gleaned in your tenure which surely exceeds hundreds of quintillions of <em>earthen years</em>. Most visitors come to time travel, but you might stay to steal?`
           }
           if (previousChoice == -1) {
-            return `<em>TK: free food for life, with a price</em>`
+            return `You smiled and lied. The <em>earthen wood</em> was a generous gift for your accidental first encounter. Allegedly, a dignitary had overheard the shopkeeper extolling the <em>earthen sushi</em> that you had reached. Perhaps their new status had shown them what to cherish?`
           }
         },
         actions: [
           {
-            label: `Shake their hand`,
+            label: `Shake your hand`,
+            before: () => this.state.visitorWoodWeird = true,
           },
           {
-            label: `Shake your head`,
+            label: `Shake their head`,
+            before: () => this.state.visitorWoodWeird = true,
+          },
+          {
+            label: `Rest a beat`,
+            before: () => this.state.visitorWoodWeird = false,
           },
         ],
       },
@@ -217,8 +224,12 @@ app.tutorial.donationLoop = app.tutorial.invent({
             content.donations.add(10)
           }
         },
-        title: `<q>Thanks for the chat!</q>`,
-        description: `They exit through the airlock without further explanation. You welcome how its smell has been unwelcome since before the dawn of time.`,
+        title: () => (
+          this.state.visitorWoodWeird
+            ? `<q>Gee, thanks!</q>`
+            : `<q>Welp, smell ya later!</q>`
+        ),
+        description: `They exit through the airlock without further salutations. It seems you're growing desensitized to its trioxygenic scent.`,
         actions: () => content.donations.has() ? [
           {
             label: `Check for donations`,

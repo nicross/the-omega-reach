@@ -283,6 +283,9 @@
     margin-right: 0.5em;
     margin-top: 0.5em;
   }
+  .a-game--dialogActions-block li {
+    display: block;
+  }
 
 @keyframes a-game--attribute-undiscovered {
   0% {

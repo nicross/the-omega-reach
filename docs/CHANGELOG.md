@@ -5,7 +5,7 @@
 - Added hycean planets and moons.
 - Added lava planets and moons.
 - Added more terrain generators to terrestrial worlds.
-- Added new visitor encounters.
+- Added three new visitor encounters.
 - Split settings into multiple screens.
 - Added a slider for interface scaling.
 - Added a slider for music volume.
@@ -18,7 +18,7 @@
 - Opened the world sooner when tutorials are off.
 - Increased the habitability of the universe.
 - Increased the maximum gold sink at the shop.
-- Doubled the health pool for the cellar.
+- Increased the health pool for the cellar.
 - Tracked number of deaths in the cellar.
 - Tracked number of donations collected.
 - Used full galaxy names for instruments.

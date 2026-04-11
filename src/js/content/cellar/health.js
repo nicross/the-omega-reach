@@ -5,7 +5,7 @@ content.cellar.health = (() => {
 
   function calculateMax() {
     const count = content.instruments.count()
-    return 4 + (2 * Math.round(Math.sqrt(count)))
+    return 4 + Math.round(Math.sqrt(2 * count))
   }
 
   return pubsub.decorate({

@@ -3,7 +3,7 @@ app.tutorial.visitorJumpscare = app.tutorial.invent({
   // State
   state: {},
   // Lifecycle
-  shouldActivate: () => content.location.is('horizon') && content.donations.has(100),
+  shouldActivate: () => content.location.is('horizon') && content.donations.has(100) && content.conservatory.isOpen(),
   onUpdate: function () {
     if (!content.location.is('reach')) {
       return
