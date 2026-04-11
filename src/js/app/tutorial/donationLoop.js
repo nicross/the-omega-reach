@@ -116,7 +116,7 @@ app.tutorial.donationLoop = app.tutorial.invent({
         },
         description: () => {
           if (previousChoice == 1) {
-            return `You recalled fondly the day you randomly reached <em>Earth</em> from here. You'd reached dozens of terran worlds before, but none had its confluence of nature and culture—and cuisine so sublime—in that goldilocks zone of spacetime.`
+            return `You recalled fondly the day you randomly reached <em>Earth</em> from here. You'd encountered dozens of terran worlds, but none had its confluence of nature and culture—and cuisine so sublime—in that goldilocks zone of spacetime.`
           }
           if (previousChoice == 0) {
             return `You fumbled unusually through your proven pitch—whenever was the last <em>earthen elevator</em> you hitched? Your guest showed disinterest in the verbose astrophysics—the big words and the winding sentence structures with their specifics. How do you make the pieces fit?`
@@ -158,7 +158,7 @@ app.tutorial.donationLoop = app.tutorial.invent({
             return `You waxed poetic of their music and everything deep-fried; yet, their legacy is like an <em>earthen onion</em>: so layered and mercurial that everybody cries. What unspeakable horrors follow when the final tree dies? You summarized the worst outcomes and solutions that you'd devised.`
           }
           if (previousChoice == 0) {
-            return `You exhausted the merits of <em>earthen lumber</em>: its durability, safety, sustainability, and beauty. Specifically, you emphasized the visible knots and rings which marble the ornate ceiling. Your guest drifted occasionally during your semiscientific ramblings.`
+            return `You exhausted the merits of <em>earthen lumber</em>: its durability, safety, sustainability, and beauty. Specifically, you emphasized the visible knots and rings which marble the ornate ceiling. Your guest drifted occasionally during your semi-scientific ramblings.`
           }
           if (previousChoice == -1) {
             return `You incorporated and extrapolated the pertinent details, but shouldn't it differ every cycle? At this nexus it was a pale blue dot, a producer of elixir and cheese, and an island sustaining trillions of trees. Perhaps <em>earthen unicorns</em> were where its evolution peaked?`
@@ -221,7 +221,9 @@ app.tutorial.donationLoop = app.tutorial.invent({
       {
         before: () => {
           if (Math.abs(this.state.visitorWoodScore) >= 2) {
-            content.donations.add(10)
+            content.donations.add(
+              engine.fn.randomInt(10, 20)
+            )
           }
         },
         title: () => (
