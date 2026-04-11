@@ -1,10 +1,5 @@
 content.cellar.position = (() => {
-  let vector = engine.tool.vector2d.create()
-
-  function calculateMax() {
-    const count = content.instruments.count()
-    return 2 + (count ? Math.round(Math.log2(count)) : 0)
-  }
+  let vector = engine.tool.vector3d.create()
 
   return {
     export: function () {
@@ -14,18 +9,18 @@ content.cellar.position = (() => {
     },
     get: () => vector.clone(),
     import: function (data = {}) {
-      vector = engine.tool.vector2d.create(data.vector)
+      vector = engine.tool.vector3d.create(data.vector)
 
       return this
     },
-    is: ({x, y}) => vector.x == x && vector.y == y,
+    is: ({x, y, z}) => vector.x == x && vector.y == y && vector.z == z,
     reset: function () {
       vector = engine.tool.vector2d.create()
 
       return this
     },
     set: function (value) {
-      vector = engine.tool.vector2d.create(value)
+      vector = engine.tool.vector3d.create(value)
 
       return this
     },

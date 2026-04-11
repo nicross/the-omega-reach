@@ -1,229 +1,89 @@
 content.cellar.tiles = (() => {
-  const cache = engine.tool.cache2d.create()
+  const cache = engine.tool.cache3d.create(),
+    registry = new Map(),
+    uniques = []
 
   const offLimits = [
-    engine.tool.vector2d.create({x: 0, y: 2}), // stockroom
-    engine.tool.vector2d.create({x: 0, y: 1}), // shop
-    engine.tool.vector2d.create({x: -1, y: 1}), // atrium
-    engine.tool.vector2d.create({x: -1, y: 2}), // reach
-    engine.tool.vector2d.create({x: -2, y: 1}), // lobby
-    engine.tool.vector2d.create({x: -1, y: 0}), // gallery
+    engine.tool.vector3d.create({x: 0, y: 2, z: 0}), // stockroom
+    engine.tool.vector3d.create({x: 0, y: 1, z: 0}), // shop
+    engine.tool.vector3d.create({x: -1, y: 1, z: 0}), // atrium
+    engine.tool.vector3d.create({x: -1, y: 2, z: 0}), // reach
+    engine.tool.vector3d.create({x: -2, y: 1, z: 0}), // lobby
+    engine.tool.vector3d.create({x: -1, y: 0, z: 0}), // gallery
   ]
 
-  const effectTypes = [
-    /*
-    Chances
-    0.3 - damage
-    0.2 - nothing
-    0.15 - small donation
-    0.125 - heal
-    0.1 - big donation
-    0.075 - restore
-    0.05 - instrument
-    */
-    // Nothing
-    {
-      weight: 0.2,
-      generate: (srand) => {
-        const label = engine.fn.choose([
-          'Cracked ceiling',
-          'Donation logs',
-          'Employee records',
-          'Guest ledgers',
-          'Large cobwebs',
-          'Random detritis',
-          'Recipe books',
-          'Really nothing',
-          'Stacked boxes',
-          'Stacked newspapers',
-          'Uneven flooring',
-          'Vestigial wiring',
-        ], srand())
+  function generate(x, y, z) {
+    const seed = ['cellar', content.cellar.run.count(), 'tile', x, y, z],
+      srand = engine.fn.srand(...seed)
 
-        return {
-          apply: () => {},
-          attribute: {
-            label,
-            modifiers: [],
-          },
-          liveLabel: `${label} found`,
-        }
-      },
-    },
-    // Small credits
-    {
-      weight: 0.15,
-      generate: (srand) => {
-        const roll = srand()
-        const reward = Math.round(engine.fn.lerp(1, 10, roll))
-        const label = engine.fn.choose(['Microscopic', 'Meager', 'Modest'], roll)
-
-        return {
-          apply: () => {
-            content.wallet.add(reward)
-          },
-          attribute: {
-            label: `${label} donation`,
-            modifiers: ['rare'],
-          },
-          liveLabel: `${label} donation found`,
-        }
-      },
-    },
-    // Big credits
-    {
-      weight: 0.1,
-      generate: (srand) => {
-        const roll = srand()
-        const reward = Math.round(engine.fn.lerp(25, 75, roll))
-        const label = engine.fn.choose(['Generous', 'Grandiose', 'Gargantuan'], roll)
-
-        return {
-          apply: () => {
-            content.wallet.add(reward)
-          },
-          attribute: {
-            label: `${label} donation`,
-            modifiers: ['rare'],
-          },
-          liveLabel: `${label} donation found`,
-        }
-      },
-    },
-    // Instrument
-    {
-      weight: 0.05,
-      generate: (srand) => {
-        return {
-          apply: () => {
-            content.instruments.add(
-              content.cellar.instruments.generateUniqueName()
-            )
-          },
-          attribute: {
-            label: `Instrument recovered`,
-            modifiers: ['instrument'],
-          },
-        }
-      },
-    },
-    // Heal
-    {
-      weight: 0.125,
-      generate: (srand) => {
-        const label = engine.fn.choose([
-          'Astronomical observations',
-          'Calm atmosphere',
-          'Discarded thesauruses',
-          'Dusty encyclopedias',
-          'Faded dictionaries',
-          'Musical compositions',
-          'Smitten kittens',
-          'Stellar catalogs',
-          'Vintage synthesizers',
-          'Vinyl records',
-        ], srand())
-
-        return {
-          apply: () => {
-            content.cellar.health.add(1)
-          },
-          attribute: {
-            label,
-            modifiers: [],
-          },
-          liveLabel: `${label} found, gained ${app.utility.format.health(1)}`,
-        }
-      },
-    },
-    // Full heal
-    {
-      weight: 0.075,
-      generate: (srand) => {
-        const label = engine.fn.choose([
-          'Breadcrumb trail',
-          'Familiar landmark',
-          'Rest area',
-          'Water cooler',
-        ], srand())
-
-        return {
-          apply: () => {
-            content.cellar.health.setMax()
-          },
-          attribute: {
-            label,
-            modifiers: ['legendary'],
-          },
-          liveLabel: `${label} found, sanity fully restored`,
-        }
-      },
-    },
-    // Damage
-    {
-      weight: 0.3,
-      generate: (srand) => {
-        const label = engine.fn.choose([
-          'Antimatter residue',
-          'Burning odor',
-          'Dutch angle',
-          'Earthen rodents',
-          'Electrical hum',
-          'Flickering light',
-          'Gravitational blip',
-          'Magnetic interference',
-          'Mysterious presence',
-          'Putrid stench',
-          'Research chemicals',
-          'Temporal distortion',
-        ], srand())
-
-        return {
-          apply: () => {
-            content.cellar.health.subtract(1)
-          },
-          attribute: {
-            label,
-            modifiers: [],
-          },
-          liveLabel: `${label} found, lost ${app.utility.format.health(1)}`,
-        }
-      },
-    },
-  ]
-
-  function generate(x, y) {
     const tile = {
       effects : [],
+      note: engine.fn.choose([1,2,3,4,5,6,7,8,10,11,12], srand()),
+      prime: engine.fn.choose([59, 61, 67, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113], srand()),
+      seed,
       x,
       y,
+      z,
     }
 
-    const srand = engine.fn.srand('cellar', content.cellar.run.count(), 'tile', x, y)
-    const types = [...effectTypes]
+    const types = getTypes(tile)
+    const type = engine.fn.chooseWeighted(types, srand())
 
-    const count = !x && !y
-      ? 0
-      : Math.round(engine.fn.lerpExp(0, 2, srand(), 3))
-
-    for (let i = 0; i < count; i += 1) {
-      const type = engine.fn.chooseWeighted(types, srand())
-
-      tile.effects.push(
-        type.generate(
-          engine.fn.srand(
-            'cellar', content.cellar.run.count(), 'tile', x, y, 'effect', i
-          )
-        )
-      )
-
-      types.splice(types.indexOf(type), 1)
+    if (type.uniquePerFloor || type.uniquePerRun) {
+      uniques.push({
+        id: type.id,
+        x: tile.x,
+        y: tile.y,
+        z: tile.z,
+      })
     }
 
-    tile.note = engine.fn.choose([1,2,3,4,5,6,7,8,10,11,12], srand())
-    tile.prime = engine.fn.choose([59, 61, 67, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113], srand())
+    return type.generate(tile)
+  }
 
-    return tile
+  function getTypes(tile) {
+    // Origin is always normal
+    if (tile.x == 0 && tile.y == 0 && tile.z == 0) {
+      return [
+        registry.get('normal'),
+      ]
+    }
+
+    // If known to be unique, force tile to be that type
+    for (const unique of uniques) {
+      if (unique.x == tile.x && unique.y == tile.y && unique.z == tile.z) {
+        return [
+          registry.get(unique.id),
+        ]
+      }
+    }
+
+    // Determine which unique types are already in-use
+    const nonUniqueTypes = [],
+      uniqueTypes = [],
+      uniquesInUse = new Set()
+
+    for (const unique of uniques) {
+      const type = registry.get(unique.id)
+
+      if (!type.uniquePerFloor || unique.z == tile.z) {
+        uniquesInUse.add(unique.id)
+      }
+    }
+
+    // Combine all non-unique and unused-unique types
+    for (const type of registry.values()) {
+      if (!type.uniquePerFloor && !type.uniquePerRun) {
+        nonUniqueTypes.push(type)
+      } else if (!uniquesInUse.has(type.id)) {
+        uniqueTypes.push(type)
+      }
+    }
+
+    return [
+      ...nonUniqueTypes,
+      ...uniqueTypes,
+    ]
   }
 
   return {
@@ -232,16 +92,37 @@ content.cellar.tiles = (() => {
         content.cellar.position.get()
       )
     },
-    get: function ({x, y}) {
-      if (!cache.has(x, y)) {
-        cache.set(x, y, generate(x, y))
+    export: () => ({
+      uniques: [...uniques],
+    }),
+    get: function ({x, y, z}) {
+      if (!cache.has(x, y, z)) {
+        cache.set(x, y, z, generate(x, y, z))
       }
 
-      return cache.get(x, y)
+      return cache.get(x, y, z)
     },
-    isOffLimits: ({x, y}) => {
+    import: function (data = {}) {
+      if (data.uniques?.length) {
+        for (const unique of data.uniques) {
+          uniques.push(unique)
+        }
+      }
+
+      return this
+    },
+    invent: function (prototype) {
+      if (!this.base.isPrototypeOf(prototype)) {
+        prototype = this.base.extend(prototype)
+      }
+
+      registry.set(prototype.id, prototype)
+
+      return prototype
+    },
+    isOffLimits: ({x, y, z}) => {
       for (let vector of offLimits) {
-        if (vector.x == x && vector.y == y) {
+        if (vector.x == x && vector.y == y && vector.z == z) {
           return true
         }
       }
@@ -250,6 +131,7 @@ content.cellar.tiles = (() => {
     },
     reset: function () {
       cache.reset()
+      uniques.length = 0
 
       return this
     },

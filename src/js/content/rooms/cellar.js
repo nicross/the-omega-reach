@@ -22,9 +22,10 @@ content.rooms.cellar = content.rooms.invent({
 
     const tile = content.cellar.tiles.current()
     const scans = content.cellar.scans.get(tile)
+    const effects = tile.getEffects()
 
-    for (let i = 0; i < tile.effects.length; i += 1) {
-      const effect = tile.effects[i]
+    for (let i = 0; i < effects.length; i += 1) {
+      const effect = effects[i]
 
       if (scans >= i + 1) {
         attributes.push(effect.attribute)
@@ -46,11 +47,15 @@ content.rooms.cellar = content.rooms.invent({
   isDiscovered: function () {
     return true
   },
-  isEntrance: () => content.cellar.position.is({x: 0, y: 0}),
+  isEntrance: () => content.cellar.position.is({x: 0, y: 0, z: 0}),
   // Interaction
   canInteract: function () {
     const tile = content.cellar.tiles.current()
-    return tile.effects.length > content.cellar.scans.get(tile)
+
+    const effects = tile.getEffects(),
+      scans = content.cellar.scans.get(tile)
+
+    return effects.length > scans
   },
   canInteractFreely: () => true,
   isComplete: () => false,
@@ -61,8 +66,11 @@ content.rooms.cellar = content.rooms.invent({
     const message = []
 
     const tile = content.cellar.tiles.current()
-    const scans = content.cellar.scans.increment(tile)
-    const effect = tile.effects[scans - 1]
+
+    const effects = tile.getEffects(),
+      scans = content.cellar.scans.increment(tile)
+
+    const effect = effects[scans - 1]
 
     message.push(effect.liveLabel || effect.attribute.label)
     effect.apply()
@@ -75,7 +83,7 @@ content.rooms.cellar = content.rooms.invent({
       return
     }
 
-    if (scans == tile.effects.length) {
+    if (scans == effects.length) {
       content.audio.cellarInteractives.update(true)
       message.push('Area complete')
       content.location.emit('interact-complete', {room: this})

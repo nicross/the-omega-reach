@@ -1,23 +1,31 @@
 content.cellar.scans = (() => {
   let cache = {}
 
-  function get(x, y) {
-    if (!(x in cache)) {
-      cache[x] = {}
+  function get(x, y, z) {
+    if (!(x in cache) || !(y in cache[x])) {
+      return 0
     }
 
-    return cache[x][y] || 0
+    return cache[x][y][z] || 0
   }
 
-  function set(x, y, value) {
+  function set(x, y, z, value) {
     if (!(x in cache)) {
       cache[x] = {}
     }
 
-    return cache[x][y] = value
+    if (!(y in cache[x])) {
+      cache[x][y] = {}
+    }
+
+    cache[x][y][z] = value
   }
 
   return {
+    delete: function ({x, y, z}) {
+      set(x, y, z, 0)
+      return this
+    },
     export: function () {
       return {
         hash: {...cache},
@@ -28,12 +36,12 @@ content.cellar.scans = (() => {
 
       return this
     },
-    increment: function ({x, y}) {
-      const value = get(x, y) + 1
-      set(x, y, value)
+    increment: function ({x, y, z}) {
+      const value = get(x, y, z) + 1
+      set(x, y, z, value)
       return value
     },
-    get: ({x, y}) => get(x, y),
+    get: ({x, y, z}) => get(x, y, z),
     reset: function () {
       cache = {}
 

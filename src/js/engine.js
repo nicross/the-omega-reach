@@ -71,3 +71,24 @@ engine.tool.fsm.prototype.dispatch = function (event, data = {}) {
 
   return this
 }
+
+// Fix cache3d.set missing z argument
+engine.tool.cache3d.prototype.set = function (x, y, z, value) {
+  let xMap = this.map.get(x)
+
+  if (!xMap) {
+    xMap = new Map()
+    this.map.set(x, xMap)
+  }
+
+  let yMap = xMap.get(y)
+
+  if (!yMap) {
+    yMap = new Map()
+    xMap.set(y, yMap)
+  }
+
+  yMap.set(z, value)
+
+  return this
+}

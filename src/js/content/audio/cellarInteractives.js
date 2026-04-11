@@ -10,8 +10,11 @@ content.audio.cellarInteractives = (() => {
   content.audio.reverb().from(bus)
 
   function createSynth(tile, direction = 0) {
-    const relative = engine.tool.vector2d.create(tile)
-      .subtract(content.cellar.tiles.current())
+    const current = content.cellar.tiles.current()
+
+    // Ignore z-axis
+    const relative = engine.tool.vector2d.create({x: tile.x, y: tile.y})
+      .subtract({x: current.x, y: current.y})
 
     const distance = relative.distance(),
       distanceRatio = engine.fn.clamp(distance / 2 / Math.sqrt(2)),
@@ -121,9 +124,10 @@ content.audio.cellarInteractives = (() => {
           position.add({x, y})
         )
 
-        const scans = content.cellar.scans.get(tile)
+        const effects = tile.getEffects(),
+          scans = content.cellar.scans.get(tile)
 
-        if (tile.effects.length && tile.effects.length > scans && (!isNearDeath || content.cellar.discovered.is(tile))) {
+        if (effects.length && effects.length > scans && (!isNearDeath || content.cellar.discovered.is(tile))) {
           tiles.push(tile)
         }
       }
@@ -176,12 +180,12 @@ content.audio.cellarInteractives = (() => {
       if (isCellar) {
         const next = content.cellar.position.get()
 
-        if (force || !current || current.x != next.x || current.y != next.y) {
+        if (force || !current || current.x != next.x || current.y != next.y || current.z != next.z) {
           trigger(
             engine.tool.vector2d.create(next).subtract(current).normalize().x
           )
 
-          current = {x: next.x, y: next.y}
+          current = {x: next.x, y: next.y, z: next.z}
         }
       } else if (synths.length) {
         destroySynths()
