@@ -2,7 +2,7 @@ content.rooms.cellar = content.rooms.invent({
   // Attributes
   id: 'cellar',
   name: 'The cellar',
-  description: 'Unexamiend area',
+  description: 'Unexamined area',
   defaultProgram: 'cellar',
   // Transitions
   transitions: {
@@ -10,6 +10,9 @@ content.rooms.cellar = content.rooms.invent({
     faint: 'atrium',
   },
   // Methods
+  getName: function () {
+    return content.cellar.tiles.current()?.getName() || this.name
+  },
   getDescription: function () {
     if (this.isEntrance()) {
       return 'Cellar entrance'
@@ -79,6 +82,7 @@ content.rooms.cellar = content.rooms.invent({
     content.programs.get().loadProperties()
 
     if (!content.cellar.health.has()) {
+      // XXX: Run is over, do not call tile.onExit()
       content.location.emit('cellar-death')
       return
     }
@@ -118,6 +122,8 @@ content.rooms.cellar = content.rooms.invent({
       : 'No north'
   },
   moveDown: function () {
+    content.cellar.tiles.current()?.onExit()
+
     const next = content.cellar.position.get().add({y: -1})
     const isDiscovered = content.cellar.discovered.is(next)
 
@@ -129,6 +135,8 @@ content.rooms.cellar = content.rooms.invent({
     content.audio.cellarMovement.down()
 
     content.cellar.position.set(next)
+    content.cellar.tiles.current()?.onEnter()
+
     content.solution.generate()
     this.updateProgram()
 
@@ -141,6 +149,8 @@ content.rooms.cellar = content.rooms.invent({
     return this.move('down')
   },
   moveLeft: function () {
+    content.cellar.tiles.current()?.onExit()
+
     const next = content.cellar.position.get().add({x: -1})
     const isDiscovered = content.cellar.discovered.is(next)
 
@@ -152,6 +162,8 @@ content.rooms.cellar = content.rooms.invent({
     content.audio.cellarMovement.left()
 
     content.cellar.position.set(next)
+    content.cellar.tiles.current()?.onEnter()
+
     content.solution.generate()
     this.updateProgram()
 
@@ -164,6 +176,8 @@ content.rooms.cellar = content.rooms.invent({
     return this.move('left')
   },
   moveRight: function () {
+    content.cellar.tiles.current()?.onExit()
+
     const next = content.cellar.position.get().add({x: 1})
     const isDiscovered = content.cellar.discovered.is(next)
 
@@ -175,6 +189,8 @@ content.rooms.cellar = content.rooms.invent({
     content.audio.cellarMovement.right()
 
     content.cellar.position.set(next)
+    content.cellar.tiles.current()?.onEnter()
+
     content.solution.generate()
     this.updateProgram()
 
@@ -187,6 +203,8 @@ content.rooms.cellar = content.rooms.invent({
     return this.move('right')
   },
   moveUp: function () {
+    content.cellar.tiles.current()?.onExit()
+
     if (this.isEntrance()) {
       return this.move('exit')
     }
@@ -202,6 +220,8 @@ content.rooms.cellar = content.rooms.invent({
     content.audio.cellarMovement.up()
 
     content.cellar.position.set(next)
+    content.cellar.tiles.current()?.onEnter()
+
     content.solution.generate()
     this.updateProgram()
 
@@ -212,6 +232,9 @@ content.rooms.cellar = content.rooms.invent({
     })
 
     return this.move('up')
+  },
+  onEnter: function () {
+    content.cellar.tiles.current()?.onEnter()
   },
   updateProgram: function () {
     content.programs.load(this.defaultProgram)

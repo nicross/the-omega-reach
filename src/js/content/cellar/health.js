@@ -34,6 +34,11 @@ content.cellar.health = (() => {
 
       return this
     },
+    set: function (value = 0) {
+      amount = engine.fn.clamp(value, 0, calculateMax())
+
+      return this
+    },
     setMax: function () {
       amount = calculateMax()
 

@@ -1,8 +1,9 @@
 content.audio.cellarInteractives = (() => {
-  const baseGain = engine.fn.fromDb(-9),
+  const baseGain = engine.fn.fromDb(-7.5),
     bus = content.audio.channel.music.createBus(),
     context = engine.context(),
     maxSynths = 8,
+    radius = 3,
     synths = []
 
   let current
@@ -17,31 +18,42 @@ content.audio.cellarInteractives = (() => {
       .subtract({x: current.x, y: current.y})
 
     const distance = relative.distance(),
-      distanceRatio = engine.fn.clamp(distance / 2 / Math.sqrt(2)),
+      distanceRatio = engine.fn.clamp(distance / radius / Math.sqrt(2)),
       isDiscovered = content.cellar.discovered.is(tile),
+      isFullyScanned = tile.isFullyScanned(),
       isHere = distance == 0,
       isNearDeath = content.cellar.health.amount() <= 1,
+      isUp = relative.y >= 0,
       normal = relative.normalize()
 
-    const rootFrequency = isHere ? engine.fn.fromMidi(36 + tile.note) : (engine.fn.fromMidi(48 + tile.note) * distance)
+    const gain = engine.fn.fromDb(
+        engine.fn.lerp(0, -12, distanceRatio)
+      + (isFullyScanned && !tile.alwaysAudible ? -9 : 0)
+    )
 
-    const amDepth = engine.fn.fromDb(-7.5),
-      gain = engine.fn.fromDb((isHere ? 0 : -4.5) + engine.fn.lerp(0, -3, distanceRatio)),
+    const rootFrequency = engine.fn.detune(
+      engine.fn.fromMidi(42 + tile.note),
+      (
+          engine.fn.scale(Math.abs(relative.x), 0, radius, 0, 1200)
+        + engine.fn.scale(relative.y, -radius, radius, -666, 666)
+      )
+    )
+
+    const amDepth = gain * engine.fn.fromDb(-12),
       when = engine.time()
 
     const synth = engine.synth.pwm({
       detune: engine.fn.randomFloat(-50, 50),
       frequency: rootFrequency,
       gain: gain - amDepth,
-      type: 'sine',
-      width: engine.fn.randomFloat(0.25, 0.75),
+      type: tile.synthType || (isUp && !isFullyScanned ? 'triangle' : 'sine'),
+      width: engine.fn.randomFloat(0.375, 0.625),
       when,
     }).chainAssign(
       'panner', context.createStereoPanner()
     ).chainAssign(
       'fader', context.createGain()
     ).filtered({
-      detune: -600,
       frequency: rootFrequency,
     }).connect(bus)
 
@@ -114,37 +126,49 @@ content.audio.cellarInteractives = (() => {
   }
 
   function getTiles() {
-    const isNearDeath = content.cellar.health.amount() <= 1,
+    const distancesByTile = new Map(),
+      isNearDeath = content.cellar.health.amount() <= 1,
       position = content.cellar.position.get(),
+      scansByTile = new Map(),
       tiles = []
 
-    for (let x = -2; x <= 2; x += 1) {
-      for (let y = -2; y <= 2; y += 1) {
-        const tile = content.cellar.tiles.get(
-          position.add({x, y})
-        )
+    for (let x = -radius; x <= radius; x += 1) {
+      for (let y = -radius; y <= radius; y += 1) {
+        const here = position.add({x, y})
 
-        const effects = tile.getEffects(),
-          scans = content.cellar.scans.get(tile)
+        // Prevent early discovery of uniques
+        if (!content.cellar.discovered.is(here)) {
+          continue
+        }
 
-        if (effects.length && effects.length > scans && (!isNearDeath || content.cellar.discovered.is(tile))) {
+        const tile = content.cellar.tiles.get(here)
+        const effects = tile.getEffects()
+
+        distancesByTile.set(tile, engine.fn.distance(position, tile))
+        scansByTile.set(tile, tile.isFullyScanned() ? 1 : 0)
+
+        if (tile.alwaysAudible || (effects.length && (!isNearDeath || content.cellar.discovered.is(tile)))) {
           tiles.push(tile)
         }
       }
     }
 
-    const distances = new Map()
-
+    // [...unscanned sorted by distance asc, ...scanned sorted by distance asc]
     tiles.sort((a, b) => {
-      if (!distances.has(a)) {
-        distances.set(a, engine.fn.distance(position, a))
+      if (a.alwaysAudible) {
+        return -1
       }
 
-      if (!distances.has(b)) {
-        distances.set(b, engine.fn.distance(position, b))
+      if (b.alwaysAudible) {
+        return 1
       }
 
-      return distances.get(b) - distances.get(b)
+      const scanA = scansByTile.get(a),
+        scanB = scansByTile.get(b)
+
+      return scanA == scanB
+        ? distancesByTile.get(a) - distancesByTile.get(b)
+        : scanA - scanB
     })
 
     return tiles.slice(0, maxSynths)
@@ -163,8 +187,6 @@ content.audio.cellarInteractives = (() => {
   return {
     getTiles,
     import: function () {
-      this.update()
-
       return this
     },
     reset: function () {

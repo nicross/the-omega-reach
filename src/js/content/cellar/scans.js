@@ -47,5 +47,10 @@ content.cellar.scans = (() => {
 
       return this
     },
+    set: function ({x, y, z}, value = 0) {
+      set(x, y, z, value)
+
+      return this
+    },
   }
 })()

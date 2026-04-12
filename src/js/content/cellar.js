@@ -9,6 +9,7 @@ content.cellar = (() => {
         position: this.position.export(),
         run: this.run.export(),
         scans: this.scans.export(),
+        tiles: this.tiles.export(),
       }
     },
     import: function (data = {}) {
@@ -19,6 +20,7 @@ content.cellar = (() => {
       this.position.import(data.position)
       this.run.import(data.run)
       this.scans.import(data.scans)
+      this.tiles.import(data.tiles)
 
       return this
     },
@@ -40,6 +42,7 @@ content.cellar = (() => {
       this.instruments.reset()
       this.run.reset()
       this.scans.reset()
+      this.tiles.reset()
 
       return this
     },

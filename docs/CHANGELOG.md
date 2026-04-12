@@ -6,6 +6,7 @@
 - Added lava planets and moons.
 - Added more terrain generators to terrestrial worlds.
 - Added three new visitor encounters.
+- Added two unique tiles to the cellar.
 - Split settings into multiple screens.
 - Added a slider for interface scaling.
 - Added a slider for music volume.
@@ -20,6 +21,7 @@
 - Increased the maximum gold sink at the shop.
 - Increased the health pool for the cellar.
 - Adjusted anomaly rarities in the cellar.
+- Revealed cellar music more gradually.
 - Reset run if in the cellar in v1.0.0 save.
 - Tracked number of deaths in the cellar.
 - Tracked number of donations collected.

@@ -15,7 +15,7 @@ content.cellar.position = (() => {
     },
     is: ({x, y, z}) => vector.x == x && vector.y == y && vector.z == z,
     reset: function () {
-      vector = engine.tool.vector2d.create()
+      vector = engine.tool.vector3d.create()
 
       return this
     },

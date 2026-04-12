@@ -5,7 +5,7 @@ content.location.on('cellar-death', () => {
   )
 
   const hasStolen = content.stockroom.hasStolen(),
-    stolenCount = content.stockroom.stolenCount()
+    stolenCount = content.stockroom.countStolen()
 
   content.cellar.deaths.increment()
   content.stockroom.reset()
@@ -67,7 +67,7 @@ content.location.on('cellar-death', () => {
         description: `You forfeit <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
         actions: [
           {
-            label: 'Groan',
+            label: 'Snore peacefully',
           },
         ],
       })

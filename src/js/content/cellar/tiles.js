@@ -29,7 +29,7 @@ content.cellar.tiles = (() => {
     const types = getTypes(tile)
     const type = engine.fn.chooseWeighted(types, srand())
 
-    if (type.uniquePerFloor || type.uniquePerRun) {
+    if (type.isUnique) {
       uniques.push({
         id: type.id,
         x: tile.x,
@@ -73,7 +73,7 @@ content.cellar.tiles = (() => {
 
     // Combine all non-unique and unused-unique types
     for (const type of registry.values()) {
-      if (!type.uniquePerFloor && !type.uniquePerRun) {
+      if (!type.isUnique) {
         nonUniqueTypes.push(type)
       } else if (!uniquesInUse.has(type.id)) {
         uniqueTypes.push(type)
