@@ -24,6 +24,7 @@ content.programs.cellar = content.programs.invent({
   alterParticle: function (particle) {
     const hasSolution = content.solution.has(),
       isOnline = content.rooms.reach.state.online,
+      tile = content.cellar.tiles.current(),
       time = content.time.value()
 
     let isBoundary = false
@@ -44,6 +45,12 @@ content.programs.cellar = content.programs.invent({
       isBoundary = true
     }
 
+    // Add a 20x20 plot for unique tiles
+    if (tile.isUnique && isBoundary) {
+      isBoundary = Math.abs(particle.target.x) > 10
+        || Math.abs(particle.target.y) > 10
+    }
+
     if (this.properties.isEntrance && particle.target.x < -5) {
       if (Math.abs(particle.target.y) < 5) {
         particle.target.z += Math.round(engine.fn.scale(particle.target.x, -7.5, -8.5, 0, 0.25) * 2) * 0.5
@@ -62,7 +69,11 @@ content.programs.cellar = content.programs.invent({
         y: ((this.properties.position.y * 30) + particle.target.y) * 0.0625,
         z: time * engine.fn.lerp(0, 1/4, this.properties.health),
       }, 1) ** 2) * 4 * this.properties.health) - 2
+
+      return
     }
+
+    tile.alterParticle(particle)
 
     if (hasSolution) {
       const distance = Math.max(Math.abs(particle.target.x), Math.abs(particle.target.y))
@@ -71,11 +82,11 @@ content.programs.cellar = content.programs.invent({
         particle.target.h = engine.fn.lerp(-25, 25, content.fn.gain(this.fields.flicker.valueAt({x: time}, 6), 1.5)) / 360
         particle.target.s = engine.fn.scale(Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0]), -1, 1, 0.333, 1)
 
-        particle.target.z = particle.floor.z + engine.fn.scale(
+        particle.target.z = Math.max(particle.target.z, particle.floor.z + engine.fn.scale(
           Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1] * 0.5),
           -1, 1,
           0, 4 - distance,
-        )
+        ))
       }
     }
   },

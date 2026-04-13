@@ -1,12 +1,9 @@
 # CHANGELOG
 ## v1.1.0
 - Added the stockroom.
-- Added mechanics and tutorials for the stockroom.
-- Added hycean planets and moons.
-- Added lava planets and moons.
-- Added more terrain generators to terrestrial worlds.
+- Added two new planet and moon types.
 - Added three new visitor encounters.
-- Added two unique tiles to the cellar.
+- Added three unique tiles to the cellar.
 - Split settings into multiple screens.
 - Added a slider for interface scaling.
 - Added a slider for music volume.
@@ -15,9 +12,10 @@
 - Added a prompt and toggle for tutorials.
 - Added a slider for voice limit.
 - Autosaved whenever the atrium is entered.
-- Improved the agency of early dialog choices.
+- Added small consequences to existing dialog choices.
 - Opened the world sooner when tutorials are off.
 - Increased the habitability of the universe.
+- Added more terrain generators to terrestrial worlds.
 - Increased the maximum gold sink at the shop.
 - Increased the health pool for the cellar.
 - Adjusted anomaly rarities in the cellar.

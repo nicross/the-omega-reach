@@ -42,4 +42,6 @@ content.cellar.tiles.base = {
   },
   onEnter: function () {},
   onExit: function () {},
+  // Particles
+  alterParticle: function (particle) {},
 }

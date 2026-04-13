@@ -234,7 +234,7 @@ content.rooms.cellar = content.rooms.invent({
     return this.move('up')
   },
   onEnter: function () {
-    content.cellar.tiles.current()?.onEnter()
+    // XXX: Tile effects persist when saving/loading, do not call onEnter()
   },
   updateProgram: function () {
     content.programs.load(this.defaultProgram)
@@ -245,7 +245,7 @@ content.rooms.cellar = content.rooms.invent({
   getReachMuffle: () => {
     const distance = content.cellar.position.get().distance(),
       max = content.cellar.health.max(),
-      value = engine.fn.clamp(distance / (max * max))
+      value = engine.fn.clamp(distance / (max * 2))
 
     return 1 - engine.fn.lerpExp(1/4, 0, value, 1/3)
   },

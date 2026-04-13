@@ -170,6 +170,9 @@ function getContentJs() {
   const srcs = [
     'src/js/content.js',
     'src/js/content/*.js',
+    'src/js/content/cellar.js',
+    'src/js/content/cellar/tiles.js',
+    'src/js/content/cellar/tiles/base.js',
     'src/js/content/gl/sl.js',
     'src/js/content/programs/base.js',
     'src/js/content/programs/baseGalaxy.js',

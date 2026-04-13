@@ -5,7 +5,7 @@ content.cellar.tiles.pit = content.cellar.tiles.invent({
   name: 'The pit',
   synthType: 'sawtooth',
   uniquePerRun: true,
-  weight: 1/16,
+  weight: 1/12,
   getEffects: function () {
     const effects = [],
       scans = content.cellar.scans.get(this)
@@ -17,7 +17,7 @@ content.cellar.tiles.pit = content.cellar.tiles.invent({
         },
         attribute: {
           label: 'Sanity drained',
-          modifiers: ['legendary'],
+          modifiers: [],
         },
       })
     }
@@ -43,5 +43,31 @@ content.cellar.tiles.pit = content.cellar.tiles.invent({
   },
   onExit: function () {
     content.cellar.scans.set(this, 0)
+  },
+  alterParticle: function (particle) {
+    const radius = 10
+
+    if (Math.abs(particle.target.x) > radius || Math.abs(particle.target.y) > radius) {
+      return
+    }
+
+    let vector = engine.tool.vector2d.create(particle.target)
+    const distance = 1 - (vector.distance() / radius)
+
+    if (distance < 0) {
+      return
+    }
+
+    const time = content.time.value()
+
+    vector = vector.rotate(
+      engine.const.tau * time * 0.05 * distance
+    )
+
+    particle.target.x = vector.x
+    particle.target.y = vector.y
+    particle.target.z -= distance * 2
+
+    particle.target.v *= 1 - distance
   },
 })
