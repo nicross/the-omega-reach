@@ -18,6 +18,7 @@
 - Added more terrain generators to terrestrial worlds.
 - Increased the maximum gold sink at the shop.
 - Increased the health pool for the cellar.
+- Reduced the donations earned from the cellar.
 - Adjusted anomaly rarities in the cellar.
 - Revealed cellar music more gradually.
 - Reset run if in the cellar in v1.0.0 save.

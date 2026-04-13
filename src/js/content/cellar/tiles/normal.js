@@ -44,7 +44,7 @@ content.cellar.tiles.normal = (() => {
       weight: 0.15,
       generate: (srand) => {
         const roll = srand()
-        const reward = Math.round(engine.fn.lerp(1, 10, roll))
+        const reward = Math.round(engine.fn.lerp(1, 3, roll))
         const label = engine.fn.choose(['Microscopic', 'Meager', 'Modest'], roll)
 
         return {
@@ -64,7 +64,7 @@ content.cellar.tiles.normal = (() => {
       weight: 0.1,
       generate: (srand) => {
         const roll = srand()
-        const reward = Math.round(engine.fn.lerp(25, 75, roll))
+        const reward = Math.round(engine.fn.lerp(3, 5, roll))
         const label = engine.fn.choose(['Generous', 'Grandiose', 'Gargantuan'], roll)
 
         return {
@@ -142,7 +142,7 @@ content.cellar.tiles.normal = (() => {
           },
           attribute: {
             label,
-            modifiers: ['legendary'],
+            modifiers: [],
           },
           liveLabel: `${label} found, sanity fully restored`,
         }
@@ -159,9 +159,11 @@ content.cellar.tiles.normal = (() => {
           'Earthen rodents',
           'Electrical hum',
           'Flickering light',
+          'Infrasonic drone',
           'Gravitational blip',
           'Magnetic interference',
           'Mysterious presence',
+          'Ominous footprints',
           'Putrid stench',
           'Research chemicals',
           'Temporal distortion',
