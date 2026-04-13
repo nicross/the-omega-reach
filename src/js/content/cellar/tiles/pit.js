@@ -14,6 +14,7 @@ content.cellar.tiles.pit = content.cellar.tiles.invent({
       effects.push({
         apply: () => {
           content.cellar.health.subtract(1)
+          content.audio.sanityChange.trigger({isUp: false})
         },
         attribute: {
           label: 'Sanity drained',

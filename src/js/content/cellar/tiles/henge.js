@@ -14,6 +14,7 @@ content.cellar.tiles.henge = content.cellar.tiles.invent({
       effects.push({
         apply: () => {
           content.cellar.health.set(4)
+          content.audio.sanityChange.trigger({isUp: true})
         },
         attribute: {
           label: 'Sanity restored',

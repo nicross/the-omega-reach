@@ -16,13 +16,15 @@ content.cellar.tiles.balance = content.cellar.tiles.invent({
   },
   getEffects: function () {
     const effects = [],
+      health = content.cellar.health.amount(),
       scans = content.cellar.scans.get(this),
       target = this.calculateTargetHealth()
 
-    if (scans > 1 || content.cellar.health.amount() != target) {
+    if (scans > 1 || health != target) {
       effects.push({
         apply: () => {
           content.cellar.health.set(target)
+          content.audio.sanityChange.trigger({isUp: health < target})
         },
         attribute: {
           label: 'Sanity inverted',

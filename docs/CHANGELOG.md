@@ -4,6 +4,7 @@
 - Added two new planet and moon types.
 - Added three new visitor encounters.
 - Added three unique tiles to the cellar.
+- Added sounds to actions that affect sanity in the cellar.
 - Split settings into multiple screens.
 - Added a slider for interface scaling.
 - Added a slider for music volume.

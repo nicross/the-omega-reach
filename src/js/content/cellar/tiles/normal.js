@@ -116,6 +116,7 @@ content.cellar.tiles.normal = (() => {
         return {
           apply: () => {
             content.cellar.health.add(1)
+            content.audio.sanityChange.trigger({isUp: true})
           },
           attribute: {
             label,
@@ -139,6 +140,7 @@ content.cellar.tiles.normal = (() => {
         return {
           apply: () => {
             content.cellar.health.setMax()
+            content.audio.sanityChange.trigger({isUp: true})
           },
           attribute: {
             label,
@@ -172,6 +174,7 @@ content.cellar.tiles.normal = (() => {
         return {
           apply: () => {
             content.cellar.health.subtract(1)
+            content.audio.sanityChange.trigger({isUp: false})
           },
           attribute: {
             label,

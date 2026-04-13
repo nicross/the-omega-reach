@@ -5,11 +5,10 @@ content.audio.zoom = (() => {
 
   function trigger({
     duration = 1/4,
-    pan = 0,
     isIn = true,
   } = {}) {
     const modDepth = engine.fn.fromDb(-3),
-      modFrequency = engine.fn.lerp(15, 20, Math.random()),
+      modFrequency = engine.fn.randomFloat(15, 20),
       when = engine.time()
 
     // Synthesis

@@ -1,5 +1,5 @@
 content.audio.cellarInteractives = (() => {
-  const baseGain = engine.fn.fromDb(-9),
+  const baseGain = engine.fn.fromDb(-7.5),
     bus = content.audio.channel.music.createBus(),
     context = engine.context(),
     maxSynths = 8,
@@ -28,7 +28,7 @@ content.audio.cellarInteractives = (() => {
 
     const gain = engine.fn.fromDb(
         engine.fn.lerp(0, tile.isUnique ? -7.5 : -12, distanceRatio)
-      + (isFullyScanned && !tile.isUnique ? -7.5 : 0)
+      + (isFullyScanned && !tile.isUnique ? -6 : 0)
     )
 
     const rootFrequency = engine.fn.detune(
@@ -39,7 +39,7 @@ content.audio.cellarInteractives = (() => {
       )
     )
 
-    const amDepth = gain * engine.fn.fromDb(tile.isUnique ? -4.5 : -12),
+    const amDepth = gain * engine.fn.fromDb(tile.isUnique ? -6 : -12),
       when = engine.time()
 
     const synth = engine.synth.pwm({
