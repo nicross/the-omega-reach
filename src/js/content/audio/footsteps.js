@@ -3,12 +3,13 @@ content.audio.footsteps = (() => {
     bus = content.audio.channel.default.createBus()
 
   function trigger({
+    color,
     duration,
     pan,
     velocity,
     when,
   } = {}) {
-    const frequency = engine.fn.lerp(375, 750, velocity),
+    const frequency = engine.fn.lerp(375, 750, velocity) * color,
       modDepth = engine.fn.fromDb(-6),
       modFrequency = engine.fn.lerp(4, 20, Math.random())
 
@@ -45,6 +46,7 @@ content.audio.footsteps = (() => {
   return {
     trigger: function ({
       count = 5,
+      color = content.location.is('cellar') ? 0.666 : 1,
       delay = 1/8,
       duration = 1/16,
       pan = 0,
@@ -53,6 +55,7 @@ content.audio.footsteps = (() => {
     } = {}) {
       for (let i = 0; i < count; i += 1) {
         trigger({
+          color,
           duration,
           pan: engine.fn.scale(i, 0, count - 1, 0, pan),
           velocity: engine.fn.scale(i, 0, count - 1, velocity, 0),

@@ -1,5 +1,5 @@
 content.audio.cellarInteractives = (() => {
-  const baseGain = engine.fn.fromDb(-7.5),
+  const baseGain = engine.fn.fromDb(-9),
     bus = content.audio.channel.music.createBus(),
     context = engine.context(),
     maxSynths = 8,
@@ -27,8 +27,8 @@ content.audio.cellarInteractives = (() => {
       normal = relative.normalize()
 
     const gain = engine.fn.fromDb(
-        engine.fn.lerp(0, tile.isUnique ? -7.5 : -12, distanceRatio)
-      + (isFullyScanned && !tile.isUnique ? -6 : 0)
+        engine.fn.lerp(0, tile.isUnique ? -6 : -10.5, distanceRatio)
+      + (isFullyScanned && !tile.isUnique ? -4.5 : 0)
     )
 
     const rootFrequency = engine.fn.detune(
@@ -46,7 +46,7 @@ content.audio.cellarInteractives = (() => {
       detune: engine.fn.randomFloat(-50, 50),
       frequency: rootFrequency,
       gain: gain - amDepth,
-      type: tile.synthType || (isUp && !isFullyScanned ? 'triangle' : 'sine'),
+      type: ((isUp && !isFullyScanned) || tile.isUnique ? 'triangle' : 'sine'),
       width: engine.fn.randomFloat(0.375, 0.625),
       when,
     }).chainAssign(
@@ -79,7 +79,7 @@ content.audio.cellarInteractives = (() => {
 
     // Detune LFO
     synth.assign('dm', engine.synth.lfo({
-      depth: 100,
+      depth: tile.isUnique ? 25 : 100,
       frequency: tile.isUnique ? tile.prime/9 : 2/tile.prime * engine.fn.lerp(1, 0.5, distanceRatio),
       when,
     }))
