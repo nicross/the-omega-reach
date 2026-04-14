@@ -32,6 +32,7 @@
 - Applied a lowpass filter to the overall mix.
 - Tweaked various aspects of the mix for clarity.
 - Made live regions more assertive.
+- Updated the manual accordingly.
 
 ## v1.0.0
 Initial release.
