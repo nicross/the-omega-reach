@@ -3,7 +3,7 @@
 - Added the stockroom.
 - Added two new planet and moon types.
 - Added three new visitor encounters.
-- Added three unique tiles to the cellar.
+- Added four unique tiles to the cellar.
 - Added sounds to actions that affect sanity in the cellar.
 - Split settings into multiple screens.
 - Added a slider for interface scaling.
