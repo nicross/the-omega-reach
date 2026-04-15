@@ -242,5 +242,10 @@ engine.loop.on('frame', ({paused}) => {
     return
   }
 
+  // XXX: Prevent timer updating while app has a dialog open
+  if (app.screen.game.dialog.isOpen()) {
+    return
+  }
+
   content.shop.update()
 })

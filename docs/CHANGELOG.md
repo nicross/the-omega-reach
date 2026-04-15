@@ -18,6 +18,7 @@
 - Increased the habitability of the universe.
 - Added more terrain generators to terrestrial worlds.
 - Increased the maximum gold sink at the shop.
+- Paused the shop timer when dialogs are open.
 - Increased the health pool for the cellar.
 - Reduced the donations earned from the cellar.
 - Adjusted anomaly rarities in the cellar.
