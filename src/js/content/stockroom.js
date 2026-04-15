@@ -3,12 +3,15 @@ content.stockroom = (() => {
     instruments = new Map(),
     stolen = new Set()
 
+  let steals = 0
+
   return {
     countGenerated: () => generated.size,
     countStolen: () => stolen.size,
     export: () => ({
       generated: [...generated],
       stolen: [...stolen],
+      steals,
     }),
     generate: function () {
       const count = engine.fn.clamp(Math.round(
@@ -37,6 +40,7 @@ content.stockroom = (() => {
     import: function ({
       generated: generatedNames = [],
       stolen: stolenNames = [],
+      steals: stolenCount = 0,
     } = {}) {
       for (const name of generatedNames) {
         generated.add(name)
@@ -47,6 +51,8 @@ content.stockroom = (() => {
         stolen.add(name)
       }
 
+      steals += 1
+
       return this
     },
     isGenerated: (name) => generated.has(name),
@@ -56,6 +62,7 @@ content.stockroom = (() => {
         if (!content.instruments.has(name)) {
           content.instruments.add(name, instruments.get(name)?.state)
           generated.delete(name)
+          steals += 1
         }
       }
 
@@ -68,6 +75,8 @@ content.stockroom = (() => {
       instruments.clear()
       stolen.clear()
 
+      steals = 0
+
       return this
     },
     steal: function (name) {
@@ -75,6 +84,7 @@ content.stockroom = (() => {
 
       return this
     },
+    stealCount: () => steals,
     stolen: () => [...stolen],
     unsteal: function (name) {
       stolen.delete(name)
