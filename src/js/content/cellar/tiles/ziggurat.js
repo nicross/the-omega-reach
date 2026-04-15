@@ -80,7 +80,7 @@ content.cellar.tiles.ziggurat = content.cellar.tiles.invent({
       particle.target.v = 0.6 + (Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]) * 0.25)
     }
 
-    if (distance == 0 || distance >= (steps - 1) / steps) {
+    if (distance == 0 || distance >= (steps - 1.5) / steps) {
       particle.target.s = 0.166 + (Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1]) * 0.166)
     }
 
