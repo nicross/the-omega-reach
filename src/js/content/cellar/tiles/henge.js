@@ -3,7 +3,6 @@ content.cellar.tiles.henge = content.cellar.tiles.invent({
   alwaysAudible: true,
   isUnique: true,
   name: 'The henge',
-  synthType: 'sawtooth',
   uniquePerRun: true,
   weight: 1/12,
   getEffects: function () {

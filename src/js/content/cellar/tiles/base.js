@@ -3,7 +3,6 @@ content.cellar.tiles.base = {
   alwaysAudible: false,
   isUnique: false,
   name: undefined,
-  synthType: 'sine',
   uniquePerFloor: false,
   uniquePerRun: false,
   weight: 1,

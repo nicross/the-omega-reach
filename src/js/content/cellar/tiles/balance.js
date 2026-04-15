@@ -3,7 +3,6 @@ content.cellar.tiles.balance = content.cellar.tiles.invent({
   alwaysAudible: true,
   isUnique: true,
   name: 'The balance',
-  synthType: 'sawtooth',
   uniquePerRun: true,
   weight: 1/12,
   calculateTargetHealth: function () {
