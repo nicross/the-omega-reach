@@ -4,7 +4,6 @@
 - Added two new planet and moon types.
 - Added three new visitor encounters.
 - Added four unique tiles to the cellar.
-- Added sounds to actions that affect sanity in the cellar.
 - Split settings into multiple screens.
 - Added a slider for interface scaling.
 - Added a slider for music volume.
@@ -20,6 +19,7 @@
 - Increased the maximum gold sink at the shop.
 - Paused the shop timer when dialogs are open.
 - Added a tutorial prompt for sanity in the cellar.
+- Added sounds to actions that affect sanity in the cellar.
 - Increased the maximum sanity for the cellar.
 - Reduced the donations earned from the cellar.
 - Adjusted anomaly rarities in the cellar.
