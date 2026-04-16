@@ -11,11 +11,11 @@ app.tutorial.stockroomInstrument = app.tutorial.invent({
 
     [
       {
-        title: ``,
-        description: ``,
+        title: `What's this?`,
+        description: `It's an instrument outside its appropriate place inside <strong>the gallery</strong>. This must be a new specimen—as laid evident by your skeptical lack of recognition. You question its origin and connection to <strong>the cellar</strong>.`,
         actions: [
           {
-            label: `Consider examining ${content.stockroom.countGenerated() == 1 ? 'it' : 'them'}`,
+            label: `Consider appraising ${content.stockroom.countGenerated() == 1 ? 'it' : 'them'}`,
           },
         ],
         after: () => this.markComplete(),

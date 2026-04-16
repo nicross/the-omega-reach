@@ -25,17 +25,17 @@ app.tutorial.atrium = app.tutorial.invent({
         actions: [
           {
             label: 'Fall back to sleep',
-            before: () => state.lazy = true,
+            before: () => this.state.lazy = true,
           },
           {
             label: 'Snap out of it',
-            before: () => state.lazy = false,
+            before: () => this.state.lazy = false,
           }
         ],
       },
       {
-        title: () => `${this.state.lazy ? 'No' : 'Of course'}, you are the curator!`,
-        description: `With the auction house cleared and the cycle soon ending, the gallery sits criminally empty. It would be best for you to preserve as much as you can by using <strong>the reach</strong>.`,
+        title: () => `${this.state.lazy ? 'No' : 'Of course'}, you're the curator!`,
+        description: `With the auction house cleared and the next cycle starting, the gallery sits criminally empty. It would be best for you to preserve as much as you can by using <strong>the reach</strong>.`,
         actions: [
           {
             label: 'Get to work',
