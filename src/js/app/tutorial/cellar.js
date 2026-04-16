@@ -11,9 +11,19 @@ app.tutorial.cellar = app.tutorial.invent({
 
     [
       {
+        title: `Was this always here?`,
+        description: `You follow the shopkeeper into the <em>earthen labyrinth</em> undetected. Perhaps this is a shortcut to wherever they find their wares? Yet, the darkness which enshrouds their footsteps seems to creep much further.`,
+        actions: [
+          {
+            label: 'Be careful',
+          }
+        ],
+        after: () => this.markComplete(),
+      },
+      {
         tutorial: true,
-        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The cellar?`,
-        description: `Who put this <em>earthen labyrinth</em> here? Your surprise is as genuine as mine—so you're on your own in this maze! My best advice is to turn away—or explore it at your pace.`,
+        title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Sanity`,
+        description: `Sanity is your main resource when exploring <strong>the cellar</strong>. Use it to reveal unexplored areas—but beware! The consequences for running out aren't yet clear.`,
         actions: [
           {
             label: 'Regain control',
