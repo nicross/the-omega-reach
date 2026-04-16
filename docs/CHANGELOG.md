@@ -35,6 +35,7 @@
 - Tweaked various aspects of the mix for clarity.
 - Made live regions more assertive.
 - Updated the manual accordingly.
+- Updated desktop builds to Electron 41.
 
 ## v1.0.0
 Initial release.
