@@ -33,6 +33,7 @@
 - Highlighted bracketed text in non-diegetic dialogs.
 - Applied a lowpass filter to the overall mix.
 - Tweaked various aspects of the mix for clarity.
+- Reduced sensitivity of navigating the UI with analog sticks.
 - Made live regions more assertive.
 - Updated the manual accordingly.
 - Updated desktop builds to Electron 41.

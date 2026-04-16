@@ -24,8 +24,8 @@ app.controls.mappings = {
     up: {
       gamepadAnalog: [],
       gamepadAxis: [
-        [1, -1],
-        [3, -1],
+        [1, -1, (mapping) => Math.abs(engine.input.gamepad.getAxis(1)) - Math.abs(engine.input.gamepad.getAxis(0)) > 0.333],
+        [3, -1,  (mapping) => Math.abs(engine.input.gamepad.getAxis(3)) - Math.abs(engine.input.gamepad.getAxis(2)) > 0.333],
       ],
       gamepadDigital: [
         12,
@@ -42,8 +42,8 @@ app.controls.mappings = {
     down: {
       gamepadAnalog: [],
       gamepadAxis: [
-        [1, 1],
-        [3, 1],
+        [1, 1, (mapping) => Math.abs(engine.input.gamepad.getAxis(1)) - Math.abs(engine.input.gamepad.getAxis(0)) > 0.333],
+        [3, 1, (mapping) => Math.abs(engine.input.gamepad.getAxis(3)) - Math.abs(engine.input.gamepad.getAxis(2)) > 0.333],
       ],
       gamepadDigital: [
         13,
@@ -60,8 +60,8 @@ app.controls.mappings = {
     left: {
       gamepadAnalog: [],
       gamepadAxis: [
-        [0, -1],
-        [2, -1],
+        [0, -1, (mapping) => Math.abs(engine.input.gamepad.getAxis(0)) - Math.abs(engine.input.gamepad.getAxis(1)) > 0.333],
+        [2, -1, (mapping) => Math.abs(engine.input.gamepad.getAxis(2)) - Math.abs(engine.input.gamepad.getAxis(3)) > 0.333],
       ],
       gamepadDigital: [
         14,
@@ -80,8 +80,8 @@ app.controls.mappings = {
     right: {
       gamepadAnalog: [],
       gamepadAxis: [
-        [0, 1],
-        [2, 1],
+        [0, 1, (mapping) => Math.abs(engine.input.gamepad.getAxis(0)) - Math.abs(engine.input.gamepad.getAxis(1)) > 0.333],
+        [2, 1, (mapping) => Math.abs(engine.input.gamepad.getAxis(2)) - Math.abs(engine.input.gamepad.getAxis(3)) > 0.333],
       ],
       gamepadDigital: [
         15,

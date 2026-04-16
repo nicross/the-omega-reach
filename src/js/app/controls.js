@@ -25,6 +25,10 @@ app.controls = (() => {
       mappings.gamepadAxis.reduce((value, mapping) => {
         const reading = engine.input.gamepad.getAxis(mapping[0])
 
+        if (typeof mapping[2] == 'function' && !mapping[2]()) {
+          return value
+        }
+
         return Math.max(
           value,
           mapping[1] * reading > 0 ? Math.abs(reading) : 0,
