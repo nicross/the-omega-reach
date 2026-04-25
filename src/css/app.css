@@ -91,13 +91,13 @@
   z-index: 999 !important;
 }
 .a-app-capsule .a-splash--logo {
-  font-size: 1.666em;
+  font-size: 1.5em;
   opacity: 1 !important;
-  transform: translateY(-2em);
+  transform: translateY(-0.5rem);
 }
 .a-app-capsule .a-splash--logoSymbol {
   animation: none !important;
-  opacity: 0.666;
+  opacity: 0.5;
 }
 .a-app-capsule .a-splash--logoSymbol i {
   animation: none !important;

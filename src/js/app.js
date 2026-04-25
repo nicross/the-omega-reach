@@ -7,6 +7,7 @@ const app = (() => {
   })
 
   let isActive = false,
+    isCapsule = false,
     root
 
   return {
@@ -22,6 +23,7 @@ const app = (() => {
     },
     component: {},
     isActive: () => isActive,
+    isCapsule: () => isCapsule,
     isElectron: () => typeof ElectronApi != 'undefined',
     name: () => 'shiftbacktick/omega-reach',
     quit: function () {
@@ -37,7 +39,9 @@ const app = (() => {
         : readyContext
     },
     screen: {},
-    setCapsule: function (isCapsule) {
+    setCapsule: function (value) {
+      isCapsule = Boolean(value)
+
       if (isCapsule) {
         root.classList.add('a-app-capsule')
         content.particles.setSpeed(0)

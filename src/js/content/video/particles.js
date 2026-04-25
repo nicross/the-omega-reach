@@ -178,10 +178,12 @@ void main(void) {
       gl.uniformMatrix4fv(program.uniforms.u_rotation, false, rotation.elements)
 
       // Bind mesh
+      const isCapsule = app.isCapsule()
+
       const mesh = content.gl.createQuad({
-        height: 1/64,
+        height: isCapsule ? 1/32 : 1/64,
         quaternion: content.camera.quaternion(),
-        width: 1/64,
+        width: isCapsule ? 1/32 : 1/64,
       })
 
       gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())

@@ -39,6 +39,7 @@
       transition-duration: 4s;
     }
   .a-splash--logoLine {
+    filter: drop-shadow(0 0 1rem #FF0069);
     font-family: CalvusRegular, RobotoRegular, sans-serif;
     position: relative;
     text-transform: uppercase;
