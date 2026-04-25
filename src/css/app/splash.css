@@ -39,6 +39,7 @@
       transition-duration: 4s;
     }
   .a-splash--logoLine {
+    font-family: CalvusRegular, RobotoRegular, sans-serif;
     position: relative;
     text-transform: uppercase;
     z-index: 2;
@@ -50,7 +51,7 @@
       font-size: 2em;
     }
     .a-splash--logoLine-2 {
-      font-size: 6em;
+      font-size: 5em;
     }
     .a-splash--logoLine-3 {
       font-size: 8em;
@@ -58,7 +59,7 @@
   .a-splash--logoSymbol {
     animation: a-splash--logoSymbol 4s ease-in-out 0s infinite alternate both;
     color: #FF0069;
-    font-size: 24em;
+    font-size: 32em;
     z-index: 1;
   }
   .a-splash--logoSymbol i {

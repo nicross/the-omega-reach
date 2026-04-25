@@ -1,4 +1,10 @@
 @font-face {
+  font-family: CalvusRegular;
+  font-style: normal;
+  font-weight: 400;
+  src: url('font/calvus-regular.woff') format('woff');
+}
+@font-face {
   font-family: FiraCodeLight;
   font-style: normal;
   font-weight: 300;
