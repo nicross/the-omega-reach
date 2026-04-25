@@ -37,6 +37,17 @@ const app = (() => {
         : readyContext
     },
     screen: {},
+    setCapsule: function (isCapsule) {
+      if (isCapsule) {
+        root.classList.add('a-app-capsule')
+        content.particles.setSpeed(0)
+      } else {
+        root.classList.remove('a-app-capsule')
+        content.particles.setSpeed(1)
+      }
+
+      return this
+    },
     setUiScale: function (value) {
       document.documentElement.style.setProperty(`--ui-scale`, value)
 

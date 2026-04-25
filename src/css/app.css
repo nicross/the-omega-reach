@@ -74,3 +74,31 @@
 .a-app-active {
   opacity: 1;
 }
+
+/* Capsule mode */
+.a-app-capsule {}
+.a-app-capsule .a-game--info,
+.a-app-capsule .a-game--nav,
+.a-app-capsule .a-splash--details,
+.a-app-capsule .a-splash--instruction {
+  display: none;
+}
+.a-app-capsule .a-app--splash {
+  background: transparent !important;
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  z-index: 999 !important;
+}
+.a-app-capsule .a-splash--logo {
+  font-size: 1.666em;
+  opacity: 1 !important;
+  transform: translateY(-2em);
+}
+.a-app-capsule .a-splash--logoSymbol {
+  animation: none !important;
+  opacity: 0.666;
+}
+.a-app-capsule .a-splash--logoSymbol i {
+  animation: none !important;
+}

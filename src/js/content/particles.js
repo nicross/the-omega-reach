@@ -3,7 +3,8 @@ content.particles = (() => {
     minParticles = 2500,
     particles = []
 
-  let limit = engine.fn.lerp(minParticles, maxParticles, 0.5)
+  let limit = engine.fn.lerp(minParticles, maxParticles, 0.5),
+    speed = 1
 
   while (particles.length < limit) {
     particles.push({
@@ -56,6 +57,7 @@ content.particles = (() => {
 
   return {
     all: () => particles.slice(0, limit),
+    getSpeed: () => speed,
     maxParticles: () => maxParticles,
     minParticles: () => minParticles,
     setLimit: function (value = 0.5) {
@@ -63,5 +65,10 @@ content.particles = (() => {
 
       return this
     },
+    setSpeed: function (value = 1) {
+      speed = value
+
+      return this
+    }
   }
 })()

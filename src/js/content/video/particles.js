@@ -99,7 +99,8 @@ void main(void) {
 
       const activeProgram = content.programs.get(),
         camera = content.camera.vector(),
-        particles = content.particles.all()
+        particles = content.particles.all(),
+        speed = content.particles.getSpeed()
 
       const colors = [],
         offsets = []
@@ -118,12 +119,12 @@ void main(void) {
           target.z = 0
         }
 
-        current.h = engine.fn.accelerateValue(current.h, target.h, 4)
-        current.s = engine.fn.accelerateValue(current.s, target.s, 4)
-        current.v = engine.fn.accelerateValue(current.v, target.v, 4)
-        current.x = engine.fn.accelerateValue(current.x, target.x, 6 * Math.max(1, Math.abs(target.x - current.x)))
-        current.y = engine.fn.accelerateValue(current.y, target.y, 6 * Math.max(1, Math.abs(target.y - current.y)))
-        current.z = engine.fn.accelerateValue(current.z, target.z, 6 * Math.max(1, Math.abs(target.z - current.z)))
+        current.h = engine.fn.accelerateValue(current.h, target.h, 4 * speed)
+        current.s = engine.fn.accelerateValue(current.s, target.s, 4 * speed)
+        current.v = engine.fn.accelerateValue(current.v, target.v, 4 * speed)
+        current.x = engine.fn.accelerateValue(current.x, target.x, 6 * Math.max(1, Math.abs(target.x - current.x)) * speed)
+        current.y = engine.fn.accelerateValue(current.y, target.y, 6 * Math.max(1, Math.abs(target.y - current.y)) * speed)
+        current.z = engine.fn.accelerateValue(current.z, target.z, 6 * Math.max(1, Math.abs(target.z - current.z)) * speed)
 
         colors.push(
           current.h,
