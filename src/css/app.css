@@ -84,7 +84,7 @@
   display: none;
 }
 .a-app-capsule .a-app--splash {
-  background: transparent !important;
+  background: transparent;
   display: block !important;
   opacity: 1 !important;
   pointer-events: none !important;
@@ -97,7 +97,7 @@
 }
 .a-app-capsule .a-splash--logoSymbol {
   animation: none !important;
-  opacity: 0.5;
+  color: hsl(335deg, 100%, 25%);
 }
 .a-app-capsule .a-splash--logoSymbol i {
   animation: none !important;

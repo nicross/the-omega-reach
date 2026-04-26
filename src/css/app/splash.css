@@ -28,18 +28,19 @@
     filter: drop-shadow(0 0 1em #000000);
     line-height: 0.75;
     opacity: 0;
+    max-width: unset !important;
     position: relative;
-    transform: translateY(-2em) scale(0.125);
+    transform: translateY(-1em) scale(0.125);
     transition: all 1s ease;
     transition-property: opacity, transform;
   }
     .a-app--screen-active .a-splash--logo {
       opacity: 1;
-      transform: translateY(-2em);
+      transform: translateY(-1em);
       transition-duration: 4s;
     }
   .a-splash--logoLine {
-    filter: drop-shadow(0 0 1rem #FF0069);
+    filter: drop-shadow(0 0 0.5rem hsla(335deg, 100%, 12.5%, 0.75));
     font-family: CalvusRegular, RobotoRegular, sans-serif;
     position: relative;
     text-transform: uppercase;
@@ -49,18 +50,18 @@
       font-size: 1.5em;
     }
     .a-splash--logoLine-1 {
-      font-size: 2em;
+      font-size: 4em;
     }
     .a-splash--logoLine-2 {
-      font-size: 5em;
+      font-size: 9em;
     }
     .a-splash--logoLine-3 {
-      font-size: 8em;
+      font-size: 13em;
     }
   .a-splash--logoSymbol {
     animation: a-splash--logoSymbol 4s ease-in-out 0s infinite alternate both;
     color: #FF0069;
-    font-size: 32em;
+    font-size: 28em;
     z-index: 1;
   }
   .a-splash--logoSymbol i {
@@ -91,16 +92,16 @@
 
 @keyframes a-splash--logoSymbol--i {
   0% {
-    transform: translateX(-50%) translateY(calc(-50% + 0.25rem));
+    transform: translateX(-50%) translateY(calc(-50% + 0.5rem));
   }
   100% {
-    transform: translateX(-50%) translateY(calc(-50% - 0.25rem));
+    transform: translateX(-50%) translateY(calc(-50% - 0.5rem));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .a-splash--logo {
-    transform: translateY(-2em) !important;
+    transform: translateY(-1em) !important;
   }
 
   .a-splash--logoSymbol {
