@@ -1,4 +1,6 @@
-content.location.on('cellar-death', () => {
+content.location.on('cellar-death', ({
+  reason = 'unknown power',
+} = {}) => {
   const penalty = Math.min(
     content.wallet.amount(),
     Math.ceil(content.shop.getCost() * 0.75),
@@ -69,7 +71,7 @@ content.location.on('cellar-death', () => {
     if (hasStolen) {
       app.screen.game.dialog.push({
         title: `<q>I'll take ${stolenCount == 1 ? 'that' : 'those'}!</q>`,
-        description: `You forfeit <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
+        description: `You forfeit <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong>.`,
         actions: [
           {
             label: 'Snore peacefully',
@@ -78,9 +80,11 @@ content.location.on('cellar-death', () => {
       })
     }
 
+    reason = reason.toLowerCase()
+
     app.screen.game.dialog.push({
       title: `It's the atrium.`,
-      description: `You lost <strong class="a-game--dialogCurrency">${app.utility.format.currency(penalty)}</strong> to <strong>the cellar</strong> this run.`,
+      description: `You lost <strong class="a-game--dialogCurrency">${app.utility.format.currency(penalty)}</strong> to ${(['a','e','i','o','u'].includes(reason.charAt(0)) ? 'an' : 'a')} <strong>${reason}</strong> in <strong>the cellar</strong>.`,
       actions: [
         {
           label: 'Wake up again',

@@ -14,7 +14,7 @@ app.tutorial.galleryStealLoop = app.tutorial.invent({
 
     app.screen.game.dialog.push({
       title: `Checkpoint!`,
-      description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
+      description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong>.`,
       actions: [
         {
           label: `Enjoy!`,

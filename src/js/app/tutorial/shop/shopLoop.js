@@ -104,7 +104,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
       ;[
         {
           title: `<q>Not so fast!</q>`,
-          description: `You forfeit <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
+          description: `You forfeit <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong>.`,
           actions: [
             {
               label: `Relinquish ${stolenCount == 1 ? 'it' : 'them'}`,
@@ -129,7 +129,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
 
         app.screen.game.dialog.push({
           title: `Success!`,
-          description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong> this run.`,
+          description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong>.`,
           actions: [
             {
               label: `Enjoy!`,
