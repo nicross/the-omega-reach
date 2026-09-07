@@ -1,6 +1,7 @@
 content.cellar.tiles.pit = content.cellar.tiles.invent({
   id: 'pit',
   name: 'The pit',
+  category: 'negative',
   uniquePerFloor: true,
   weight: 8,
   defaultState: {

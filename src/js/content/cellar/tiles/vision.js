@@ -1,6 +1,7 @@
 content.cellar.tiles.vision = content.cellar.tiles.invent({
   id: 'vision',
   name: 'The vision',
+  category: 'special',
   uniquePerRun: true,
   weight: 1,
   defaultState: {

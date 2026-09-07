@@ -1,12 +1,12 @@
 content.cellar.tiles.armory = content.cellar.tiles.invent({
   id: 'armory',
   name: 'The armory',
+  category: 'special',
   uniquePerRun: true,
   weight: 1,
   defaultState: {
     entered: false,
   },
-  canGenerate: (tile) => engine.fn.between(tile.z, -1, -2), // Not on first floor
   onEnterEffects: function () {
     if (this.state.entered) {
       return

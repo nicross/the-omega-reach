@@ -2,11 +2,15 @@ content.cellar.tiles.descent = content.cellar.tiles.invent({
   alwaysAudible: true,
   id: 'descent',
   name: 'The descent',
+  category: 'traversal',
+  firstFloor: 0,
   isDescent: true,
   isUnique: true,
   uniquePerFloor: true,
   weight: 4,
-  canGenerate: (tile) => engine.fn.between(tile.z, 0, -2), // Not past third floor
+  canGenerate: function (tile) {
+    return engine.fn.between(tile.z, this.firstFloor, content.cellar.lastFloor() - 1)
+  },
   canInteractMore: () => true,
   getDestination: function () {
     return content.cellar.tiles.get({
@@ -42,6 +46,12 @@ content.cellar.tiles.descent = content.cellar.tiles.invent({
       'Second',
       'Third',
       'Fourth',
+      'Fifth',
+      'Sixth',
+      'Seventh',
+      'Eighth',
+      'Ninth',
+      'Tenth',
     ]
 
     return [

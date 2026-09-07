@@ -18,6 +18,18 @@ app.debug.drawCellarMap = function (radius = 5, position = content.cellar.positi
   return map
 }
 
+app.debug.drawCellarMaps = function (radius = 5, position = content.cellar.position.get()) {
+  const maps = []
+
+  for (position.z = 0; position.z > -9; position.z -= 1) {
+    maps.push(
+      this.drawCellarMap(radius, position)
+    )
+  }
+
+  return maps
+}
+
 app.debug.enqueueMovement = async function (directions = [], delay = 1000/3) {
   for (const direction of directions) {
     await engine.fn.promise(delay)

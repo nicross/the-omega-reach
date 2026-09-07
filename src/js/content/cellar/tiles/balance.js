@@ -1,6 +1,7 @@
 content.cellar.tiles.balance = content.cellar.tiles.invent({
   id: 'balance',
   name: 'The balance',
+  category: 'situational',
   uniquePerFloor: true,
   weight: 2,
   calculateTargetHealth: function () {
@@ -11,7 +12,6 @@ content.cellar.tiles.balance = content.cellar.tiles.invent({
       engine.fn.scale(current, 1, max, max, 1)
     )
   },
-  canGenerate: (tile) => engine.fn.between(tile.z, -1, -2), // Not on first floor
   onEnterEffects: function () {
     // Health = max * (1 - (health / max))
 

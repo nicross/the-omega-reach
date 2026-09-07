@@ -1,9 +1,13 @@
 content.cellar.tiles.baseUnique = content.cellar.tiles.base.extend({
   alwaysAudible: true,
+  category: 'default',
   effectsGlobal: [],
   effectsOnEnter: [],
+  firstFloor: 0,
   isUnique: true,
-  canGenerate: (tile) => engine.fn.between(tile.z, 0, -2), // Not past third floor
+  canGenerate: function (tile) {
+    return engine.fn.between(tile.z, this.firstFloor, content.cellar.lastFloor() - 1)
+  },
   getDialogs: () => [],
   getEffects: function () {
     return [

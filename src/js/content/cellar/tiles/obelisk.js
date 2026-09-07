@@ -1,6 +1,7 @@
 content.cellar.tiles.obelisk = content.cellar.tiles.invent({
   id: 'obelisk',
   name: 'The obelisk',
+  category: 'special',
   uniquePerRun: true,
   weight: 1,
   defaultState: {
@@ -15,7 +16,6 @@ content.cellar.tiles.obelisk = content.cellar.tiles.invent({
       }
     },
   ],
-  canGenerate: (tile) => engine.fn.between(tile.z, -1, -2), // Not on first floor
   getGlobalHealthBonus: () => 5,
   onEnterEffects: function () {
     this.state.rotation = this.state.rotation

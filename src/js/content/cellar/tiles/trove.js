@@ -1,6 +1,7 @@
 content.cellar.tiles.trove = content.cellar.tiles.invent({
   id: 'trove',
   name: 'The trove',
+  category: 'special',
   uniquePerRun: true,
   weight: 1,
   effectsGlobal: [
@@ -11,7 +12,6 @@ content.cellar.tiles.trove = content.cellar.tiles.invent({
       }
     },
   ],
-  canGenerate: (tile) => engine.fn.between(tile.z, -1, -2), // Not on first floor
   getGlobalDonationRate: () => 2/3,
   onActivate: function () {
     this.zField = engine.fn.createNoise({

@@ -1,6 +1,7 @@
 content.cellar.tiles.quagmire = content.cellar.tiles.invent({
   id: 'quagmire',
   name: 'The quagmire',
+  category: 'special',
   uniquePerRun: true,
   weight: 1,
   effectsGlobal: [

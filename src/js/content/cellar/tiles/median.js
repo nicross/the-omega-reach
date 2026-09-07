@@ -1,12 +1,12 @@
 content.cellar.tiles.median = content.cellar.tiles.invent({
   id: 'median',
   name: 'The median',
+  category: 'situational',
   uniquePerFloor: true,
   weight: 2,
   defaultState: {
     delta: 0,
   },
-  canGenerate: (tile) => engine.fn.between(tile.z, -1, -2), // Not on first floor
   onEnterEffects: function () {
     // Health set to 50% max
 

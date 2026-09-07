@@ -1,4 +1,6 @@
 content.cellar = (() => {
+  const lastFloor = -5
+
   return {
     export: function () {
       return {
@@ -22,10 +24,11 @@ content.cellar = (() => {
       this.position.import(data.position)
       this.run.import(data.run)
       this.scans.import(data.scans)
-      this.tiles.import(data.tiles)
+      this.tiles.import(data.tiles).randomizeUniques()
 
       return this
     },
+    lastFloor: () => lastFloor,
     isOpen: function () {
       return content.conservatory.isReady()
         && !content.shop.isOpen()
@@ -53,7 +56,7 @@ content.cellar = (() => {
       this.discovered.reset()
       this.position.reset()
       this.scans.reset()
-      this.tiles.reset()
+      this.tiles.reset().randomizeUniques()
 
       this.health.setMax()
       this.barrier.reset()

@@ -1,7 +1,10 @@
 # CHANGELOG
 ## v1.2.2
-- Improved demo limtiation dialogs.
+- Improved demo limitation dialogs.
 - Added more tutorial dialogs to the cellar.
+- Expanded the cellar to five explorable floors.
+- Randomized the topography of cellar floors each run.
+- Gradually introduce unique cellar tiles each floor.
 - Split audio settings into mixer and performance screens.
 - Fixed focus memory when exiting to main menu.
 

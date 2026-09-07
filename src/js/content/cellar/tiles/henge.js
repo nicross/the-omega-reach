@@ -1,6 +1,7 @@
 content.cellar.tiles.henge = content.cellar.tiles.invent({
   id: 'henge',
   name: 'The henge',
+  category: 'positive',
   uniquePerFloor: true,
   weight: 8,
   onEnterEffects: function () {

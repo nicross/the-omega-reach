@@ -1,12 +1,12 @@
 content.cellar.tiles.contraption = content.cellar.tiles.invent({
   id: 'contraption',
   name: 'The contraption',
+  category: 'situational',
   uniquePerFloor: true,
   weight: 2,
   defaultState: {
     delta: 0,
   },
-  canGenerate: (tile) => engine.fn.between(tile.z, -1, -2), // Not on first floor
   onEnterEffects: function () {
     // Health trends toward zero or max, whichever is closest
 

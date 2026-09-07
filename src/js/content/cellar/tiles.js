@@ -14,13 +14,31 @@ content.cellar.tiles = (() => {
     engine.tool.vector3d.create({x: -1, y: 0, z: 0}), // gallery
   ]
 
-  const solidField = engine.fn.createNoise({
-    octaves: 4,
-    seed: ['cellar', 'tiles', 'solid'],
-    type: 'simplex3d',
-  })
+  let solidField
 
-  engine.ephemera.add(solidField)
+  function createSolidField() {
+    if (solidField) {
+      destroySolidField()
+    }
+
+    solidField = engine.fn.createNoise({
+      octaves: 1,
+      seed: ['cellar', 'tiles', 'solid', content.cellar.run.count()],
+      type: 'simplex3d',
+    })
+
+    engine.ephemera.add(solidField)
+  }
+
+  function destroySolidField() {
+    if (!solidField) {
+      return
+    }
+
+    engine.ephemera.remove(solidField)
+    solidField.reset()
+    solidField = undefined
+  }
 
   function find(criteria = {}) {
     for (const {instance} of uniques) {
@@ -136,9 +154,12 @@ content.cellar.tiles = (() => {
       }
     }
 
-    // Roll the dice (5/6, 4/5, 3/4... chance per floor)
-    const normalChance = (5 - Math.abs(tile.z))
-      / (6 - Math.abs(tile.z))
+    // Roll the dice
+    const normalChance = engine.fn.scale(
+      tile.z,
+      0, content.cellar.lastFloor() - 1,
+      5/6, 2/3,
+    )
 
     return srand('isNormal') < normalChance || !uniqueTypes.length
       ? engine.fn.chooseWeighted(normalTypes, srand('roll'))
@@ -159,40 +180,46 @@ content.cellar.tiles = (() => {
   }
 
   function isSolid(x, y, z) {
+    // Max out on floor before finale
+    const maxFloor = Math.abs(content.cellar.lastFloor()) - 1
+
+    if (!solidField) {
+      createSolidField()
+    }
+
+    const absZ = Math.min(Math.abs(z), maxFloor)
+
+    if (x == 0 && y == 0 && z != 0) {
+      return true
+    }
+
     const ascent = engine.tool.vector2d.create(
       z == 0 ? {} : find({z, id: 'ascent'})
     )
 
     // Distance from ascent on current floor
-    const distance = [
-      7,
-      5,
-      3,
-      1,
-    ][Math.abs(z)]
+    const distance = Math.round(engine.fn.scale(
+      absZ,
+      0, maxFloor,
+      2 + (maxFloor * 0.5), 2,
+    ))
 
-    if (ascent.distance({x, y}) < distance) {
+    if (Math.max(Math.abs(ascent.x - x), Math.abs(ascent.y - y)) <= distance) {
       return false
     }
 
     // Scale of noise on current floor
-    const scale = [
-      12.5,
-      10,
-      7.5,
-      5,
-    ][Math.abs(z)]
+    const scale = 12.5
 
     // Threshold of noise on current floor
-    const threshold = [
-      0.1125,
-      0.1,
-      0.0875,
-      0.075,
-    ][Math.abs(z)]
+    const threshold = engine.fn.scale(
+      absZ,
+      0, maxFloor,
+      0.25, 0.125,
+    )
 
     return !engine.fn.between(solidField.value(
-      x / scale, y / scale, (z + 0.5) * 10,
+      x / scale, y / scale, z * 10,
     ), 0.5 - threshold, 0.5 + threshold)
   }
 
@@ -269,10 +296,63 @@ content.cellar.tiles = (() => {
 
       return isSolid(x, y, z)
     },
+    randomizeUniques: function () {
+      const run = content.cellar.run.count()
+
+      // Gather buckets
+      const buckets = {}
+
+      for (const unique of registry.values()) {
+        if (!unique.isUnique) {
+          continue
+        }
+
+        if (!(unique.category in buckets)) {
+          buckets[unique.category] = []
+        }
+
+        buckets[unique.category].push(unique)
+      }
+
+      // Sort the buckets
+      for (const [category, bucket] of Object.entries(buckets)) {
+        buckets[category] = engine.fn.shuffle(bucket, engine.fn.srand('cellar', 'uniques', run, category))
+      }
+
+      // Positives
+      // One per floor, starting at beginning
+      for (let i = 0; i < buckets.positive.length; i += 1) {
+        buckets.positive[i].firstFloor = -i
+      }
+
+      // Negatives
+      // One per floor, starting at second floor
+      for (let i = 0; i < buckets.negative.length; i += 1) {
+        buckets.negative[i].firstFloor = -i - 1
+      }
+
+      // Situationals
+      // One per floor, starting at beginning
+      for (let i = 0; i < buckets.situational.length; i += 1) {
+        buckets.situational[i].firstFloor = -i
+      }
+
+      // Specials
+      // One per floor, starting at beginning
+      for (let i = 0; i < buckets.special.length; i += 1) {
+        buckets.special[i].firstFloor = -i
+      }
+
+      // Traversals
+      // Intentionally blank.
+
+      return this
+    },
     reset: function () {
       cache.reset()
-      solidField.reset()
       uniques.length = 0
+
+      destroySolidField()
 
       return this
     },

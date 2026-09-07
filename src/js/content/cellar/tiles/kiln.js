@@ -1,6 +1,7 @@
 content.cellar.tiles.kiln = content.cellar.tiles.invent({
   id: 'kiln',
   name: 'The kiln',
+  category: 'special',
   uniquePerRun: true,
   weight: 1,
   defaultState: {

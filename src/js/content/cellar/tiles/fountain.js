@@ -1,6 +1,7 @@
 content.cellar.tiles.fountain = content.cellar.tiles.invent({
   id: 'fountain',
   name: 'The fountain',
+  category: 'positive',
   uniquePerFloor: true,
   weight: 8,
   defaultState: {

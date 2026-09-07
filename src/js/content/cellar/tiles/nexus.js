@@ -1,9 +1,15 @@
 content.cellar.tiles.nexus = content.cellar.tiles.invent({
   id: 'nexus',
   name: 'The nexus',
+  category: 'traversal',
+  firstFloor: -1,
   isNexus: true,
   uniquePerFloor: true,
   weight: 4,
+  canGenerate: function (tile) {
+    return engine.fn.between(tile.z, this.firstFloor, content.cellar.lastFloor() - 1)
+      && Math.abs(tile.z) % 2 == 1 // Even floors
+  },
   getDialogs: () => [
     {
       title: `It's a teleporter.`,

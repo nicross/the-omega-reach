@@ -7,7 +7,7 @@ app.tutorial.cellarLimitation = app.tutorial.invent({
   // Lifecycle
   shouldActivate: () => content.location.is('cellar'),
   onUpdate: function () {
-    if (!(content.location.is('cellar') && content.cellar.position.get().z == -3)) {
+    if (!(content.location.is('cellar') && content.cellar.position.get().z == content.cellar.lastFloor())) {
       return
     }
 
@@ -19,7 +19,7 @@ app.tutorial.cellarLimitation = app.tutorial.invent({
     if (!this.state.tutorial) {
       app.screen.game.dialog.push({
         title: `<span class="u-highlight">[Demo limitation]</span>`,
-        description: `You have reached the end of <strong>the cellar</strong>. It will expand deeper for you to reach its thrilling conclusion. Thanks for playing!`,
+        description: `You have reached the current end of <strong>the cellar</strong>. It will expand deeper for you to reach its thrilling conclusion. Thanks for playing!`,
         actions: [
           {
             label: `Regain control`,
@@ -32,7 +32,10 @@ app.tutorial.cellarLimitation = app.tutorial.invent({
     app.screen.game.dialog.push({
       title: `What was that?`,
       description: `Swiftly the air swells and you…`,
-      before: () => app.canvas.setBlur(true),
+      before: () => {
+        app.canvas.setBlur(true)
+        content.cellar.health.set(1)
+      },
       actions: [
         {
           label: `brace for it.`,
@@ -49,8 +52,6 @@ app.tutorial.cellarLimitation = app.tutorial.invent({
           pan: engine.fn.randomSign(),
           velocity: 1,
         })
-
-        content.cellar.health.set(1)
       },
       after: () => {
         content.location.emit('cellar-death')

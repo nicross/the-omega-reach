@@ -2,9 +2,9 @@
 ## v1.2.3 - Steam demo (due 2026-10-02)
 - Improve mirrored solutions
 - Lost visitor in cellar dialogue and consequences
+- Display cause of death in cellar
 - Shopkeeper, descent B3 (once per run)
 - Intergalactic inspector, first interaction
-- Demo ends cellar runs at B6
 - A reusable/parameterized sound for unique cellar tiles
 - More descriptions of unique cellar tiles
 
