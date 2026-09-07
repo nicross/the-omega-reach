@@ -2,7 +2,6 @@
 ## v1.2.3 - Steam demo (due 2026-10-02)
 - Improve mirrored solutions
 - Lost visitor in cellar dialogue and consequences
-- Shopkeeper, descent B3 (once per run)
 - Intergalactic inspector, first interaction
 - A reusable/parameterized sound for unique cellar tiles
 - More descriptions of unique cellar tiles
@@ -37,10 +36,12 @@
   - Auctioneer, second auction
   - Intergalactic inspector, second interaction
   - Intergalactic inspector, third interaction
+  - Shopkeeper, cellar B3 descent (once per run)
   - Shopkeeper, cellar B6 descent (once per run)
   - Shopkeeper, cellar B9 descent (once per run)
   - Gate shopkeeper cellar confrontations behind using the emporium
   - Demo ends cellar runs at B10
+- Shopkeeper musical theme
 
 ## v3.0.0 - Steam release (Q3 2027, spoilers in notebook)
 - Cellar B10 sequence (`[redacted]`, dialogs, guaranteed relic at end)
