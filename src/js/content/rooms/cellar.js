@@ -127,13 +127,11 @@ content.rooms.cellar = content.rooms.invent({
 
     effect.apply()
 
-    const effectLabel = (
+    message.push((
       typeof effect.liveLabel == 'function'
         ? effect.liveLabel()
         : effect.liveLabel
-    ) || effect.attribute.label
-
-    message.push(effectLabel)
+    ) || effect.attribute.label)
 
     // Force walls to update
     content.programs.get().loadProperties()
@@ -141,7 +139,7 @@ content.rooms.cellar = content.rooms.invent({
     if (!content.cellar.health.has()) {
       // XXX: Run is over, do not call tile.onExit()
       content.location.emit('cellar-death', {
-        cause: effectLabel,
+        reason: effect.reason,
       })
 
       return

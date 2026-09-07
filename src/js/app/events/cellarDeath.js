@@ -1,5 +1,5 @@
 content.location.on('cellar-death', ({
-  reason = 'unknown power',
+  reason = 'unknown adversary',
 } = {}) => {
   const penalty = Math.min(
     content.wallet.amount(),
@@ -80,11 +80,9 @@ content.location.on('cellar-death', ({
       })
     }
 
-    reason = reason.toLowerCase()
-
     app.screen.game.dialog.push({
       title: `It's the atrium.`,
-      description: `You lost <strong class="a-game--dialogCurrency">${app.utility.format.currency(penalty)}</strong> to ${(['a','e','i','o','u'].includes(reason.charAt(0)) ? 'an' : 'a')} <strong>${reason}</strong> in <strong>the cellar</strong>.`,
+      description: `You lost <strong class="a-game--dialogCurrency">${app.utility.format.currency(penalty)}</strong> to <em>${reason.toLowerCase()}</em> in <strong>the cellar</strong>.`,
       actions: [
         {
           label: 'Wake up again',

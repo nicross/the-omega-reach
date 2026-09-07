@@ -207,6 +207,7 @@ content.cellar.tiles.normal = (() => {
             modifiers: [],
           },
           liveLabel: () => `${label} found, lost ${app.utility.format[formatter](1)}`,
+          reason: label,
         }
       },
     },
