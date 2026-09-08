@@ -4,7 +4,8 @@
 - Added more tutorial dialogs to the cellar.
 - Expanded the cellar to five explorable floors.
 - Randomized the topography of cellar floors each run.
-- Gradually introduce unique cellar tiles each floor.
+- Introduced unique cellar tiles gradually each floor.
+- Added lost visitors to the cellar.
 - Output the reason for fainting in the cellar.
 - Split audio settings into mixer and performance screens.
 - Fixed focus memory when exiting to main menu.
