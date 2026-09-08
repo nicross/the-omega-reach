@@ -1,7 +1,7 @@
 app.tutorial.cellarVisitorLoop = app.tutorial.invent({
   id: 'cellarVisitorLoop',
   // Lifecycle
-  shouldActivate: () => content.location.is('cellar'),
+  shouldActivate: () => content.location.is('cellar') && app.tutorial.death.complete,
   onUpdate: function () {
     if (!content.location.is('cellar')) {
       return
@@ -12,17 +12,19 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
 
     if (this.state.run != run) {
       this.state = {
-        encountered: false,
+        count: (this.state.count || 0) + 1,
+        done: false,
+        found: false,
         history: {},
         perfect: false,
-        result: false,
         run,
         score: 0,
+        success: false,
       }
     }
 
     // Prevent repeat encounters in same run
-    if (this.state.encountered) {
+    if (this.state.found) {
       return
     }
 
@@ -48,19 +50,18 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
     )
 
     if (Math.random() > chance) {
-      // TODO: uncomment, always runs
       //return
     }
 
     // Trigger the dialogue
-    this.state.encountered = true
+    this.state.found = true
 
     const maxScore = 2,
       questions = this.generateAnswers(tile)
 
     ;[
       {
-        title: `It's a… visitor?`,
+        title: `It's… a visitor?`,
         description: () => engine.fn.choose([
           `TK: Randomized placeholder text.`,
         ], Math.random()),
@@ -72,14 +73,15 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
       {
         title: () => engine.fn.choose([
           `<q>Bonkers…</q>`,
-          `<q>Hmm…</q>`,
+          `<q>Explains a lot…</q>`,
           `<q>Huh…</q>`,
           `<q>Incredible…</q>`,
           `<q>Jeez…</q>`,
-          `<q>Mm-hmm…</q>`,
-          `<q>No way…</q>`,
+          `<q>My mistake…</q>`,
+          `<q>No wonder…</q>`,
           `<q>Of course…</q>`,
           `<q>Strange…</q>`,
+          `<q>That's odd…</q>`,
           `<q>Wow…</q>`,
         ], Math.random()),
         description: () => [
@@ -113,7 +115,7 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
           const actions = []
 
           if (this.state.score == maxScore) {
-            actions.push({label: 'Gesture positively'})
+            actions.push({label: 'Gesture affirmatively'})
           }
 
           actions.push(
@@ -129,8 +131,18 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
           return actions
         },
         after: () => {
+          // Mark complete for this run
           this.state.perfect = this.state.score == maxScore
-          this.state.result = Math.random() <= [0.2, 0.4, 0.8][this.state.score]
+          this.state.success = Math.random() <= [0.2, 0.4, 0.8][this.state.score]
+
+          // Add donations when successful
+          if (this.state.success) {
+            content.donations.add(
+              this.state.perfect
+                ? engine.fn.randomInt(10, 20)
+                : engine.fn.randomInt(5, 10)
+            )
+          }
         },
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
@@ -200,5 +212,111 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
     }
 
     return answers
+  },
+  // Epilogues
+  epilogueCellarDeath: function () {
+    if (this.done || !this.state.found) {
+      return false
+    }
+
+    if (this.state.success) {
+      this.epilogueCellarDeathSuccess()
+    } else {
+      this.epilogueFailure(false)
+    }
+
+    this.done = true
+
+    return true
+  },
+  epilogueCellarDeathSuccess: function () {
+    app.screen.game.dialog.push({
+      title: [
+        engine.fn.choose([
+          `<q>Thanks for nothing…</q>`,
+          `<q>You nearly killed us both!</q>`,
+        ], Math.random()),
+        engine.fn.choose([
+          `<q>I'm lucky to be alive…</q>`,
+          `<q>You're lucky I'm alive!</q>`,
+        ], Math.random()),
+        engine.fn.choose([
+          `<q>I've learned my lesson…</q>`,
+          `<q>Returning the favor!</q>`,
+        ], Math.random()),
+      ][this.state.score],
+      description: `It's the lost visitor from <strong>the cellar</strong>. ` + [
+        `Your beguiling advice magnified their horrific predicament.`,
+        `Your incomplete instructions included a wrong turn at <em>Earthen albuquerque</em>.`,
+        `Your unfailing memory led them directly to the entrance with confidence.`,
+      ][this.state.score],
+      actions: [
+        {label: this.state.perfect ? 'Gesture affirmatively' : 'Thank coldly'},
+        {label: this.state.perfect ? 'Thank warmly' : 'Grimace stiffly'},
+        {label: 'Back to work'},
+      ],
+    })
+  },
+  epilogueFailure: function (isShop = false) {
+    app.screen.game.dialog.push({
+      title: `Someone's missing.`,
+      description: `Unfortunately, the wayward visitor who you discovered inside <strong>the cellar</strong> hasn't reached the entrance.`,
+      actions: [
+        {label: 'Grieve briefly'},
+        {label: 'Shrug numbly'},
+        {label: isShop ? 'Brace for it' : 'Back to work'},
+      ],
+    })
+  },
+  epilogueShopLoop: function () {
+    if (this.done || !this.state.found) {
+      return false
+    }
+
+    if (this.state.success) {
+      this.epilogueShopLoopSuccess()
+    } else {
+      this.epilogueFailure(true)
+    }
+
+    this.done = true
+
+    return true
+  },
+  epilogueShopLoopSuccess: function () {
+    app.screen.game.dialog.push({
+      title: [
+        engine.fn.choose([
+          `<q>That's them…</q>`,
+          `<q>Speak of the fool…</q>`,
+        ], Math.random()),
+        engine.fn.choose([
+          `<q>It was a team effort!</q>`,
+          `<q>You make a great team!</q>`,
+        ], Math.random()),
+        engine.fn.choose([
+          `<q>Our hero returns!</q>`,
+          `<q>That's them!</q>`,
+        ], Math.random()),
+      ][this.state.score],
+      description: [
+        `Hushed complaints evaporate into the muted room.`,
+        `Their debriefing ends with shaking hands.`,
+        `Boisterous jubilance exudes from the room.`,
+      ][this.state.score] + ` The lost visitor from <strong>the cellar</strong> swivels from the shopkeeper. They both ` + [
+        `meet your gaze with a shared blame`,
+        `acknowledge you with hurried waves`,
+        `applaud your triumphant escape`,
+      ][this.state.score] + ` before the visitor ` + [
+        `scurries regretfully`,
+        `strolls gratefully`,
+        `skips gleefully`,
+      ][this.state.score] +` away.`,
+      actions: [
+        {label: this.state.perfect ? 'Gesture affirmatively' : 'Nod softly'},
+        {label: this.state.perfect ? 'Wave warmly' : 'Smile wryly'},
+        {label: 'Brace for it'},
+      ],
+    })
   },
 })

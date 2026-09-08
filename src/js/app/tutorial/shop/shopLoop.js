@@ -90,54 +90,40 @@ app.tutorial.shopLoop = app.tutorial.invent({
     }
 
     const fromStockroom = content.location.was('stockroom'),
+      hasCellarVisitor = app.tutorial.cellarVisitorLoop.state.found && !app.tutorial.cellarVisitorLoop.done,
       hasStolen = content.stockroom.hasStolen(),
       stealingDetected = hasStolen && fromStockroom,
       stolenCount = content.stockroom.countStolen()
 
-    if (this.state.tutorial && !this.state.visitorPineapple && !hasStolen && content.wallet.has(300)) {
+    if (this.state.tutorial && !this.state.visitorPineapple && !hasStolen && content.wallet.has(300) && !hasCellarVisitor) {
       return this.visitorPineapple()
     }
 
+    app.tutorial.cellarVisitorLoop.epilogueShopLoop()
+
     if (stealingDetected) {
-      content.audio.interactComplete.trigger()
+      app.screen.game.dialog.push({
+        title: `<q>Not so fast!</q>`,
+        description: `You forfeit <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong>.`,
+        actions: [
+          {
+            label: `Relinquish ${stolenCount == 1 ? 'it' : 'them'}`,
+          },
+        ],
+        before: () => content.audio.interactComplete.trigger(),
+      })
 
-      ;[
-        {
-          title: `<q>Not so fast!</q>`,
-          description: `You forfeit <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong>.`,
-          actions: [
-            {
-              label: `Relinquish ${stolenCount == 1 ? 'it' : 'them'}`,
-            },
-          ],
-        },
-        {
-          title: `<q>Now excuse me…</q>`,
-          description: `The shopkeeper disappears once more through the cellar door for their mandated lunch break.`,
-          actions: [
-            {
-              label: 'Back to work',
-              before: () => this.startCellarRun(),
-            },
-          ],
-        }
-      ].forEach((x) => app.screen.game.dialog.push(x))
+      app.screen.game.dialog.push({
+        title: `<q>Now excuse me…</q>`,
+        description: `The shopkeeper disappears once more through the cellar door for their mandated lunch break.`,
+        actions: [
+          {
+            label: 'Back to work',
+            before: () => this.startCellarRun(),
+          },
+        ],
+      })
     } else {
-      if (hasStolen) {
-        content.audio.interactSuccess.trigger({index: 0})
-        content.stockroom.keepStolen()
-
-        app.screen.game.dialog.push({
-          title: `Success!`,
-          description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong>.`,
-          actions: [
-            {
-              label: `Enjoy!`,
-            },
-          ],
-        })
-      }
-
       const cost = content.shop.getCost(),
         name = content.shop.generateUniqueName()
 
@@ -180,6 +166,22 @@ app.tutorial.shopLoop = app.tutorial.invent({
           ],
         },
       ].forEach((x) => app.screen.game.dialog.push(x))
+
+      if (hasStolen) {
+        app.screen.game.dialog.push({
+          title: `Success!`,
+          description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong>.`,
+          actions: [
+            {
+              label: `Stash it`,
+            },
+          ],
+          before: () => {
+            content.audio.interactSuccess.trigger({index: 0})
+            content.stockroom.keepStolen()
+          },
+        })
+      }
     }
 
     if (!this.state.tutorial) {

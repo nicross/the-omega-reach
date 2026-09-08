@@ -1,7 +1,7 @@
 # TODO
 ## v1.2.3 - Steam demo (due 2026-10-02)
 - Improve mirrored solutions
-- Lost visitor in cellar dialogue and consequences
+- Lost visitor placeholder text
 - Intergalactic inspector, first interaction
 - A reusable/parameterized sound for unique cellar tiles
 - More descriptions of unique cellar tiles

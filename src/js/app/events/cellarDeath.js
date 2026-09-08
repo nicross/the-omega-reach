@@ -90,6 +90,8 @@ content.location.on('cellar-death', ({
         },
       ],
     })
-  }
 
+    // Handle lost visitor
+    app.tutorial.cellarVisitorLoop.epilogueCellarDeath()
+  }
 })

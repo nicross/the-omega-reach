@@ -17,7 +17,7 @@ app.tutorial.galleryStealLoop = app.tutorial.invent({
       description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong>.`,
       actions: [
         {
-          label: `Enjoy!`,
+          label: `Stash it`,
         },
       ],
     })
