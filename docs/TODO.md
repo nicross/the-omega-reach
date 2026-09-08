@@ -1,5 +1,5 @@
 # TODO
-## v1.2.3 - Steam demo (due 2026-10-02)
+## v1.2.3 - Steam demo (2026-10-08 or earlier)
 - Improve mirrored solutions
 - Lost visitor placeholder text
 - Intergalactic inspector, first interaction
