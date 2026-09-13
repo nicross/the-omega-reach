@@ -1,8 +1,6 @@
 # TODO
 ## v1.2.3 - Steam demo (2026-10-08 or earlier)
 - Improve mirrored solutions
-- Lost visitor placeholder text
-- Intergalactic inspector, first interaction
 - A reusable/parameterized sound for unique cellar tiles
 - More descriptions of unique cellar tiles
 
@@ -34,6 +32,7 @@
   - Auctioneer, introduction
   - Auctioneer, first auction
   - Auctioneer, second auction
+  - Intergalactic inspector, first interaction
   - Intergalactic inspector, second interaction
   - Intergalactic inspector, third interaction
   - Shopkeeper, cellar B3 descent (once per run)
@@ -41,6 +40,7 @@
   - Shopkeeper, cellar B9 descent (once per run)
   - Gate shopkeeper cellar confrontations behind using the emporium
   - Demo ends cellar runs at B10
+  - More lost visitor dialogs in cellar
 - Shopkeeper musical theme
 
 ## v3.0.0 - Steam release (Q3 2027, spoilers in notebook)

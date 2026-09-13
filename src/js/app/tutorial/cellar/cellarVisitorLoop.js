@@ -50,47 +50,110 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
     )
 
     if (Math.random() > chance) {
-      //return
+      return
     }
 
     // Trigger the dialogue
     this.state.found = true
 
-    const maxScore = 2,
+    const given = engine.tool.vector2d.create(),
+      maxScore = 2,
       questions = this.generateAnswers(tile)
 
     ;[
       {
-        title: `It's… a visitor?`,
-        description: () => engine.fn.choose([
-          `TK: Randomized placeholder text.`,
+        ...engine.fn.choose([
+          // TODO: More random entrances
+          {
+            title: `<q>Is anybody there?</q>`,
+            description: `The shrieking cry multiplies and divides as it ricochets about the maze, diminishing and rejoining the sibilence of the background noise. Yet, its origin was nearby.`,
+          },
         ], Math.random()),
+        actions: [
+          {
+            label: `Investigate it`
+          },
+          {
+            label: `Ignore it`,
+            before: () => app.screen.game.dialog.purgeQueue(),
+          },
+        ],
+      },
+      {
+        title: `It's… a visitor?`,
+        description: `They must be lost. Calming your mind to help visualize, you retrace your steps to point them toward the exit.`,
         actions: questions[0].map((answer) => ({
           label: `Head ${Math.abs(answer.value)} step${Math.abs(answer.value) == 1 ? '' : 's'} ${{x: Math.sign(answer.value) > 0 ? 'east' : 'west', y: Math.sign(answer.value) > 0 ? 'north' : 'south'}[answer.dimension]}…`,
-          before: () => this.state.score += (answer.correct ? 1 : 0),
+          before: () => {
+            this.state.score += (answer.correct ? 1 : 0)
+            given[answer.dimension] = answer.value
+          },
         })),
       },
       {
         title: () => engine.fn.choose([
           `<q>Bonkers…</q>`,
+          `<q>Come on…</q>`,
           `<q>Explains a lot…</q>`,
+          `<q>Give me a break…</q>`,
           `<q>Huh…</q>`,
-          `<q>Incredible…</q>`,
+          `<q>Inconceivable…</q>`,
           `<q>Jeez…</q>`,
           `<q>My mistake…</q>`,
-          `<q>No wonder…</q>`,
+          `<q>No way…</q>`,
           `<q>Of course…</q>`,
+          `<q>Please…</q>`,
           `<q>Strange…</q>`,
           `<q>That's odd…</q>`,
-          `<q>Wow…</q>`,
+          `<q>Well I'll be…</q>`,
+          `<q>You're kidding…</q>`,
         ], Math.random()),
         description: () => [
-          `TK: Incorrect choice.`,
-          `TK: Correct choice.`,
+          // Incorrect choice
+          [
+            engine.fn.choose([
+              `Their fears wax.`,
+              `Their hopes wane.`,
+              `Their optimism wanes.`,
+              `Their pessimism waxes.`,
+            ], Math.random()),
+            engine.fn.choose([
+              `No, that wasn't it.`,
+              `That's nowhere near the exit.`,
+              `You were confidently incorrect.`,
+            ], Math.random()),
+            engine.fn.choose([
+              `Are you lost as well?`,
+              `Can you get them halfway?`,
+              `Does it matter anymore?`,
+            ], Math.random()),
+          ].filter((x) => x).join(' '),
+          // Correct choice
+          [
+            engine.fn.choose([
+              `Their fears wane.`,
+              `Their hopes wax.`,
+              `Their optimism waxes.`,
+              `Their pessimism wanes.`,
+            ], Math.random()),
+            engine.fn.choose([
+              `That's halfway to the exit.`,
+              `Yes, that was it.`,
+              `You were confidently correct.`,
+            ], Math.random()),
+            engine.fn.choose([
+              `Are you fully situated?`,
+              `Can you get them home?`,
+              `Do you remember the rest?`,
+            ], Math.random()),
+          ].filter((x) => x).join(' '),
         ][this.state.score],
         actions: questions[1].map((answer) => ({
           label: answer.value ? `…then ${Math.abs(answer.value)} step${Math.abs(answer.value) == 1 ? '' : 's'} ${{x: Math.sign(answer.value) > 0 ? 'east' : 'west', y: Math.sign(answer.value) > 0 ? 'north' : 'south'}[answer.dimension]}` : `…and you've arrived.`,
-          before: () => this.state.score += (answer.correct ? 1 : 0),
+          before: () => {
+            this.state.score += (answer.correct ? 1 : 0)
+            given[answer.dimension] = answer.value
+          },
         })),
       },
       {
@@ -109,7 +172,8 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
           `<q>You're the best!</q>`,
         ], Math.random()),
         description: () => engine.fn.choose([
-          `TK: Randomized placeholder text.`,
+          // TODO: More random exits
+          `The lost guest disappears into the darkness of the wrong direction. Comically, their hurried steps skid and about-face as they belatedly process your instructions. You catch a muffled laugh as they cross your path again.`,
         ], Math.random()),
         actions: () => {
           const actions = []
@@ -130,16 +194,23 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
 
           return actions
         },
+        before: () => content.audio.footsteps.trigger({
+          count: 5,
+          delay: 1/4,
+          duration: 1/5,
+          pan: given.normalize().x,
+          velocity: 1,
+        }),
         after: () => {
           // Mark complete for this run
           this.state.perfect = this.state.score == maxScore
-          this.state.success = Math.random() <= [0.2, 0.4, 0.8][this.state.score]
+          this.state.success = Math.random() <= [0.4, 0.6, 0.8][this.state.score]
 
           // Add donations when successful
           if (this.state.success) {
             content.donations.add(
               this.state.perfect
-                ? engine.fn.randomInt(10, 20)
+                ? engine.fn.randomInt(15, 25)
                 : engine.fn.randomInt(5, 10)
             )
           }
@@ -311,7 +382,7 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
         `scurries regretfully`,
         `strolls gratefully`,
         `skips gleefully`,
-      ][this.state.score] +` away.`,
+      ][this.state.score] + ` away.`,
       actions: [
         {label: this.state.perfect ? 'Gesture affirmatively' : 'Nod softly'},
         {label: this.state.perfect ? 'Wave warmly' : 'Smile wryly'},
