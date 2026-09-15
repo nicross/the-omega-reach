@@ -8,6 +8,7 @@
 - Added lost visitors to rescue from the cellar.
 - Output the reason for fainting in the cellar.
 - Split audio settings into mixer and performance screens.
+- Added a slider for interface volume to the audio mixer.
 - Fixed focus memory when exiting to main menu.
 
 ## v1.2.1

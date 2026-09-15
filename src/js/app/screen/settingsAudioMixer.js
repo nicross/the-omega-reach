@@ -27,6 +27,7 @@ app.screen.settingsAudioMixer = app.screenManager.invent({
       ['.a-settingsAudioMixer--musicVolume', app.settings.raw.musicVolume, app.settings.setMusicVolume],
       ['.a-settingsAudioMixer--reachVolume', app.settings.raw.reachVolume, app.settings.setReachVolume],
       ['.a-settingsAudioMixer--sfxVolume', app.settings.raw.sfxVolume, app.settings.setSfxVolume],
+      ['.a-settingsAudioMixer--uiVolume', app.settings.raw.uiVolume, app.settings.setUiVolume],
     ].map(([selector, initialValue, setter]) => {
       const component = app.component.slider.hydrate(root.querySelector(selector), initialValue)
       component.on('change', () => setter(component.getValueAsFloat()))

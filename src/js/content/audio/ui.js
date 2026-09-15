@@ -1,5 +1,5 @@
 content.audio.ui = (() => {
-  const bus = content.audio.channel.bypass.createBus()
+  const bus = content.audio.channel.ui.createBus()
   bus.gain.value = engine.fn.fromDb(-6)
 
   return {

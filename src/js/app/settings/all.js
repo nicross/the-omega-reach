@@ -127,3 +127,11 @@ app.settings.register('uiScale', {
     app.setUiScale(computedValue)
   },
 })
+
+app.settings.register('uiVolume', {
+  compute: (rawValue) => engine.fn.fromDb(engine.fn.lerpExp(engine.const.zeroDb, 0, rawValue, 0.1)),
+  default: 1,
+  update: function (computedValue) {
+    engine.fn.setParam(content.audio.channel.ui.param.gain, computedValue)
+  },
+})

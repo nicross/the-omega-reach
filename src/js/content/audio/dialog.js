@@ -1,6 +1,6 @@
 content.audio.dialog = (() => {
   const baseGain = engine.fn.fromDb(-6),
-    bus = content.audio.channel.sfx.createBus()
+    bus = content.audio.channel.ui.createBus()
 
   function trigger({
     color,
