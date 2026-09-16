@@ -101,7 +101,7 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
       {
         title: () => engine.fn.choose([
           `<q>Bonkers…</q>`,
-          `<q>Come on…</q>`,
+          `<q>Come on, man…</q>`,
           `<q>Explains a lot…</q>`,
           `<q>Give me a break…</q>`,
           `<q>Huh…</q>`,
@@ -126,7 +126,7 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
               `Their pessimism waxes.`,
             ], Math.random()),
             engine.fn.choose([
-              `No, that wasn't it.`,
+              `No, that wasn't quite it.`,
               `That's nowhere near the exit.`,
               `You were confidently incorrect.`,
             ], Math.random()),
@@ -146,7 +146,7 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
             ], Math.random()),
             engine.fn.choose([
               `That's halfway to the exit.`,
-              `Yes, that was it.`,
+              `Yes, that was exactly it.`,
               `You were confidently correct.`,
             ], Math.random()),
             engine.fn.choose([
@@ -181,6 +181,8 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
         ], Math.random()),
         description: () => engine.fn.choose([
           // TODO: More random exits
+          `The visitor blinks thrice to establish a beat for their parting motif. <q>Just keep zooming, zooming, zooming…</q> The weirdly familiar echolalia loses meaning as their mantra repeats.`,
+          `The visitor lingers to return the charity before they leave. <q>Equal parts marshmallow, chocolate, and sweet crackers. Be sure to use <em>earthen ingredients</em>—it's delicious!</q>`,
           `The visitor vanishes into the wrong direction. Comically, their hurried steps skid and about-face as they belatedly process your instructions. You catch a muffled laugh as they cross your path again.`,
         ], Math.random()),
         actions: () => {
