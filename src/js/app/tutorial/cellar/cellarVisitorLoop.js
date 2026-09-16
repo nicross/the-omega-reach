@@ -68,6 +68,14 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
             title: `<q>Is anybody there?</q>`,
             description: `The shrieking cry multiplies and divides as it ricochets about the maze, diminishing and rejoining the sibilence of the background noise. Yet, its origin was nearby.`,
           },
+          {
+            title: `<q>Mew-wew!</q>`,
+            description: `The source of the roar trots out from the void. <q>I'm sick of rats! Do you people have any treats?</q> Is that elegantly glossy beast… <em>a talking cat!?!</em>`,
+          },
+          {
+            title: `What the smell?`,
+            description: `It's a smoky cocktail of carbon monoxide, methane, and various particulates reminiscent of <strong>the lobby</strong>'s ceiling. A silhouette protects its fiery wellspring.`,
+          },
         ], Math.random()),
         actions: [
           {
@@ -173,7 +181,7 @@ app.tutorial.cellarVisitorLoop = app.tutorial.invent({
         ], Math.random()),
         description: () => engine.fn.choose([
           // TODO: More random exits
-          `The lost guest disappears into the darkness of the wrong direction. Comically, their hurried steps skid and about-face as they belatedly process your instructions. You catch a muffled laugh as they cross your path again.`,
+          `The visitor vanishes into the wrong direction. Comically, their hurried steps skid and about-face as they belatedly process your instructions. You catch a muffled laugh as they cross your path again.`,
         ], Math.random()),
         actions: () => {
           const actions = []
