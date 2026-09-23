@@ -6,120 +6,36 @@ content.audio.cellarInteractives = (() => {
     radius = 3,
     synths = []
 
+  const buses = {
+    music: content.audio.channel.music.createBus(),
+    sfx: content.audio.channel.sfx.createBus(),
+  }
+
   let current
 
-  content.audio.reverb().from(bus)
+  for (const bus of Object.values(buses)) {
+    content.audio.reverb().from(bus)
+    bus.gain.value = baseGain / maxSynths
+  }
 
   function createSynth(tile, direction = 0) {
-    const current = content.cellar.tiles.current()
+    const options = {
+      bus: tile.isUnique ? buses.sfx : buses.music,
+      direction,
+      radius,
+      tile,
+    }
 
-    // Ignore z-axis
-    const relative = engine.tool.vector2d.create({x: tile.x, y: tile.y})
-      .subtract({x: current.x, y: current.y})
-
-    const distance = relative.distance(),
-      distanceRatio = engine.fn.clamp(distance / radius / Math.sqrt(2)),
-      isDiscovered = content.cellar.discovered.is(tile),
-      isFullyScanned = tile.isFullyScanned(),
-      isHere = distance == 0,
-      isNearDeath = content.cellar.health.amount() <= 1,
-      isUp = relative.y >= 0,
-      normal = relative.normalize()
-
-    const gain = engine.fn.fromDb(
-        engine.fn.lerp(0, tile.isUnique || isNearDeath ? -9 : -12, distanceRatio)
-      + (isFullyScanned && !tile.isUnique && !isNearDeath ? -6 : 0)
-    )
-
-    const rootFrequency = engine.fn.detune(
-      engine.fn.fromMidi(42 + tile.note),
-      (
-          engine.fn.scale(Math.abs(relative.x), 0, radius, 0, 1200)
-        + engine.fn.scale(relative.y, -radius, radius, -1200, 1200)
-      )
-    )
-
-    const amDepth = gain * engine.fn.fromDb(tile.isUnique || !isFullyScanned ? -6 : -3),
-      when = engine.time()
-
-    const synth = engine.synth.pwm({
-      detune: engine.fn.randomFloat(-50, 50),
-      frequency: rootFrequency,
-      gain: gain - amDepth,
-      type: ((isUp && !isFullyScanned) || tile.isUnique ? 'triangle' : 'sine'),
-      width: engine.fn.randomFloat(0.375, 0.625),
-      when,
-    }).chainAssign(
-      'panner', context.createStereoPanner()
-    ).chainAssign(
-      'fader', context.createGain()
-    ).filtered({
-      frequency: rootFrequency,
-    }).connect(bus)
-
-    // Amplitude LFO
-    synth.assign('am', engine.synth.lfo({
-      depth: amDepth,
-      frequency: tile.isUnique ? tile.prime/7 : 5/tile.prime * engine.fn.lerp(1.5, 0.5, distanceRatio),
-      when,
-    }))
-
-    synth.am.connect(synth.param.gain)
-    synth.chainStop(synth.am)
-
-    // Color LFO
-    synth.assign('cm', engine.synth.lfo({
-      depth: 600,
-      frequency: tile.isUnique ? tile.prime/8 : 7/tile.prime * engine.fn.lerp(1.5, 0.5, distanceRatio),
-      when,
-    }))
-
-    synth.cm.connect(synth.filter.detune)
-    synth.chainStop(synth.cm)
-
-    // Detune LFO
-    synth.assign('dm', engine.synth.lfo({
-      depth: tile.isUnique ? 25 : 100,
-      frequency: tile.isUnique ? tile.prime/9 : 2/tile.prime * engine.fn.lerp(1, 0.5, distanceRatio),
-      when,
-    }))
-
-    synth.dm.connect(synth.param.detune)
-    synth.chainStop(synth.dm)
-
-    // Width LFO
-    synth.assign('wm', engine.synth.lfo({
-      depth: 0.125,
-      frequency: tile.isUnique ? tile.prime/5 : 3/tile.prime * engine.fn.lerp(1, 0.5, distanceRatio),
-      when,
-    }))
-
-    synth.wm.connect(synth.param.width)
-    synth.chainStop(synth.wm)
-
-    // Fader
-    const attack = (isHere || isNearDeath) ? 1/8 : (distance/4),
-      panAttack = 1/4
-
-    synth.panner.pan.value = direction
-    synth.panner.pan.setValueAtTime(direction, when)
-    synth.panner.pan.linearRampToValueAtTime(normal.x, when + panAttack)
-
-    synth.fader.gain.value = 0
-    synth.fader.gain.setValueAtTime(0, when)
-    synth.fader.gain.linearRampToValueAtTime(baseGain / maxSynths, when + attack)
-
-    return synth
+    return content.audio.cellarInteractives.generic.instantiate(options)
   }
 
   function destroySynths(direction = 0) {
-    const now = engine.time(),
-      release = 1/16
+    const options = {
+      direction,
+    }
 
     for (const synth of synths) {
-      engine.fn.rampLinear(synth.fader.gain, 0, release)
-      engine.fn.rampLinear(synth.panner.pan, direction, release)
-      synth.stop(now + release)
+      synth.destroy(options)
     }
 
     synths.length = 0
@@ -196,6 +112,7 @@ content.audio.cellarInteractives = (() => {
 
       return this
     },
+    synths: () => synths,
     update: function (force = false) {
       const isCellar = content.location.is('cellar')
 
