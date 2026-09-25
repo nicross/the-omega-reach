@@ -8,6 +8,7 @@ content.particles = (() => {
 
   while (particles.length < limit) {
     particles.push({
+      index: particles.length,
       current: {
         h: 0,
         s: 0,

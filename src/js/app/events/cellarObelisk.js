@@ -8,7 +8,7 @@ content.location.on('cellar-obelisk', ({tile}) => {
         before: () => {
           tile.state.active = true
 
-          content.cellar.health.add(tile.getGlobalHealthBonus())
+          content.cellar.health.add(tile.activeHealthBonus)
           content.audio.sanityChange.trigger({isUp: true})
           content.cellar.scans.set(tile, tile.getEffects().length)
 

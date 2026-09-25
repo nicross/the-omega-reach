@@ -2,6 +2,7 @@
 ## v1.2.2
 - Improved demo limitation dialogs.
 - Added more tutorial dialogs to the cellar.
+- Added more descriptions and interactions to unique cellar tiles.
 - Expanded the cellar to five explorable floors.
 - Randomized the topography of cellar floors each run.
 - Introduced unique cellar tiles gradually each floor.

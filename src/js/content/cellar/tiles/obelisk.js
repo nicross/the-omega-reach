@@ -4,11 +4,11 @@ content.cellar.tiles.obelisk = content.cellar.tiles.invent({
   category: 'special',
   uniquePerRun: true,
   weight: 1,
-  activeHealthBonus: 3,
   defaultState: {
     active: false,
     rotation: 0,
   },
+  activeHealthBonus: 3,
   canInteractMore: function () {
     return !this.state.active
   },
@@ -97,8 +97,8 @@ content.cellar.tiles.obelisk = content.cellar.tiles.invent({
 
     const value = (0.5 + (0.5 * Math.sin(engine.const.tau * time/10 * particle.twinkleFrequencies[2]))) ** 4
 
-    particle.target.x = engine.fn.lerp(vector.x, particle.floor.x, value)
-    particle.target.y = engine.fn.lerp(vector.y, particle.floor.y, value)
+    particle.target.x = this.state.active ? engine.fn.lerp(vector.x, particle.floor.x, value) : vector.x
+    particle.target.y = this.state.active ? engine.fn.lerp(vector.y, particle.floor.y, value) : vector.y
     particle.target.z += engine.fn.lerp(-5, 10, particle.value)
   },
 }, content.cellar.tiles.baseUnique)

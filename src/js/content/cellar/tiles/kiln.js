@@ -16,7 +16,7 @@ content.cellar.tiles.kiln = content.cellar.tiles.invent({
   getDialogs: () => [
     {
       title: `It's a furnace.`,
-      description: `The intensity escaping its engines of creation nurtures a pleasant respite, spilling into the heiroglyphics marking its enclosing bricks, which appear…`,
+      description: `The intensity escaping its engines of creation nurtures a pleasant respite, spilling into the graven heiroglyphics of its enclosing bricks, which appear…`,
       actions: [
         {label: 'instructive.'},
         {label: 'provocative.'},
