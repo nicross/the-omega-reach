@@ -5,32 +5,40 @@ content.cellar.tiles.kiln = content.cellar.tiles.invent({
   uniquePerRun: true,
   weight: 1,
   defaultState: {
-    entered: false,
-    exited: false,
+    cooldown: 0,
+    uses: 0,
   },
-  effectsGlobal: [
+  canInteractMore: function () {
+    return content.wallet.has(this.calculateCost())
+      && content.time.value() > this.state.cooldown
+  },
+  effectsGlobal: [],
+  getDialogs: () => [
     {
-      attribute: {
-        label: 'Instrument recovered',
-        modifiers: ['instrument'],
-      },
+      title: `It's a furnace.`,
+      description: `The intensity escaping its engines of creation nurtures a pleasant respite, spilling into the heiroglyphics marking its enclosing bricks, which appear…`,
+      actions: [
+        {label: 'instructive.'},
+        {label: 'provocative.'},
+        {label: 'decorative.'},
+      ],
+    },
+    {
+      tutorial: true,
+      title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The kiln:`,
+      description: () => ({
+        gamepad: `${app.settings.computed.inputHold ? 'Hold' : 'Press'} any <kbd>Face Button</kbd>`,
+        keyboard: `${app.settings.computed.inputHold ? 'Hold' : 'Press'} <kbd>Enter</kbd> or <kbd>Spacebar</kbd>`,
+        mouse: `${app.settings.computed.inputHold ? 'Click and hold' : 'Click'} the <kbd>Interact Button</kbd>`,
+        touch: `${app.settings.computed.inputHold ? 'Tap and hold' : 'Tap'} the <kbd>Interact Button</kbd>`,
+      }[app.tutorial.getInputPreference()]) + ` to repurpose credits into new instruments.`,
     },
   ],
-  onEnterEffects: function () {
-    if (this.state.entered) {
-      return
-    }
-
-    content.instruments.add(
-      content.cellar.instruments.generateUniqueName()
-    )
-
-    content.audio.interactSuccess.trigger({index: 2})
-
-    this.state.entered = true
-  },
-  onExitEffects: function () {
-    this.state.exited = true
+  getInteractLabelMore: () => 'Interact',
+  onInteractMore: function () {
+    content.location.emit('cellar-kiln', {
+      tile: this,
+    })
   },
   alterParticle: function (particle) {
     const height = 2,
@@ -53,11 +61,31 @@ content.cellar.tiles.kiln = content.cellar.tiles.invent({
     const vector = engine.tool.vector2d.create(particle.floor)
       .scale(value)
 
-    particle.target.h = engine.fn.lerpExp(1/3 * particle.value, 0, value, 0.5)
+    particle.target.h = engine.fn.lerpExp(1/3 * particle.value, 0, value, 0.5) - (1/4 * this.getCooldownValue())
     particle.target.s = (3/4 + (1/4 * Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2])))
     particle.target.v = (1 - value) ** 0.25
     particle.target.x = vector.x
     particle.target.y = vector.y
     particle.target.z += -1 + (height * (value ** 4))
+  },
+  // Interactions
+  cooldownTime: 10,
+  calculateCost: function () {
+    return content.shop.getCost() * (1/3 * (this.state.uses + 2))
+  },
+  getCooldownValue: function () {
+    return engine.fn.clamp(
+      (this.state.cooldown - content.time.value()) / this.cooldownTime
+    ) ** 2
+  },
+  incrementUses: function () {
+    this.state.uses += 1
+
+    return this
+  },
+  triggerCooldown: function () {
+    this.state.cooldown = content.time.value() + this.cooldownTime
+
+    return this
   },
 }, content.cellar.tiles.baseUnique)

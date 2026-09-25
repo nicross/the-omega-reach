@@ -16,7 +16,7 @@ content.cellar.tiles.pit = content.cellar.tiles.invent({
   getDialogs: () => [
     {
       title: `It's a sink.`,
-      description: `The air freezes as its sanity leaches into the vortex reeling at your feet. Perhaps it greedily feeds upon other tithings?`,
+      description: `The air freezes as its sanity leaches into the vortex reeling at your feet. Perhaps it feeds greedily upon other tithings?`,
       actions: [
         {label: 'Exhale deeply'},
         {label: 'Inhale sharply'},
