@@ -3,6 +3,14 @@ content.cellar.tiles.baseUnique = content.cellar.tiles.base.extend({
   category: 'default',
   effectsGlobal: [],
   effectsOnEnter: [],
+  effectsUnique: [
+    {
+      attribute: {
+        label: 'Radix of power',
+        modifiers: ['legendary'],
+      },
+    },
+  ],
   firstFloor: 0,
   isUnique: true,
   canGenerate: function (tile) {
@@ -13,12 +21,7 @@ content.cellar.tiles.baseUnique = content.cellar.tiles.base.extend({
     return [
       ...this.effectsOnEnter,
       ...this.effectsGlobal,
-      {
-        attribute: {
-          label: 'Radix of power',
-          modifiers: ['legendary'],
-        },
-      },
+      ...this.effectsUnique,
     ]
   },
   getGlobalDonationRate: () => 0,
