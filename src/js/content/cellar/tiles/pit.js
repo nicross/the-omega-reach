@@ -45,7 +45,7 @@ content.cellar.tiles.pit = content.cellar.tiles.invent({
     }
 
     content.cellar.health.subtract(1)
-    content.audio.sanityChange.trigger({isUp: false})
+    content.audio.healthChange.trigger({isUp: false})
 
     this.effectsOnEnter.push({
       attribute: {

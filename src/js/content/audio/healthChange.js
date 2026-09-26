@@ -1,4 +1,4 @@
-content.audio.sanityChange = (() => {
+content.audio.healthChange = (() => {
   const baseGain = engine.fn.fromDb(-12),
     bus = content.audio.channel.sfx.createBus(),
     rootFrequency = engine.fn.fromMidi(48)

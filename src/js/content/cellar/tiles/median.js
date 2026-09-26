@@ -20,7 +20,7 @@ content.cellar.tiles.median = content.cellar.tiles.invent({
     }
 
     content.cellar.health.set(target)
-    content.audio.sanityChange.trigger({isUp: health < target})
+    content.audio.healthChange.trigger({isUp: health < target})
 
     this.state.delta = health < target ? -1 : 1
 

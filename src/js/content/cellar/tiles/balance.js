@@ -23,7 +23,7 @@ content.cellar.tiles.balance = content.cellar.tiles.invent({
     }
 
     content.cellar.health.set(target)
-    content.audio.sanityChange.trigger({isUp: health < target})
+    content.audio.healthChange.trigger({isUp: health < target})
 
     this.effectsOnEnter.push({
       attribute: {

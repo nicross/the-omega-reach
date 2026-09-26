@@ -11,7 +11,7 @@ content.location.on('cellar-vision', ({tile}) => {
           tile.state.active = false
 
           content.cellar.health.subtract(cost)
-          content.audio.sanityChange.trigger({isUp: false})
+          content.audio.healthChange.trigger({isUp: false})
 
           app.tutorial.update()
           app.screen.game.update()

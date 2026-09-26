@@ -61,7 +61,7 @@ content.cellar.tiles.vision = content.cellar.tiles.invent({
 
     if (health > target) {
       content.cellar.health.set(target)
-      content.audio.sanityChange.trigger({isUp: false})
+      content.audio.healthChange.trigger({isUp: false})
     }
   },
   onInteractMore: function () {

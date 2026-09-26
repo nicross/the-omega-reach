@@ -128,7 +128,7 @@ content.cellar.tiles.normal = (() => {
             }
 
             content.cellar.health.add(1)
-            content.audio.sanityChange.trigger({isUp: true})
+            content.audio.healthChange.trigger({isUp: true})
           },
           attribute: {
             label,
@@ -156,7 +156,7 @@ content.cellar.tiles.normal = (() => {
             }
 
             content.cellar.health.setMax()
-            content.audio.sanityChange.trigger({isUp: true})
+            content.audio.healthChange.trigger({isUp: true})
           },
           attribute: {
             label,
@@ -199,7 +199,7 @@ content.cellar.tiles.normal = (() => {
             } else {
               formatter = 'health'
               content.cellar.health.subtract(1)
-              content.audio.sanityChange.trigger({isUp: false})
+              content.audio.healthChange.trigger({isUp: false})
             }
           },
           attribute: {
