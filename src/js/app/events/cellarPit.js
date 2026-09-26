@@ -11,7 +11,10 @@ content.location.on('cellar-pit', ({tile}) => {
           // XXX: Uses before() so the tutorial is enqueued without a screen flash
           content.audio.barrierChange.trigger({isUp: true})
           content.cellar.barrier.add(1)
+
           content.wallet.subtract(cost)
+          content.audio.currencyChange.trigger({isUp: true})
+
           tile.incrementUses()
 
           app.tutorial.update()

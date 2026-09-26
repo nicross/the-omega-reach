@@ -9,7 +9,9 @@ content.location.on('cellar-trove', ({tile}) => {
         label: `Pocket the credit${amount == 1 ? '' : 's'}`,
         before: () => {
           content.donations.remove(amount)
+
           content.wallet.add(amount)
+          content.audio.currencyChange.trigger({isUp: true})
 
           app.tutorial.update()
           app.screen.game.update()

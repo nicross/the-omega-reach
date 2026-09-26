@@ -4,7 +4,6 @@
   - Quagmire intro
   - Trove intro
   - Vision intro
-- Implement credit up/down sound and use wherever wallet changes
 - Improve mirrored solutions
 - A reusable/parameterized sound for unique cellar tiles
 

@@ -138,8 +138,9 @@ app.tutorial.shopLoop = app.tutorial.invent({
                 this.state.bought = true
 
                 content.instruments.add(name)
+
                 content.wallet.subtract(cost)
-                content.audio.interactSuccess.trigger({index: 2})
+                content.audio.currencyChange.trigger({isUp: false})
 
                 // XXX: Prevent door open animation until next dialog
                 content.cellar.health.reset()

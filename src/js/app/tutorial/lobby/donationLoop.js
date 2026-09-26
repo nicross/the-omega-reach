@@ -53,12 +53,12 @@ app.tutorial.donationLoop = app.tutorial.invent({
     }
   },
   earnCredits: function () {
-    content.audio.interactSuccess.trigger({index: 2})
-
     const amount = content.donations.amount()
 
     content.donations.collect(amount)
+
     content.wallet.add(amount)
+    content.audio.currencyChange.trigger({isUp: true})
 
     app.screen.game.dialog.push({
       title: `Credits received!`,

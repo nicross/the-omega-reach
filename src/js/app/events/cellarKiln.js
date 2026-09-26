@@ -10,8 +10,9 @@ content.location.on('cellar-kiln', ({tile}) => {
         label: `Smelt the credit${cost == 1 ? '' : 's'}`,
         before: () => {
           content.instruments.add(name)
-          content.audio.interactSuccess.trigger({index: 2})
+
           content.wallet.subtract(cost)
+          content.audio.currencyChange.trigger({isUp: false})
 
           tile.incrementUses()
           tile.triggerCooldown()

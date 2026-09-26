@@ -9,7 +9,9 @@ content.location.on('cellar-quagmire', ({tile}) => {
         label: `Burn the credit${cost == 1 ? '' : 's'}`,
         before: () => {
           tile.state.active = false
+
           content.wallet.subtract(cost)
+          content.audio.currencyChange.trigger({isUp: false})
 
           app.tutorial.update()
           app.screen.game.update()

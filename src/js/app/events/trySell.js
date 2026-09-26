@@ -8,11 +8,10 @@ content.location.on('try-sell', ({instrument}) => {
         label: 'Sell it',
         after: () => {
           content.rooms.gallery.onSell()
+          content.audio.currencyChange.trigger({isUp: true})
 
           app.screen.game.update()
           app.tutorial.update()
-
-          content.audio.interactSuccess.trigger({index: 2})
         },
       },
       {

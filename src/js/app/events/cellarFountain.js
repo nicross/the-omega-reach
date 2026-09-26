@@ -11,7 +11,10 @@ content.location.on('cellar-fountain', ({tile}) => {
         after: () => {
           content.audio.healthChange.trigger({isUp: true})
           content.cellar.health.add(recovery)
+
           content.wallet.subtract(cost)
+          content.audio.currencyChange.trigger({isUp: false})
+
           content.donations.add(cost)
 
           tile.incrementUses()
