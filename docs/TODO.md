@@ -1,8 +1,12 @@
 # TODO
-## v1.2.3 - Steam demo (2026-10-08 or earlier)
+## v1.2.2 - Steam demo (2026-10-08 or earlier)
+- Cellar tile mechanics
+  - Quagmire intro
+  - Trove intro
+  - Vision intro
+- Implement credit up/down sound and use wherever wallet changes
 - Improve mirrored solutions
 - A reusable/parameterized sound for unique cellar tiles
-- More descriptions of unique cellar tiles
 
 ## v2.0.0 - Story expansion (Q2 2027)
 - Add relics to planets/moons

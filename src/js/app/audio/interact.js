@@ -4,7 +4,7 @@ engine.ready(() => {
       return
     }
 
-    if (room.id == 'cellar' && ['ascent','descent','fountain','nexus'].includes(content.cellar.tiles.current().id)) {
+    if (room.id == 'cellar' && content.cellar.tiles.current().isUnique) {
       return
     }
 

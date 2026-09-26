@@ -8,7 +8,7 @@ content.cellar.tiles.obelisk = content.cellar.tiles.invent({
     active: false,
     rotation: 0,
   },
-  activeHealthBonus: 3,
+  activeHealthBonus: 5,
   canInteractMore: function () {
     return !this.state.active
   },
@@ -31,7 +31,7 @@ content.cellar.tiles.obelisk = content.cellar.tiles.invent({
         keyboard: `${app.settings.computed.inputHold ? 'Hold' : 'Press'} <kbd>Enter</kbd> or <kbd>Spacebar</kbd>`,
         mouse: `${app.settings.computed.inputHold ? 'Click and hold' : 'Click'} the <kbd>Interact Button</kbd>`,
         touch: `${app.settings.computed.inputHold ? 'Tap and hold' : 'Tap'} the <kbd>Interact Button</kbd>`,
-      }[app.tutorial.getInputPreference()]) + ` to gain its blessings.`,
+      }[app.tutorial.getInputPreference()]) + ` to increase your maximum sanity.`,
     },
   ],
   getEffects: function () {

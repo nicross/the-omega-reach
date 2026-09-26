@@ -53,7 +53,7 @@ content.cellar.tiles.normal = (() => {
 
         return {
           apply: () => {
-            content.wallet.add(
+            content.donations.add(
               Math.max(1, Math.round(reward * (1 + content.cellar.tiles.calculateGlobalDonationRate())))
             )
           },
@@ -75,7 +75,7 @@ content.cellar.tiles.normal = (() => {
 
         return {
           apply: () => {
-            content.wallet.add(
+            content.donations.add(
               Math.max(1, Math.round(reward * (1 + content.cellar.tiles.calculateGlobalDonationRate())))
             )
           },

@@ -29,7 +29,7 @@ content.cellar.tiles.armory = content.cellar.tiles.invent({
         keyboard: `${app.settings.computed.inputHold ? 'Hold' : 'Press'} <kbd>Enter</kbd> or <kbd>Spacebar</kbd>`,
         mouse: `${app.settings.computed.inputHold ? 'Click and hold' : 'Click'} the <kbd>Interact Button</kbd>`,
         touch: `${app.settings.computed.inputHold ? 'Tap and hold' : 'Tap'} the <kbd>Interact Button</kbd>`,
-      }[app.tutorial.getInputPreference()]) + ` to equip additional protection.`,
+      }[app.tutorial.getInputPreference()]) + ` to equip some extra protection.`,
     },
   ],
   getEffects: function () {

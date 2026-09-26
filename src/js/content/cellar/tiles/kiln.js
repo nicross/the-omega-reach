@@ -10,7 +10,7 @@ content.cellar.tiles.kiln = content.cellar.tiles.invent({
   },
   canInteractMore: function () {
     return content.wallet.has(this.calculateCost())
-      && content.time.value() > this.state.cooldown
+      //&& content.time.value() > this.state.cooldown
   },
   effectsGlobal: [],
   getDialogs: () => [
@@ -31,7 +31,7 @@ content.cellar.tiles.kiln = content.cellar.tiles.invent({
         keyboard: `${app.settings.computed.inputHold ? 'Hold' : 'Press'} <kbd>Enter</kbd> or <kbd>Spacebar</kbd>`,
         mouse: `${app.settings.computed.inputHold ? 'Click and hold' : 'Click'} the <kbd>Interact Button</kbd>`,
         touch: `${app.settings.computed.inputHold ? 'Tap and hold' : 'Tap'} the <kbd>Interact Button</kbd>`,
-      }[app.tutorial.getInputPreference()]) + ` to repurpose credits into new instruments.`,
+      }[app.tutorial.getInputPreference()]) + ` to transmute your credits into instruments.`,
     },
   ],
   getInteractLabelMore: () => 'Interact',

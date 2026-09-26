@@ -40,6 +40,11 @@ content.donations = (() => {
 
       return this
     },
+    set: function (value = 0) {
+      amount = value
+
+      return this
+    },
   }
 })()
 
