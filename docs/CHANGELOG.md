@@ -12,6 +12,7 @@
 - Split audio settings into mixer and performance screens.
 - Added a slider for interface volume to the audio mixer.
 - Fixed focus memory when exiting to main menu.
+- Updated the manual accordingly.
 
 ## v1.2.1
 - Added support for touch input.

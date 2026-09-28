@@ -64,7 +64,7 @@ app.tutorial.cellarUnique = app.tutorial.invent({
     app.screen.game.dialog.push({
       tutorial: true,
       title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> Radices of power:`,
-      description: `<strong>The cellar</strong> is peppered with landmarks that alter your adventure. Exploit them to dive deeper.`,
+      description: `<strong>The cellar</strong> is peppered with landmarks which alter your perspective. Exploit them to dive deeper.`,
       actions: [
         {
           label: hasMoreDialogs ? 'Next tutorial' : 'Regain control',

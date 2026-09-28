@@ -15,11 +15,12 @@ content.cellar.tiles.vision = content.cellar.tiles.invent({
   getDialogs: function () {
     return [
       {
-        title: `It's an omen.`,
+        title: `It's an unspeakable evil.`,
         description: ``,
         actions: [
           {label: 'Quiver cowardly'},
           {label: 'Scoff skeptically'},
+          {label: 'Be cool'},
         ],
       },
       {
