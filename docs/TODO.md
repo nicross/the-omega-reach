@@ -1,7 +1,6 @@
 # TODO
 ## v1.2.2 - Steam demo (2026-10-08 or earlier)
 - Cellar tile mechanics
-  - Quagmire intro
   - Trove intro
   - Vision intro
 - Improve mirrored solutions

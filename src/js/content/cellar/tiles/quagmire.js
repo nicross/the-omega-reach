@@ -14,7 +14,7 @@ content.cellar.tiles.quagmire = content.cellar.tiles.invent({
     return [
       {
         title: `It's a boondoggle.`,
-        description: ``,
+        description: `The derelict project hinders your progress as its medley of failed remedies slip deeper into the <em>earthen bog</em>. The vexing miasma that your predecessors couldn't plug vacillates with a vampiric yuck.`,
         actions: [
           {label: 'Pardon the problem'},
           {label: 'Seek a solution'},
@@ -23,7 +23,7 @@ content.cellar.tiles.quagmire = content.cellar.tiles.invent({
       {
         tutorial: true,
         title: `<span class="u-highlight">[Tutorial]</span> <span class="u-screenReader">for</span> The quagmire:`,
-        description: () => `Donations are reduced while this remains unaddressed. ` + ({
+        description: () => `Donations are reduced while it remains unaddressed. ` + ({
           gamepad: `${app.settings.computed.inputHold ? 'Hold' : 'Press'} any <kbd>Face Button</kbd>`,
           keyboard: `${app.settings.computed.inputHold ? 'Hold' : 'Press'} <kbd>Enter</kbd> or <kbd>Spacebar</kbd>`,
           mouse: `${app.settings.computed.inputHold ? 'Click and hold' : 'Click'} the <kbd>Interact Button</kbd>`,
@@ -79,23 +79,27 @@ content.cellar.tiles.quagmire = content.cellar.tiles.invent({
     }
 
     const time = content.time.value(),
-      value = this.zField.value(particle.target.x / 10, particle.target.y / 10, time / 10)
+      value = this.zField.value(particle.target.x / 10, particle.target.y / 10, time / 10 * (this.state.active ? 1 : 0))
+
+    const isVein = engine.fn.between(value, 0.4, 0.6)
 
     particle.target.z += this.state.active
       ? 1.5 * engine.fn.scale(value, 0, 1, -1, 1) * (distance ** 0.75)
       : 0
 
-    particle.target.h = this.state.active
+    particle.target.h = this.state.active || isVein
       ? particle.target.h
       : Math.sin(engine.const.tau * time / 60 * particle.twinkleFrequencies[0])
 
-    particle.target.s = this.state.active
-      ? (0.5 + (0.5 * Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1]))) ** 0.5
-      : 3/4 + Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1])/4
+    if (this.state.active || !isVein) {
+      particle.target.s = this.state.active
+        ? (0.5 + (0.5 * Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1]))) ** 0.5
+        : 3/4 + Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1])/4
 
-    particle.target.v = this.state.active
-      ? (0.5 + (0.5 * Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]))) ** 1.5
-      : 3/4 + Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0])/4
+      particle.target.v = this.state.active
+        ? (0.5 + (0.5 * Math.sin(engine.const.tau * time * particle.twinkleFrequencies[2]))) ** 1.5
+        : 3/4 + Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0])/4
+    }
   },
   // Interactions
   calculateCost: function () {
