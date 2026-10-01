@@ -16,7 +16,7 @@ content.cellar.tiles.vision = content.cellar.tiles.invent({
     return [
       {
         title: `It's an unspeakable evil.`,
-        description: ``,
+        description: `Its presence manifests from cycles of accumulated greed. The insatiable concentrate permeates and gelatinates the ether, congesting your stifled lungs with icy rancid smog.`,
         actions: [
           {label: 'Quiver cowardly'},
           {label: 'Scoff skeptically'},
