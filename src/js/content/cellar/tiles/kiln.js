@@ -10,7 +10,6 @@ content.cellar.tiles.kiln = content.cellar.tiles.invent({
   },
   canInteractMore: function () {
     return content.wallet.has(this.calculateCost())
-      //&& content.time.value() > this.state.cooldown
   },
   effectsGlobal: [],
   getDialogs: () => [

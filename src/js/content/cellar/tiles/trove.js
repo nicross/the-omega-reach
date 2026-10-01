@@ -11,11 +11,11 @@ content.cellar.tiles.trove = content.cellar.tiles.invent({
   canInteractMore: () => content.donations.has(1),
   getDialogs: () => [
     {
-      title: `It's a miracle.`,
-      description: ``,
+      title: `It's a fortune.`,
+      description: `Mountains of opulence manifest your livelihood with affectionate hints of <em>earthen wood</em>. Its magnetic piles of credits are ripe for…`,
       actions: [
-        {label: 'stealing.'},
         {label: 'swimming.'},
+        {label: 'squandering.'},
         {label: 'saving.'},
       ],
     },
@@ -27,7 +27,7 @@ content.cellar.tiles.trove = content.cellar.tiles.invent({
         keyboard: `${app.settings.computed.inputHold ? 'Hold' : 'Press'} <kbd>Enter</kbd> or <kbd>Spacebar</kbd>`,
         mouse: `${app.settings.computed.inputHold ? 'Click and hold' : 'Click'} the <kbd>Interact Button</kbd>`,
         touch: `${app.settings.computed.inputHold ? 'Tap and hold' : 'Tap'} the <kbd>Interact Button</kbd>`,
-      }[app.tutorial.getInputPreference()]) + ` to raid donations from <strong>the lobby</strong>.`,
+      }[app.tutorial.getInputPreference()]) + ` to borrow a portion of donations from <strong>the lobby</strong>.`,
     },
   ],
   getEffects: function () {
@@ -64,6 +64,7 @@ content.cellar.tiles.trove = content.cellar.tiles.invent({
     }
 
     content.donations.add(engine.fn.randomInt(20, 30))
+    content.audio.currencyChange.trigger({isUp: true})
 
     this.state.entered = true
     this.state.total = content.donations.amount()
@@ -99,7 +100,7 @@ content.cellar.tiles.trove = content.cellar.tiles.invent({
       time = content.time.value(),
       z = this.zField.value(particle.target.x / 10, particle.target.y / 10)
 
-    particle.target.z += 2.5 * content.fn.gain(distance, 2) * z * value
+    particle.target.z += radius * content.fn.gain(distance, 2) * z * value
     particle.target.h = Math.sin(engine.const.tau * time / 60 * particle.twinkleFrequencies[2])
     particle.target.s = engine.fn.lerpExp(0, 3/4 + Math.sin(engine.const.tau * time * particle.twinkleFrequencies[0])/4, z, 0.5)
     particle.target.v = engine.fn.lerpExp(1, 3/4 + Math.sin(engine.const.tau * time * particle.twinkleFrequencies[1])/4, z, 0.5)

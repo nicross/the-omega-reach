@@ -15,8 +15,8 @@ content.cellar.tiles.vision = content.cellar.tiles.invent({
   getDialogs: function () {
     return [
       {
-        title: `It's an unspeakable evil.`,
-        description: `Its presence manifests from cycles of accumulated greed. The insatiable concentrate permeates and gelatinates the ether, congesting your stifled lungs with icy rancid smog.`,
+        title: `It's an omen.`,
+        description: `Its presence commences from countless cycles of accumulating greed. The insatiable concentrate permeates and gelatinates the ether, congesting your stifled lungs with icy rancid smog.`,
         actions: [
           {label: 'Quiver cowardly'},
           {label: 'Scoff skeptically'},
