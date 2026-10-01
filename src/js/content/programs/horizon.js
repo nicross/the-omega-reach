@@ -18,5 +18,10 @@ content.programs.horizon = content.programs.invent({
     particle.target.x = -Math.abs(particle.spheres[index].x) * 10
     particle.target.y = particle.spheres[index].y * 10
     particle.target.z = particle.spheres[index].z * 10
+
+    // XXX: Capsule
+    if (app.isCapsule()) {
+      particle.target.v *= 1 - (Math.abs(particle.target.x) / 10)
+    }
   },
 })

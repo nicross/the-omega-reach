@@ -1,8 +1,5 @@
 # TODO
 ## v1.2.2 - Steam demo (2026-10-08 or earlier)
-- Cellar tile mechanics
-  - Trove intro
-  - Vision intro
 - Improve mirrored solutions
 - A reusable/parameterized sound for unique cellar tiles
 

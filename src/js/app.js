@@ -6,7 +6,8 @@ const app = (() => {
     readyContext.reject = reject
   })
 
-  let isActive = false,
+  let capsuleTimeout,
+    isActive = false,
     isCapsule = false,
     isImmersive = false,
     root
@@ -50,9 +51,10 @@ const app = (() => {
 
       if (isCapsule) {
         root.classList.add('a-app-capsule')
-        content.particles.setSpeed(0)
+        capsuleTimeout = setTimeout(() => content.particles.setSpeed(0), 1000)
       } else {
         root.classList.remove('a-app-capsule')
+        clearTimeout(capsuleTimeout)
         content.particles.setSpeed(1)
       }
 
