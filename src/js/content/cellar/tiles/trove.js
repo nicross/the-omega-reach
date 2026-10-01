@@ -64,7 +64,6 @@ content.cellar.tiles.trove = content.cellar.tiles.invent({
     }
 
     content.donations.add(engine.fn.randomInt(20, 30))
-    content.audio.currencyChange.trigger({isUp: true})
 
     this.state.entered = true
     this.state.total = content.donations.amount()
