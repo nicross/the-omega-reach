@@ -7,7 +7,7 @@ content.location.on('cellar-armory', ({tile}) => {
         label: `Borrow something`,
         before: () => {
           content.cellar.barrier.add(1)
-          content.audio.barrierChange.trigger({isUp: true})
+          content.audio.barrierChange.up()
 
           tile.incrementUses()
           content.cellar.scans.set(tile, tile.getEffects().length)

@@ -17,7 +17,7 @@ content.cellar.tiles.rift = content.cellar.tiles.invent({
       )
     )
 
-    content.audio.healthChange.trigger({isUp: false})
+    content.audio.healthChange.down()
 
     this.effectsOnEnter.push({
       attribute: {

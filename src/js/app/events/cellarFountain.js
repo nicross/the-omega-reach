@@ -9,11 +9,11 @@ content.location.on('cellar-fountain', ({tile}) => {
       {
         label: `Donate the credit${cost == 1 ? '' : 's'}`,
         after: () => {
-          content.audio.healthChange.trigger({isUp: true})
+          content.audio.healthChange.up()
           content.cellar.health.add(recovery)
 
           content.wallet.subtract(cost)
-          content.audio.currencyChange.trigger({isUp: false})
+          content.audio.currencyChange.down()
 
           content.donations.add(cost)
 

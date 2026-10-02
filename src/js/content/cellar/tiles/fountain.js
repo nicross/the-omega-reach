@@ -58,7 +58,7 @@ content.cellar.tiles.fountain = content.cellar.tiles.invent({
     }
 
     content.cellar.health.add(1)
-    content.audio.healthChange.trigger({isUp: true})
+    content.audio.healthChange.up()
 
     this.effectsOnEnter.push({
       attribute: {

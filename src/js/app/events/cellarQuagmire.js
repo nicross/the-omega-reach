@@ -11,7 +11,7 @@ content.location.on('cellar-quagmire', ({tile}) => {
           tile.state.active = false
 
           content.wallet.subtract(cost)
-          content.audio.currencyChange.trigger({isUp: false})
+          content.audio.currencyChange.down()
 
           app.tutorial.update()
           app.screen.game.update()

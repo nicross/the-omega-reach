@@ -140,7 +140,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
                 content.instruments.add(name)
 
                 content.wallet.subtract(cost)
-                content.audio.currencyChange.trigger({isUp: false})
+                content.audio.currencyChange.down()
 
                 // XXX: Prevent door open animation until next dialog
                 content.cellar.health.reset()

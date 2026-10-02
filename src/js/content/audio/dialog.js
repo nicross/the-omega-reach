@@ -36,7 +36,7 @@ content.audio.dialog = (() => {
     trigger: function ({
       duration = 1/24,
       delay = 1/24,
-      when = engine.time() + 1/8,
+      when = engine.time() + engine.fn.randomFloat(1/12, 1/8),
     } = {}) {
       const notes = engine.fn.shuffle([
         60,63,65,67,70,72,

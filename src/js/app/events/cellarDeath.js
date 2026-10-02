@@ -43,7 +43,7 @@ content.location.on('cellar-death', ({
       {
         title: `<q>By the way…</q>`,
         description: `You brace for it again. <q>Check your wallet. My true expertise doesn't come cheap.</q> You confirm the <strong class="a-game--dialogCurrency">${app.utility.format.currency(penalty)}</strong> now missing—and face its thief.`,
-        before: () => content.audio.currencyChange.trigger({isUp: false}),
+        before: () => content.audio.currencyChange.down(),
         actions: [
           {
             label: 'Grumble loudly',
@@ -84,7 +84,7 @@ content.location.on('cellar-death', ({
     app.screen.game.dialog.push({
       title: `It's the atrium.`,
       description: `You lost <strong class="a-game--dialogCurrency">${app.utility.format.currency(penalty)}</strong> to <em>${reason.toLowerCase()}</em> in <strong>the cellar</strong>.`,
-      before: () => content.audio.currencyChange.trigger({isUp: false}),
+      before: () => content.audio.currencyChange.down(),
       after: () => app.canvas.setBlur(false),
       actions: [
         {

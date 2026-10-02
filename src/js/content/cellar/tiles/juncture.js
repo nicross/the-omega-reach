@@ -17,7 +17,7 @@ content.cellar.tiles.juncture = content.cellar.tiles.invent({
       )
     )
 
-    content.audio.healthChange.trigger({isUp: true})
+    content.audio.healthChange.up()
 
     this.effectsOnEnter.push({
       attribute: {

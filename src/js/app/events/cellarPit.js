@@ -9,11 +9,11 @@ content.location.on('cellar-pit', ({tile}) => {
         label: `Destroy the credit${cost == 1 ? '' : 's'}`,
         before: () => {
           // XXX: Uses before() so the tutorial is enqueued without a screen flash
-          content.audio.barrierChange.trigger({isUp: true})
+          content.audio.barrierChange.up()
           content.cellar.barrier.add(1)
 
           content.wallet.subtract(cost)
-          content.audio.currencyChange.trigger({isUp: true})
+          content.audio.currencyChange.up()
 
           tile.incrementUses()
 

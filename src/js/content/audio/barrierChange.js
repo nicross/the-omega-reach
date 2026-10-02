@@ -4,13 +4,12 @@ content.audio.barrierChange = (() => {
     rootFrequency = engine.fn.fromMidi(60)
 
   function trigger({
-    delay = 1/12,
     duration = 1/2,
     isUp = true,
+    when = engine.time() + engine.fn.randomFloat(1/6, 1/4),
   } = {}) {
     const detune = engine.fn.randomFloat(-10, 10),
-      modFrequency = engine.fn.randomFloat(7, 13),
-      when = engine.time() + delay
+      modFrequency = engine.fn.randomFloat(7, 13)
 
     // Synthesis
     const synth = engine.synth.fm({
@@ -40,8 +39,14 @@ content.audio.barrierChange = (() => {
   }
 
   return {
-    trigger: function (...args) {
-      trigger(...args)
+    down: function (options = {}) {
+      trigger({...options, isUp: false})
+
+      return this
+    },
+    trigger,
+    up: function (options = {}) {
+      trigger({...options, isUp: true})
 
       return this
     },

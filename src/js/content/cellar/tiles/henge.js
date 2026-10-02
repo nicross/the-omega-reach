@@ -10,7 +10,7 @@ content.cellar.tiles.henge = content.cellar.tiles.invent({
     }
 
     content.cellar.health.set(4)
-    content.audio.healthChange.trigger({isUp: true})
+    content.audio.healthChange.up()
 
     this.effectsOnEnter.push({
       attribute: {

@@ -128,7 +128,7 @@ content.cellar.tiles.normal = (() => {
             }
 
             content.cellar.health.add(1)
-            content.audio.healthChange.trigger({isUp: true})
+            content.audio.healthChange.up()
           },
           attribute: {
             label,
@@ -156,7 +156,7 @@ content.cellar.tiles.normal = (() => {
             }
 
             content.cellar.health.setMax()
-            content.audio.healthChange.trigger({isUp: true})
+            content.audio.healthChange.up()
           },
           attribute: {
             label,
@@ -195,11 +195,11 @@ content.cellar.tiles.normal = (() => {
             if (content.cellar.barrier.has(1) && !content.cellar.health.has(2)) {
               formatter = 'barrier'
               content.cellar.barrier.subtract(1)
-              content.audio.barrierChange.trigger({isUp: false})
+              content.audio.barrierChange.down()
             } else {
               formatter = 'health'
               content.cellar.health.subtract(1)
-              content.audio.healthChange.trigger({isUp: false})
+              content.audio.healthChange.down()
             }
           },
           attribute: {
@@ -230,7 +230,7 @@ content.cellar.tiles.normal = (() => {
         return {
           apply: () => {
             content.cellar.barrier.add(1)
-            content.audio.barrierChange.trigger({isUp: true})
+            content.audio.barrierChange.up()
           },
           attribute: {
             label,

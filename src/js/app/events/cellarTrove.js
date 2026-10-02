@@ -11,7 +11,7 @@ content.location.on('cellar-trove', ({tile}) => {
           content.donations.remove(amount)
 
           content.wallet.add(amount)
-          content.audio.currencyChange.trigger({isUp: true})
+          content.audio.currencyChange.up()
 
           app.tutorial.update()
           app.screen.game.update()

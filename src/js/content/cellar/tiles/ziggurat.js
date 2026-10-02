@@ -23,7 +23,7 @@ content.cellar.tiles.ziggurat = content.cellar.tiles.invent({
       this.state.delta = -1
 
       content.cellar.health.subtract(1)
-      content.audio.healthChange.trigger({isUp: false})
+      content.audio.healthChange.down()
 
       this.effectsOnEnter.push({
         attribute: {
@@ -35,7 +35,7 @@ content.cellar.tiles.ziggurat = content.cellar.tiles.invent({
       this.state.delta = 1
 
       content.cellar.health.add(1)
-      content.audio.healthChange.trigger({isUp: true})
+      content.audio.healthChange.up()
 
       this.effectsOnEnter.push({
         attribute: {

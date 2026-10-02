@@ -12,7 +12,7 @@ content.location.on('cellar-kiln', ({tile}) => {
           content.instruments.add(name)
 
           content.wallet.subtract(cost)
-          content.audio.currencyChange.trigger({isUp: false})
+          content.audio.currencyChange.down()
 
           tile.incrementUses()
           tile.triggerCooldown()
