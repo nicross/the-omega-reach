@@ -60,7 +60,7 @@ content.stars = (() => {
       })
     }
 
-    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < star.wildcard/2) {
+    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < star.wildcard/1.5) {
       star.quirks.push({
         name: engine.fn.chooseSplice(
           type.commonQuirks,
@@ -69,7 +69,7 @@ content.stars = (() => {
       })
     }
 
-    if (!isTutorial && type.rareQuirks.length && srand('quirk', 'rare', 'roll') < star.wildcard/3) {
+    if (!isTutorial && type.rareQuirks.length && srand('quirk', 'rare', 'roll') < star.wildcard/2) {
       star.quirks.push({
         isRare: true,
         name: engine.fn.chooseSplice(
@@ -83,6 +83,14 @@ content.stars = (() => {
   }
 
   function generateTypes(galaxy, srand) {
+    const rareQuirks = [
+      'Debris disk',
+      'Distress beacon',
+      'Megastructures',
+      'Navigational beacon',
+      'Spaceship graveyard',
+    ]
+
     return [
       {
         label: 'Main sequence star',
@@ -92,18 +100,22 @@ content.stars = (() => {
         weight: engine.fn.lerp(1, 0.5, galaxy.age),
         commonQuirks: [
           'Asteroid belt',
+          engine.fn.choose(['Hydrogen','Helium'], srand('blue hypergiant','fusion')) + ' fusion',
+          'Gravity well',
+          'Highly luminous',
           'Highly metallic',
           'Irregular spin',
           'Mass ejections',
-          'Stellar winds',
           'Stellar flares',
+          'Stellar winds',
+          'Type ' + engine.fn.choose(['A','F','G'], srand('main sequence','type')),
           'Unusual spectra',
         ],
         rareQuirks: [
-          'Debris disk',
-          'Distress beacon',
+          ...rareQuirks,
+          'Degenerate core',
           'Protostar',
-          'Spaceship graveyard',
+          'Starspots',
         ],
       },
       {
@@ -113,19 +125,22 @@ content.stars = (() => {
         planets: 2,
         weight: engine.fn.lerp(0, 1/2, galaxy.age),
         commonQuirks: [
-          engine.fn.choose(['Carbon core', 'Neon core', 'Helium core'], srand('dwarf','core')),
+          engine.fn.choose(['Carbon', 'Neon', 'Helium'], srand('dwarf','core')) + ' core',
+          'Gravitational lens',
           'High density',
           'Highly magnetic',
           'Highly metallic',
           'Irregular spin',
           'Planetary nebula',
+          'Stellar remnant',
           'Unusual spectra',
         ],
         rareQuirks: [
+          ...rareQuirks,
+          'Accretion disk',
+          'Carbon fusion',
           'Collapsing core',
-          'Distress beacon',
           'Runaway fusion',
-          'Spaceship graveyard',
         ],
       },
       {
@@ -141,14 +156,15 @@ content.stars = (() => {
           'Irregular spin',
           'Photon sphere',
           'Relatavistic jets',
+          'Stellar remnant',
           'Unusual charge',
         ],
         rareQuirks: [
+          ...rareQuirks,
           'Accretion disk',
-          'Distress beacon',
           'Quasar',
+          'Quasistar',
           'Spaceship graveyard',
-          'Supernova remnant',
         ],
       },
       {
@@ -164,14 +180,17 @@ content.stars = (() => {
           'High density',
           'High gravity',
           'Highly magnetic',
+          'Plasma core',
+          'Radio emissions',
+          'Stellar remnant',
           'Unusual spectra',
         ],
         rareQuirks: [
+          ...rareQuirks,
+          'Accretion disk',
           'Gamma rays',
-          'Distress beacon',
           'Pulsar',
           'Star quakes',
-          'Spaceship graveyard',
           'Supernova remnant',
         ],
       },
@@ -183,6 +202,8 @@ content.stars = (() => {
         weight: engine.fn.lerp(1/3/2, 1/6/2, galaxy.age),
         commonQuirks: [
           'Asteroid belt',
+          engine.fn.choose(['Helium','Carbon','Iron'], srand('red supergiant','fusion')) + ' fusion',
+          'Gravity well',
           'Highly metallic',
           'Irregular spin',
           'Low density',
@@ -190,13 +211,15 @@ content.stars = (() => {
           'Mass ejections',
           'Stellar winds',
           'Super flares',
+          'Type ' + engine.fn.choose(['K','M'], srand('red supergiant','type')),
           'Unusual spectra',
         ],
         rareQuirks: [
+          ...rareQuirks,
           'Collapsing core',
-          'Debris disk',
-          'Distress beacon',
-          'Spaceship graveyard',
+          'Degenerate core',
+          'Highly variable',
+          'Starspots',
           'Supernova candidate',
         ],
       },
@@ -208,6 +231,7 @@ content.stars = (() => {
         weight: engine.fn.lerp(1/3/2, 1/6/2, galaxy.age),
         commonQuirks: [
           'Asteroid belt',
+          engine.fn.choose(['Helium','Carbon','Iron'], srand('blue hypergiant','fusion')) + ' fusion',
           'Highly metallic',
           'Irregular spin',
           'Low density',
@@ -215,13 +239,15 @@ content.stars = (() => {
           'Mass ejections',
           'Stellar winds',
           'Super flares',
+          'Type ' + engine.fn.choose(['O','B'], srand('blue hypergiant','type')),
           'Unusual spectra',
         ],
         rareQuirks: [
+          ...rareQuirks,
           'Collapsing core',
-          'Debris disk',
-          'Distress beacon',
-          'Spaceship graveyard',
+          'Degenerate core',
+          'Highly variable',
+          'Starspots',
           'Supernova candidate',
         ],
       },
@@ -234,19 +260,19 @@ content.stars = (() => {
        commonQuirks: [
          'Anticyclonic storms',
          'Asteroid belt',
+         engine.fn.choose(['Deuterium','Lithium'], srand('brown dwarf','fusion')) + ' fusion',
          'Gravity well',
          'Failed protostar',
          'Internal heating',
          'Lithium bands',
          'Methane atmosphere',
          'Metallic rain',
+         'Protoplanetary disk',
        ],
        rareQuirks: [
-         'Debris disk',
-         'Distress beacon',
+         ...rareQuirks,
          'Microbial life',
          'Primordial life',
-         'Spaceship graveyard',
          'X-ray source',
        ],
      },
