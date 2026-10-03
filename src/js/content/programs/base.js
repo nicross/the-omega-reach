@@ -337,8 +337,8 @@ content.programs.base = {
   },
   useNavigationalRumble: () => false,
   getNavigationalRumble: function (point) {
-    const location = content.location.get()
-    const vectors = []
+    const location = content.location.get(),
+      vectors = []
 
     if (!location.canMoveDown()) {
       vectors.push(engine.tool.vector3d.unitX())

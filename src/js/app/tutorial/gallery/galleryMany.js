@@ -22,7 +22,7 @@ app.tutorial.galleryMany = app.tutorial.invent({
             label: 'Regain control',
           }
         ],
-        after: () => console.log('marked complete', this.markComplete()),
+        after: () => this.markComplete(),
       },
     ].forEach((x) => app.screen.game.dialog.push(x))
   },

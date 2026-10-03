@@ -114,72 +114,116 @@ content.instruments = (() => {
     ]
 
     // Generic
-    if (srand('generic','rarity') < 1/2) {
+    if (srand('generic','rarity') < 0.5) {
       rare.push(
-        engine.fn.choose(['Esoteric','Handmade','Obscure'], srand('generic','roll'))
+        engine.fn.choose(['Esoteric','Handmade','Obscure'], srand('generic','roll')),
       )
     } else {
       common.push(
-        engine.fn.choose(['Branded','Generic','Readymade'], srand('generic','roll'))
+        engine.fn.choose(['Branded','Generic','Readymade'], srand('generic','roll')),
       )
     }
 
     // Type
-    if (srand('type','rarity') < 1/2) {
-      rare.push('Electronic')
+    if (srand('type','rarity') < 0.5) {
       rare.push(
-        engine.fn.choose(['Amplified','Electrophone','Sampler','Synthesizer'], srand('type','roll'))
+        'Electronic',
+        engine.fn.choose(['Amplified','Electrophone','Sampler','Synthesizer'], srand('type','roll')),
       )
     } else {
-      common.push('Acoustic')
       common.push(
-        engine.fn.choose(['Aerophone','Chordophone','Ideophone','Membranophone'], srand('type','roll'))
+        'Acoustic',
+        engine.fn.choose(['Aerophone','Chordophone','Ideophone','Membranophone'], srand('type','roll')),
       )
     }
 
     // Size
     common.push(
-      engine.fn.choose(['Handheld','Mounted','Upright','Free standing'], srand('size','roll'))
+      engine.fn.choose(['Handheld','Mounted','Upright','Free standing'], srand('size','roll')),
     )
 
     // Owner
     rare.push(
-      engine.fn.choose(['Famous','Iconic','Infamous','Renown'], srand('size','roll')) + ' owner'
+      engine.fn.choose(['Famous','Iconic','Infamous','Renown'], srand('size','roll')) + ' owner',
     )
 
     // Skill level
-    if (srand('skill','rarity') < 1/2) {
+    if (srand('skill','rarity') < 0.5) {
       rare.push(
-        engine.fn.choose(['Advanced','Professional','Maestro'], srand('skill','roll')) + ' level'
+        engine.fn.choose(['Advanced','Professional','Maestro'], srand('skill','roll')) + ' level',
       )
     } else {
       common.push(
-        engine.fn.choose(['Toy','Beginner level','Intermediate level'], srand('skill','roll'))
+        engine.fn.choose(['Toy','Beginner level','Intermediate level'], srand('skill','roll')),
       )
     }
 
     // Handedness
-    if (srand('handedness','rarity') < 3/4) {
+    if (srand('handedness','rarity') < 0.5) {
       rare.push(
-        engine.fn.choose(['Ambidextrous','Left handed','No handed'], srand('handedness','roll'))
+        engine.fn.choose(['Ambidextrous','Left handed','No handed'], srand('handedness','roll')),
       )
     } else {
       common.push('Right handed')
     }
 
     // Edibility
-    if (srand('edibility','rarity') < 1/2) {
+    if (srand('edibility','rarity') < 0.5) {
       rare.push(
-        engine.fn.choose(['Edible','Edible once'], srand('edibility','roll'))
+        engine.fn.choose(['Edible','Edible once'], srand('edibility','roll')),
       )
     } else {
       common.push(
-        engine.fn.choose(['Inedible','Toxic'], srand('edibility','roll'))
+        engine.fn.choose(['Inedible'], srand('edibility','roll')),
+      )
+    }
+
+    // Taste
+    if (srand('taste','rarity') < 0.5) {
+      rare.push(
+        engine.fn.choose(['Chewy','Crunchy','Delicious','Mouthwatering','Salty','Savory','Spicy','Sweet'], srand('taste','roll')),
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Bitter','Bland','Sour','Stale','Tasteless','Unappetizing','Unpalatable','Unsavory'], srand('taste','roll')),
+      )
+    }
+
+    // Smell
+    if (srand('small','rarity') < 0.5) {
+      rare.push(
+        engine.fn.choose(['Ambrosial','Aromatic','Fragrant','Funky','Musky','Noxious','Pungent','Smelly'], srand('small','roll')),
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Neutral','Odorless','Pleasant','Scentless','Sterile','Unscented'], srand('small','roll')),
+      )
+    }
+
+    // Touch
+    if (srand('touch','rarity') < 0.5) {
+      rare.push(
+        engine.fn.choose(['Clammy','Fuzzy','Gooey','Moist','Oily','Polished','Prickly','Squishy','Sticky','Velvety'], srand('touch','roll')),
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Bendy','Coarse','Cool','Heavy','Light','Jagged','Smooth','Soft','Tough','Warm'], srand('touch','roll')),
+      )
+    }
+
+    // Sentience
+    if (srand('sentience','rarity') < 0.5) {
+      rare.push(
+        engine.fn.choose(['Aware','Breathing','Possessed','Sentient','Sleeping'], srand('sentience','roll')),
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Deceased','Inanimate','Inert','Petrified','Static'], srand('sentience','roll')),
       )
     }
 
     // Design
-    if (srand('design','rarity') < 3/7) {
+    if (srand('design','rarity') < 0.5) {
       rare.push(
         engine.fn.choose(['Commemorative','Decorative','Ornate'], srand('design','roll')) + ' design'
       )
@@ -190,7 +234,7 @@ content.instruments = (() => {
     }
 
     // Lore
-    if (srand('lore','rarity') < 1/2) {
+    if (srand('lore','rarity') < 0.5) {
       rare.push(
         engine.fn.choose(['Epic','Forgotten','Legendary','Mythical','Retconned'], srand('lore','roll')) + ' lore'
       )
@@ -201,20 +245,20 @@ content.instruments = (() => {
     }
 
     // Material
-    if (srand('material','rarity') < 4/7) {
+    if (srand('material','rarity') < 0.5) {
       rare.push(
-        engine.fn.choose(['Exotic','Living','Radioactive','Synthetic'], srand('material','roll')) + ' matter'
+        engine.fn.choose(['Degenerate','Exotic','Radioactive','Synthetic'], srand('material','roll')) + ' matter'
       )
     } else {
       common.push(
-        engine.fn.choose(['Metallic','Organic','Silicate'], srand('material','roll')) + ' matter'
+        engine.fn.choose(['Inorganic','Metallic','Nonmetallic','Organic'], srand('material','roll')) + ' matter'
       )
     }
 
     // Period
-    if (srand('period','rarity') < 3/7) {
+    if (srand('period','rarity') < 0.5) {
       rare.push(
-        engine.fn.choose(['Ancient period','Extinction period','Timeless'], srand('period','roll'))
+        engine.fn.choose(['Ancient period','Extinction period','Timeless','Transcendental'], srand('period','roll'))
       )
     } else {
       common.push(
@@ -223,7 +267,7 @@ content.instruments = (() => {
     }
 
     // Quality
-    if (srand('quality','rarity') < 1/2) {
+    if (srand('quality','rarity') < 0.5) {
       rare.push(
         engine.fn.choose(['Fine','Very fine','Near mint','Mint'], srand('quality','roll')) + ' condition'
       )
