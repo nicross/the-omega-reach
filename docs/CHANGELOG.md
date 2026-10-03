@@ -1,8 +1,8 @@
 # CHANGELOG
 ## v1.2.2
 - Improved demo limitation dialogs.
-- Added more quirks for stellar objects and instruments.
-- Added more instrument names.
+- Added more stellar object quirks.
+- Added more instrument names and quirks.
 - Added more tutorial dialogs to the cellar.
 - Added more descriptions and interactions to the cellar.
 - Expanded the cellar to five explorable floors.
