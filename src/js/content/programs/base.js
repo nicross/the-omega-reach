@@ -338,11 +338,7 @@ content.programs.base = {
   useNavigationalRumble: () => false,
   getNavigationalRumble: function (point) {
     const location = content.location.get()
-
-    const vectors = [
-      engine.tool.vector3d.unitZ(),
-      engine.tool.vector3d.unitZ().inverse(),
-    ]
+    const vectors = []
 
     if (!location.canMoveDown()) {
       vectors.push(engine.tool.vector3d.unitX())
@@ -360,10 +356,20 @@ content.programs.base = {
       vectors.push(engine.tool.vector3d.unitX().inverse())
     }
 
+    // Vertical traversal checks
+    // XXX: If other locations add vertical movement, then make this a method
+    if (location.id != 'cellar' || content.cellar.tiles.current().id != 'ascent') {
+      vectors.push(engine.tool.vector3d.unitZ().inverse())
+    }
+
+    if (location.id != 'cellar' || content.cellar.tiles.current().id != 'descent') {
+      vectors.push(engine.tool.vector3d.unitZ())
+    }
+
     const test = {
-      x: Math.sign(point.x) * (Math.abs(point.x)) ** 3,
-      y: Math.sign(point.y) * (Math.abs(point.y)) ** 3,
-      z: Math.sign(point.z) * (Math.abs(point.z)) ** 3,
+      x: Math.sign(point.x) * content.fn.gain(Math.abs(point.x), 3),
+      y: Math.sign(point.y) * content.fn.gain(Math.abs(point.y), 3),
+      z: Math.sign(point.z) * content.fn.gain(Math.abs(point.z), 4),
     }
 
     return vectors.reduce((value, vector) => {

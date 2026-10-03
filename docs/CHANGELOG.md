@@ -6,6 +6,7 @@
 - Added more tutorial dialogs to the cellar.
 - Added more descriptions and interactions to the cellar.
 - Expanded the cellar to five explorable floors.
+- Account for cellar ascents and descents when feeling the room.
 - Randomized the topography of cellar floors each run.
 - Introduced unique cellar tiles gradually each floor.
 - Added lost visitors to rescue from the cellar.
@@ -14,6 +15,7 @@
 - Split audio settings into mixer and performance screens.
 - Added a slider for interface volume to the audio mixer.
 - Fixed focus memory when exiting to main menu.
+- Improved some visual styles and transitions.
 - Updated the manual accordingly.
 
 ## v1.2.1
