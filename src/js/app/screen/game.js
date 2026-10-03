@@ -55,7 +55,8 @@ app.screen.game = app.screenManager.invent({
     this.update()
     this.dialog.checkAdvance()
 
-    app.setRunning(true)
+    app.setPaused(false)
+    engine.loop.once('frame', () => app.setRunning(true))
   },
   onExit: function () {
     app.autosave.trigger()
@@ -65,7 +66,7 @@ app.screen.game = app.screenManager.invent({
     app.controls.interactions.reset()
     content.programs.get()?.update()
 
-    app.setRunning(false)
+    app.setPaused(true).setRunning(false)
   },
   onFrame: function () {
     this.interact.accelerate()

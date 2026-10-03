@@ -80,6 +80,15 @@ const app = (() => {
 
       return this
     },
+    setPaused: function (value) {
+      if (value) {
+        root.classList.add('a-app-paused')
+      } else {
+        root.classList.remove('a-app-paused')
+      }
+
+      return this
+    },
     setUiScale: function (value) {
       document.documentElement.style.setProperty(`--ui-scale`, value)
 

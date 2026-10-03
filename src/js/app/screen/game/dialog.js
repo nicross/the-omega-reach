@@ -82,6 +82,7 @@ app.screen.game.dialog = (() => {
         return
       }
 
+      app.screen.game.rootElement.classList.remove('a-game-dialogOpen')
       document.querySelector('.a-game--info').removeAttribute('aria-hidden')
       document.querySelector('.a-game--nav').removeAttribute('aria-hidden')
 
@@ -168,6 +169,7 @@ app.screen.game.dialog = (() => {
     rootElement.removeAttribute('aria-hidden')
     app.utility.focus.setWithin(rootElement)
 
+    app.screen.game.rootElement.classList.add('a-game-dialogOpen')
     document.querySelector('.a-game--info').setAttribute('aria-hidden', true)
     document.querySelector('.a-game--nav').setAttribute('aria-hidden', true)
 

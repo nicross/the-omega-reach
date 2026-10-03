@@ -20,6 +20,14 @@
     margin-top: unset;
   }
 
+  /* Dialog fades */
+  .a-game > :not(.a-game--dialog) {
+    transition: opacity 0.125s ease;
+  }
+  .a-game-dialogOpen > :not(.a-game--dialog) {
+    opacity: 0.25;
+  }
+
   /* Information */
   .a-game--info {
     outline: none !important;
@@ -259,6 +267,7 @@
   }
   .a-game--dialogContent {
     background-color: hsla(335deg 100% 5% / 75%);
+    border: 0.0625em solid hsla(335deg 100% 25% / 100%);
     max-width: 66ch;
     padding: 2em;
     width: 100%;
@@ -317,7 +326,7 @@
   }
   .a-game--dialogActions {
     list-style-type: none;
-    margin-top: 1.5em;
+    margin-top: 1em;
   }
   .a-game--dialogActions li {
     display: inline-block;

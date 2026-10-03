@@ -28,6 +28,9 @@
     .a-app-running .a-app--canvas {
       transition-duration: 1s;
     }
+    .a-app-paused .a-app--canvas {
+      transition-duration: 0.25s;
+    }
   .a-app--overlaySupport {
     height: 100%;
     left: 0;
