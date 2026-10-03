@@ -100,7 +100,7 @@ content.instruments = (() => {
 
   function generateQuirks(srand) {
     const common = [
-      'Branded',
+      'Counterfeit',
       'Replica',
       'Smuggled',
       'Stolen',
@@ -109,43 +109,79 @@ content.instruments = (() => {
     const rare = [
       'Autographed',
       'Forbidden',
-      'Obscure',
+      'Holographic',
       'Priceless',
-      'Renown owner',
     ]
+
+    // Generic
+    if (srand('generic','rarity') < 1/2) {
+      rare.push(
+        engine.fn.choose(['Esoteric','Handmade','Obscure'], srand('generic','roll'))
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Branded','Generic','Readymade'], srand('generic','roll'))
+      )
+    }
 
     // Type
     if (srand('type','rarity') < 1/2) {
       rare.push('Electronic')
+      rare.push(
+        engine.fn.choose(['Amplified','Electrophone','Sampler','Synthesizer'], srand('type','roll'))
+      )
     } else {
       common.push('Acoustic')
+      common.push(
+        engine.fn.choose(['Aerophone','Chordophone','Ideophone','Membranophone'], srand('type','roll'))
+      )
     }
 
     // Size
     common.push(
-      engine.fn.choose(['Handheld','Upright','Free standing'], srand('size','roll'))
+      engine.fn.choose(['Handheld','Mounted','Upright','Free standing'], srand('size','roll'))
     )
 
+    // Owner
+    rare.push(
+      engine.fn.choose(['Famous','Iconic','Infamous','Renown'], srand('size','roll')) + ' owner'
+    )
+
+    // Skill level
+    if (srand('skill','rarity') < 1/2) {
+      rare.push(
+        engine.fn.choose(['Advanced','Professional','Maestro'], srand('skill','roll')) + ' level'
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Toy','Beginner level','Intermediate level'], srand('skill','roll'))
+      )
+    }
+
     // Handedness
-    if (srand('handedness','rarity') < 1/2) {
-      rare.push('Left handed')
+    if (srand('handedness','rarity') < 3/4) {
+      rare.push(
+        engine.fn.choose(['Ambidextrous','Left handed','No handed'], srand('handedness','roll'))
+      )
     } else {
       common.push('Right handed')
     }
 
     // Edibility
-    if (srand('edibility','rarity') < 2/3) {
+    if (srand('edibility','rarity') < 1/2) {
       rare.push(
         engine.fn.choose(['Edible','Edible once'], srand('edibility','roll'))
       )
     } else {
-      common.push('Inedible')
+      common.push(
+        engine.fn.choose(['Inedible','Toxic'], srand('edibility','roll'))
+      )
     }
 
     // Design
-    if (srand('design','rarity') < 2/7) {
+    if (srand('design','rarity') < 3/7) {
       rare.push(
-        engine.fn.choose(['Commemorative','Ornate'], srand('design','roll')) + ' design'
+        engine.fn.choose(['Commemorative','Decorative','Ornate'], srand('design','roll')) + ' design'
       )
     } else {
       common.push(
@@ -154,9 +190,9 @@ content.instruments = (() => {
     }
 
     // Lore
-    if (srand('lore','rarity') < 3/9) {
+    if (srand('lore','rarity') < 1/2) {
       rare.push(
-        engine.fn.choose(['Epic','Legendary','Mythical'], srand('lore','roll')) + ' lore'
+        engine.fn.choose(['Epic','Forgotten','Legendary','Mythical','Retconned'], srand('lore','roll')) + ' lore'
       )
     } else {
       common.push(
@@ -176,9 +212,9 @@ content.instruments = (() => {
     }
 
     // Period
-    if (srand('period','rarity') < 2/6) {
+    if (srand('period','rarity') < 3/7) {
       rare.push(
-        engine.fn.choose(['Ancient','Extinction'], srand('period','roll')) + ' period'
+        engine.fn.choose(['Ancient period','Extinction period','Timeless'], srand('period','roll'))
       )
     } else {
       common.push(
@@ -232,71 +268,135 @@ content.instruments = (() => {
           'Ambiance',
           'Anthem',
           'Aria',
+          'Axiom',
           'Ballad',
           'Bark',
           'Beat',
+          'Bellow',
+          'Blast',
+          'Bleat',
+          'Breath',
+          'Boom',
+          'Buzz',
           'Call',
           'Caw',
           'Canon',
           'Chant',
+          'Cheer',
           'Chirp',
           'Chortle',
           'Chorus',
           'Coda',
+          'Concept',
+          'Concert',
           'Cough',
+          'Crash',
+          'Croak',
           'Cry',
+          'Dialogue',
+          'Ding',
+          'Dirge',
           'Drone',
           'Duet',
           'Echo',
           'Etude',
           'Fermata',
+          'Gasp',
+          'Growl',
+          'Grunt',
           'Harmony',
+          'Hiss',
+          'Huff',
           'Hum',
+          'Hurrah',
+          'Huzzah',
           'Hymn',
+          'Idea',
+          'Idiom',
+          'Invocation',
+          'Inflection',
+          'Jeer',
+          'Jingle',
+          'Joy',
+          'Jubilation',
+          'Knell',
           'Laugh',
+          'Lullaby',
           'Lyric',
           'March',
           'Mass',
           'Melody',
           'Meow',
+          'Mistake',
+          'Monologue',
+          'Motif',
+          'Motto',
           'Nocturne',
           'Noise',
           'Note',
+          'Noun',
           'Ode',
           'Opera',
           'Ostinato',
+          'Prayer',
           'Prelude',
+          'Pride',
+          'Proverb',
           'Psalm',
+          'Puff',
           'Pulse',
-          'Roar',
+          'Quiver',
+          'Rally',
+          'Refrain',
           'Requiem',
           'Rhapsody',
           'Rhyme',
           'Rhythm',
+          'Riff',
+          'Roar',
+          'Romance',
           'Scale',
           'Scream',
           'Serenade',
           'Shout',
           'Sigh',
+          'Signal',
           'Siren',
           'Snarl',
           'Sneeze',
           'Snort',
+          'Soliloquy',
+          'Solo',
           'Sonata',
           'Sound',
           'Song',
+          'Squall',
+          'Symphony',
+          'Threnody',
           'Timbre',
           'Tone',
           'Tongue',
           'Trance',
+          'Trill',
           'Triumph',
+          'Tune',
+          'Utterance',
+          'Vent',
           'Verse',
           'Vibe',
           'Voice',
           'Waltz',
+          'Wail',
+          'Warble',
+          'Wheeze',
+          'Whine',
+          'Whoop',
           'Word',
+          'Yak',
           'Yawn',
           'Yell',
+          'Yowl',
+          'Zephyr',
         ], Math.random())
 
         name = `${prefix} of ${shortName}`
