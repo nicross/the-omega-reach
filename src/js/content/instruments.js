@@ -14,7 +14,7 @@ content.instruments = (() => {
   }
 
   function generate(name) {
-    const isTutorial = name.includes(content.scans.firstMoon().split(' ').slice(-2, -1).join(' '))
+    const isTutorial = name.includes(content.scans.firstMoon().split(' ').slice(-2).join(' '))
 
     const srand = (...seed) => engine.fn.srand('instrument', name, 'attribute', ...seed)()
     const rarity = srand('rarity') * (isTutorial ? 1/8 : 1)
@@ -257,7 +257,7 @@ content.instruments = (() => {
     },
     generateEphemeral: (name) => generate(name),
     generateNameForBody: function (bodyName) {
-      const shortName = bodyName.split(' ').slice(-3, -1).join(' ')
+      const shortName = bodyName.split(' ').slice(-2).join(' ')
 
       let name
 

@@ -16,7 +16,7 @@ content.scans = (() => {
       const star = content.stars.firstName()
 
       if (star) {
-        return `${star.split(' ').pop()} 2b`
+        return `${star.split(' ').pop()} b2`
       }
 
       return ''

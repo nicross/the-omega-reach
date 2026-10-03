@@ -103,7 +103,7 @@ content.moons = (() => {
     ]
 
     const rareTerrestrialQuirks = [
-      ...rareBaseQuirks,
+      ...rareQuirks,
       'Mining stations',
       'Organic compounds',
       'Precious metals',
