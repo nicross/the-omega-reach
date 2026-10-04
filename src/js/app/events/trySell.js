@@ -8,7 +8,10 @@ content.location.on('try-sell', ({instrument}) => {
         label: 'Sell it',
         after: () => {
           content.rooms.gallery.onSell()
-          content.audio.currencyChange.up()
+
+          content.audio.currencyChange.up({
+            when: engine.time(),
+          })
 
           app.screen.game.update()
           app.tutorial.update()

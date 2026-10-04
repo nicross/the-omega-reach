@@ -4,8 +4,15 @@ content.cellar.health = (() => {
   let amount = 0
 
   function calculateMax(isRaw = false) {
-    const count = content.instruments.count()
-    const raw = 4 + Math.round(Math.sqrt(4 * count))
+    const instruments = content.instruments.count(),
+      runs = content.cellar.run.count()
+
+    const bonus = Math.min(
+      Math.round(Math.sqrt(4 * instruments)),
+      Math.max(0, (runs - 1) * 2),
+    )
+
+    const raw = 4 + bonus
 
     return isRaw
       ? raw

@@ -58,7 +58,6 @@ app.tutorial.donationLoop = app.tutorial.invent({
     content.donations.collect(amount)
 
     content.wallet.add(amount)
-    content.audio.currencyChange.up()
 
     app.screen.game.dialog.push({
       title: `Credits received!`,
@@ -68,6 +67,9 @@ app.tutorial.donationLoop = app.tutorial.invent({
           label: `Cheers!`,
         }
       ],
+      after: () => content.audio.currencyChange.up({
+        when: engine.time(),
+      }),
     })
   },
   // Visitors
