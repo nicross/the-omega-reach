@@ -33,7 +33,7 @@ content.instruments = (() => {
       value: engine.fn.lerp(10, 100, rarity),
     }
 
-    const quirks = generateQuirks(srand)
+    const quirks = generateQuirks(instrument, srand)
     quirks.common = engine.fn.shuffle(quirks.common, engine.fn.srand(srand('sort','common')))
     quirks.rare = engine.fn.shuffle(quirks.rare, engine.fn.srand(srand('sort','rare')))
 
@@ -93,34 +93,38 @@ content.instruments = (() => {
       }
     }
 
+    if (instrument.quirks.some(({name}) => name == 'Holographic')) {
+      multiplier *= 1.5
+    }
+
     instrument.value = Math.ceil(instrument.value * multiplier)
 
     return instrument
   }
 
-  function generateQuirks(srand) {
-    const common = [
-      'Counterfeit',
-      'Replica',
-      'Smuggled',
-      'Stolen',
-    ]
+  function generateQuirks(instrument, srand) {
+    const common = []
+    const rare = ['Holographic']
 
-    const rare = [
-      'Autographed',
-      'Forbidden',
-      'Holographic',
-      'Priceless',
-    ]
-
-    // Generic
-    if (srand('generic','rarity') < 0.5) {
+    // General qualities
+    if (srand('general','rarity') < 0.5) {
       rare.push(
-        engine.fn.choose(['Esoteric','Handmade','Obscure'], srand('generic','roll')),
+        engine.fn.choose(['Ejected','Forbidden','Irreplacable','Priceless'], srand('general','roll')),
       )
     } else {
       common.push(
-        engine.fn.choose(['Branded','Generic','Readymade'], srand('generic','roll')),
+        engine.fn.choose(['Counterfeit','Replica','Smuggled','Stolen'], srand('general','roll')),
+      )
+    }
+
+    // Maker
+    if (srand('maker','rarity') < 0.5) {
+      rare.push(
+        engine.fn.choose(['Esoteric','Handmade','Obscure'], srand('maker','roll')),
+      )
+    } else {
+      common.push(
+        engine.fn.choose(['Brand name','Generic','Readymade'], srand('maker','roll')),
       )
     }
 
@@ -144,6 +148,7 @@ content.instruments = (() => {
 
     // Owner
     rare.push(
+      'Autographed',
       engine.fn.choose(['Famous','Iconic','Infamous','Renown'], srand('size','roll')) + ' owner',
     )
 
@@ -161,10 +166,12 @@ content.instruments = (() => {
     // Handedness
     if (srand('handedness','rarity') < 0.5) {
       rare.push(
-        engine.fn.choose(['Ambidextrous','Left handed','No handed'], srand('handedness','roll')),
+        engine.fn.choose(['Left handed','No handed'], srand('handedness','roll')),
       )
     } else {
-      common.push('Right handed')
+      common.push(
+        engine.fn.choose(['Ambidextrous','Right handed'], srand('handedness','roll')),
+      )
     }
 
     // Edibility
@@ -225,7 +232,7 @@ content.instruments = (() => {
     // Design
     if (srand('design','rarity') < 0.5) {
       rare.push(
-        engine.fn.choose(['Commemorative','Decorative','Ornate'], srand('design','roll')) + ' design'
+        engine.fn.choose(['Commemorative','Decorative','Impossible','Ornate'], srand('design','roll')) + ' design'
       )
     } else {
       common.push(
@@ -274,6 +281,13 @@ content.instruments = (() => {
     } else {
       common.push(
         engine.fn.choose(['Poor','Fair','Good','Very good'], srand('quality','roll')) + ' condition'
+      )
+    }
+
+    // Weapons
+    if (instrument.name.startsWith('The ')) {
+      common.push(
+        engine.fn.choose(['Battle scarred','Bloodied','Combat damaged','Gory','Sanguine','Weaponized'], srand('gore','roll'))
       )
     }
 
