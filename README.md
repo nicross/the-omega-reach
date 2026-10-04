@@ -1,4 +1,4 @@
-# The Omega Reach
+# THE OMEGA REACH
 A tactile universe explorer initially created for [Games for Blind Gamers 5](https://itch.io/jam/games-for-blind-gamers-5).
 
 ## Getting started

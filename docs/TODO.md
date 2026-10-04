@@ -1,5 +1,5 @@
 # TODO
-## v1.2.2 - Steam demo (2026-10-08 or earlier)
+## v1.2.x - Miscellaneous improvements
 - Improve mirrored solutions
 - A reusable/parameterized sound for unique cellar tiles
 

@@ -1,23 +1,24 @@
 # CHANGELOG
 ## v1.2.2
-- Improved demo limitation dialogs.
 - Added more stellar object quirks.
+- Increased the frequency of stellar object quirks.
+- Added holographic instruments.
 - Added more instrument names and quirks.
-- Added more tutorial dialogs to the cellar.
-- Added more descriptions and interactions to the cellar.
-- Expanded the cellar to five explorable floors.
-- Increased maximum allowed sanity over multiple cellar runs.
-- Revealed unique cellar tiles after a minimum normal tiles.
-- Accounted for cellar ascents and descents when feeling the room.
-- Randomized the topography of cellar floors each run.
-- Introduced unique cellar tiles gradually each floor.
+- Added more tutorials, descriptions, and interactions to the cellar.
 - Added lost visitors to rescue from the cellar.
-- Output the reason for fainting in the cellar.
-- Added a sound for changes in credits.
+- Expanded the cellar to five explorable floors.
+- Introduced unique cellar tiles gradually each floor.
+- Accounted for cellar ascents and descents when feeling the room.
+- Required a minimum number of discovered tiles to reveal unique ones.
+- Increased the maximum allowed sanity with each cellar run.
+- Randomized the topography of cellar floors each run.
+- Displayed the reason for fainting in the cellar.
+- Added a sound for gaining and losing credits.
 - Split audio settings into mixer and performance screens.
 - Added a slider for interface volume to the audio mixer.
-- Fixed focus memory when exiting to main menu.
+- Fixed a focus memory issue when exiting to the main menu.
 - Improved some visual styles and transitions.
+- Improved the demo limitation dialogs.
 - Updated the manual accordingly.
 
 ## v1.2.1
