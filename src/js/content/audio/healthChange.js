@@ -43,6 +43,11 @@ content.audio.healthChange = (() => {
 
       return this
     },
+    trigger: function (options = {}) {
+      trigger(options)
+
+      return this
+    },
     up: function (options = {}) {
       trigger({...options, isUp: true})
 

@@ -3,7 +3,7 @@ content.cellar.tiles.henge = content.cellar.tiles.invent({
   name: 'The henge',
   category: 'positive',
   uniquePerFloor: true,
-  weight: 8,
+  weight: 6,
   onEnterEffects: function () {
     if (content.cellar.health.has(4)) {
       return

@@ -66,7 +66,11 @@ content.audio.currencyChange = (() => {
 
       return this
     },
-    trigger,
+    trigger: function (options = {}) {
+      trigger(options)
+
+      return this
+    },
     up: function (options = {}) {
       trigger({...options, isUp: true})
 

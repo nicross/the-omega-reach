@@ -3,6 +3,8 @@ content.cellar.discovered = (() => {
     flattened = []
 
   return {
+    count: () => flattened.length,
+    countForFloor: (z) => flattened.filter((array) => Math.abs(array[2]) == Math.abs(z)).length,
     export: function () {
       return {
         vectors: flattened.map((x) => [...x]),

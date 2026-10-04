@@ -161,7 +161,12 @@ content.cellar.tiles = (() => {
       5/6, 2/3,
     )
 
-    return srand('isNormal') < normalChance || !uniqueTypes.length
+    const discoveredForFloor = content.cellar.discovered.countForFloor(tile.z),
+      uniquesForFloor = content.cellar.tiles.uniquesForFloor(tile.z)
+
+    const thresholdForFloor = 4 * (uniquesForFloor + 1)
+
+    return srand('isNormal') < normalChance || discoveredForFloor < thresholdForFloor
       ? engine.fn.chooseWeighted(normalTypes, srand('roll'))
       : engine.fn.chooseWeighted(uniqueTypes, srand('roll'))
   }
@@ -356,5 +361,6 @@ content.cellar.tiles = (() => {
 
       return this
     },
+    uniquesForFloor: (z) => uniques.filter((unique) => Math.abs(unique.z) == Math.abs(z)).length,
   }
 })()
