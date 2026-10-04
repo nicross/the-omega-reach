@@ -9,15 +9,18 @@ app.tutorial.galleryStealLoop = app.tutorial.invent({
 
     const stolenCount = content.stockroom.countStolen()
 
-    content.audio.interactSuccess.trigger({index: 0})
-    content.stockroom.keepStolen()
-
     app.screen.game.dialog.push({
       title: `Checkpoint!`,
       description: `You stole <strong>${stolenCount} instrument${stolenCount == 1 ? '' : 's'}</strong> from <strong>the stockroom</strong>.`,
       actions: [
         {
           label: `Stash it`,
+          after: () => {
+            content.audio.interactSuccess.trigger({index: 2})
+            content.audio.interactComplete.trigger()
+
+            content.stockroom.keepStolen()
+          },
         },
       ],
     })

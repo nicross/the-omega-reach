@@ -7,14 +7,12 @@ content.location.on('try-steal', ({instrument}) => {
       {
         label: 'Steal it',
         after: () => {
-          content.stockroom.steal(
-            content.rooms.stockroom.getInstrument().name
-          )
+          content.stockroom.steal(instrument.name)
 
           app.screen.game.update()
           app.tutorial.update()
 
-          content.audio.interactSuccess.trigger({index: 0})
+          content.audio.interactSuccess.trigger({index: 1})
         },
       },
       {

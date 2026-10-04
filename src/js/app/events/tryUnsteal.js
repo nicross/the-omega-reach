@@ -12,7 +12,7 @@ content.location.on('try-unsteal', ({instrument}) => {
           app.screen.game.update()
           app.tutorial.update()
 
-          content.audio.interactSuccess.trigger({index: 2})
+          content.audio.interactSuccess.trigger({index: 0})
         },
       },
       {

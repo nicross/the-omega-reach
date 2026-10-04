@@ -110,7 +110,7 @@ app.tutorial.shopLoop = app.tutorial.invent({
             label: `Relinquish ${stolenCount == 1 ? 'it' : 'them'}`,
           },
         ],
-        before: () => content.audio.interactComplete.trigger(),
+        after: () => content.audio.interactComplete.trigger(),
       })
 
       app.screen.game.dialog.push({
@@ -177,8 +177,10 @@ app.tutorial.shopLoop = app.tutorial.invent({
               label: `Stash it`,
             },
           ],
-          before: () => {
-            content.audio.interactSuccess.trigger({index: 0})
+          after: () => {
+            content.audio.interactSuccess.trigger({index: 2})
+            content.audio.interactComplete.trigger()
+
             content.stockroom.keepStolen()
           },
         })
