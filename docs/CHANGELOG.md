@@ -3,6 +3,7 @@
 - Improved demo limitation dialogs.
 - Added more stellar object quirks.
 - Added more instrument names and quirks.
+- Added holographic instruments.
 - Added more tutorial dialogs to the cellar.
 - Added more descriptions and interactions to the cellar.
 - Expanded the cellar to five explorable floors.

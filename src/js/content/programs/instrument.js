@@ -72,6 +72,7 @@ content.programs.instrument = content.programs.invent({
     fmFrequencyCenter: (srand) => srand(),
     fmFrequencyRange: function (srand) {return srand() * this.options.instrument.rarity * 0.5},
     fmFrequencyScale: function (srand) {return srand() * this.options.instrument.rarity},
+    holographic: function () {return this.hasAttribute('Holographic')},
     mode: (srand) => srand(),
     scale: (srand) => srand(),
     widthCenter: (srand) => srand(),
@@ -355,7 +356,8 @@ content.programs.instrument = content.programs.invent({
   // Particles
   alterParticle: function (particle) {
     const index = content.sphereIndex.get(),
-      isScanned = this.options.instrument.state.scans > 0
+      isScanned = this.options.instrument.state.scans > 0,
+      time = content.time.value()
 
     particle.target.h = engine.fn.lerp(this.properties.particleHueMin, this.properties.particleHueMax, this.fields.particleHue.valueAt(particle.spheres[index], this.properties.particleHueScale))
 
@@ -370,6 +372,12 @@ content.programs.instrument = content.programs.invent({
     particle.target.x = particle.spheres[index].x * radius * this.properties.particleScaleX
     particle.target.y = particle.spheres[index].y * radius * this.properties.particleScaleY
     particle.target.z = particle.spheres[index].z * radius * this.properties.particleScaleZ
+
+    if (this.properties.holographic) {
+      particle.target.h += engine.fn.scale(Math.sin(time * engine.const.tau * particle.twinkleFrequencies[0]), -1, 1, -1/8, 1/8)
+      particle.target.s = engine.fn.scale(Math.sin(time * engine.const.tau * particle.twinkleFrequencies[1]), -1, 1, 0, 1)
+      particle.target.v = engine.fn.scale(Math.sin(time * engine.const.tau * particle.twinkleFrequencies[2]), -1, 1, 0.5, 1)
+    }
   },
   getLightSource: () => engine.tool.euler.create().forward(),
   getRotation: function () {
@@ -380,5 +388,15 @@ content.programs.instrument = content.programs.invent({
   // Rumble
   getRumble: function (point) {
     return this.fields.particleRadius.valueAt(point, this.properties.particleRadiusScale) ** this.properties.particleRadiusPower
+  },
+  // Methods
+  hasAttribute: function (name) {
+    for (const quirk of this.options.instrument.quirks) {
+      if (quirk.name == name) {
+        return true
+      }
+    }
+
+    return false
   },
 })

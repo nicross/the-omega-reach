@@ -125,7 +125,7 @@ content.planets = (() => {
       'Rocky core',
     ]
     const commonTerrestrialQuirks = [
-      'Geological activity',
+      'Geologic activity',
       engine.fn.choose(['Strong','Weak'], srand('magnetism')) + ' magnetic field',
     ]
 
