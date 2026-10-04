@@ -9,7 +9,7 @@ content.programs.lobby = content.programs.invent({
   },
   // Particles
   alterParticle: function (particle) {
-    const isNorth = engine.fn.between(particle.floor.y, -15, -10),
+    const isNorth = engine.fn.between(particle.floor.y, -15, -10) && particle.floor.x < -10,
       isOnline = content.rooms.reach.state.online,
       time = content.time.value()
 
@@ -18,7 +18,7 @@ content.programs.lobby = content.programs.invent({
     particle.target.v = 1
     particle.target.x = isNorth ? particle.floor.x : Math.max(particle.floor.x, particle.floor.y < 10 ? -10 : -20)
     particle.target.y = particle.floor.y
-    particle.target.z = particle.floor.z + (isNorth ? 0 : (particle.floor.y < 10 ? Math.max(0, Math.abs(particle.floor.x) - 10) : Math.max(0, Math.abs(particle.floor.x) - 20)))
+    particle.target.z = particle.floor.z + (isNorth ? Math.round(Math.max(0, engine.fn.scale(particle.floor.x, -10, -11, 0, 1/2))) : (particle.floor.y < 10 ? Math.max(0, Math.abs(particle.floor.x) - 10) : Math.max(0, Math.abs(particle.floor.x) - 20)))
 
     // Atrium waterfall
     if (particle.floor.y > 10 && particle.floor.x <= -20) {
