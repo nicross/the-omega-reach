@@ -51,7 +51,7 @@ content.moons = (() => {
       })
     }
 
-    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < moon.wildcard/1.5) {
+    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < moon.wildcard/1.25) {
       moon.quirks.push({
         name: engine.fn.chooseSplice(
           type.commonQuirks,
@@ -60,7 +60,7 @@ content.moons = (() => {
       })
     }
 
-    if (!isTutorial && type.rareQuirks.length && srand('quirk', 'rare', 'roll') < moon.wildcard/2) {
+    if (!isTutorial && type.rareQuirks.length && srand('quirk', 'rare', 'roll') < moon.wildcard/1.5) {
       moon.quirks.push({
         isRare: true,
         name: engine.fn.chooseSplice(

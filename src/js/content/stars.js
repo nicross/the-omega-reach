@@ -60,7 +60,7 @@ content.stars = (() => {
       })
     }
 
-    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < star.wildcard/1.5) {
+    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < star.wildcard/1.25) {
       star.quirks.push({
         name: engine.fn.chooseSplice(
           type.commonQuirks,
@@ -69,7 +69,7 @@ content.stars = (() => {
       })
     }
 
-    if (!isTutorial && type.rareQuirks.length && srand('quirk', 'rare', 'roll') < star.wildcard/2) {
+    if (!isTutorial && type.rareQuirks.length && srand('quirk', 'rare', 'roll') < star.wildcard/1.5) {
       star.quirks.push({
         isRare: true,
         name: engine.fn.chooseSplice(

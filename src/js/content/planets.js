@@ -80,7 +80,7 @@ content.planets = (() => {
       })
     }
 
-    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < planet.wildcard/1.5) {
+    if (!isTutorial && type.commonQuirks.length && srand('quirk', 'common2', 'roll') < planet.wildcard/1.25) {
       planet.quirks.push({
         name: engine.fn.chooseSplice(
           type.commonQuirks,
@@ -89,7 +89,7 @@ content.planets = (() => {
       })
     }
 
-    if (isTutorial || type.rareQuirks.length && srand('quirk', 'rare', 'roll') < planet.wildcard/2) {
+    if (isTutorial || type.rareQuirks.length && srand('quirk', 'rare', 'roll') < planet.wildcard/1.5) {
       planet.quirks.push({
         isRare: true,
         name: engine.fn.chooseSplice(
