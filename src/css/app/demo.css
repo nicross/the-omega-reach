@@ -22,7 +22,7 @@
   }
   .a-demo--dialogContent {
     background-color: hsla(335deg 100% 5% / 75%);
-    border: 0.0625em solid hsla(335deg 100% 25% / 100%);
+    border: 0.0625em solid hsla(335deg 100% 12.5% / 100%);
     max-width: 66ch;
     padding: 2em;
     width: 100%;
