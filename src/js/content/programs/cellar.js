@@ -52,7 +52,7 @@ content.programs.cellar = content.programs.invent({
 
     if (this.properties.isEntrance && particle.target.x < -5) {
       if (Math.abs(particle.target.y) < 5) {
-        particle.target.z += Math.round(engine.fn.scale(particle.target.x, -7.5, -8.5, 0, 1/2)) * 0.5
+        particle.target.z += Math.round(engine.fn.scale(particle.target.x, -7.5, -8.5, 0, 4.5/12)) * 0.5
       } else {
         isBoundary = true
       }
