@@ -84,7 +84,7 @@ content.moons = (() => {
     const commonQuirks = [
       engine.fn.choose(['High','Low'], srand('density')) + ' density',
       engine.fn.choose(['High','Low'], srand('gravity')) + ' gravity',
-      'Geological activity',
+      'Geologic activity',
       engine.fn.choose(['Strong','Weak'], srand('magnetism')) + ' magnetic field',
     ]
 
@@ -143,6 +143,7 @@ content.moons = (() => {
           'Polar ice',
           'Stripped atmosphere',
           'Tenuous atmosphere',
+          'Terraforming candidate',
         ],
       },
       {
@@ -166,6 +167,7 @@ content.moons = (() => {
           'Ancient ruins',
           'Captured asteroid',
           'Tectonic plates',
+          'Terraforming candidate',
         ],
       },
       {
@@ -193,6 +195,7 @@ content.moons = (() => {
           'Hydrothermal vents',
           'Heavy water',
           'Magnetic storms',
+          'Terraformed',
           'Vaporizing',
         ],
       },
@@ -220,9 +223,12 @@ content.moons = (() => {
           lifeQuirks[4],
           lifeQuirks[5],
           'Abandoned cities',
+          'Colonized',
+          'Enslaved',
           'Greenhosue gases',
           'Heavy water',
           'Magnetic storms',
+          'Mass graveyards',
           'Terraformed',
         ],
       },
@@ -239,6 +245,7 @@ content.moons = (() => {
           'Dust storms',
           'Fine regolith',
           'Polar ice',
+          'Terraforming candidate',
           'Thin atmosphere',
         ],
         rareQuirks: [
@@ -279,6 +286,7 @@ content.moons = (() => {
           'Breathable atmosphere',
           'Heavy water',
           'Sublimating',
+          'Terraforming candidate',
         ],
       },
       {
@@ -303,6 +311,7 @@ content.moons = (() => {
           'Megaquakes',
           'Supervolcanoes',
           'Tectonic plates',
+          'Terraforming candidate',
         ],
       },
       // Black holes

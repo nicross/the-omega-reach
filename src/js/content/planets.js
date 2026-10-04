@@ -238,6 +238,7 @@ content.planets = (() => {
           'Polar ice',
           'Stripped atmosphere',
           'Tenuous atmosphere',
+          'Terraforming candidate',
         ],
       },
       {
@@ -262,6 +263,7 @@ content.planets = (() => {
           lifeQuirks[0],
           'Ancient ruins',
           'Tectonic plates',
+          'Terraforming candidate',
         ],
       },
       {
@@ -291,6 +293,7 @@ content.planets = (() => {
           'Hydrothermal vents',
           'Heavy water',
           'Magnetic storms',
+          'Terraformed',
           'Vaporizing',
         ],
       },
@@ -320,9 +323,12 @@ content.planets = (() => {
           lifeQuirks[4],
           lifeQuirks[5],
           'Abandoned cities',
+          'Colonized',
+          'Enslaved',
           'Greenhosue gases',
           'Heavy water',
           'Magnetic storms',
+          'Mass graveyards',
           'Terraformed',
         ],
       },
@@ -342,6 +348,7 @@ content.planets = (() => {
           'Electric storms',
           'Fine regolith',
           'Polar ice',
+          'Terraforming candidate',
           'Thin atmosphere',
         ],
         rareQuirks: [
@@ -384,6 +391,7 @@ content.planets = (() => {
           'Breathable atmosphere',
           'Heavy water',
           'Sublimating',
+          'Terraforming candidate',
         ],
       },
       {
@@ -410,6 +418,7 @@ content.planets = (() => {
           'Megaquakes',
           'Supervolcanoes',
           'Tectonic plates',
+          'Terraforming candidate',
         ],
       },
       // Black holes
