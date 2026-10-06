@@ -1,5 +1,5 @@
 # TODO
-## v1.2.x - Miscellaneous improvements
+## v1.3.x - Miscellaneous improvements
 - Improve mirrored solutions
 - A reusable/parameterized sound for unique cellar tiles
 

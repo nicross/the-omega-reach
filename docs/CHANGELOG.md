@@ -1,5 +1,5 @@
 # CHANGELOG
-## v1.2.2
+## v1.3.0
 - Added more stellar object quirks.
 - Increased the frequency of stellar object quirks.
 - Added holographic instruments.

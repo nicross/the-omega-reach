@@ -1,4 +1,4 @@
-app.updates.register('1.2.2', () => {
+app.updates.register('1.3.0', () => {
   migrateGame()
 
   function migrateGame() {
