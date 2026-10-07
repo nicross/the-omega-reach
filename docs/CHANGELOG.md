@@ -4,13 +4,15 @@
 - Increased the frequency of stellar object quirks.
 - Added holographic instruments.
 - Added more instrument names and quirks.
+- Expanded the cellar to five explorable floors.
 - Added more tutorials, descriptions, and interactions to the cellar.
 - Added lost visitors to rescue from the cellar.
-- Expanded the cellar to five explorable floors.
 - Introduced unique cellar tiles gradually each floor.
 - Accounted for cellar ascents and descents when feeling the room.
 - Required a minimum number of discovered tiles to reveal unique ones.
 - Increased the maximum allowed sanity with each cellar run.
+- Added unique cellar tiles as fast travel destinations from the nexus.
+- Fixed unique cellar tile names including the floor level.
 - Randomized the topography of cellar floors each run.
 - Displayed the reason for fainting in the cellar.
 - Added a sound for gaining and losing credits.
