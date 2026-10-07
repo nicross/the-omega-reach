@@ -8,6 +8,8 @@ content.location.on('cellar-nexus', ({tile}) => {
     ...content.cellar.tiles.findAll({id: 'descent'}).filter((x) => !content.cellar.tiles.find({id: 'ascent', z: x.z - 1})),
     // All nexuses
     ...content.cellar.tiles.findAll({id: 'nexus'}).filter((x) => x !== tile),
+    // All unique tiles per run
+    ...content.cellar.tiles.findAll({uniquePerRun: true}),
   ])]
 
   destinations.sort((a, b) => {
@@ -24,7 +26,7 @@ content.location.on('cellar-nexus', ({tile}) => {
     description: `You will be disintegrated and reintegrated upon reaching your destination. <strong>The Omega Conservatory</strong> is not liable for any unintended side effects.`,
     actions: [
       ...destinations.map((to) => ({
-        label: (to.isEntrance || tile.isUniquePerRun) ? to.name : `${to.name} B${Math.abs(to.z) + 1}`,
+        label: (to.isEntrance || to.uniquePerRun) ? to.name : `${to.name} B${Math.abs(to.z) + 1}`,
         after: () => travel(tile, to),
       })),
       {

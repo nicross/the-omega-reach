@@ -4,7 +4,6 @@
 - Steam Deck better default settings
 - Fullscreen toggle
 - Dynamic holographic delay parameters
-- Add unique tiles to cellar nexus
 - Improve mirrored solutions
 - A reusable/parameterized sound for unique cellar tiles
 
