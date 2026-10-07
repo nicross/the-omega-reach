@@ -166,7 +166,7 @@ content.cellar.tiles = (() => {
 
     const thresholdForFloor = 4 * (uniquesForFloor + 1)
 
-    return srand('isNormal') < normalChance || discoveredForFloor < thresholdForFloor
+    return srand('isNormal') < normalChance || discoveredForFloor < thresholdForFloor || !uniqueTypes.length
       ? engine.fn.chooseWeighted(normalTypes, srand('roll'))
       : engine.fn.chooseWeighted(uniqueTypes, srand('roll'))
   }
