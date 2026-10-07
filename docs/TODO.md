@@ -3,7 +3,7 @@
 - Steamworks integration
 - Steam Deck better default settings
 - Fullscreen toggle
-- Add delay channel to holographic instruments
+- Dynamic holographic delay parameters
 - Add unique tiles to cellar nexus
 - Improve mirrored solutions
 - A reusable/parameterized sound for unique cellar tiles

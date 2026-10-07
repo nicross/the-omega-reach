@@ -290,7 +290,7 @@ content.programs.base = {
     wrapper.input.connect(wrapper.panner)
     wrapper.panner.connect(wrapper.filter)
     wrapper.filter.connect(wrapper.output)
-    wrapper.output.connect(this.destination)
+    wrapper.output.connect(this.getSynthWrapperDestination())
 
     wrapper.filter.frequency.value = wrapper.rootFrequency * engine.fn.scale((_this.invertSynthX() ? -1 : 1) * point.x, -1, 1, wrapper.minColor, engine.fn.lerp(wrapper.minColor, wrapper.maxColor, depth))
     wrapper.input.gain.value = 0
@@ -305,6 +305,9 @@ content.programs.base = {
     return wrapper
   },
   decorateSynthWrapper: (wrapper) => {},
+  getSynthWrapperDestination: function () {
+    return this.destination
+  },
   invertSynthX: () => false,
   // Particles
   alterParticle: function (particle) {},

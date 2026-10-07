@@ -6,6 +6,16 @@ content.programs.instrument = content.programs.invent({
   unscannedRadius: 0.5,
   onLoad: function () {
     content.sphereIndex.randomize()
+
+    if (this.properties.holographic) {
+      this.createDelayEffect()
+    }
+
+    return this
+  },
+  onUnload: function () {
+    this.destroyDelayEffect()
+
     return this
   },
   fieldDefinitions: {
@@ -122,6 +132,8 @@ content.programs.instrument = content.programs.invent({
       this.options.instrument.state.time += delta
       content.donations.add(delta * rarity * 15/60)
     }
+
+    this.updateDelayEffect()
   },
   createSynth: function ({point, wrapper}) {
     const {
@@ -398,5 +410,70 @@ content.programs.instrument = content.programs.invent({
     }
 
     return false
+  },
+  // Delay effect
+  calculateDelayEffectParameters: function () {
+    if (!this.properties.holographic) {
+      return {}
+    }
+
+    return {
+      dry: engine.fn.fromDb(0),
+      delay: 1/4,
+      feedback: engine.fn.fromDb(-6),
+      filter: {
+        detune: 0,
+        gain: engine.fn.fromDb(0),
+        frequency: 500,
+        Q: 1,
+      },
+      gain: engine.fn.fromDb(0),
+      wet: engine.fn.fromDb(0),
+    }
+  },
+  createDelayEffect: function () {
+    if (!this.properties.holographic) {
+      return this
+    }
+
+    this.delayEffect = content.effect.pingPongDubDelay(
+      this.calculateDelayEffectParameters()
+    )
+
+    this.delayEffect.output.connect(this.destination)
+  },
+  destroyDelayEffect: function () {
+    if (!this.delayEffect) {
+      return this
+    }
+
+    engine.fn.rampLinear(this.delayEffect.param.wet, 0, 1/32)
+    delete this.delayEffect
+  },
+  getSynthWrapperDestination: function () {
+    return this.delayEffect ? this.delayEffect.input : this.destination
+  },
+  updateDelayEffect: function () {
+    if (!this.delayEffect) {
+      return this
+    }
+
+    const {
+      dry,
+      delay,
+      feedback,
+      filter,
+      gain,
+      wet,
+    } = this.calculateDelayEffectParameters()
+
+    engine.fn.setParam(this.delayEffect.param.dry, dry)
+    engine.fn.setParam(this.delayEffect.param.delay, delay)
+    engine.fn.setParam(this.delayEffect.param.filter.detune, filter.detune)
+    engine.fn.setParam(this.delayEffect.param.filter.gain, filter.gain)
+    engine.fn.setParam(this.delayEffect.param.filter.frequency, filter.frequency)
+    engine.fn.setParam(this.delayEffect.param.filter.Q, filter.Q)
+    engine.fn.setParam(this.delayEffect.param.gain, gain)
+    engine.fn.setParam(this.delayEffect.param.wet, wet)
   },
 })
