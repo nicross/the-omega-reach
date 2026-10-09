@@ -39,7 +39,7 @@ app.utility.format.list = function (items = []) {
   }
 
   if (items.length == 1) {
-    return list[0]
+    return items[0]
   }
 
   if (items.length == 2) {

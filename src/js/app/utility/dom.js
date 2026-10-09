@@ -10,7 +10,7 @@ app.utility.dom = {
     return false
   },
   generateUniqueId: ({length = 16, prefix = ''} = {}) => {
-    const chars = 'adcdefghijklmnopqrstuvwxyz0123456789'
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
 
     let id
 

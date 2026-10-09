@@ -197,13 +197,13 @@ content.instruments = (() => {
     }
 
     // Smell
-    if (srand('small','rarity') < 0.5) {
+    if (srand('smell','rarity') < 0.5) {
       rare.push(
-        engine.fn.choose(['Ambrosial','Aromatic','Fragrant','Funky','Musky','Noxious','Pungent','Smelly'], srand('small','roll')),
+        engine.fn.choose(['Ambrosial','Aromatic','Fragrant','Funky','Musky','Noxious','Pungent','Smelly'], srand('smell','roll')),
       )
     } else {
       common.push(
-        engine.fn.choose(['Neutral','Odorless','Pleasant','Scentless','Sterile','Unscented'], srand('small','roll')),
+        engine.fn.choose(['Neutral','Odorless','Pleasant','Scentless','Sterile','Unscented'], srand('smell','roll')),
       )
     }
 

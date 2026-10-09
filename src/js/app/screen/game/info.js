@@ -60,7 +60,7 @@ app.screen.game.info = (() => {
 
       attributesElement.innerHTML = (isComplete ? completeLabel : '')
         + attributes.map(
-            ({label, modifiers}) => `<li class="a-game--attribute${modifiers.map((modifier) => ` a-game--attribute-${modifier}`).join('')}">${label}</li>`
+            ({label, modifiers}) => `<li class="a-game--attribute${modifiers.filter((x) => x).map((modifier) => ` a-game--attribute-${modifier}`).join('')}">${label}</li>`
           ).join('')
 
       descriptionElement.className = 'a-game--description'

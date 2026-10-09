@@ -114,6 +114,8 @@ app.screen.game.dialog = (() => {
       before()
     }
 
+    actions = typeof actions == 'function' ? actions() : actions
+
     titleElement.innerHTML = typeof title == 'function' ? title() : title
     descriptionElement.innerHTML = typeof description == 'function' ? description() : description
 
@@ -125,7 +127,7 @@ app.screen.game.dialog = (() => {
 
     actionsElement.innerHTML = '';
 
-    for (const action of (typeof actions == 'function' ? actions() : actions)) {
+    for (const action of actions) {
       if ('filter' in action) {
         if (typeof action.filter == 'function' && !action.filter()) {
           continue

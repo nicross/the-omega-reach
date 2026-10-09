@@ -23,7 +23,7 @@ app.screen.settingsGameplay = app.screenManager.invent({
 
     // Sliders
     this.sliders = [
-      ['.a-settingsInput--puzzleDifficulty', app.settings.raw.puzzleDifficulty, app.settings.setPuzzleDifficulty],
+      ['.a-settingsGameplay--puzzleDifficulty', app.settings.raw.puzzleDifficulty, app.settings.setPuzzleDifficulty],
     ].map(([selector, initialValue, setter]) => {
       const component = app.component.slider.hydrate(root.querySelector(selector), initialValue)
       component.on('change', () => setter(component.getValueAsFloat()))

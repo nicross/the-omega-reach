@@ -225,7 +225,7 @@ content.moons = (() => {
           'Abandoned cities',
           'Colonized',
           'Enslaved',
-          'Greenhosue gases',
+          'Greenhouse gases',
           'Heavy water',
           'Magnetic storms',
           'Mass graveyards',
