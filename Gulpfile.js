@@ -16,7 +16,8 @@ const zip = require('gulp-zip')
 
 const argv = require('yargs').argv,
   isDebug = argv.debug === true
-  isFull = argv.full === true
+  isFull = argv.full === true,
+  isSteam = argv.steam === true
 
 gulp.task('build-css', () => {
   return gulp.src(
@@ -37,7 +38,7 @@ gulp.task('build-js', () => {
     concat('scripts.min.js')
   ).pipe(
     footer(
-      `;app.version=()=>'${package.version + (isFull ? '' : '-demo') + (isDebug ? '-debug' : '')}';`
+      `;app.version=()=>'${package.version + (isSteam ? '-steam' : '') + (isFull ? '' : '-demo') + (isDebug ? '-debug' : '')}';`
     )
   ).pipe(
     gulpif(!isDebug, iife(), header("'use strict';\n\n"))
@@ -58,7 +59,7 @@ gulp.task('dist-electron', async () => {
 
   const paths = await packager({
     arch: 'x64',
-    asar: true,
+    asar: false,
     dir: '.',
     icon: 'assets/icon/favicon',
     ignore: [
@@ -70,6 +71,7 @@ gulp.task('dist-electron', async () => {
       'package-lock.json',
       'README.md',
       'src',
+      ...getSteamIgnores(),
     ],
     out: 'dist',
     overwrite: true,
@@ -81,6 +83,7 @@ gulp.task('dist-electron', async () => {
     const build = gulp.src(path + '/**/*')
 
     const manual = gulp.src([
+      'public/favicon.png',
       'public/font/*',
       'public/manual.html'
     ], {base: 'public'}).pipe(
@@ -211,4 +214,23 @@ function getEngineJs() {
     'node_modules/syngen/dist/syngen.js',
     'src/js/engine.js',
   ]
+}
+
+function getSteamIgnores() {
+  if (!isSteam) {
+    return [
+      'steamworks.js',
+    ]
+  }
+
+  return {
+    linux: [
+      'steamworks.js/dist/osx',
+      'steamworks.js/dist/win64',
+    ],
+    win32: [
+      'steamworks.js/dist/linux64',
+      'steamworks.js/dist/osx',
+    ],
+  }[process.platform]
 }

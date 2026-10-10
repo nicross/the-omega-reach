@@ -9,6 +9,7 @@ const app = (() => {
   let capsuleTimeout,
     isActive = false,
     isCapsule = false,
+    isHandheld = false,
     isImmersive = false,
     root
 
@@ -24,8 +25,9 @@ const app = (() => {
     isCapsule: () => isCapsule,
     isDebug: () => Boolean(app.debug),
     isDemo: () => Boolean(app.demo),
-    isImmersive: () => isImmersive,
     isElectron: () => typeof ElectronApi != 'undefined',
+    isHandheld: () => isHandheld,
+    isImmersive: () => isImmersive,
     name: () => 'shiftbacktick/omega-reach',
     quit: function () {
       app.haptics.kill()
@@ -59,6 +61,17 @@ const app = (() => {
         clearTimeout(capsuleTimeout)
         content.particles.setSpeed(1)
       }
+
+      return this
+    },
+    setFullscreen: async function (value) {
+      if (this.isElectron()) {
+        value = value || isHandheld
+        ElectronApi.setFullscreen(value)
+      }
+    },
+    setHandheld: function (value) {
+      isHandheld = Boolean(value)
 
       return this
     },

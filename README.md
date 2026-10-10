@@ -55,3 +55,4 @@ npx gulp dev
 | - | - |
 | `--debug` | Suppresses minification. |
 | `--full` | With paid features and demo notices removed. |
+| `--steam` | With [steamworks.js](https://github.com/ceifa/steamworks.js) integration. |

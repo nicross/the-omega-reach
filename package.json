@@ -23,5 +23,8 @@
     "merge-stream": "^2.0.0",
     "syngen": "^2.0.0-beta",
     "yargs": "^17.7.0"
+  },
+  "dependencies": {
+    "steamworks.js": "^0.4.0"
   }
 }

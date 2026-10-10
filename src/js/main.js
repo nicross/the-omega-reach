@@ -2,6 +2,13 @@
   // Wait for document ready
   await engine.ready()
 
+  // Cache whether it's a handheld device
+  if (typeof ElectronApi != 'undefined') {
+    app.setHandheld(
+      await ElectronApi.isHandheld()
+    )
+  }
+
   // Kill haptics if stuck on
   app.haptics.kill()
 

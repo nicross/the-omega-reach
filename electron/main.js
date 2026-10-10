@@ -4,7 +4,14 @@ const os = require('os'),
   package = require('../package.json'),
   path = require('path')
 
-let mainWindow
+let mainWindow,
+  steamClient
+
+try {
+  steamClient = require('steamworks.js').init(4638520)
+} catch (e) {
+  // Steam not open, or account doesn't own game.
+}
 
 // Improve support for WebGL and Steam overlays
 if (os.platform() == 'win32') {
@@ -16,24 +23,6 @@ if (os.platform() == 'win32') {
   app.commandLine.appendSwitch('ignore-gpu-blacklist')
   app.commandLine.appendSwitch('enable-features', 'VaapiVideoDecoder')
 }
-
-// Application lifecycle
-app.on('ready', () => {
-  app.accessibilitySupportEnabled = true
-  createWindow()
-})
-
-app.on('window-all-closed', () => {
-  app.quit()
-})
-
-app.on('activate', () => {
-  if (!mainWindow) {
-    createWindow()
-  }
-})
-
-ipcMain.on('quit', () => app.quit())
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -96,3 +85,28 @@ function createWindow() {
   // Load the index file
   mainWindow.loadFile('public/index.html')
 }
+
+app.on('ready', () => {
+  app.accessibilitySupportEnabled = true
+  createWindow()
+})
+
+app.on('window-all-closed', () => {
+  app.quit()
+})
+
+app.on('activate', () => {
+  if (!mainWindow) {
+    createWindow()
+  }
+})
+
+ipcMain.on('quit', () => app.quit())
+
+// Handheld support
+ipcMain.handle('isHandheld', () => steamClient?.utils.isSteamRunningOnSteamDeck() || false)
+
+// Fullscreen / windowed mode
+ipcMain.on('setFullscreen', (e, value) => {
+  mainWindow?.setFullScreen(value)
+})
