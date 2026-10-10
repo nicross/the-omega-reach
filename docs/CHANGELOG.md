@@ -5,6 +5,7 @@
 - Set initial input preference on splash screen.
 - Integrated desktop builds with Steam.
 - Kill haptics on application close.
+- Fixed some typographical errors.
 
 ## v1.3.0
 - Added more stellar object quirks.
