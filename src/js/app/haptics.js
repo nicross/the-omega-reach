@@ -38,6 +38,24 @@ app.haptics = (() => {
     },
     getActuators,
     isActive,
+    kill: function () {
+      events = []
+
+      for (const actuator of getActuators()) {
+        actuator.playEffect(actuator.type, {
+          duration: engine.loop.delta() * 1000,
+          startDelay: 0,
+          strongMagnitude: 0,
+          weakMagnitude: 0,
+        })
+
+        if (typeof actuator.reset == 'function') {
+          actuator.reset()
+        }
+      }
+
+      return this;
+    },
     setSensitivity: function (value) {
       sensitivity = Number(value) || 0
 

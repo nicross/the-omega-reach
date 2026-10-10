@@ -1,4 +1,7 @@
 # CHANGELOG
+## v1.3.1
+- Kill haptics on application close.
+
 ## v1.3.0
 - Added more stellar object quirks.
 - Increased the frequency of stellar object quirks.

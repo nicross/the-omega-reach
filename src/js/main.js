@@ -2,6 +2,9 @@
   // Wait for document ready
   await engine.ready()
 
+  // Kill haptics if stuck on
+  app.haptics.kill()
+
   // Load and apply preferences
   app.preActivate()
   await app.storage.ready()

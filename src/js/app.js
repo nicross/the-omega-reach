@@ -28,6 +28,8 @@ const app = (() => {
     isElectron: () => typeof ElectronApi != 'undefined',
     name: () => 'shiftbacktick/omega-reach',
     quit: function () {
+      app.haptics.kill()
+
       if (this.isElectron()) {
         ElectronApi.quit()
       }
