@@ -130,7 +130,7 @@ app.settings.register('tutorialOn', {
 
 app.settings.register('uiScale', {
   compute: (rawValue) => engine.fn.lerp(1, 4, rawValue),
-  default: 0.5,
+  default: 1,
   update: function (computedValue) {
     app.setUiScale(computedValue)
   },

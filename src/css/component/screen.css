@@ -101,5 +101,6 @@
   .c-screen--title {
     font-family: FiraCodeRegular, monospace;
     font-size: 4em;
-    line-height: 0.75;
+    line-height: 0.875;
+    max-width: none !important;
   }

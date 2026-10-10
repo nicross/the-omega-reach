@@ -1,6 +1,7 @@
 # CHANGELOG
 ## v1.3.1
 - Added a toggle for fullscreen mode.
+- Set default interface scale to maximum.
 - Integrated desktop builds with Steam.
 - Kill haptics on application close.
 

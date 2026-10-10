@@ -1,8 +1,5 @@
 # TODO
 ## v1.3.x - Miscellaneous improvements
-- Steamworks integration
-- Steam Deck better default settings
-- Fullscreen toggle
 - Dynamic holographic delay parameters
 - Improve mirrored solutions
 - A reusable/parameterized sound for unique cellar tiles
