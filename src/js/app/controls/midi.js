@@ -158,6 +158,7 @@ app.controls.midi = (() => {
 
       return mapping
     }),
+    has: () => notes.size > 0,
     isSupported: () => isSupported,
     reset: function () {
       kill()

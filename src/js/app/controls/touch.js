@@ -94,6 +94,7 @@ app.controls.touch = (() => {
   }
 
   return {
+    has: () => touches.size > 0,
     getPoints: () => {
       // Update depths
       for (const vector of touches.values()) {

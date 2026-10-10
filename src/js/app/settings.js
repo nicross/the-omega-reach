@@ -50,6 +50,7 @@ app.settings = (() => {
   return {
     computed,
     defaults,
+    has: () => app.storage.has(storageKey),
     load: function () {
       const data = app.storage.get(storageKey)
 
