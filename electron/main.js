@@ -26,9 +26,9 @@ if (os.platform() == 'win32') {
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    frame: false,
-    fullscreen: true,
+    fullscreen: false,
     icon: path.join(__dirname, '../public/favicon.png'),
+    show: false,
     title: 'THE OMEGA REACH',
     webPreferences: {
       contextIsolation: true,
@@ -99,6 +99,10 @@ app.on('activate', () => {
   if (!mainWindow) {
     createWindow()
   }
+})
+
+ipcMain.on('ready', () => {
+  mainWindow?.show()
 })
 
 ipcMain.on('quit', () => app.quit())

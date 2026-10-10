@@ -1,3 +1,11 @@
+app.settings.register('fullscreenOn', {
+  compute: (rawValue) => Boolean(rawValue),
+  default: true,
+  update: function (computedValue) {
+    app.setFullscreen(computedValue)
+  },
+})
+
 app.settings.register('gamepadDeadzone', {
   default: engine.fn.scale(0.15, 0, 0.5, 0, 1),
   compute: (rawValue) => engine.fn.lerp(0, 0.5, rawValue),

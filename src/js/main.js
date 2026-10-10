@@ -55,6 +55,10 @@
   app.screenManager.dispatch('activate')
   app.activate()
 
+  if (app.isElectron()) {
+    ElectronApi.ready()
+  }
+
   // Prevent closing HTML5 builds
   if (!app.isElectron()) {
     window.addEventListener('beforeunload', (e) => {

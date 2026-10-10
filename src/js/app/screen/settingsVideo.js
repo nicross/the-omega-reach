@@ -33,12 +33,16 @@ app.screen.settingsVideo = app.screenManager.invent({
 
     // Toggles
     this.toggles = [
+      ['.a-settingsVideo--fullscreenOn', app.settings.raw.fullscreenOn, app.settings.setFullscreenOn],
       ['.a-settingsVideo--graphicsOn', app.settings.raw.graphicsOn, app.settings.setGraphicsOn],
     ].map(([selector, initialValue, setter]) => {
       const component = app.component.toggle.hydrate(root.querySelector(selector), initialValue)
       component.on('change', () => setter(component.getValue()))
       return component
     })
+
+    // Hide fullscreen on handheld
+    root.querySelector('.a-settingsVideo--field-fullscreen').hidden = !app.isElectron() || app.isHandheld()
   },
   onEnter: function () {},
   onExit: function () {},

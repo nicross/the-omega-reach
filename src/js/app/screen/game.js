@@ -62,6 +62,7 @@ app.screen.game = app.screenManager.invent({
     app.autosave.trigger()
 
     engine.loop.pause()
+    app.haptics.kill()
 
     app.controls.interactions.reset()
     content.programs.get()?.update()

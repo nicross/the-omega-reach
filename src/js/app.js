@@ -29,8 +29,11 @@ const app = (() => {
     isHandheld: () => isHandheld,
     isImmersive: () => isImmersive,
     name: () => 'shiftbacktick/omega-reach',
-    quit: function () {
+    quit: async function () {
       app.haptics.kill()
+
+      engine.fn.rampLinear(engine.mixer.param.gain, 0, 1/16)
+      await engine.fn.promise((1/16 * 1000) + engine.const.zeroTime)
 
       if (this.isElectron()) {
         ElectronApi.quit()
