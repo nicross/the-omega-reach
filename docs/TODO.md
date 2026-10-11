@@ -1,6 +1,5 @@
 # TODO
 ## v1.3.x - Miscellaneous improvements
-- Dynamic holographic delay parameters
 - Improve mirrored solutions
 - A reusable/parameterized sound for unique cellar tiles
 

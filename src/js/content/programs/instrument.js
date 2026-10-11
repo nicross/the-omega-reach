@@ -40,6 +40,11 @@ content.programs.instrument = content.programs.invent({
     particleSaturation: {},
     particleValue: {},
     particleRadius: {octaves: 3},
+    // Delay
+    delayFeedback: {type: '1d'},
+    delayFrequency: {type: '1d'},
+    delayQ: {type: '1d'},
+    delayTime: {type: '1d'},
   },
   propertyDefinitions: {
     // Synthesis
@@ -417,18 +422,22 @@ content.programs.instrument = content.programs.invent({
       return {}
     }
 
+    const time = content.time.value() / 30
+
     return {
       dry: engine.fn.fromDb(0),
-      delay: 1/4,
-      feedback: engine.fn.fromDb(-6),
+      delay: engine.fn.lerpExp(1/16, 1, this.fields.delayTime.value(time), 2),
+      feedback: engine.fn.fromDb(
+        engine.fn.lerp(-6, -3, this.fields.delayFeedback.value(time))
+      ),
       filter: {
         detune: 0,
         gain: engine.fn.fromDb(0),
-        frequency: 500,
-        Q: 1,
+        frequency: engine.fn.lerpExp(500, 5000, this.fields.delayFrequency.value(time), 2),
+        Q: engine.fn.lerpExp(1, 10, this.fields.delayQ.value(time), 2),
       },
       gain: engine.fn.fromDb(0),
-      wet: engine.fn.fromDb(0),
+      wet: engine.fn.fromDb(-3),
     }
   },
   createDelayEffect: function () {
