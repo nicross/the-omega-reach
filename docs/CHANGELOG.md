@@ -5,6 +5,7 @@
 - Set input preference for first-time players on the splash screen.
 - Defaulted the interface scale to its maximum.
 - Integrated desktop builds with Steam.
+- Faded out main volume on application close.
 - Killed haptics on application open and close.
 - Fixed some typographical errors.
 
