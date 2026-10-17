@@ -38,7 +38,7 @@ gulp.task('build-js', () => {
     concat('scripts.min.js')
   ).pipe(
     footer(
-      `;app.version=()=>'${package.version + (isSteam ? '-steam' : '') + (isFull ? '' : '-demo') + (isDebug ? '-debug' : '')}';`
+      `;app.version=()=>'${package.version + (isFull ? '' : '-demo') + (isDebug ? '-debug' : '')}';`
     )
   ).pipe(
     gulpif(!isDebug, iife(), header("'use strict';\n\n"))
@@ -92,7 +92,7 @@ gulp.task('dist-electron', async () => {
     )
 
     merge(build, manual).pipe(
-      zip(path.replace('dist\\', '') + (isFull ? '' : '-demo') + '.zip')
+      zip(path.replace('dist\\', '') + (isSteam ? '-steam' : '') + (isFull ? '' : '-demo') + '.zip')
     ).pipe(
       gulp.dest('dist')
     )
