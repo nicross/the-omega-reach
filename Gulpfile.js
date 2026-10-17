@@ -64,6 +64,7 @@ gulp.task('dist-electron', async () => {
     icon: 'assets/icon/favicon',
     ignore: [
       '^/.gitignore',
+      '^/assets',
       '^/dist',
       '^/docs',
       '^/Gulpfile.js',
