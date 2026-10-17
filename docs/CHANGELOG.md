@@ -1,12 +1,12 @@
 # CHANGELOG
 ## v1.3.1
-- Added a toggle for fullscreen mode.
-- Added dynamic delay parameters to holographic instruments.
-- Set input preference for first-time players on the splash screen.
-- Defaulted the interface scale to its maximum.
 - Integrated desktop builds with Steam.
+- Added a toggle for full screen mode.
+- Added dynamic delay parameters to holographic instruments.
+- Set input preference silently on the splash screen.
+- Defaulted the interface scale to its maximum.
 - Faded out main volume on application close.
-- Killed haptics on application open and close.
+- Killed haptics on application close.
 - Fixed some typographical errors.
 
 ## v1.3.0
